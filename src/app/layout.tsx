@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Outfit, IBM_Plex_Mono } from "next/font/google";
 import { siteConfig } from "@/config/site";
 import { organizationJsonLd } from "@/lib/seo";
@@ -27,6 +27,13 @@ const mono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#1A1916",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -75,7 +82,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${display.variable} ${sans.variable} ${mono.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-ivory font-sans text-charcoal">
+      <body className="min-h-full overflow-x-clip bg-ivory font-sans text-charcoal">
         <JsonLd data={organizationJsonLd()} />
         <FavoritesProvider>
           <CompareProvider>

@@ -30,11 +30,11 @@ export default function ComparePage() {
 
   return (
     <PublicShell>
-      <section className="px-6 pb-24 pt-32 md:px-12">
+      <section className="px-4 pb-20 pt-28 sm:px-6 md:px-12 md:pt-32">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="text-[11px] uppercase tracking-[0.22em] text-earth">Compare</p>
-            <h1 className="font-display mt-3 text-5xl">Side by side.</h1>
+            <h1 className="font-display mt-3 text-[2.1rem] sm:text-5xl">Side by side.</h1>
           </div>
           {ids.length ? (
             <button type="button" onClick={clear} className="text-[11px] uppercase tracking-[0.18em] text-muted">

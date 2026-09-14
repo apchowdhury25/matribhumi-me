@@ -32,7 +32,7 @@ export default async function ProjectsPage({
         title="Neighbourhoods you can return to — or live in every day."
         description="Demonstration communities in Bangladesh, including Bashundhara, planned for vacation weeks, retirement, and full-time district living."
       />
-      <section className="px-6 py-16 md:px-12">
+      <section className="px-4 py-12 sm:px-6 md:px-12 md:py-16">
         <div className="flex flex-wrap gap-3 text-[11px] uppercase tracking-[0.18em]">
           <Link href="/projects" className={!category ? "text-charcoal" : "text-muted"}>All</Link>
           {categories.map((item) => (

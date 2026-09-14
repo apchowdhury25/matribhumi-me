@@ -11,7 +11,7 @@ export function PublicShell({
   return (
     <>
       <SiteHeader transparent={transparentHeader} />
-      <main className="flex-1">{children}</main>
+      <main className="min-w-0 flex-1 overflow-x-clip">{children}</main>
       <SiteFooter />
     </>
   );

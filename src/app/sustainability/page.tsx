@@ -28,7 +28,7 @@ export default function SustainabilityPage() {
         title="Care for the ground is a design problem."
         description="No environmental certification is claimed on this site unless it is clearly marked as fictional demonstration content. None are."
       />
-      <section className="px-6 py-20 md:px-12">
+      <section className="px-4 py-14 sm:px-6 md:px-12 md:py-20">
         <div className="space-y-24">
           {sections.map((section, index) => (
             <article key={section.title} className="grid items-center gap-10 lg:grid-cols-12">

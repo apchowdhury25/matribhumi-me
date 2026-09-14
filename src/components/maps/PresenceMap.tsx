@@ -31,7 +31,7 @@ export function PresenceMap({ pins }: { pins: MapPin[] }) {
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1.4fr_0.8fr]">
-      <div className="relative min-h-[420px] overflow-hidden bg-charcoal">
+      <div className="relative min-h-[240px] overflow-hidden bg-charcoal sm:min-h-[320px] lg:min-h-[420px]">
         <svg viewBox="0 0 1000 560" className="h-full w-full" role="img" aria-label="MatriBhumi demonstration locations">
           <rect width="1000" height="560" fill="#1A1916" />
           <g opacity="0.35" fill="none" stroke="#D8C9B0" strokeWidth="0.8">

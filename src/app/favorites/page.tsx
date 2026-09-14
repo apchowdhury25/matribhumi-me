@@ -29,9 +29,9 @@ export default function FavoritesPage() {
 
   return (
     <PublicShell>
-      <section className="px-6 pb-24 pt-32 md:px-12">
+      <section className="px-4 pb-20 pt-28 sm:px-6 md:px-12 md:pt-32">
         <p className="text-[11px] uppercase tracking-[0.22em] text-earth">Saved homes</p>
-        <h1 className="font-display mt-3 text-5xl">Your shortlist.</h1>
+        <h1 className="font-display mt-3 text-[2.1rem] sm:text-5xl">Your shortlist.</h1>
         <p className="mt-4 max-w-xl text-muted">
           Saved on this device. Sign-in favorites are stored when you use a staff account.
         </p>

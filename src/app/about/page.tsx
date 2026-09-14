@@ -35,7 +35,7 @@ export default function AboutPage() {
         title="Named for the land you still call home."
         description="MatriBhumi means mother-land. We make residences for people who live abroad and come back, for retirees returning, and for families already in Bangladesh who want a modern home in Bashundhara. Demonstration company story."
       />
-      <section className="grid gap-12 px-6 py-20 md:px-12 lg:grid-cols-2">
+      <section className="grid gap-12 px-4 py-14 sm:px-6 md:px-12 md:py-20 lg:grid-cols-2">
         <div>
           <h2 className="font-display text-4xl">Story</h2>
           <p className="mt-4 leading-8 text-muted">
@@ -53,7 +53,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-      <section className="bg-mist px-6 py-20 md:px-12">
+      <section className="bg-mist px-4 py-14 sm:px-6 md:px-12 md:py-20">
         <SectionHeader title="Values" eyebrow="How we work" />
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {["Care for the ground", "Homes that can be left and returned to", "Retirement that still feels like a neighbourhood", "Bashundhara district convenience", "Rooms for family gatherings", "Honesty about uncertainty"].map((item) => (
@@ -61,7 +61,7 @@ export default function AboutPage() {
           ))}
         </div>
       </section>
-      <section className="px-6 py-20 md:px-12">
+      <section className="px-4 py-14 sm:px-6 md:px-12 md:py-20">
         <SectionHeader title="Leadership" description="Fictional demonstration portraits." />
         <div className="mt-12 grid gap-8 md:grid-cols-3">
           {leaders.map((person) => (
@@ -83,7 +83,7 @@ export default function AboutPage() {
           </p>
         </div>
       </section>
-      <section className="px-6 py-20 md:px-12">
+      <section className="px-4 py-14 sm:px-6 md:px-12 md:py-20">
         <SectionHeader title="Timeline" />
         <ol className="mt-10 space-y-6">
           {timeline.map(([year, note]) => (

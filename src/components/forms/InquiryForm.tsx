@@ -44,7 +44,7 @@ export function InquiryForm({
           <select
             name="inquiryType"
             defaultValue={inquiryType}
-            className="h-11 border border-charcoal/15 bg-paper px-3 text-sm tracking-normal text-charcoal"
+            className="h-12 w-full border border-charcoal/15 bg-paper px-3 text-base tracking-normal text-charcoal"
           >
             {inquiryTypes.map((type) => (
               <option key={type.value} value={type.value}>
@@ -66,7 +66,7 @@ export function InquiryForm({
       <Field name="budget" label="Budget (optional)" />
       <label className="grid gap-2 text-[11px] uppercase tracking-[0.18em] text-earth">
         Preferred contact
-        <select name="contactMethod" className="h-11 border border-charcoal/15 bg-paper px-3 text-sm tracking-normal text-charcoal">
+        <select name="contactMethod" className="h-12 w-full border border-charcoal/15 bg-paper px-3 text-base tracking-normal text-charcoal">
           <option value="EMAIL">Email</option>
           <option value="PHONE">Phone</option>
           <option value="WHATSAPP">WhatsApp</option>
@@ -74,14 +74,14 @@ export function InquiryForm({
       </label>
       <label className="grid gap-2 text-[11px] uppercase tracking-[0.18em] text-earth">
         Message
-        <textarea name="message" required minLength={10} rows={5} className="border border-charcoal/15 bg-paper p-3 text-sm tracking-normal text-charcoal" />
+        <textarea name="message" required minLength={10} rows={5} className="w-full border border-charcoal/15 bg-paper p-3 text-base tracking-normal text-charcoal" />
       </label>
       <label className="flex items-start gap-3 text-sm normal-case tracking-normal text-muted">
         <input type="checkbox" name="consent" value="true" required className="mt-1" />
         I agree to MatriBhumi storing this inquiry to respond to my request.
       </label>
       {state.error ? <p className="text-sm text-red-800">{state.error}</p> : null}
-      <Button type="submit" disabled={pending}>
+      <Button type="submit" disabled={pending} className="w-full sm:w-auto">
         {pending ? "Sending…" : "Request Information"}
       </Button>
     </form>
@@ -106,7 +106,7 @@ function Field({
         name={name}
         type={type}
         required={required}
-        className="h-11 border border-charcoal/15 bg-paper px-3 text-sm tracking-normal text-charcoal"
+        className="h-12 w-full border border-charcoal/15 bg-paper px-3 text-base tracking-normal text-charcoal"
       />
     </label>
   );

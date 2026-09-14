@@ -5,7 +5,7 @@ import { footerNav, siteConfig } from "@/config/site";
 export function SiteFooter() {
   return (
     <footer className="bg-charcoal text-ivory">
-      <div className="grid gap-12 px-6 py-16 md:grid-cols-[1.4fr_1fr_1fr_1fr] md:px-12">
+      <div className="grid gap-10 px-4 py-14 sm:grid-cols-2 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr_1fr] md:gap-12 md:px-12 md:py-16">
         <div>
           <Logo variant="dark" />
           <p className="mt-6 max-w-sm text-sm leading-7 text-ivory/70">
@@ -25,7 +25,7 @@ export function SiteFooter() {
         <FooterCol title="Company" items={footerNav.company} />
         <FooterCol title="Legal" items={footerNav.legal} />
       </div>
-      <div className="flex flex-col gap-3 border-t border-ivory/10 px-6 py-6 text-xs text-ivory/50 md:flex-row md:items-center md:justify-between md:px-12">
+      <div className="flex flex-col gap-3 border-t border-ivory/10 px-4 py-6 text-xs leading-5 text-ivory/50 sm:px-6 md:flex-row md:items-center md:justify-between md:px-12">
         <p>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
         <p>{siteConfig.demoNotice}</p>
       </div>

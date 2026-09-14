@@ -24,11 +24,11 @@ export default async function JobPage({ params }: { params: Promise<{ slug: stri
 
   return (
     <PublicShell>
-      <article className="px-6 pb-24 pt-32 md:px-12">
+      <article className="px-4 pb-20 pt-28 sm:px-6 md:px-12 md:pt-32">
         <p className="text-[11px] uppercase tracking-[0.22em] text-earth">
           {job.department} · {job.location} · {job.type}
         </p>
-        <h1 className="font-display mt-4 max-w-3xl text-5xl md:text-6xl">{job.title}</h1>
+        <h1 className="font-display mt-4 max-w-3xl text-[2.1rem] leading-tight sm:text-5xl md:text-6xl">{job.title}</h1>
         <div className="mt-10 grid gap-12 lg:grid-cols-2">
           <div className="space-y-6 text-muted leading-8">
             <p>{job.description}</p>

@@ -40,8 +40,12 @@ export function SearchOverlay() {
 
   useEffect(() => {
     if (open) {
+      document.body.style.overflow = "hidden";
       const t = setTimeout(() => inputRef.current?.focus(), 40);
-      return () => clearTimeout(t);
+      return () => {
+        document.body.style.overflow = "";
+        clearTimeout(t);
+      };
     }
   }, [open]);
 
@@ -68,22 +72,22 @@ export function SearchOverlay() {
         <Search className="h-4 w-4" />
       </button>
       {open ? (
-        <div className="fixed inset-0 z-[80] bg-charcoal/55 backdrop-blur-sm" role="dialog" aria-modal>
-          <div className="mx-auto mt-[12vh] w-[min(720px,calc(100%-2rem))] border border-stone bg-ivory shadow-lift">
-            <div className="flex items-center gap-3 border-b border-charcoal/10 px-5">
-              <Search className="h-4 w-4 text-earth" />
+        <div className="fixed inset-0 z-[80] bg-charcoal/55 backdrop-blur-sm" role="dialog" aria-modal="true">
+          <div className="mx-auto mt-0 h-full w-full border-0 bg-ivory shadow-lift sm:mt-[10vh] sm:h-auto sm:w-[min(720px,calc(100%-2rem))] sm:border sm:border-stone">
+            <div className="flex items-center gap-3 border-b border-charcoal/10 px-4 sm:px-5" style={{ paddingTop: "env(safe-area-inset-top)" }}>
+              <Search className="h-4 w-4 shrink-0 text-earth" />
               <input
                 ref={inputRef}
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
-                placeholder="Search properties, developments, locations, insights"
-                className="h-14 flex-1 bg-transparent text-base text-charcoal outline-none placeholder:text-muted"
+                placeholder="Search homes, places, insights"
+                className="h-14 min-w-0 flex-1 bg-transparent text-base text-charcoal outline-none placeholder:text-muted"
               />
               <button type="button" onClick={() => setOpen(false)} aria-label="Close search">
                 <X className="h-4 w-4" />
               </button>
             </div>
-            <div className="max-h-[50vh] overflow-y-auto p-5">
+            <div className="max-h-[calc(100dvh-4.5rem)] overflow-y-auto p-5 sm:max-h-[50vh]">
               {!results ? (
                 <p className="text-sm text-muted">
                   Type at least two characters. Press <kbd className="font-mono">/</kbd> anytime.

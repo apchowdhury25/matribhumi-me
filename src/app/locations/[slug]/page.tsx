@@ -37,12 +37,12 @@ export default async function LocationDetailPage({ params }: { params: Promise<{
         <div className="relative flex min-h-[70vh] items-end px-6 pb-16 md:px-12">
           <div className="text-ivory">
             <p className="text-[11px] uppercase tracking-[0.24em] text-sand">{location.country}</p>
-            <h1 className="font-display mt-3 text-6xl md:text-8xl">{location.city}</h1>
+            <h1 className="font-display mt-3 text-4xl sm:text-6xl md:text-8xl">{location.city}</h1>
             <p className="mt-4 max-w-xl text-ivory/80">{location.description}</p>
           </div>
         </div>
       </section>
-      <section className="grid gap-10 px-6 py-20 md:px-12 lg:grid-cols-3">
+      <section className="grid gap-10 px-4 py-14 sm:px-6 md:px-12 md:py-20 lg:grid-cols-3">
         {[
           ["Overview", location.overview],
           ["Lifestyle", location.lifestyle],
@@ -58,7 +58,7 @@ export default async function LocationDetailPage({ params }: { params: Promise<{
         <h2 className="font-display text-4xl">Development opportunities</h2>
         <p className="mt-4 max-w-3xl leading-8 text-muted">{location.opportunities}</p>
       </section>
-      <section className="px-6 py-20 md:px-12">
+      <section className="px-4 py-14 sm:px-6 md:px-12 md:py-20">
         <h2 className="font-display text-4xl">Featured homes</h2>
         <div className="mt-10 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           {location.properties.map((property) => (

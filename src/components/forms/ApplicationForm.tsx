@@ -32,7 +32,7 @@ export function ApplicationForm({ jobId }: { jobId: string }) {
           type="url"
           required
           placeholder="https://"
-          className="h-11 border border-charcoal/15 bg-paper px-3 text-sm tracking-normal text-charcoal"
+          className="h-12 w-full border border-charcoal/15 bg-paper px-3 text-base tracking-normal text-charcoal"
         />
         <span className="normal-case tracking-normal text-muted">
           Paste a public link to your CV. File upload is not enabled on this demonstration site.
@@ -45,11 +45,11 @@ export function ApplicationForm({ jobId }: { jobId: string }) {
           required
           minLength={40}
           rows={7}
-          className="border border-charcoal/15 bg-paper p-3 text-sm tracking-normal text-charcoal"
+          className="w-full border border-charcoal/15 bg-paper p-3 text-base tracking-normal text-charcoal"
         />
       </label>
       {state.error ? <p className="text-sm text-red-800">{state.error}</p> : null}
-      <Button type="submit" disabled={pending}>
+      <Button type="submit" disabled={pending} className="w-full sm:w-auto">
         {pending ? "Sending…" : "Submit application"}
       </Button>
     </form>

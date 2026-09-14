@@ -26,7 +26,7 @@ export default async function CareersPage() {
         title="Build homes people can return to."
         description="We work on residences in Bangladesh for families who live overseas. Openings below are demonstration roles."
       />
-      <section className="grid gap-10 px-6 py-20 md:px-12 lg:grid-cols-3">
+      <section className="grid gap-10 px-4 py-14 sm:px-6 md:px-12 md:py-20 lg:grid-cols-3">
         <article>
           <h2 className="font-display text-3xl">Culture</h2>
           <p className="mt-4 leading-7 text-muted">A small studio that prefers a well-made courtyard to a loud launch. We argue about shade, guest rooms, and how a building is handed over to a family who may live most of the year in another country.</p>
@@ -40,7 +40,7 @@ export default async function CareersPage() {
           <p className="mt-4 leading-7 text-muted">{locations.join(", ") || "Dhaka"} · departments: {departments.join(", ") || "Design"}</p>
         </article>
       </section>
-      <section className="bg-mist px-6 py-20 md:px-12">
+      <section className="bg-mist px-4 py-14 sm:px-6 md:px-12 md:py-20">
         <SectionHeader title="Open positions" eyebrow="Join the studio" />
         <ul className="mt-10 divide-y divide-charcoal/10 border-y border-charcoal/10">
           {jobs.map((job) => (

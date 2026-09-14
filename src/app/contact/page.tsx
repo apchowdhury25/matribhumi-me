@@ -21,7 +21,7 @@ export default function ContactPage() {
         title="Write to us from wherever you live."
         description="A winter month, a retirement in Dhaka, or a home in Bashundhara’s new districts: tell us how you would use it. Demonstration inquiries only."
       />
-      <section className="grid gap-16 px-6 py-20 md:px-12 lg:grid-cols-[0.8fr_1.2fr]">
+      <section className="grid gap-16 px-4 py-14 sm:px-6 md:px-12 md:py-20 lg:grid-cols-[0.8fr_1.2fr]">
         <div>
           <p className="text-[11px] uppercase tracking-[0.2em] text-earth">Studio</p>
           <p className="mt-4 leading-7">

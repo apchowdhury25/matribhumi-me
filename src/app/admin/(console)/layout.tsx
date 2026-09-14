@@ -42,14 +42,14 @@ export default async function ConsoleLayout({ children }: { children: React.Reac
         </form>
       </aside>
       <div className="flex-1">
-        <nav className="flex gap-3 overflow-x-auto border-b border-charcoal/10 px-4 py-3 md:hidden" aria-label="Admin mobile">
+        <nav className="no-scrollbar flex gap-3 overflow-x-auto border-b border-charcoal/10 px-4 py-3 md:hidden" aria-label="Admin mobile">
           {links.map((link) => (
             <Link key={link.href} href={link.href} className="whitespace-nowrap text-[11px] uppercase tracking-[0.16em]">
               {link.label}
             </Link>
           ))}
         </nav>
-        <div className="p-6 md:p-10">{children}</div>
+        <div className="min-w-0 overflow-x-auto p-4 sm:p-6 md:p-10">{children}</div>
       </div>
     </div>
   );

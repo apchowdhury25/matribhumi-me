@@ -58,18 +58,18 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
           { name: property.name, path: `/properties/${property.slug}` },
         ])}
       />
-      <section className="relative min-h-[80vh] overflow-hidden">
+      <section className="relative min-h-[70dvh] overflow-hidden">
         <img src={property.heroImage} alt={property.name} className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-charcoal/20" />
-        <div className="relative flex min-h-[80vh] items-end px-6 pb-16 pt-32 md:px-12">
+        <div className="relative flex min-h-[70dvh] items-end px-4 pb-12 pt-28 sm:px-6 md:px-12 md:pb-16 md:pt-32">
           <div className="max-w-4xl text-ivory">
             <p className="text-[11px] uppercase tracking-[0.24em] text-sand">
               {property.location.city}, {property.location.country} · {statusLabel(property.status)}
             </p>
-            <h1 className="font-display mt-4 text-5xl md:text-7xl">{property.name}</h1>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Button href="#inquire" variant="invert">Request Information</Button>
-              <Button href="#viewing" variant="outline" className="border-ivory/40 text-ivory hover:bg-ivory hover:text-charcoal">
+            <h1 className="font-display mt-4 text-[2.1rem] leading-[1.05] sm:text-5xl md:text-7xl">{property.name}</h1>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+              <Button href="#inquire" variant="invert" className="w-full sm:w-auto">Request Information</Button>
+              <Button href="#viewing" variant="outline" className="w-full border-ivory/40 text-ivory hover:bg-ivory hover:text-charcoal sm:w-auto">
                 Schedule a Viewing
               </Button>
               {property.brochureUrl ? (
@@ -84,7 +84,7 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
         </div>
       </section>
 
-      <section className="grid gap-12 px-6 py-20 md:px-12 lg:grid-cols-[1.4fr_0.8fr]">
+      <section className="grid gap-12 px-4 py-14 sm:px-6 md:px-12 md:py-20 lg:grid-cols-[1.4fr_0.8fr]">
         <div>
           <p className="text-[11px] uppercase tracking-[0.22em] text-earth">Overview</p>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-muted">{property.description}</p>
@@ -108,14 +108,14 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
         </aside>
       </section>
 
-      <section className="px-6 pb-20 md:px-12">
+      <section className="px-4 pb-16 sm:px-6 md:px-12 md:pb-20">
         <h2 className="font-display text-4xl">Gallery</h2>
         <div className="mt-8">
           <Gallery images={property.images} />
         </div>
       </section>
 
-      <section className="bg-mist px-6 py-20 md:px-12">
+      <section className="bg-mist px-4 py-14 sm:px-6 md:px-12 md:py-20">
         <h2 className="font-display text-4xl">Amenities</h2>
         <ul className="mt-8 grid gap-4 md:grid-cols-3">
           {property.amenities.map((item) => (
@@ -126,7 +126,7 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
         </ul>
       </section>
 
-      <section className="px-6 py-20 md:px-12">
+      <section className="px-4 py-14 sm:px-6 md:px-12 md:py-20">
         <h2 className="font-display text-4xl">Floor plans</h2>
         <div className="mt-8 grid gap-8 md:grid-cols-2">
           {property.floorPlans.map((plan) => (
@@ -148,7 +148,7 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
         </div>
       </section>
 
-      <section className="px-6 pb-20 md:px-12">
+      <section className="px-4 pb-16 sm:px-6 md:px-12 md:pb-20">
         <h2 className="font-display text-4xl">Available units</h2>
         <div className="mt-8 overflow-x-auto">
           <table className="w-full min-w-[720px] text-left text-sm">
@@ -178,7 +178,7 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
         </div>
       </section>
 
-      <section className="grid gap-10 bg-charcoal px-6 py-20 text-ivory md:px-12 lg:grid-cols-2">
+      <section className="grid gap-10 bg-charcoal px-4 py-14 text-ivory sm:px-6 md:px-12 md:py-20 lg:grid-cols-2">
         <div>
           <h2 className="font-display text-4xl">Location</h2>
           <p className="mt-4 text-ivory/70">{property.development.locationNote}</p>
@@ -203,7 +203,7 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
         </div>
       </section>
 
-      <section className="grid gap-12 px-6 py-20 md:px-12 lg:grid-cols-2">
+      <section className="grid gap-12 px-4 py-14 sm:px-6 md:px-12 md:py-20 lg:grid-cols-2">
         <div id="inquire">
           <h2 className="font-display text-4xl">Request information</h2>
           <p className="mt-3 text-sm text-muted">Demonstration inquiry — stored for the admin console only.</p>

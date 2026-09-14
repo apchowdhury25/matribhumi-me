@@ -58,18 +58,18 @@ export function Gallery({
             if (dx < -40) next();
           }}
         >
-          <button className="absolute right-5 top-5 text-ivory" onClick={close} aria-label="Close gallery">
+          <button className="absolute right-3 top-4 grid h-11 w-11 place-items-center text-ivory sm:right-5 sm:top-5" onClick={close} aria-label="Close gallery">
             <X />
           </button>
-          <button className="absolute left-4 top-1/2 -translate-y-1/2 text-ivory" onClick={prev} aria-label="Previous image">
+          <button className="absolute left-2 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center text-ivory sm:left-4" onClick={prev} aria-label="Previous image">
             <ChevronLeft />
           </button>
           <img
             src={images[index].url}
             alt={images[index].alt}
-            className="mx-auto h-full max-h-full w-auto object-contain p-12"
+            className="mx-auto h-full max-h-full w-auto max-w-full object-contain p-8 sm:p-12"
           />
-          <button className="absolute right-4 top-1/2 -translate-y-1/2 text-ivory" onClick={next} aria-label="Next image">
+          <button className="absolute right-2 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center text-ivory sm:right-4" onClick={next} aria-label="Next image">
             <ChevronRight />
           </button>
           {images[index].caption ? (

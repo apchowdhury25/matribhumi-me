@@ -11,8 +11,8 @@ export const metadata = createMetadata({
 export default function PrivacyPage() {
   return (
     <PublicShell>
-      <article className="mx-auto max-w-3xl px-6 pb-24 pt-32">
-        <h1 className="font-display text-5xl">Privacy</h1>
+      <article className="mx-auto max-w-3xl px-4 pb-20 pt-28 sm:px-6 md:pt-32">
+        <h1 className="font-display text-[2.1rem] sm:text-5xl">Privacy</h1>
         <p className="mt-6 leading-8 text-muted">
           Inquiries, viewing requests, and job applications submitted on {siteConfig.domain} are stored so a member of the team can respond. We do not sell this information. This page describes a demonstration policy, not a law-firm opinion.
         </p>

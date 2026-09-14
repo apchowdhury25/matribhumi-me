@@ -66,7 +66,7 @@ export default async function InsightsPage({
         description="Essays on visiting Bangladesh, looking after a house from abroad, and the unglamorous craft of making a place. Demonstration content."
       />
 
-      <section className="px-6 py-16 md:px-12">
+      <section className="px-4 py-12 sm:px-6 md:px-12 md:py-16">
         <SectionHeader
           eyebrow="The journal"
           title="Read by subject."

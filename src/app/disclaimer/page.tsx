@@ -11,8 +11,8 @@ export const metadata = createMetadata({
 export default function DisclaimerPage() {
   return (
     <PublicShell>
-      <article className="mx-auto max-w-3xl px-6 pb-24 pt-32">
-        <h1 className="font-display text-5xl">Disclaimer</h1>
+      <article className="mx-auto max-w-3xl px-4 pb-20 pt-28 sm:px-6 md:pt-32">
+        <h1 className="font-display text-[2.1rem] sm:text-5xl">Disclaimer</h1>
         <p className="mt-6 leading-8 text-muted">
           MatriBhumi homes are described for vacation and part-year stays, for retirement in Bangladesh, and for everyday living in districts such as Bashundhara — not as investment products. We are not Bashundhara Group. We do not guarantee returns, capital appreciation, rental income, occupancy, or any other financial outcome. Discussions of location and construction are educational. They are not financial, legal, or tax advice.
         </p>

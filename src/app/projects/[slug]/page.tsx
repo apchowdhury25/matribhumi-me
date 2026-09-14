@@ -39,13 +39,13 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             <p className="text-[11px] uppercase tracking-[0.24em] text-sand">
               {project.location.city}, {project.location.country}
             </p>
-            <h1 className="font-display mt-4 text-5xl md:text-7xl">{project.name}</h1>
+            <h1 className="font-display mt-4 text-[2.1rem] leading-[1.05] sm:text-5xl md:text-7xl">{project.name}</h1>
             <p className="mt-4 text-lg text-ivory/80">{project.tagline}</p>
             <Button href="/properties" variant="invert" className="mt-8">Explore Properties</Button>
           </div>
         </div>
       </section>
-      <section className="grid gap-12 px-6 py-20 md:px-12 lg:grid-cols-2">
+      <section className="grid gap-12 px-4 py-14 sm:px-6 md:px-12 md:py-20 lg:grid-cols-2">
         <div>
           <h2 className="font-display text-4xl">Architecture</h2>
           <p className="mt-4 leading-8 text-muted">{project.architecture}</p>
@@ -75,7 +75,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           </div>
         </dl>
       </section>
-      <section className="px-6 py-20 md:px-12">
+      <section className="px-4 py-14 sm:px-6 md:px-12 md:py-20">
         <h2 className="font-display text-4xl">Homes in this place</h2>
         <div className="mt-10 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           {project.properties.map((property) => (

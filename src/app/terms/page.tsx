@@ -11,8 +11,8 @@ export const metadata = createMetadata({
 export default function TermsPage() {
   return (
     <PublicShell>
-      <article className="mx-auto max-w-3xl px-6 pb-24 pt-32">
-        <h1 className="font-display text-5xl">Terms of use</h1>
+      <article className="mx-auto max-w-3xl px-4 pb-20 pt-28 sm:px-6 md:pt-32">
+        <h1 className="font-display text-[2.1rem] sm:text-5xl">Terms of use</h1>
         <p className="mt-6 leading-8 text-muted">
           This website is a demonstration of how MatriBhumi might present homes in Bangladesh for families living overseas — vacation and part-year stays, not investment products. Content, prices, and availability are fictional unless we say otherwise. Nothing here is an offer to sell real property or an invitation to invest.
         </p>

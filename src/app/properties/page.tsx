@@ -43,9 +43,9 @@ export default async function PropertiesPage({
         title="A Bangladesh address that fits how you live."
         description="Search demonstration homes for holidays, retirement, and everyday living in Bashundhara and beyond. Nothing here is a live offering or a financial recommendation."
       />
-      <section className="px-6 py-12 md:px-12">
+      <section className="px-4 py-10 sm:px-6 md:px-12 md:py-12">
         <form className="grid gap-3 border border-charcoal/10 bg-paper p-4 md:grid-cols-4 lg:grid-cols-6">
-          <input name="q" defaultValue={filters.q} placeholder="Search" className="h-11 border border-charcoal/15 bg-ivory px-3 text-sm md:col-span-2" />
+          <input name="q" defaultValue={filters.q} placeholder="Search" className="h-12 border border-charcoal/15 bg-ivory px-3 text-base md:col-span-2" />
           <select name="location" defaultValue={filters.location ?? ""} className="h-11 border border-charcoal/15 bg-ivory px-3 text-sm">
             <option value="">All locations</option>
             {data.locations.map((loc) => (
@@ -82,7 +82,7 @@ export default async function PropertiesPage({
             <option value="newest">Newest</option>
           </select>
           <input type="hidden" name="view" value={view} />
-          <button className="h-11 bg-charcoal text-[11px] uppercase tracking-[0.18em] text-ivory">Apply</button>
+          <button className="h-12 bg-charcoal text-[11px] uppercase tracking-[0.18em] text-ivory">Apply</button>
         </form>
 
         <div className="mt-8 flex items-center justify-between">

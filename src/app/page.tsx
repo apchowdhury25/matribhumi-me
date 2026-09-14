@@ -26,31 +26,31 @@ export default async function HomePage() {
 
   return (
     <PublicShell transparentHeader>
-      <section className="relative min-h-screen overflow-hidden">
+      <section className="relative min-h-[100dvh] overflow-hidden">
         <img
           src="/media/hero-plaza.jpg"
           alt="A landscaped plaza at the base of a contemporary MatriBhumi development"
           className="absolute inset-0 h-full w-full object-cover ken-burns"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-charcoal/25" />
-        <div className="relative flex min-h-screen flex-col justify-end px-6 pb-20 pt-32 md:px-16 md:pb-28">
+        <div className="relative flex min-h-[100dvh] flex-col justify-end px-4 pb-16 pt-28 sm:px-6 md:px-16 md:pb-28 md:pt-32">
           <p className="text-[11px] uppercase tracking-[0.32em] text-sand">MatriBhumi</p>
-          <h1 className="font-display mt-5 max-w-4xl text-5xl leading-[0.92] text-ivory md:text-8xl">
+          <h1 className="font-display mt-4 max-w-4xl text-[2.15rem] leading-[1.05] text-ivory sm:text-5xl md:mt-5 md:text-8xl md:leading-[0.92]">
             {siteConfig.tagline}
           </h1>
-          <p className="mt-6 max-w-xl text-lg leading-8 text-ivory/80">{siteConfig.supporting}</p>
-          <div className="mt-10 flex flex-wrap gap-4">
-            <Button href="/projects" variant="invert" size="lg">
+          <p className="mt-5 max-w-xl text-base leading-7 text-ivory/80 sm:mt-6 sm:text-lg sm:leading-8">{siteConfig.supporting}</p>
+          <div className="mt-8 flex w-full flex-col gap-3 sm:mt-10 sm:w-auto sm:flex-row sm:flex-wrap sm:gap-4">
+            <Button href="/projects" variant="invert" size="lg" className="w-full sm:w-auto">
               Explore Developments
             </Button>
-            <Button href="/about" variant="outline" size="lg" className="border-ivory/40 text-ivory hover:bg-ivory hover:text-charcoal">
+            <Button href="/about" variant="outline" size="lg" className="w-full border-ivory/40 text-ivory hover:bg-ivory hover:text-charcoal sm:w-auto">
               Discover MatriBhumi
             </Button>
           </div>
         </div>
       </section>
 
-      <section className="px-6 py-20 md:px-12">
+      <section className="px-4 py-16 sm:px-6 md:px-12 md:py-20">
         <SectionHeader
           eyebrow="Who it is for"
           title="Three ways of living in Bangladesh."
@@ -66,7 +66,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="px-6 py-24 md:px-12">
+      <section className="px-4 py-16 sm:px-6 md:px-12 md:py-24">
         <SectionHeader
           eyebrow="Featured developments"
           title="Addresses in Bangladesh you can come back to — or live in every day."
@@ -95,7 +95,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="bg-charcoal px-6 py-24 text-ivory md:px-12">
+      <section className="bg-charcoal px-4 py-16 text-ivory sm:px-6 md:px-12 md:py-24">
         <SectionHeader
           eyebrow="Signature developments"
           title="Buildings as stories, told at the scale of a neighborhood."
@@ -134,7 +134,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="px-6 py-24 md:px-12">
+      <section className="px-4 py-16 sm:px-6 md:px-12 md:py-24">
         <SectionHeader
           eyebrow="How you might live"
           title="A visit. A retirement. A full Dhaka week."
@@ -154,7 +154,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="bg-mist px-6 py-24 md:px-12">
+      <section className="bg-mist px-4 py-16 sm:px-6 md:px-12 md:py-24">
         <SectionHeader
           eyebrow="Bangladesh, and a few studies abroad"
           title="Most of our work is at home — especially Dhaka’s new districts."
@@ -179,7 +179,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="px-6 py-24 md:px-12">
+      <section className="px-4 py-16 sm:px-6 md:px-12 md:py-24">
         <SectionHeader
           eyebrow="Why MatriBhumi"
           title="Homes for people whose life is here, or in two places."
@@ -197,9 +197,9 @@ export default async function HomePage() {
 
       <section className="grid lg:grid-cols-2">
         <div className="min-h-[420px] bg-cover bg-center" style={{ backgroundImage: "url(/media/location-aerial.jpg)" }} />
-        <div className="flex flex-col justify-center bg-charcoal px-8 py-16 text-ivory md:px-16">
+        <div className="flex flex-col justify-center bg-charcoal px-4 py-14 text-ivory sm:px-8 md:px-16 md:py-16">
           <p className="text-[11px] uppercase tracking-[0.24em] text-sand">How you will use it</p>
-          <h2 className="font-display mt-4 text-4xl md:text-5xl">Look at the life, not at a yield.</h2>
+          <h2 className="font-display mt-4 text-[1.85rem] leading-tight sm:text-4xl md:text-5xl">Look at the life, not at a yield.</h2>
           <p className="mt-5 max-w-lg text-ivory/70">
             These homes are meant for vacation and part-year stays, for retirement in Bangladesh, and for everyday living in Bashundhara’s new districts. We do not guarantee returns, appreciation, or rental income.
           </p>
@@ -211,13 +211,13 @@ export default async function HomePage() {
               </li>
             ))}
           </ul>
-          <Button href="/properties" variant="invert" className="mt-10 w-fit">
+          <Button href="/properties" variant="invert" className="mt-10 w-full sm:w-fit">
             Explore Properties
           </Button>
         </div>
       </section>
 
-      <section className="bg-mist px-6 py-24 md:px-12">
+      <section className="bg-mist px-4 py-16 sm:px-6 md:px-12 md:py-24">
         <SectionHeader
           eyebrow="Bashundhara district life"
           title="Malls, golf, parks — and a home on the same map."
@@ -231,15 +231,15 @@ export default async function HomePage() {
             </article>
           ))}
         </div>
-        <Button href="/locations/bashundhara" className="mt-10">
+        <Button href="/locations/bashundhara" className="mt-10 w-full sm:w-auto">
           Explore Bashundhara
         </Button>
       </section>
 
-      <section className="px-6 py-24 md:px-12">
-        <div className="flex items-end justify-between gap-6">
+      <section className="px-4 py-16 sm:px-6 md:px-12 md:py-24">
+        <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <SectionHeader eyebrow="Insights" title="Notes from the studio and the street." />
-          <Button href="/insights" variant="outline" className="hidden md:inline-flex">
+          <Button href="/insights" variant="outline" className="w-full sm:w-auto">
             All insights
           </Button>
         </div>

@@ -23,7 +23,7 @@ export default async function LocationsPage() {
         title="Bangladesh first — especially Bashundhara."
         description="Homes for coming back, retiring, or living every day in Dhaka’s new districts. Other cities on this map are demonstration studies."
       />
-      <section className="grid gap-8 px-6 py-20 md:grid-cols-2 md:px-12">
+      <section className="grid gap-8 px-4 py-14 sm:px-6 md:grid-cols-2 md:px-12 md:py-20">
         {locations.map((location) => (
           <Link key={location.id} href={`/locations/${location.slug}`} className="group">
             <div className="aspect-[16/10] overflow-hidden bg-stone">
