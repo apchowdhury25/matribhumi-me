@@ -5,10 +5,17 @@ const pages = [
   "/properties",
   "/properties/heights-residences",
   "/projects",
+  "/projects/the-grove-residences",
+  "/locations",
+  "/locations/chattogram",
   "/locations/bashundhara",
   "/about",
+  "/sustainability",
   "/contact",
   "/insights",
+  "/careers",
+  "/favorites",
+  "/privacy",
 ];
 
 const viewports = [
@@ -58,6 +65,15 @@ for (const vp of viewports) {
     });
   });
 }
+
+test("desktop header has one Contact and no Explore Properties", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/locations/chattogram");
+  const header = page.locator("header");
+  await expect(header.getByRole("link", { name: "Contact" })).toHaveCount(1);
+  await expect(header.getByRole("link", { name: "Explore Properties" })).toHaveCount(0);
+  await expect(header.getByRole("link", { name: "Properties" })).toHaveCount(1);
+});
 
 test("property inquiry form is usable at 390", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });

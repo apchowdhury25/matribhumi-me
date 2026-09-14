@@ -53,30 +53,6 @@ export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
         </nav>
         <div className="flex shrink-0 items-center gap-1 sm:gap-2">
           <SearchOverlay />
-          <Link
-            href="/contact"
-            className={cn(
-              "inline-flex h-10 items-center px-3 text-[10px] uppercase tracking-[0.16em] sm:px-4 sm:text-[11px] lg:hidden",
-              inverted ? "text-ivory" : "text-charcoal",
-            )}
-          >
-            Contact
-          </Link>
-          <Link
-            href="/properties"
-            className={cn(
-              "hidden h-10 items-center px-5 text-[11px] uppercase tracking-[0.2em] md:inline-flex",
-              inverted ? "bg-ivory text-charcoal" : "bg-charcoal text-ivory",
-            )}
-          >
-            Explore Properties
-          </Link>
-          <Link
-            href="/contact"
-            className="hidden text-[11px] uppercase tracking-[0.2em] opacity-80 lg:inline"
-          >
-            Contact
-          </Link>
           <button
             type="button"
             className="grid h-11 w-11 place-items-center lg:hidden"
@@ -101,20 +77,6 @@ export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
                 {item.label}
               </Link>
             ))}
-            <Link
-              href="/properties"
-              onClick={() => setOpen(false)}
-              className="mt-6 bg-charcoal px-5 py-4 text-center text-[11px] uppercase tracking-[0.22em] text-ivory"
-            >
-              Explore Properties
-            </Link>
-            <Link
-              href="/contact"
-              onClick={() => setOpen(false)}
-              className="mt-3 border border-charcoal/20 px-5 py-4 text-center text-[11px] uppercase tracking-[0.22em]"
-            >
-              Contact
-            </Link>
           </nav>
         </div>
       ) : null}
