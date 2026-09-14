@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-labelledby="title">
+  <title id="title">MatriBhumi</title>
+  <rect x="3" y="3" width="58" height="58" stroke="currentColor" stroke-width="1.5"/>
+  <path d="M12 48V28L32 14L52 28V48" stroke="currentColor" stroke-width="1.6" fill="none"/>
+  <path d="M12 48L32 30L52 48" stroke="currentColor" stroke-width="1.6"/>
+  <path d="M8 52H56" stroke="currentColor" stroke-width="1.2"/>
+</svg>

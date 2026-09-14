@@ -1,0 +1,413 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  // Local default is SQLite so the site runs without Docker.
+  // Production: set provider = "postgresql" and a Postgres DATABASE_URL.
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  EDITOR
+  SALES
+}
+
+enum PropertyType {
+  APARTMENT
+  VILLA
+  TOWNHOUSE
+  PENTHOUSE
+  COMMERCIAL
+  HOSPITALITY
+  MIXED_USE
+  PLOT
+}
+
+enum PropertyStatus {
+  UPCOMING
+  LAUNCHED
+  UNDER_CONSTRUCTION
+  READY
+  SOLD_OUT
+}
+
+enum UnitStatus {
+  AVAILABLE
+  RESERVED
+  SOLD
+  HOLD
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  VIEWING_SCHEDULED
+  NEGOTIATION
+  CONVERTED
+  CLOSED
+}
+
+enum InquiryType {
+  GENERAL
+  SALES
+  PARTNERSHIP
+  MEDIA
+  CAREER
+}
+
+enum ContactMethod {
+  EMAIL
+  PHONE
+  WHATSAPP
+}
+
+enum ArticleCategory {
+  NEWS
+  PROJECT_UPDATES
+  ARCHITECTURE
+  DESIGN
+  SUSTAINABILITY
+  MARKET_INSIGHTS
+  LIFESTYLE
+}
+
+enum DevelopmentCategory {
+  RESIDENTIAL
+  VILLAS
+  COMMERCIAL
+  HOSPITALITY
+  MIXED_USE
+  WATERFRONT
+  COMMUNITIES
+}
+
+model User {
+  id           String        @id @default(cuid())
+  email        String        @unique
+  name         String
+  passwordHash String
+  role         UserRole      @default(EDITOR)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  articles     NewsArticle[]
+  favorites    Favorite[]
+}
+
+model Developer {
+  id           String         @id @default(cuid())
+  name         String
+  slug         String         @unique
+  description  String
+  logoUrl      String?
+  properties   Property[]
+  developments Development[]
+}
+
+model Location {
+  id               String         @id @default(cuid())
+  name             String
+  slug             String         @unique
+  city             String
+  country          String
+  region           String?
+  description      String
+  overview         String
+  lifestyle        String
+  connectivity     String
+  opportunities    String
+  heroImage        String
+  latitude         Float
+  longitude        Float
+  featured         Boolean        @default(false)
+  attractions      Json?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  developments     Development[]
+  properties       Property[]
+}
+
+model Development {
+  id           String               @id @default(cuid())
+  name         String
+  slug         String               @unique
+  tagline      String
+  description  String
+  architecture String
+  lifestyle    String
+  locationNote String
+  heroImage    String
+  category     DevelopmentCategory
+  propertyType PropertyType
+  status       PropertyStatus
+  completion   String
+  startingPrice Decimal
+  currency     String               @default("USD")
+  stats        Json
+  featured     Boolean              @default(false)
+  signature    Boolean              @default(false)
+  published    Boolean              @default(true)
+  latitude     Float
+  longitude    Float
+  locationId   String
+  location     Location             @relation(fields: [locationId], references: [id])
+  developerId  String
+  developer    Developer            @relation(fields: [developerId], references: [id])
+  properties   Property[]
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+
+  @@index([locationId])
+  @@index([status])
+  @@index([category])
+  @@index([featured])
+}
+
+model Property {
+  id             String            @id @default(cuid())
+  name           String
+  slug           String            @unique
+  description    String
+  type           PropertyType
+  status         PropertyStatus
+  completionDate DateTime?
+  startingPrice  Decimal
+  currency       String            @default("USD")
+  bedroomsMin    Int
+  bedroomsMax    Int
+  bathroomsMin   Int
+  bathroomsMax   Int
+  areaMin        Int
+  areaMax        Int
+  areaUnit       String            @default("sqft")
+  floors         Int?
+  totalUnits     Int?
+  heroImage      String
+  videoUrl       String?
+  brochureUrl    String?
+  latitude       Float
+  longitude      Float
+  featured       Boolean           @default(false)
+  published      Boolean           @default(true)
+  lifestyle      String?
+  developmentId  String
+  development    Development       @relation(fields: [developmentId], references: [id])
+  locationId     String
+  location       Location          @relation(fields: [locationId], references: [id])
+  developerId    String
+  developer      Developer         @relation(fields: [developerId], references: [id])
+  images         PropertyImage[]
+  units          Unit[]
+  amenities      PropertyAmenity[]
+  floorPlans     FloorPlan[]
+  nearbyPlaces   NearbyPlace[]
+  leads          Lead[]
+  viewings       ViewingRequest[]
+  favorites      Favorite[]
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+
+  @@index([locationId])
+  @@index([type])
+  @@index([status])
+  @@index([startingPrice])
+  @@index([published])
+  @@index([featured])
+  @@index([bedroomsMin])
+}
+
+model Amenity {
+  id         String            @id @default(cuid())
+  name       String            @unique
+  slug       String            @unique
+  icon       String
+  category   String
+  properties PropertyAmenity[]
+}
+
+model PropertyAmenity {
+  propertyId String
+  amenityId  String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  amenity    Amenity  @relation(fields: [amenityId], references: [id], onDelete: Cascade)
+
+  @@id([propertyId, amenityId])
+}
+
+model PropertyImage {
+  id         String   @id @default(cuid())
+  url        String
+  alt        String
+  caption    String?
+  sortOrder  Int      @default(0)
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  @@index([propertyId])
+}
+
+model FloorPlan {
+  id         String   @id @default(cuid())
+  name       String
+  type       String
+  imageUrl   String
+  pdfUrl     String?
+  area       Int
+  bedrooms   Int
+  bathrooms  Int
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  @@index([propertyId])
+}
+
+model Unit {
+  id         String     @id @default(cuid())
+  name       String
+  type       String
+  bedrooms   Int
+  bathrooms  Int
+  area       Int
+  price      Decimal
+  status     UnitStatus @default(AVAILABLE)
+  floor      Int?
+  propertyId String
+  property   Property   @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  @@index([propertyId])
+  @@index([status])
+}
+
+model NearbyPlace {
+  id         String   @id @default(cuid())
+  name       String
+  category   String
+  distance   String
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  @@index([propertyId])
+}
+
+model Lead {
+  id            String        @id @default(cuid())
+  name          String
+  email         String
+  phone         String
+  country       String
+  budget        String?
+  contactMethod ContactMethod @default(EMAIL)
+  message       String
+  inquiryType   InquiryType   @default(SALES)
+  status        LeadStatus    @default(NEW)
+  propertyId    String?
+  property      Property?     @relation(fields: [propertyId], references: [id])
+  notes         String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([status])
+  @@index([email])
+  @@index([createdAt])
+  @@index([propertyId])
+}
+
+model ViewingRequest {
+  id            String        @id @default(cuid())
+  name          String
+  email         String
+  phone         String
+  preferredDate DateTime
+  preferredTime String
+  contactMethod ContactMethod @default(EMAIL)
+  message       String?
+  status        String        @default("NEW")
+  propertyId    String
+  property      Property      @relation(fields: [propertyId], references: [id])
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([propertyId])
+  @@index([status])
+}
+
+model NewsArticle {
+  id          String          @id @default(cuid())
+  title       String
+  slug        String          @unique
+  excerpt     String
+  body        String
+  coverImage  String
+  category    ArticleCategory
+  authorId    String
+  author      User            @relation(fields: [authorId], references: [id])
+  readingTime Int
+  published   Boolean         @default(true)
+  publishedAt DateTime        @default(now())
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  @@index([category])
+  @@index([publishedAt])
+  @@index([published])
+}
+
+model Job {
+  id           String           @id @default(cuid())
+  title        String
+  slug         String           @unique
+  department   String
+  location     String
+  type         String
+  description  String
+  requirements String
+  published    Boolean          @default(true)
+  applications JobApplication[]
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  @@index([department])
+  @@index([published])
+}
+
+model JobApplication {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  phone       String
+  resumeUrl   String
+  coverLetter String
+  jobId       String
+  job         Job      @relation(fields: [jobId], references: [id])
+  createdAt   DateTime @default(now())
+
+  @@index([jobId])
+}
+
+model Favorite {
+  id         String   @id @default(cuid())
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id])
+  sessionId  String?
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+
+  @@unique([userId, propertyId])
+  @@index([sessionId])
+  @@index([propertyId])
+}
+
+model MediaAsset {
+  id        String   @id @default(cuid())
+  url       String
+  key       String   @unique
+  filename  String
+  mimeType  String
+  size      Int
+  alt       String?
+  createdAt DateTime @default(now())
+}

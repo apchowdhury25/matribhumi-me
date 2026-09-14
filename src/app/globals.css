@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-charcoal: #1a1916;
+  --color-ink: #2c2a26;
+  --color-ivory: #f7f3eb;
+  --color-sand: #d8c9b0;
+  --color-earth: #8a7355;
+  --color-moss: #4a5d4e;
+  --color-bronze: #a4895a;
+  --color-stone: #e9e2d4;
+  --color-mist: #f3eee4;
+  --color-paper: #fbf8f2;
+  --color-muted: #6b6560;
+  --color-hairline: color-mix(in oklab, var(--color-charcoal) 12%, transparent);
+  --font-display: var(--font-display), "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, monospace;
+  --shadow-lift: 0 24px 60px -28px rgb(26 25 22 / 0.35);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  background: var(--color-ivory);
+  color: var(--color-charcoal);
+}
+
+body {
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-moss);
+  color: var(--color-ivory);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-moss);
+  outline-offset: 3px;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+.hairline {
+  border-color: var(--color-hairline);
+}
+
+.editorial-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.ken-burns {
+  animation: ken-burns 28s ease-out forwards;
+}
+
+@keyframes ken-burns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+.reveal {
+  animation: reveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .ken-burns,
+  .reveal {
+    animation: none;
+  }
+}

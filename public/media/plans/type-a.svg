@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" fill="none">
+  <rect width="800" height="520" fill="#F7F3EB"/>
+  <rect x="80" y="60" width="640" height="400" stroke="#1A1916" stroke-width="2"/>
+  <path d="M80 260H720M400 60V460" stroke="#1A1916" stroke-width="1"/>
+  <text x="150" y="180" fill="#8A7355" font-family="Georgia" font-size="18">Living</text>
+  <text x="500" y="180" fill="#8A7355" font-family="Georgia" font-size="18">Bedroom</text>
+  <text x="150" y="360" fill="#8A7355" font-family="Georgia" font-size="18">Kitchen</text>
+  <text x="500" y="360" fill="#8A7355" font-family="Georgia" font-size="18">Bath</text>
+  <text x="80" y="500" fill="#1A1916" font-family="Georgia" font-size="14">MatriBhumi · Type A · demonstration floor plan</text>
+</svg>

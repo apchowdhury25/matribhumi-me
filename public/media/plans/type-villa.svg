@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" fill="none">
+  <rect width="800" height="520" fill="#F7F3EB"/>
+  <rect x="40" y="40" width="720" height="440" stroke="#1A1916" stroke-width="2"/>
+  <rect x="70" y="70" width="240" height="180" stroke="#4A5D4E" stroke-width="1.5"/>
+  <rect x="340" y="70" width="390" height="180" stroke="#1A1916"/>
+  <rect x="70" y="280" width="660" height="170" stroke="#1A1916"/>
+  <text x="140" y="165" fill="#4A5D4E" font-family="Georgia" font-size="18">Courtyard</text>
+  <text x="480" y="165" fill="#8A7355" font-family="Georgia" font-size="18">Living</text>
+  <text x="340" y="370" fill="#8A7355" font-family="Georgia" font-size="18">Bedrooms & kitchen</text>
+  <text x="40" y="505" fill="#1A1916" font-family="Georgia" font-size="14">MatriBhumi · Courtyard villa · demonstration floor plan</text>
+</svg>
