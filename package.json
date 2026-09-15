@@ -2,10 +2,13 @@
   "name": "matribhumi",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20 <=24"
+  },
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
-    "start": "next start",
+    "build": "prisma generate && node scripts/ensure-db.mjs && next build",
+    "start": "next start --hostname 0.0.0.0",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
@@ -34,6 +37,7 @@
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "tailwind-merge": "^3.7.0",
+    "tsx": "^4.23.13",
     "zod": "^4.6.5"
   },
   "devDependencies": {
@@ -47,7 +51,6 @@
     "eslint-config-next": "16.3.5",
     "prisma": "6.19.3",
     "tailwindcss": "^4",
-    "tsx": "^4.23.13",
     "typescript": "^5",
     "vitest": "^3.2.7"
   }

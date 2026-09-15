@@ -15,7 +15,7 @@ function safeName(filename: string) {
 }
 
 class LocalStorage implements ObjectStorage {
-  private dir = path.join(process.cwd(), "public", "uploads");
+  private dir = process.env.UPLOAD_DIR || path.join(process.cwd(), "public", "uploads");
 
   async put(bytes: Buffer, filename: string, mimeType: string): Promise<StoredObject> {
     await mkdir(this.dir, { recursive: true });

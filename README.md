@@ -113,6 +113,20 @@ npm start
 
 ## Deployment
 
+### Hostinger (matribhumi.me)
+
+Deploy as a **Node.js web app** from GitHub. Do not use **Advanced → Git** (that only copies files and will not build Next.js).
+
+Full checklist: **[HOSTINGER.md](./HOSTINGER.md)**
+
+1. Business or Cloud hosting plan.
+2. hPanel → **Websites → Add Website → Node.js web app → Import Git repository**.
+3. Repository `apchowdhury25/matribhumi-me`, branch `main`, Node **22**, build script `build`, output `.next`.
+4. Environment: `NEXT_PUBLIC_SITE_URL=https://matribhumi.me`, a 32+ character `SESSION_SECRET`, and a SQLite `DATABASE_URL` **outside** `hbuilds` so deploys do not wipe data.
+5. Deploy, then install SSL for `matribhumi.me` and `www`.
+
+### Other targets
+
 **Vercel** — import the repo, set env vars, attach Postgres (or keep SQLite only for preview demos). `postinstall` runs `prisma generate`. Production `NEXT_PUBLIC_SITE_URL` must be `https://matribhumi.me`. `www.matribhumi.me` redirects to the apex domain.
 
 **Docker** — `docker compose up --build` (app + Postgres).
