@@ -36,9 +36,11 @@ Confirm (or set) these values:
 | Branch | `main` |
 | Node.js version | **22** (LTS) |
 | Package manager | npm |
-| Build command | `build` |
+| Build command | `build` (runs `next build --webpack`) |
 | Output directory | `.next` |
 | Entry file | leave blank (Hostinger starts Next.js itself) |
+
+Hostinger’s Linux image is older than Next.js 16’s default Turbopack/SWC binary (`GLIBC_2.29`). The repo therefore builds with **webpack** and a plain `next.config.mjs` so the config does not need SWC to compile.
 
 Do **not** use the generic Git tool under **Advanced → Git**. That copies files as-is and will not run `npm run build`.
 
@@ -47,7 +49,7 @@ Do **not** use the generic Git tool under **Advanced → Git**. That copies file
 In the deploy screen (or **Environment variables** after the first deploy), set:
 
 ```env
-DATABASE_URL=file:/home/YOUR_USERNAME/domains/matribhumi.me/data/matribhumi.db
+DATABASE_URL=file:/home/u763041062/domains/matribhumi.me/data/matribhumi.db
 SESSION_SECRET=generate-a-random-string-at-least-32-characters
 NEXTAUTH_SECRET=generate-a-random-string-at-least-32-characters
 NEXT_PUBLIC_SITE_URL=https://matribhumi.me
