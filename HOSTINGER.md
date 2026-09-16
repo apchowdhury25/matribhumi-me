@@ -78,6 +78,8 @@ Create the data folder once in File Manager:
 
 The SQLite file must live **outside** `hbuilds/` so a new deploy does not wipe properties, leads, and admin users.
 
+If `DATABASE_URL` is omitted, the build falls back to `file:./dev.db` so Next.js can finish. That file lives inside the deploy folder and is wiped on the next deploy, so set the persistent path above for a lasting database.
+
 Saving environment variables triggers a rebuild.
 
 ## 5. First build

@@ -2,14 +2,25 @@ import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site";
 import { prisma } from "@/lib/prisma";
 
+export const dynamic = "force-dynamic";
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [properties, developments, locations, articles, jobs] = await Promise.all([
-    prisma.property.findMany({ where: { published: true }, select: { slug: true, updatedAt: true } }),
-    prisma.development.findMany({ where: { published: true }, select: { slug: true, updatedAt: true } }),
-    prisma.location.findMany({ select: { slug: true, updatedAt: true } }),
-    prisma.newsArticle.findMany({ where: { published: true }, select: { slug: true, updatedAt: true } }),
-    prisma.job.findMany({ where: { published: true }, select: { slug: true, updatedAt: true } }),
-  ]);
+  let properties: { slug: string; updatedAt: Date }[] = [];
+  let developments: { slug: string; updatedAt: Date }[] = [];
+  let locations: { slug: string; updatedAt: Date }[] = [];
+  let articles: { slug: string; updatedAt: Date }[] = [];
+  let jobs: { slug: string; updatedAt: Date }[] = [];
+  try {
+    [properties, developments, locations, articles, jobs] = await Promise.all([
+      prisma.property.findMany({ where: { published: true }, select: { slug: true, updatedAt: true } }),
+      prisma.development.findMany({ where: { published: true }, select: { slug: true, updatedAt: true } }),
+      prisma.location.findMany({ select: { slug: true, updatedAt: true } }),
+      prisma.newsArticle.findMany({ where: { published: true }, select: { slug: true, updatedAt: true } }),
+      prisma.job.findMany({ where: { published: true }, select: { slug: true, updatedAt: true } }),
+    ]);
+  } catch {
+    /* Build hosts may not inject DATABASE_URL into every worker. */
+  }
 
   const staticPaths = [
     "",

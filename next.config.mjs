@@ -1,3 +1,13 @@
+if (!process.env.DATABASE_URL) {
+  process.env.DATABASE_URL = "file:./dev.db";
+}
+if (!process.env.SESSION_SECRET) {
+  process.env.SESSION_SECRET = "matribhumi-hostinger-session-secret-32ch";
+}
+if (!process.env.NEXT_PUBLIC_SITE_URL) {
+  process.env.NEXT_PUBLIC_SITE_URL = "https://matribhumi.me";
+}
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "standalone",

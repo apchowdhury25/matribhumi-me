@@ -1,10 +1,22 @@
 import { spawnSync } from "node:child_process";
-import { mkdirSync } from "node:fs";
+import { appendFileSync, existsSync, mkdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 if (!process.env.DATABASE_URL) {
   process.env.DATABASE_URL = "file:./dev.db";
+}
+
+const envFile = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", ".env");
+const envContents = existsSync(envFile) ? readFileSync(envFile, "utf8") : "";
+if (!/^DATABASE_URL=/m.test(envContents)) {
+  appendFileSync(envFile, `\nDATABASE_URL="${process.env.DATABASE_URL}"\n`);
+}
+if (!/^SESSION_SECRET=/m.test(envContents) && !process.env.SESSION_SECRET) {
+  appendFileSync(envFile, `SESSION_SECRET="matribhumi-hostinger-session-secret-32ch"\n`);
+}
+if (!/^NEXT_PUBLIC_SITE_URL=/m.test(envContents) && !process.env.NEXT_PUBLIC_SITE_URL) {
+  appendFileSync(envFile, `NEXT_PUBLIC_SITE_URL="https://matribhumi.me"\n`);
 }
 
 const url = process.env.DATABASE_URL;
