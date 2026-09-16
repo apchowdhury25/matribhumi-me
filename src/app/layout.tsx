@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Suspense } from "react";
 import { Cormorant_Garamond, Outfit, IBM_Plex_Mono } from "next/font/google";
 import { siteConfig } from "@/config/site";
 import { organizationJsonLd } from "@/lib/seo";
@@ -89,7 +90,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             {children}
             <CompareBar />
             <CookieBanner />
-            <Analytics />
+            <Suspense fallback={null}>
+              <Analytics />
+            </Suspense>
           </CompareProvider>
         </FavoritesProvider>
       </body>

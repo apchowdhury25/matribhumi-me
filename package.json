@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && node scripts/ensure-db.mjs && next build --webpack",
+    "build": "prisma generate && node scripts/ensure-db.mjs && next build --webpack && node scripts/prepare-standalone.mjs",
     "start": "next start --hostname 0.0.0.0",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",

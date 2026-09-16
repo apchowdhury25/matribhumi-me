@@ -22,7 +22,7 @@ export default async function HomePage() {
     getSignatureDevelopments(),
     getArticles(),
     getMapDevelopments(),
-  ]);
+  ]).catch(() => [[], [], [], []] as const);
 
   return (
     <PublicShell transparentHeader>

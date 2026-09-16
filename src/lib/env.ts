@@ -1,8 +1,10 @@
-const DEFAULT_SQLITE = "file:./dev.db";
+import path from "node:path";
+
 const DEFAULT_SECRET = "matribhumi-hostinger-session-secret-32ch";
 
 if (!process.env.DATABASE_URL) {
-  process.env.DATABASE_URL = DEFAULT_SQLITE;
+  const dbFile = path.join(process.cwd(), "prisma", "dev.db").replaceAll("\\", "/");
+  process.env.DATABASE_URL = `file:${dbFile}`;
 }
 
 if (!process.env.SESSION_SECRET || process.env.SESSION_SECRET.length < 32) {

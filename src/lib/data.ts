@@ -4,63 +4,98 @@ import type { PropertyFilters } from "@/lib/validations";
 
 const PAGE_SIZE = 12;
 
+async function safe<T>(fn: () => Promise<T>, fallback: T): Promise<T> {
+  try {
+    return await fn();
+  } catch (error) {
+    console.error("[data]", error);
+    return fallback;
+  }
+}
+
 export async function getFeaturedDevelopments() {
-  return prisma.development.findMany({
-    where: { featured: true, published: true },
-    include: { location: true },
-    orderBy: { name: "asc" },
-  });
+  return safe(
+    () =>
+      prisma.development.findMany({
+        where: { featured: true, published: true },
+        include: { location: true },
+        orderBy: { name: "asc" },
+      }),
+    [],
+  );
 }
 
 export async function getSignatureDevelopments() {
-  return prisma.development.findMany({
-    where: { signature: true, published: true },
-    include: { location: true },
-    orderBy: { name: "asc" },
-  });
+  return safe(
+    () =>
+      prisma.development.findMany({
+        where: { signature: true, published: true },
+        include: { location: true },
+        orderBy: { name: "asc" },
+      }),
+    [],
+  );
 }
 
 export async function getDevelopments(category?: string) {
-  return prisma.development.findMany({
-    where: {
-      published: true,
-      ...(category ? { category: category as never } : {}),
-    },
-    include: { location: true, _count: { select: { properties: true } } },
-    orderBy: { name: "asc" },
-  });
+  return safe(
+    () =>
+      prisma.development.findMany({
+        where: {
+          published: true,
+          ...(category ? { category: category as never } : {}),
+        },
+        include: { location: true, _count: { select: { properties: true } } },
+        orderBy: { name: "asc" },
+      }),
+    [],
+  );
 }
 
 export async function getDevelopment(slug: string) {
-  return prisma.development.findUnique({
+  return safe(
+    () =>
+      prisma.development.findUnique({
     where: { slug },
     include: {
       location: true,
       developer: true,
       properties: { where: { published: true }, include: { location: true } },
     },
-  });
+      }),
+    null,
+  );
 }
 
 export async function getLocations() {
-  return prisma.location.findMany({
-    include: { _count: { select: { developments: true, properties: true } } },
-    orderBy: { name: "asc" },
-  });
+  return safe(
+    () =>
+      prisma.location.findMany({
+        include: { _count: { select: { developments: true, properties: true } } },
+        orderBy: { name: "asc" },
+      }),
+    [],
+  );
 }
 
 export async function getLocation(slug: string) {
-  return prisma.location.findUnique({
-    where: { slug },
-    include: {
-      developments: { where: { published: true } },
-      properties: { where: { published: true, featured: true }, include: { location: true } },
-    },
-  });
+  return safe(
+    () =>
+      prisma.location.findUnique({
+        where: { slug },
+        include: {
+          developments: { where: { published: true } },
+          properties: { where: { published: true, featured: true }, include: { location: true } },
+        },
+      }),
+    null,
+  );
 }
 
 export async function getProperty(slug: string) {
-  return prisma.property.findUnique({
+  return safe(
+    () =>
+      prisma.property.findUnique({
     where: { slug },
     include: {
       location: true,
@@ -72,7 +107,9 @@ export async function getProperty(slug: string) {
       floorPlans: true,
       nearbyPlaces: true,
     },
-  });
+      }),
+    null,
+  );
 }
 
 export async function getProperties(filters: PropertyFilters = {}) {
@@ -125,70 +162,87 @@ export async function getProperties(filters: PropertyFilters = {}) {
           ? { createdAt: "desc" }
           : { featured: "desc" };
 
-  const [items, total, locations, amenities] = await Promise.all([
-    prisma.property.findMany({
-      where,
-      include: { location: true, development: true },
-      orderBy,
-      skip: (page - 1) * PAGE_SIZE,
-      take: PAGE_SIZE,
-    }),
-    prisma.property.count({ where }),
-    prisma.location.findMany({ orderBy: { name: "asc" } }),
-    prisma.amenity.findMany({ orderBy: { name: "asc" } }),
-  ]);
-
-  return {
-    items,
-    total,
-    page,
-    pageSize: PAGE_SIZE,
-    pages: Math.max(1, Math.ceil(total / PAGE_SIZE)),
-    locations,
-    amenities,
-  };
+  return safe(
+    async () => {
+      const [items, total, locations, amenities] = await Promise.all([
+        prisma.property.findMany({
+          where,
+          include: { location: true, development: true },
+          orderBy,
+          skip: (page - 1) * PAGE_SIZE,
+          take: PAGE_SIZE,
+        }),
+        prisma.property.count({ where }),
+        prisma.location.findMany({ orderBy: { name: "asc" } }),
+        prisma.amenity.findMany({ orderBy: { name: "asc" } }),
+      ]);
+      return {
+        items,
+        total,
+        page,
+        pageSize: PAGE_SIZE,
+        pages: Math.max(1, Math.ceil(total / PAGE_SIZE)),
+        locations,
+        amenities,
+      };
+    },
+    {
+      items: [],
+      total: 0,
+      page,
+      pageSize: PAGE_SIZE,
+      pages: 1,
+      locations: [],
+      amenities: [],
+    },
+  );
 }
 
 export async function getPropertiesByIds(ids: string[]) {
   const unique = [...new Set(ids.map((id) => id.trim()).filter(Boolean))].slice(0, 50);
   if (!unique.length) return [];
 
-  const items = await prisma.property.findMany({
-    where: { id: { in: unique }, published: true },
-    include: { location: true },
-  });
-
-  const order = new Map(unique.map((id, index) => [id, index]));
-  return items.sort((a, b) => (order.get(a.id) ?? 0) - (order.get(b.id) ?? 0));
+  return safe(async () => {
+    const items = await prisma.property.findMany({
+      where: { id: { in: unique }, published: true },
+      include: { location: true },
+    });
+    const order = new Map(unique.map((id, index) => [id, index]));
+    return items.sort((a, b) => (order.get(a.id) ?? 0) - (order.get(b.id) ?? 0));
+  }, []);
 }
 
 export async function getArticles(category?: string) {
-  return prisma.newsArticle.findMany({
-    where: {
-      published: true,
-      ...(category ? { category: category as never } : {}),
-    },
-    include: { author: true },
-    orderBy: { publishedAt: "desc" },
-  });
+  return safe(
+    () =>
+      prisma.newsArticle.findMany({
+        where: {
+          published: true,
+          ...(category ? { category: category as never } : {}),
+        },
+        include: { author: true },
+        orderBy: { publishedAt: "desc" },
+      }),
+    [],
+  );
 }
 
 export async function getArticle(slug: string) {
-  return prisma.newsArticle.findUnique({
-    where: { slug },
-    include: { author: true },
-  });
+  return safe(
+    () => prisma.newsArticle.findUnique({ where: { slug }, include: { author: true } }),
+    null,
+  );
 }
 
 export async function getJobs() {
-  return prisma.job.findMany({
-    where: { published: true },
-    orderBy: { createdAt: "desc" },
-  });
+  return safe(
+    () => prisma.job.findMany({ where: { published: true }, orderBy: { createdAt: "desc" } }),
+    [],
+  );
 }
 
 export async function getJob(slug: string) {
-  return prisma.job.findUnique({ where: { slug } });
+  return safe(() => prisma.job.findUnique({ where: { slug } }), null);
 }
 
 export async function searchAll(q: string) {
@@ -197,46 +251,60 @@ export async function searchAll(q: string) {
     return { properties: [], developments: [], locations: [], articles: [] };
   }
   const contains = { contains: query };
-  const [properties, developments, locations, articles] = await Promise.all([
-    prisma.property.findMany({
-      where: { published: true, OR: [{ name: contains }, { description: contains }] },
-      include: { location: true },
-      take: 5,
-    }),
-    prisma.development.findMany({
-      where: { published: true, OR: [{ name: contains }, { tagline: contains }] },
-      include: { location: true },
-      take: 5,
-    }),
-    prisma.location.findMany({
-      where: { OR: [{ name: contains }, { city: contains }, { country: contains }] },
-      take: 5,
-    }),
-    prisma.newsArticle.findMany({
-      where: { published: true, OR: [{ title: contains }, { excerpt: contains }] },
-      take: 5,
-    }),
-  ]);
-  return { properties, developments, locations, articles };
+  return safe(
+    async () => {
+      const [properties, developments, locations, articles] = await Promise.all([
+        prisma.property.findMany({
+          where: { published: true, OR: [{ name: contains }, { description: contains }] },
+          include: { location: true },
+          take: 5,
+        }),
+        prisma.development.findMany({
+          where: { published: true, OR: [{ name: contains }, { tagline: contains }] },
+          include: { location: true },
+          take: 5,
+        }),
+        prisma.location.findMany({
+          where: { OR: [{ name: contains }, { city: contains }, { country: contains }] },
+          take: 5,
+        }),
+        prisma.newsArticle.findMany({
+          where: { published: true, OR: [{ title: contains }, { excerpt: contains }] },
+          take: 5,
+        }),
+      ]);
+      return { properties, developments, locations, articles };
+    },
+    { properties: [], developments: [], locations: [], articles: [] },
+  );
 }
 
 export async function getAdminMetrics() {
-  const [properties, developments, units, leads, inquiries, viewings, articles] =
-    await Promise.all([
-      prisma.property.count(),
-      prisma.development.count(),
-      prisma.unit.count(),
-      prisma.lead.count(),
-      prisma.lead.count({ where: { status: "NEW" } }),
-      prisma.viewingRequest.count({ where: { status: "NEW" } }),
-      prisma.newsArticle.count({ where: { published: true } }),
-    ]);
-  return { properties, developments, units, leads, inquiries, viewings, articles };
+  return safe(
+    async () => {
+      const [properties, developments, units, leads, inquiries, viewings, articles] =
+        await Promise.all([
+          prisma.property.count(),
+          prisma.development.count(),
+          prisma.unit.count(),
+          prisma.lead.count(),
+          prisma.lead.count({ where: { status: "NEW" } }),
+          prisma.viewingRequest.count({ where: { status: "NEW" } }),
+          prisma.newsArticle.count({ where: { published: true } }),
+        ]);
+      return { properties, developments, units, leads, inquiries, viewings, articles };
+    },
+    { properties: 0, developments: 0, units: 0, leads: 0, inquiries: 0, viewings: 0, articles: 0 },
+  );
 }
 
 export async function getMapDevelopments() {
-  return prisma.development.findMany({
-    where: { published: true },
-    include: { location: true },
-  });
+  return safe(
+    () =>
+      prisma.development.findMany({
+        where: { published: true },
+        include: { location: true },
+      }),
+    [],
+  );
 }
