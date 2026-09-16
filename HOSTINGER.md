@@ -57,7 +57,7 @@ ADMIN_EMAIL=admin@matribhumi.me
 ADMIN_PASSWORD=choose-a-strong-password-and-change-the-demo-one
 ```
 
-Replace `YOUR_USERNAME` with the hPanel system user (shown under **SSH Access** or **FTP**).
+Your Hostinger system user from the last build log is **`u763041062`**. Create `domains/matribhumi.me/data/` in File Manager before deploying.
 
 Optional:
 
