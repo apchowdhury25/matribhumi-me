@@ -4,7 +4,7 @@ import { siteConfig } from "@/config/site";
 
 export const metadata = createMetadata({
   title: "Terms",
-  description: "Terms of use for the MatriBhumi demonstration website.",
+  description: "Terms of use for the MatriBhumi website.",
   path: "/terms",
 });
 
@@ -14,12 +14,12 @@ export default function TermsPage() {
       <article className="mx-auto max-w-3xl px-4 pb-20 pt-28 sm:px-6 md:pt-32">
         <h1 className="font-display text-[2.1rem] sm:text-5xl">Terms of use</h1>
         <p className="mt-6 leading-8 text-muted">
-          This website is a demonstration of how MatriBhumi might present homes in Bangladesh for families living overseas — vacation and part-year stays, not investment products. Content, prices, and availability are fictional unless we say otherwise. Nothing here is an offer to sell real property or an invitation to invest.
+          MatriBhumi is an independent, premium boutique architectural design and development firm. Materials on this website describe exclusive pre-launch developments. Prices, availability, and completion dates are indicative until a reservation agreement is signed. Nothing here promises rental income, appreciation, or a financial return, and nothing is legal or tax advice.
         </p>
         <p className="mt-4 leading-8 text-muted">
-          You may not scrape, misrepresent, or republish the brand as if these projects were live inventory.
+          You may not scrape or misrepresent MatriBhumi, our developments, or this website. Developments within Bashundhara are private projects of MatriBhumi, integrated with the district. They are not projects of Bashundhara Group.
         </p>
-        <p className="mt-10 text-sm text-muted">{siteConfig.demoNotice}</p>
+        <p className="mt-10 text-sm text-muted">{siteConfig.url}</p>
       </article>
     </PublicShell>
   );

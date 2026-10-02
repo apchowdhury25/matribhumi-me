@@ -14,10 +14,7 @@ export default function DisclaimerPage() {
       <article className="mx-auto max-w-3xl px-4 pb-20 pt-28 sm:px-6 md:pt-32">
         <h1 className="font-display text-[2.1rem] sm:text-5xl">Disclaimer</h1>
         <p className="mt-6 leading-8 text-muted">
-          MatriBhumi homes are described for vacation and part-year stays, for retirement in Bangladesh, and for everyday living in districts such as Bashundhara — not as investment products. We are not Bashundhara Group. We do not guarantee returns, capital appreciation, rental income, occupancy, or any other financial outcome. Discussions of location and construction are educational. They are not financial, legal, or tax advice.
-        </p>
-        <p className="mt-4 leading-8 text-muted">
-          Projects, photography, people, and prices on this site are fictional demonstration content unless explicitly identified as otherwise.
+          MatriBhumi presents exclusive pre-launch residences for vacation and part-year stays, for retirement in Bangladesh, and for everyday living. {siteConfig.positioning} {siteConfig.districtRelation} We are not Bashundhara Group. Prices, floor plans, and completion dates are indicative until a reservation agreement is signed. We do not guarantee returns, capital appreciation, rental income, occupancy, or any other financial outcome. Nothing on this website is financial, legal, or tax advice.
         </p>
         <p className="mt-10 text-sm text-muted">{siteConfig.url}</p>
       </article>

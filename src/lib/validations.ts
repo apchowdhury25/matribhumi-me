@@ -43,6 +43,27 @@ export const applicationSchema = z.object({
   website: z.string().max(0).optional(),
 });
 
+export const waitlistInterests = ["Holiday Home", "Retirement", "Investment"] as const;
+
+export const waitlistSchema = z.object({
+  name: z.string().trim().min(2).max(120),
+  email: z.string().trim().email().max(180),
+  countryId: z.string().trim().min(2).max(8),
+  phone: z.string().trim().min(6).max(24),
+  interest: z.enum(waitlistInterests),
+  project: z.string().trim().max(160).optional(),
+  consent: z.literal(true, { error: "Consent is required." }),
+  website: z.string().max(0).optional(),
+});
+
+export const brochureSchema = z.object({
+  name: z.string().trim().min(2).max(120),
+  email: z.string().trim().email().max(180),
+  project: z.string().trim().max(160).optional(),
+  consent: z.literal(true, { error: "Consent is required." }),
+  website: z.string().max(0).optional(),
+});
+
 export const loginSchema = z.object({
   email: z.string().trim().email(),
   password: z.string().min(8).max(120),
@@ -67,5 +88,7 @@ export const propertyFilterSchema = z.object({
 });
 
 export type LeadInput = z.infer<typeof leadSchema>;
+export type WaitlistInput = z.infer<typeof waitlistSchema>;
+export type BrochureInput = z.infer<typeof brochureSchema>;
 export type ViewingInput = z.infer<typeof viewingSchema>;
 export type PropertyFilters = z.infer<typeof propertyFilterSchema>;

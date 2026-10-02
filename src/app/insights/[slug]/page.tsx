@@ -84,7 +84,6 @@ export default async function InsightArticlePage({
           <p className="text-[11px] uppercase tracking-[0.2em] text-earth">
             {formatDate(article.publishedAt)} · {article.readingTime} min read · {article.author.name}
           </p>
-          <p className="mt-4 text-sm text-muted">{siteConfig.demoNotice}</p>
           <div className="mt-12">
             <ArticleBody body={article.body} />
           </div>

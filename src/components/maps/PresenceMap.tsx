@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
 import { formatPrice, statusLabel } from "@/lib/format";
+import { DualCta } from "@/components/site/LeadCapture";
 
 export type MapPin = {
   id: string;
@@ -32,7 +32,7 @@ export function PresenceMap({ pins }: { pins: MapPin[] }) {
   return (
     <div className="grid gap-8 lg:grid-cols-[1.4fr_0.8fr]">
       <div className="relative min-h-[240px] overflow-hidden bg-charcoal sm:min-h-[320px] lg:min-h-[420px]">
-        <svg viewBox="0 0 1000 560" className="h-full w-full" role="img" aria-label="MatriBhumi demonstration locations">
+        <svg viewBox="0 0 1000 560" className="h-full w-full" role="img" aria-label="MatriBhumi developments">
           <rect width="1000" height="560" fill="#1A1916" />
           <g opacity="0.35" fill="none" stroke="#D8C9B0" strokeWidth="0.8">
             <path d="M120 180c80-40 160-20 220 10 80 40 140-10 210 20 70 30 130 10 190-30 40-26 90-10 140 18" />
@@ -103,12 +103,7 @@ export function PresenceMap({ pins }: { pins: MapPin[] }) {
             <p className="mt-4 text-sm">
               {statusLabel(current.status)} · from {formatPrice(current.startingPrice, current.currency)}
             </p>
-            <Link
-              href={`/projects/${current.slug}`}
-              className="mt-6 inline-flex text-[11px] uppercase tracking-[0.2em] text-earth"
-            >
-              View development
-            </Link>
+            <DualCta projectName={current.name} className="mt-6" />
           </div>
         </article>
       ) : null}

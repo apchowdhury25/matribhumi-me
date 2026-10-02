@@ -12,8 +12,7 @@ export function ApplicationForm({ jobId }: { jobId: string }) {
   if (state.ok) {
     return (
       <div className="border border-moss/20 bg-mist p-6 text-sm leading-7 text-charcoal">
-        Your application has been received. This is a demonstration form and does
-        not start a real hiring process.
+        Your application has been received. The studio will write if there is a fit.
       </div>
     );
   }
@@ -35,7 +34,7 @@ export function ApplicationForm({ jobId }: { jobId: string }) {
           className="h-12 w-full border border-charcoal/15 bg-paper px-3 text-base tracking-normal text-charcoal"
         />
         <span className="normal-case tracking-normal text-muted">
-          Paste a public link to your CV. File upload is not enabled on this demonstration site.
+          Paste a public link to your CV.
         </span>
       </label>
       <label className="grid gap-2 text-[11px] uppercase tracking-[0.18em] text-earth">

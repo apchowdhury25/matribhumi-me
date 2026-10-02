@@ -29,9 +29,8 @@ export function InquiryForm({
     return (
       <div className="border border-moss/20 bg-mist p-6 text-sm leading-7 text-charcoal">
         Thank you. A member of the MatriBhumi team will be in touch about how
-        you might use a home in Bangladesh — for a visit or a longer stay. This
-        is a demonstration inquiry and does not create a contractual
-        relationship.
+        you might use a home in Bangladesh — for a visit, a retirement, or a
+        longer stay.
       </div>
     );
   }

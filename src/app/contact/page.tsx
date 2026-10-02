@@ -19,7 +19,7 @@ export default function ContactPage() {
         image="/media/about-lobby.jpg"
         eyebrow="Contact"
         title="Write to us from wherever you live."
-        description="A winter month, a retirement in Dhaka, or a home in Bashundhara’s new districts: tell us how you would use it. Demonstration inquiries only."
+        description="A winter month, a retirement in Dhaka, or a home in Bashundhara: tell us how you would use it."
       />
       <section className="grid gap-16 px-4 py-14 sm:px-6 md:px-12 md:py-20 lg:grid-cols-[0.8fr_1.2fr]">
         <div>
@@ -30,8 +30,11 @@ export default function ContactPage() {
             {siteConfig.address.city}, {siteConfig.address.country} {siteConfig.address.postal}
           </p>
           <p className="mt-6 text-sm text-muted">
-            {siteConfig.email}<br />
-            {siteConfig.phone}
+            <a href={`mailto:${siteConfig.email}`} className="hover:text-charcoal">{siteConfig.email}</a>
+            <br />
+            <a href={siteConfig.phoneHref} className="hover:text-charcoal">{siteConfig.phone}</a>
+            <br />
+            <a href={siteConfig.social.whatsapp} className="hover:text-charcoal" target="_blank" rel="noreferrer">WhatsApp</a>
           </p>
           <ul className="mt-8 space-y-2 text-sm text-muted">
             <li>General — {siteConfig.email}</li>

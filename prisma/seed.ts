@@ -51,7 +51,7 @@ async function main() {
       name: "MatriBhumi",
       slug: "matribhumi",
       description:
-        "MatriBhumi is a demonstration real estate developer creating homes and districts where architecture, landscape, and daily life belong together.",
+        "MatriBhumi is an independent, premium boutique architectural design and development firm. Homes and districts where architecture, landscape, and daily life belong together.",
       logoUrl: "/brand/logo-mark.svg",
     },
   });
@@ -69,15 +69,15 @@ async function main() {
         latitude: 23.8103,
         longitude: 90.4125,
         description:
-          "A river metropolis of work, culture, and kinship — the demonstration home of MatriBhumi.",
+          "A river metropolis of work, culture, and kinship — home ground for MatriBhumi.",
         overview:
-          "Dhaka is presented here as a fictionalised planning context: dense, water-shaped, and in need of housing that respects climate, family life, and the public realm.",
+          "Dhaka is dense, water-shaped, and in need of housing that respects climate, family life, and the public realm.",
         lifestyle:
           "Tree-lined streets, shaded courtyards, and mixed streets where shops, schools, and homes share a block.",
         connectivity:
-          "Demonstration sites sit near major roads, river crossings, and planned transit corridors.",
+          "Sites sit near major roads, river crossings, and planned transit corridors.",
         opportunities:
-          "Infill districts, waterfront edges, and family communities — all fictional illustrations, not live offerings.",
+          "Infill districts, waterfront edges, and family communities in the pre-launch portfolio.",
         attractions: [
           { name: "River promenades", category: "Leisure" },
           { name: "Cultural districts", category: "Culture" },
@@ -97,7 +97,7 @@ async function main() {
         latitude: 22.3569,
         longitude: 91.7832,
         description: "Hills, harbour, and a slower coastal register of living.",
-        overview: "A demonstration setting for low-rise homes among trees and gardens.",
+        overview: "A setting for low-rise homes among trees and gardens, now in the pre-launch portfolio.",
         lifestyle: "Nature living, weekend markets, and harbour light.",
         connectivity: "Port, airport, and hill roads — illustrative only.",
         opportunities: "Villa communities and nature-edge housing studies.",
@@ -115,10 +115,10 @@ async function main() {
         heroImage: "/media/location-coastal.jpg",
         latitude: 25.2048,
         longitude: 55.2708,
-        description: "A demonstration international location for climate-aware urban housing.",
-        overview: "Used only as a fictional market context for MatriBhumi Horizon.",
+        description: "An international setting for climate-aware urban housing, where many of our clients already live.",
+        overview: "The context for MatriBhumi Horizon, an upcoming architectural concept.",
         lifestyle: "Urban apartments with shaded podiums and evening public rooms.",
-        connectivity: "Metro-adjacent fiction; not a live listing.",
+        connectivity: "Metro-adjacent, with the city’s main roads close at hand.",
         opportunities: "Mid-rise and tower living studies.",
         attractions: [{ name: "Waterfront walks", category: "Leisure" }],
       },
@@ -134,10 +134,10 @@ async function main() {
         heroImage: "/media/location-singapore.jpg",
         latitude: 1.3521,
         longitude: 103.8198,
-        description: "A garden-city demonstration for mixed-use districts.",
-        overview: "MatriBhumi Central is a fictional study in living above a civic street.",
+        description: "A garden city, and a reference for MatriBhumi’s mixed-use districts.",
+        overview: "MatriBhumi Central is an upcoming concept for living above a civic street.",
         lifestyle: "Cafés, trees, and apartments sharing the same block.",
-        connectivity: "Transit-oriented fiction.",
+        connectivity: "Transit-oriented, with daily life on the same block.",
         opportunities: "Mixed-use destinations.",
         attractions: [{ name: "Parks", category: "Nature" }],
       },
@@ -153,8 +153,8 @@ async function main() {
         heroImage: "/media/location-london.jpg",
         latitude: 51.5074,
         longitude: -0.1278,
-        description: "A riverside demonstration city for future studies.",
-        overview: "No live MatriBhumi inventory. Shown to illustrate a global map.",
+        description: "A riverside city where many of our clients already live.",
+        overview: "Shown so a family abroad can place home on the same map.",
         lifestyle: "River walks and compact urban homes.",
         connectivity: "Rail and river.",
         opportunities: "Future partnership studies only.",
@@ -172,8 +172,8 @@ async function main() {
         heroImage: "/media/location-toronto.jpg",
         latitude: 43.6532,
         longitude: -79.3832,
-        description: "A lakeside demonstration city.",
-        overview: "Placeholder presence for the interactive map.",
+        description: "A lakeside city where many of our clients already live.",
+        overview: "A presence on the map for families writing home from Canada.",
         lifestyle: "Park-oriented mid-rise living.",
         connectivity: "Transit and waterfront trails.",
         opportunities: "Future studies only.",
@@ -194,15 +194,15 @@ async function main() {
       latitude: 23.8199,
       longitude: 90.4526,
       description:
-        "Dhaka’s new-district living: malls, golf, amusement parks, and modern streets. Demonstration context for MatriBhumi homes — we are not Bashundhara Group.",
+        "Dhaka’s master-planned district: malls, golf, amusement parks, and modern streets. MatriBhumi’s private developments sit within it. We are not Bashundhara Group.",
       overview:
-        "Bashundhara is presented as a planned urban district where residences sit near shopping, leisure, and open ground. MatriBhumi’s listings here are fictional illustrations of that kind of life.",
+        "Boutique private developments seamlessly integrated within Dhaka’s master-planned Bashundhara district. Residences sit near shopping, leisure, and open ground.",
       lifestyle:
         "Everyday errands at a mall, weekends on a golf edge, family afternoons at an amusement park — and a home you can live in full-time or return to from overseas.",
       connectivity:
-        "Airport-adjacent east Dhaka, major roads, and the city’s newer service network. Illustrative only.",
+        "Airport-adjacent east Dhaka, major roads, and the city’s newer service network.",
       opportunities:
-        "Apartments and mixed-use blocks for expats, retirees, and households already in Dhaka. Demonstration inventory, not live offerings.",
+        "Pre-launch apartments and mixed-use blocks for expats, retirees, and households already in Dhaka.",
       attractions: [
         { name: "Shopping malls", category: "Shopping" },
         { name: "Golf course", category: "Leisure" },
@@ -248,11 +248,11 @@ async function main() {
         slug: "matribhumi-heights",
         tagline: "A vertical neighborhood above a planted plaza.",
         description:
-          "MatriBhumi Heights is a fictional residential tower in Bashundhara, Dhaka — organised around a public podium, shared rooms, and apartments a short way from malls, golf, and district parks.",
+          "MatriBhumi Heights is an upcoming residential tower in Bashundhara, Dhaka — organised around a public podium, shared rooms, and apartments a short way from malls, golf, and district parks.",
         architecture:
-          "Limestone and bronze-tinted glass, deep shading, and a planted crown. Demonstration design only.",
+          "Limestone and bronze-tinted glass, deep shading, and a planted crown. International design standards meeting local heritage.",
         lifestyle: "Urban living with gardens in the sky and Bashundhara’s malls, golf, and amusement parks on the same map.",
-        locationNote: "Bashundhara new district, Dhaka — demonstration site",
+        locationNote: "Bashundhara, Dhaka — pre-launch",
         heroImage: "/media/project-heights.jpg",
         category: "RESIDENTIAL",
         propertyType: "APARTMENT",
@@ -274,10 +274,10 @@ async function main() {
         slug: "matribhumi-riverside",
         tagline: "Homes that turn toward the water.",
         description:
-          "A fictional waterfront district of terraced apartments, boardwalks, and rooms for gathering at the river's edge.",
+          "An upcoming waterfront district of terraced apartments, boardwalks, and rooms for gathering at the river's edge.",
         architecture: "Timber balconies, pale stone, and a public walk that never privatises the shore.",
         lifestyle: "Morning walks, evening light on water, everyday shops along the path.",
-        locationNote: "Buriganga-adjacent demonstration edge, Dhaka",
+        locationNote: "Buriganga edge, Dhaka — pre-launch",
         heroImage: "/media/project-riverside.jpg",
         category: "WATERFRONT",
         propertyType: "APARTMENT",
@@ -299,10 +299,10 @@ async function main() {
         slug: "the-grove-residences",
         tagline: "Courtyard villas among existing trees.",
         description:
-          "A fictional villa community in Chattogram, planned around retained forest patches and shared gardens.",
+          "An upcoming villa community in Chattogram, planned around retained forest patches and shared gardens.",
         architecture: "Rammed earth, timber, and metal roofs that sit low in the canopy.",
         lifestyle: "Nature living with room for extended family and quiet work.",
-        locationNote: "Hill-edge demonstration site, Chattogram",
+        locationNote: "Hill edge, Chattogram — pre-launch",
         heroImage: "/media/project-grove.jpg",
         category: "VILLAS",
         propertyType: "VILLA",
@@ -324,10 +324,10 @@ async function main() {
         slug: "matribhumi-horizon",
         tagline: "Apartments oriented to sky and shade.",
         description:
-          "A fictional tower study in Dubai exploring climate, podium life, and long views. Not a live offering.",
+          "An upcoming tower in Dubai exploring climate, podium life, and long views — for clients who already live in the Gulf.",
         architecture: "Sandstone, deep fins, and a shaded civic base.",
         lifestyle: "Urban living with communal kitchens, a library, and evening terraces.",
-        locationNote: "Demonstration plot, Dubai",
+        locationNote: "Dubai — upcoming architectural concept",
         heroImage: "/media/project-horizon.jpg",
         category: "RESIDENTIAL",
         propertyType: "APARTMENT",
@@ -349,10 +349,10 @@ async function main() {
         slug: "bhumi-gardens",
         tagline: "A family neighborhood around a central park.",
         description:
-          "Townhouses and low apartments organised around play, walking, and everyday errands. Fictional demonstration community.",
+          "Townhouses and low apartments organised around play, walking, and everyday errands. An exclusive pre-launch community.",
         architecture: "Pale brick, timber, and streets sized for people first.",
         lifestyle: "Family communities with a park you can see from the kitchen.",
-        locationNote: "Uttara-adjacent demonstration fabric, Dhaka",
+        locationNote: "Uttara edge, Dhaka — pre-launch",
         heroImage: "/media/project-gardens.jpg",
         category: "COMMUNITIES",
         propertyType: "TOWNHOUSE",
@@ -374,10 +374,10 @@ async function main() {
         slug: "matribhumi-central",
         tagline: "Live above a street that stays awake.",
         description:
-          "A fictional mixed-use block in Singapore: residences over civic rooms, food, and workplaces.",
+          "An upcoming mixed-use block: residences over civic rooms, food, and workplaces.",
         architecture: "A porous ground floor, gardens at mid-level, apartments above.",
         lifestyle: "Mixed-use destinations where the commute is a staircase.",
-        locationNote: "Demonstration district, Singapore",
+        locationNote: "Singapore — upcoming architectural concept",
         heroImage: "/media/project-central.jpg",
         category: "MIXED_USE",
         propertyType: "MIXED_USE",
@@ -399,11 +399,11 @@ async function main() {
         slug: "matribhumi-bashundhara",
         tagline: "A home next to the mall, the fairway, and the park.",
         description:
-          "A fictional mixed-use community in Bashundhara’s new districts: residences, a planted street, and walking distance to shopping, golf, and family leisure. MatriBhumi is not Bashundhara Group; this is demonstration inventory in that kind of place.",
+          "A pre-launch mixed-use community seamlessly integrated within Dhaka’s master-planned Bashundhara district: residences, a planted street, and walking distance to shopping, golf, and family leisure. MatriBhumi is an independent studio, not Bashundhara Group.",
         architecture: "Mid-rise stone and glass, podiums with shade, and a civic ground floor that opens to the district.",
         lifestyle:
           "For expats visiting, retirees staying, and Dhaka families who want modern amenities without a long drive: malls, golf, amusement parks, and a proper home.",
-        locationNote: "Bashundhara, Dhaka — demonstration district living",
+        locationNote: "Bashundhara, Dhaka — pre-launch district living",
         heroImage: "/media/lifestyle-mixed.jpg",
         category: "MIXED_USE",
         propertyType: "MIXED_USE",
@@ -426,7 +426,7 @@ async function main() {
   const gallery = (hero: string, extras: string[]) =>
     [hero, ...extras].map((url, i) => ({
       url,
-      alt: "Demonstration interior or architecture",
+      alt: "MatriBhumi interior or architecture",
       sortOrder: i,
     }));
 
@@ -483,7 +483,7 @@ async function main() {
     name: "Heights Residences",
     slug: "heights-residences",
     description:
-      "One- to three-bedroom apartments in MatriBhumi Heights, Bashundhara — deep balconies, podium gardens, and walking distance to malls, golf, and district parks. Demonstration inventory only.",
+      "One- to three-bedroom apartments in MatriBhumi Heights, Bashundhara — deep balconies, podium gardens, and walking distance to malls, golf, and district parks. Pre-launch.",
     type: "APARTMENT",
     status: "UNDER_CONSTRUCTION",
     completionDate: new Date("2027-11-01"),
@@ -529,7 +529,7 @@ async function main() {
     name: "Riverside Terraces",
     slug: "riverside-terraces",
     description:
-      "Apartments stepping down to a public boardwalk. Every home has a river-facing outdoor room. Fictional demonstration.",
+      "Apartments stepping down to a public boardwalk. Every home has a river-facing outdoor room. Pre-launch.",
     type: "APARTMENT",
     status: "LAUNCHED",
     completionDate: new Date("2026-08-01"),
@@ -569,7 +569,7 @@ async function main() {
     name: "Grove Courtyard Villas",
     slug: "grove-courtyard-villas",
     description:
-      "Four-bedroom courtyard villas with private gardens and a shared forest edge. Demonstration content.",
+      "Four-bedroom courtyard villas with private gardens and a shared forest edge. Pre-launch.",
     type: "VILLA",
     status: "READY",
     completionDate: new Date("2025-03-01"),
@@ -608,7 +608,7 @@ async function main() {
     name: "Horizon Sky Residences",
     slug: "horizon-sky-residences",
     description:
-      "High apartments with long views and a shaded podium. Fictional Dubai study — not for sale.",
+      "High apartments with long views and a shaded podium. An upcoming concept for clients in the Gulf.",
     type: "APARTMENT",
     status: "UNDER_CONSTRUCTION",
     completionDate: new Date("2028-06-01"),
@@ -647,7 +647,7 @@ async function main() {
     name: "Bhumi Park Townhomes",
     slug: "bhumi-park-townhomes",
     description:
-      "Two- and three-bedroom townhomes facing a central park. Demonstration family housing.",
+      "Two- and three-bedroom townhomes facing a central park. Pre-launch family housing.",
     type: "TOWNHOUSE",
     status: "LAUNCHED",
     completionDate: new Date("2027-04-01"),
@@ -685,7 +685,7 @@ async function main() {
     name: "Central Living",
     slug: "central-living",
     description:
-      "Apartments above a civic street in a fictional Singapore mixed-use block.",
+      "Apartments above a civic street in an upcoming mixed-use block.",
     type: "MIXED_USE",
     status: "UPCOMING",
     completionDate: new Date("2029-09-01"),
@@ -723,7 +723,7 @@ async function main() {
   await addProperty({
     name: "Heights Penthouses",
     slug: "heights-penthouses",
-    description: "Upper residences with planted terraces. Demonstration penthouses in MatriBhumi Heights.",
+    description: "Upper residences with planted terraces. Pre-launch penthouses in MatriBhumi Heights.",
     type: "PENTHOUSE",
     status: "UNDER_CONSTRUCTION",
     completionDate: new Date("2027-11-01"),
@@ -755,7 +755,7 @@ async function main() {
   await addProperty({
     name: "Grove Forest Houses",
     slug: "grove-forest-houses",
-    description: "Quiet houses at the tree line. Nature-living demonstration homes.",
+    description: "Quiet houses at the tree line. Pre-launch homes for longer winter stays.",
     type: "VILLA",
     status: "READY",
     completionDate: new Date("2025-03-01"),
@@ -787,7 +787,7 @@ async function main() {
     name: "Bashundhara District Residences",
     slug: "bashundhara-district-residences",
     description:
-      "One- to four-bedroom homes in MatriBhumi Bashundhara: a demonstration community for expats, retirees, and Dhaka families who want malls, golf, amusement parks, and a modern building on the same map. Fictional inventory — MatriBhumi is not Bashundhara Group.",
+      "One- to four-bedroom homes in MatriBhumi Bashundhara: a pre-launch community for expats, retirees, and Dhaka families who want malls, golf, amusement parks, and a modern building on the same map. An independent MatriBhumi development within the district — not a Bashundhara Group project.",
     type: "MIXED_USE",
     status: "LAUNCHED",
     completionDate: new Date("2027-06-01"),
@@ -830,7 +830,7 @@ async function main() {
   const riversideHomes = await addProperty({
     name: "Canal Lofts",
     slug: "canal-lofts",
-    description: "Compact lofts along a demonstration canal edge in MatriBhumi Riverside. Fictional inventory.",
+    description: "Compact lofts along the canal edge at MatriBhumi Riverside. Pre-launch.",
     type: "APARTMENT",
     status: "LAUNCHED",
     completionDate: new Date("2026-08-01"),
@@ -865,7 +865,7 @@ async function main() {
   const gardensFlats = await addProperty({
     name: "Parkside Apartments",
     slug: "parkside-apartments",
-    description: "Low apartments facing the central park at Bhumi Gardens. Demonstration family housing.",
+    description: "Low apartments facing the central park at Bhumi Gardens. Pre-launch family housing.",
     type: "APARTMENT",
     status: "LAUNCHED",
     completionDate: new Date("2027-04-01"),
@@ -918,12 +918,12 @@ async function main() {
     {
       title: "How we plan a street that people will actually use",
       slug: "planning-streets-people-use",
-      excerpt: "Shade, seating, and a reason to linger — notes from MatriBhumi's urban design studio. Demonstration article.",
+      excerpt: "Shade, seating, and a reason to linger — notes from MatriBhumi's urban design studio.",
       category: "ARCHITECTURE" as const,
       coverImage: "/media/about-studio.jpg",
       body: `## A street is a room
 
-MatriBhumi treats the space between buildings as seriously as the buildings themselves. This demonstration essay describes how we size sidewalks, plant for shade, and keep ground floors open to daily life.
+MatriBhumi treats the space between buildings as seriously as the buildings themselves. This note describes how we size sidewalks, plant for shade, and keep ground floors open to daily life.
 
 We do not claim a proprietary method. We share a way of looking: start with walking, then light, then the shops and rooms that keep a street company after dusk.
 
@@ -938,24 +938,24 @@ These are planning questions, not marketing lines.`,
     {
       title: "Water, quietly: designing with rain in Dhaka",
       slug: "designing-with-rain-dhaka",
-      excerpt: "Courtyards, bioswales, and roofs that hold a storm. A demonstration note on water.",
+      excerpt: "Courtyards, bioswales, and roofs that hold a storm. A note on water.",
       category: "SUSTAINABILITY" as const,
       coverImage: "/media/sustain-water.jpg",
       body: `## Hold the rain
 
-In a monsoon city, water is not a problem to hide. This fictional briefing describes landscape tactics we study: permeable courts, planted roofs, and cisterns sized for dry weeks.
+In a monsoon city, water is not a problem to hide. Permeable courts, planted roofs, and cisterns sized for dry weeks.
 
 No certification is claimed. The work is to make wet days livable and dry days less brittle.`,
     },
     {
       title: "A handover is a relationship",
       slug: "handover-is-a-relationship",
-      excerpt: "What we try to get right when keys change hands. Demonstration operations note.",
+      excerpt: "What we try to get right when keys change hands.",
       category: "NEWS" as const,
       coverImage: "/media/about-lobby.jpg",
       body: `## After the photograph
 
-A home is not finished at the photoshoot. This article — demonstration content — describes snagging, building manuals, and the people residents can actually call.`,
+A home is not finished at the photoshoot. Snagging, building manuals, and the people residents can actually call.`,
     },
     {
       title: "Reading a location without reading the future",
@@ -965,7 +965,7 @@ A home is not finished at the photoshoot. This article — demonstration content
       coverImage: "/media/location-aerial.jpg",
       body: `## Place, not prediction
 
-MatriBhumi discusses transport, schools, and daily amenities because they shape how a home is used. We do not forecast prices, rents, or returns. This demonstration piece explains the difference.`,
+MatriBhumi discusses transport, schools, and daily amenities because they shape how a home is used. We do not forecast prices, rents, or returns.`,
     },
     {
       title: "Kitchen windows and the park",
@@ -975,17 +975,17 @@ MatriBhumi discusses transport, schools, and daily amenities because they shape 
       coverImage: "/media/lifestyle-family.jpg",
       body: `## See the green from the sink
 
-At Bhumi Gardens, a fictional community, we placed kitchens toward the park so the day's ordinary work still looks onto trees and play.`,
+At Bhumi Gardens we placed kitchens toward the park so the day's ordinary work still looks onto trees and play.`,
     },
     {
       title: "Update: Heights podium gardens take root",
       slug: "heights-podium-gardens",
-      excerpt: "A demonstration project update from MatriBhumi Heights.",
+      excerpt: "A project note from MatriBhumi Heights.",
       category: "PROJECT_UPDATES" as const,
       coverImage: "/media/about-construction.jpg",
       body: `## Planting a plaza in the air
 
-Construction photography in this article is generated for the demonstration site. It illustrates how we talk about progress without inventing milestones.`,
+The podium gardens at MatriBhumi Heights are part of the pre-launch architectural concept: shade at the door, and a plaza that belongs to the building.`,
     },
     {
       title: "Materials we return to",
@@ -995,12 +995,12 @@ Construction photography in this article is generated for the demonstration site
       coverImage: "/media/sustain-courtyard.jpg",
       body: `## Quiet materials
 
-We prefer surfaces that age in public: limewash, timber that can be oiled, stone that can be repaired. Demonstration palette, not a specification.`,
+We prefer surfaces that age in public: limewash, timber that can be oiled, stone that can be repaired.`,
     },
     {
       title: "What a clubhouse is for",
       slug: "what-a-clubhouse-is-for",
-      excerpt: "A room that belongs to the street, not a locked amenity. Demonstration note.",
+      excerpt: "A room that belongs to the street, not a locked amenity.",
       category: "LIFESTYLE" as const,
       coverImage: "/media/amenity-clubhouse.jpg",
       body: `## Borrowed living rooms
@@ -1010,7 +1010,7 @@ A clubhouse should work on a Tuesday afternoon: shade, a table, a kitchen someon
     {
       title: "Drawing the mixed-use block",
       slug: "drawing-the-mixed-use-block",
-      excerpt: "How MatriBhumi Central stacks living, work, and a civic street. Demonstration essay.",
+      excerpt: "How MatriBhumi Central stacks living, work, and a civic street.",
       category: "ARCHITECTURE" as const,
       coverImage: "/media/project-central.jpg",
       body: `## One plot, several days
@@ -1049,7 +1049,7 @@ If a number cannot be stood beside in a quiet room, it does not belong on a Matr
         department: "Design",
         location: "Dhaka",
         type: "Full-time",
-        description: "Lead a demonstration residential project from sketch through site. Fictional opening.",
+        description: "Lead a residential project from sketch through site.",
         requirements: "A portfolio of built or academic housing work. Care with climate and construction.",
       },
       {
@@ -1085,7 +1085,7 @@ If a number cannot be stood beside in a quiet room, it does not belong on a Matr
         department: "Construction",
         location: "Dhaka",
         type: "Full-time",
-        description: "Keep the demonstration site honest: quality, programme, and the people doing the work.",
+        description: "Keep the site honest: quality, programme, and the people doing the work.",
         requirements: "Construction experience and a calm way with contractors.",
       },
       {
@@ -1103,7 +1103,7 @@ If a number cannot be stood beside in a quiet room, it does not belong on a Matr
         department: "Sales",
         location: "Dubai",
         type: "Full-time",
-        description: "Help people understand a home without promising a market. Demonstration role.",
+        description: "Help people understand a home without promising a market.",
         requirements: "Clarity, patience, and comfort saying 'we do not forecast returns'.",
       },
       {
@@ -1118,7 +1118,7 @@ If a number cannot be stood beside in a quiet room, it does not belong on a Matr
     ],
   });
 
-  console.log("MatriBhumi demonstration database seeded.");
+  console.log("MatriBhumi database seeded.");
 }
 
 main()

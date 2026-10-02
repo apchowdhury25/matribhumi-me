@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { PublicShell } from "@/components/site/PublicShell";
-import { Button } from "@/components/ui/button";
+import { DualCta } from "@/components/site/LeadCapture";
 import { PropertyCard } from "@/components/property/PropertyCard";
 import { PropertyMap } from "@/components/maps/PropertyMap";
 import { getDevelopment } from "@/lib/data";
@@ -41,7 +41,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             </p>
             <h1 className="font-display mt-4 text-[2.1rem] leading-[1.05] sm:text-5xl md:text-7xl">{project.name}</h1>
             <p className="mt-4 text-lg text-ivory/80">{project.tagline}</p>
-            <Button href="/properties" variant="invert" className="mt-8">Explore Properties</Button>
+            <DualCta projectName={project.name} tone="dark" className="mt-8" />
           </div>
         </div>
       </section>

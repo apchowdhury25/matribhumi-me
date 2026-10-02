@@ -2,10 +2,12 @@
 
 import { headers } from "next/headers";
 import { prisma } from "@/lib/prisma";
-import { leadSchema, viewingSchema, contactSchema, applicationSchema } from "@/lib/validations";
+import { leadSchema, viewingSchema, contactSchema, applicationSchema, waitlistSchema, brochureSchema } from "@/lib/validations";
 import { getClientIp } from "@/lib/utils";
 import { rateLimit } from "@/lib/rate-limit";
-import { sendMail } from "@/lib/mail";
+import { brochureEmail, sendMail } from "@/lib/mail";
+import { findCountry } from "@/lib/countries";
+import { siteConfig } from "@/config/site";
 
 type State = { ok: boolean; error: string };
 
@@ -122,6 +124,94 @@ export async function submitViewing(_prev: State, formData: FormData): Promise<S
     where: { email: parsed.data.email, propertyId: parsed.data.propertyId },
     data: { status: "VIEWING_SCHEDULED" },
   });
+  return { ok: true, error: "" };
+}
+
+function optionalProject(formData: FormData) {
+  const project = String(formData.get("project") ?? "").trim();
+  return project || undefined;
+}
+
+export async function submitWaitlist(_prev: State, formData: FormData): Promise<State> {
+  if (!(await gated("waitlist")).ok) return tooMany();
+  if (String(formData.get("website") ?? "")) return { ok: true, error: "" };
+
+  const parsed = waitlistSchema.safeParse({
+    name: formData.get("name"),
+    email: formData.get("email"),
+    countryId: formData.get("countryId"),
+    phone: formData.get("phone"),
+    interest: formData.get("interest"),
+    project: optionalProject(formData),
+    consent: formData.get("consent") === "true",
+  });
+  if (!parsed.success) return { ok: false, error: "Please check the form and try again." };
+
+  const country = findCountry(parsed.data.countryId);
+  if (!country) return { ok: false, error: "Please choose a country code." };
+  const phone = `${country.dial} ${parsed.data.phone.replace(/\s+/g, " ").trim()}`;
+
+  await prisma.lead.create({
+    data: {
+      name: parsed.data.name,
+      email: parsed.data.email,
+      phone,
+      country: country.country,
+      contactMethod: "EMAIL",
+      message: `Pre-launch waitlist. Primary interest: ${parsed.data.interest}.${parsed.data.project ? ` Development: ${parsed.data.project}.` : ""}`,
+      inquiryType: "SALES",
+    },
+  });
+
+  await sendMail({
+    to: siteConfig.salesEmail,
+    replyTo: parsed.data.email,
+    subject: `Waitlist: ${parsed.data.name}`,
+    text: `${parsed.data.name} (${parsed.data.email}, ${phone}, ${country.country}) joined the pre-launch waitlist.\nInterest: ${parsed.data.interest}\nDevelopment: ${parsed.data.project ?? "General portfolio"}`,
+  });
+
+  return { ok: true, error: "" };
+}
+
+export async function submitBrochure(_prev: State, formData: FormData): Promise<State> {
+  if (!(await gated("brochure")).ok) return tooMany();
+  if (String(formData.get("website") ?? "")) return { ok: true, error: "" };
+
+  const parsed = brochureSchema.safeParse({
+    name: formData.get("name"),
+    email: formData.get("email"),
+    project: optionalProject(formData),
+    consent: formData.get("consent") === "true",
+  });
+  if (!parsed.success) return { ok: false, error: "Please check the form and try again." };
+
+  const letter = brochureEmail(parsed.data.name);
+  await prisma.lead.create({
+    data: {
+      name: parsed.data.name,
+      email: parsed.data.email,
+      phone: "Not provided",
+      country: "Not specified",
+      contactMethod: "EMAIL",
+      message: `Pre-launch brochure download.${parsed.data.project ? ` Development: ${parsed.data.project}.` : ""} ${letter.downloadUrl}`,
+      inquiryType: "SALES",
+    },
+  });
+
+  await sendMail({
+    to: parsed.data.email,
+    replyTo: siteConfig.email,
+    subject: letter.subject,
+    text: letter.text,
+    html: letter.html,
+  });
+  await sendMail({
+    to: siteConfig.salesEmail,
+    replyTo: parsed.data.email,
+    subject: `Brochure: ${parsed.data.name}`,
+    text: `${parsed.data.name} (${parsed.data.email}) downloaded the pre-launch brochure.${parsed.data.project ? ` Development: ${parsed.data.project}.` : ""}`,
+  });
+
   return { ok: true, error: "" };
 }
 

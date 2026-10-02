@@ -3,6 +3,9 @@ import { PublicShell } from "@/components/site/PublicShell";
 import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/site/SectionHeader";
 import { PresenceMap } from "@/components/maps/PresenceMap";
+import { BrochureButton, DualCta, WaitlistButton } from "@/components/site/LeadCapture";
+import { DiasporaFaq } from "@/components/site/DiasporaFaq";
+import { StudioLeadership } from "@/components/site/StudioLeadership";
 import { siteConfig, lifestyles, whyMatriBhumi, comingHomePrinciples, whoItsFor, districtLife } from "@/config/site";
 import { getFeaturedDevelopments, getSignatureDevelopments, getArticles, getMapDevelopments } from "@/lib/data";
 import { formatPrice, statusLabel } from "@/lib/format";
@@ -40,12 +43,12 @@ export default async function HomePage() {
           </h1>
           <p className="mt-5 max-w-xl text-base leading-7 text-ivory/80 sm:mt-6 sm:text-lg sm:leading-8">{siteConfig.supporting}</p>
           <div className="mt-8 flex w-full flex-col gap-3 sm:mt-10 sm:w-auto sm:flex-row sm:flex-wrap sm:gap-4">
-            <Button href="/projects" variant="invert" size="lg" className="w-full sm:w-auto">
-              Explore Developments
-            </Button>
-            <Button href="/about" variant="outline" size="lg" className="w-full border-ivory/40 text-ivory hover:bg-ivory hover:text-charcoal sm:w-auto">
-              Discover MatriBhumi
-            </Button>
+            <WaitlistButton variant="invert" size="lg" className="w-full sm:w-auto" />
+            <BrochureButton
+              variant="outline"
+              size="lg"
+              className="w-full border-ivory/40 text-ivory hover:bg-ivory hover:text-charcoal sm:w-auto"
+            />
           </div>
         </div>
       </section>
@@ -70,27 +73,29 @@ export default async function HomePage() {
         <SectionHeader
           eyebrow="Featured developments"
           title="Addresses in Bangladesh you can come back to — or live in every day."
-          description="Demonstration homes in Dhaka, including Bashundhara’s new districts, and elsewhere. Projects shown here are fictional unless we say otherwise."
+          description="Exclusive pre-launch developments in Dhaka and Chattogram — architectural concepts you can reserve before the public launch."
         />
         <div className="mt-12 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           {featured.map((project) => (
-            <Link key={project.id} href={`/projects/${project.slug}`} className="group">
-              <div className="aspect-[4/3] overflow-hidden bg-stone">
-                <img src={project.heroImage} alt={project.name} className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]" />
-              </div>
-              <div className="mt-5 flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-[11px] uppercase tracking-[0.2em] text-earth">
-                    {project.location.city} · {statusLabel(project.propertyType)}
-                  </p>
-                  <h3 className="font-display mt-1 text-3xl">{project.name}</h3>
-                  <p className="mt-2 text-sm text-muted">
-                    {statusLabel(project.status)} · {project.completion} · from {formatPrice(project.startingPrice, project.currency)}
-                  </p>
+            <article key={project.id} className="group flex flex-col">
+              <Link href={`/projects/${project.slug}`}>
+                <div className="aspect-[4/3] overflow-hidden bg-stone">
+                  <img src={project.heroImage} alt={project.name} className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]" />
                 </div>
-                <span className="mt-2 text-[11px] uppercase tracking-[0.18em] text-earth">View</span>
+              </Link>
+              <div className="mt-5 flex flex-1 flex-col">
+                <p className="text-[11px] uppercase tracking-[0.2em] text-earth">
+                  {project.location.city} · {statusLabel(project.propertyType)}
+                </p>
+                <h3 className="font-display mt-1 text-3xl">
+                  <Link href={`/projects/${project.slug}`} className="hover:text-moss">{project.name}</Link>
+                </h3>
+                <p className="mt-2 text-sm text-muted">
+                  {statusLabel(project.status)} · {project.completion} · from {formatPrice(project.startingPrice, project.currency)}
+                </p>
+                <DualCta projectName={project.name} className="mt-6" />
               </div>
-            </Link>
+            </article>
           ))}
         </div>
       </section>
@@ -125,9 +130,7 @@ export default async function HomePage() {
                     </div>
                   ))}
                 </dl>
-                <Button href={`/projects/${project.slug}`} variant="invert" className="mt-8">
-                  Explore
-                </Button>
+                <DualCta projectName={project.name} tone="dark" className="mt-8" />
               </div>
             </article>
           ))}
@@ -158,7 +161,7 @@ export default async function HomePage() {
         <SectionHeader
           eyebrow="Bangladesh, and a few studies abroad"
           title="Most of our work is at home — especially Dhaka’s new districts."
-          description="Bashundhara, the wider city, and Chattogram are the demonstration heart of MatriBhumi. Other pins are studies, not a claim that we operate everywhere."
+          description="Dhaka, Bashundhara, and Chattogram hold the pre-launch portfolio. Pins farther away mark cities where our clients already live."
         />
         <div className="mt-12">
           <PresenceMap
@@ -211,9 +214,7 @@ export default async function HomePage() {
               </li>
             ))}
           </ul>
-          <Button href="/properties" variant="invert" className="mt-10 w-full sm:w-fit">
-            Explore Properties
-          </Button>
+          <DualCta tone="dark" className="mt-10" />
         </div>
       </section>
 
@@ -221,7 +222,7 @@ export default async function HomePage() {
         <SectionHeader
           eyebrow="Bashundhara district life"
           title="Malls, golf, parks — and a home on the same map."
-          description="Demonstration neighbourhoods in Bashundhara’s new developments. MatriBhumi is not Bashundhara Group; we design fictional residences in and around this kind of modern Dhaka district."
+          description={`${siteConfig.districtRelation} MatriBhumi is an independent studio. The district is the setting; the architecture is ours.`}
         />
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {districtLife.map((item) => (
@@ -232,9 +233,12 @@ export default async function HomePage() {
           ))}
         </div>
         <Button href="/locations/bashundhara" className="mt-10 w-full sm:w-auto">
-          Explore Bashundhara
+          Bashundhara district
         </Button>
       </section>
+
+      <StudioLeadership />
+      <DiasporaFaq />
 
       <section className="px-4 py-16 sm:px-6 md:px-12 md:py-24">
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">

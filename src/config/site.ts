@@ -5,17 +5,23 @@ export const siteConfig = {
   url: "https://matribhumi.me",
   domain: "matribhumi.me",
   description:
-    "Homes in Bangladesh for expats coming back, retirees returning from overseas, and families who want modern new-district living in Bashundhara.",
+    "An independent, premium boutique architectural design and development firm. Homes for the Bangladeshi diaspora — a home-land, not a launch.",
   tagline: "A home in Bangladesh — to visit, to retire, to live well.",
   supporting:
-    "MatriBhumi designs residences for Bangladeshi families overseas who return for holidays or part of the year, for retirees coming home, and for people already in Bangladesh who want a modern home in Bashundhara’s new districts — malls, golf, parks, and daily amenities close at hand.",
+    "Boutique private developments seamlessly integrated within Dhaka’s master-planned Bashundhara district. An address you can fly into for Eid, a winter month, or the longer stay of retirement.",
+  positioning:
+    "MatriBhumi is an independent, premium boutique architectural design and development firm.",
+  districtRelation:
+    "Boutique private developments seamlessly integrated within Dhaka’s master-planned Bashundhara district.",
   audience:
-    "For expats, returning retirees, and Dhaka residents who want a well-made home in Bangladesh’s new districts. Not a brochure promise, and not a financial product.",
+    "For high-net-worth Bangladeshi expats and retirees who want international design standards, and the warmth of a true home.",
   email: "hello@matribhumi.me",
   salesEmail: "sales@matribhumi.me",
   pressEmail: "press@matribhumi.me",
   careersEmail: "careers@matribhumi.me",
-  phone: "+880 00 0000 0000",
+  phone: "+880 1700 000000",
+  phoneHref: "tel:+8801700000000",
+  brochurePath: "/media/brochures/matribhumi-preview.pdf",
   address: {
     line1: "House 12, Road 7",
     line2: "Gulshan",
@@ -24,14 +30,10 @@ export const siteConfig = {
     postal: "1212",
   },
   social: {
-    facebook: "",
-    instagram: "",
-    linkedin: "",
-    youtube: "",
-    x: "",
+    instagram: "https://www.instagram.com/matribhumi",
+    linkedin: "https://www.linkedin.com/company/matribhumi",
+    whatsapp: "https://wa.me/8801700000000",
   },
-  demoNotice:
-    "Demonstration content. Projects, people, prices, and locations on this site are fictional unless otherwise noted.",
 } as const;
 
 export const navItems = [
@@ -154,7 +156,7 @@ export const whyMatriBhumi = [
   },
   {
     title: "New-district convenience",
-    body: "Demonstration homes in and around Bashundhara sit near malls, golf, amusement parks, and the everyday services a modern Dhaka neighbourhood needs.",
+    body: "Residences in and around Bashundhara sit near malls, golf, amusement parks, and the everyday services a modern Dhaka neighbourhood needs.",
   },
   {
     title: "A plan for retirement",
@@ -202,6 +204,65 @@ export const comingHomePrinciples = [
   {
     title: "Title and running costs",
     body: "Price, size, service charges, and legal title should be reviewed carefully. We do not provide financial advice.",
+  },
+] as const;
+
+export const diasporaFaq = [
+  {
+    question: "Can I legally purchase and own a MatriBhumi property if I hold foreign citizenship?",
+    answer:
+      "Yes. Dual citizens and non-resident Bangladeshis (NRBs) enjoy full property ownership rights in Bangladesh. Our legal team handles the complete registration process, ensuring compliance with local property laws seamlessly from abroad.",
+  },
+  {
+    question: "How can I safely manage payments and wire transfers from overseas?",
+    answer:
+      "We facilitate secure, traceable international wire transfers directly to dedicated project accounts. All transactions are fully documented, compliant with Bangladesh Bank regulations, and aligned with transparent milestone-based construction timelines.",
+  },
+  {
+    question: "How is my home looked after when I am away for months at a time?",
+    answer:
+      "Every MatriBhumi development features comprehensive, round-the-clock building management. This includes 24/7 smart security, regular structural inspections, and dedicated property upkeep, ensuring your home is pristine and secure the moment you turn the key for Eid or winter holidays.",
+  },
+  {
+    question: "What are the advantages of joining the pre-launch waitlist?",
+    answer:
+      "Waitlist members receive priority access to architectural floor plans, exclusive early-bird pricing tiers, and the first choice of premium units (such as corner layouts and upper-floor views) before the public launch.",
+  },
+] as const;
+
+export const leadership = [
+  {
+    name: "Amina Rahman",
+    role: "Founder",
+    image: "/media/leader-founder.jpg",
+    bio: "Portrait and full biography to follow. The founding standard is international design standards meeting local heritage — a home that can be closed for the year and opened again for Eid.",
+  },
+  {
+    name: "Farhan Kabir",
+    role: "Development",
+    image: "/media/leader-development.jpg",
+    bio: "Portrait and full biography to follow. Land, structure, and builders who can stand beside a detail when the client is on another continent.",
+  },
+  {
+    name: "Leila Nassar",
+    role: "Architecture",
+    image: "/media/leader-design.jpg",
+    bio: "Portrait and full biography to follow. The studio turns a site into shade, courtyards, and rooms that still feel like a Bangladeshi home.",
+  },
+] as const;
+
+export const legalCompliance = [
+  {
+    title: "RAJUK approvals",
+    body: "Each pre-launch development is prepared for submission to RAJUK. Approval references will be published here as they are granted.",
+  },
+  {
+    title: "Structural certifications",
+    body: "Structural design is specified to international standards and certified by the appointed engineer of record. Certificate numbers will be listed with the construction drawings.",
+  },
+  {
+    title: "Developer registration",
+    body: "MatriBhumi Developments. Registered office: House 12, Road 7, Gulshan, Dhaka 1212, Bangladesh. Full registration particulars will be published before public sales.",
   },
 ] as const;
 

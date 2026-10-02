@@ -63,14 +63,14 @@ export default async function InsightsPage({
         image="/media/about-studio.jpg"
         eyebrow="Insights"
         title="Notes on coming home."
-        description="Essays on visiting Bangladesh, looking after a house from abroad, and the unglamorous craft of making a place. Demonstration content."
+        description="Essays on visiting Bangladesh, looking after a house from abroad, and the unglamorous craft of making a place."
       />
 
       <section className="px-4 py-12 sm:px-6 md:px-12 md:py-16">
         <SectionHeader
           eyebrow="The journal"
           title="Read by subject."
-          description="Filter the archive. Every piece is fictional briefing copy assembled for this website."
+          description="Filter the archive. Notes from the studio on coming home, climate, and the craft of a residence."
         />
         <div className="mt-10 flex flex-wrap gap-2">
           <FilterLink href="/insights" active={!category}>

@@ -118,6 +118,10 @@ a {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+summary::-webkit-details-marker {
+  display: none;
+}
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }

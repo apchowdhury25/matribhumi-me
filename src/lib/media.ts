@@ -8,5 +8,5 @@ export const media = {
 } as const;
 
 export function demoImage(src: string, alt: string) {
-  return { src, alt: `${alt} (demonstration imagery)` };
+  return { src, alt };
 }

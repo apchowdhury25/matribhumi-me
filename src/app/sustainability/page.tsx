@@ -26,7 +26,7 @@ export default function SustainabilityPage() {
         image="/media/sustain-courtyard.jpg"
         eyebrow="Sustainability"
         title="Care for the ground is a design problem."
-        description="No environmental certification is claimed on this site unless it is clearly marked as fictional demonstration content. None are."
+        description="We design for climate, water, and shade. Certifications are published only when they have been granted."
       />
       <section className="px-4 py-14 sm:px-6 md:px-12 md:py-20">
         <div className="space-y-24">

@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { PublicShell } from "@/components/site/PublicShell";
 import { Button } from "@/components/ui/button";
+import { BrochureButton, WaitlistButton } from "@/components/site/LeadCapture";
 import { Gallery } from "@/components/property/Gallery";
 import { InquiryForm } from "@/components/forms/InquiryForm";
 import { ViewingForm } from "@/components/forms/ViewingForm";
@@ -68,15 +69,15 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
             </p>
             <h1 className="font-display mt-4 text-[2.1rem] leading-[1.05] sm:text-5xl md:text-7xl">{property.name}</h1>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-              <Button href="#inquire" variant="invert" className="w-full sm:w-auto">Request Information</Button>
-              <Button href="#viewing" variant="outline" className="w-full border-ivory/40 text-ivory hover:bg-ivory hover:text-charcoal sm:w-auto">
+              <WaitlistButton projectName={property.name} variant="invert" className="w-full sm:w-auto" />
+              <BrochureButton
+                label="Download Brochure"
+                variant="outline"
+                className="w-full border-ivory/40 text-ivory hover:bg-ivory hover:text-charcoal sm:w-auto"
+              />
+              <Button href="#viewing" variant="ghost" className="w-full sm:w-auto">
                 Schedule a Viewing
               </Button>
-              {property.brochureUrl ? (
-                <a href={property.brochureUrl} className="text-[11px] uppercase tracking-[0.2em] text-sand">
-                  Download brochure
-                </a>
-              ) : null}
               <FavoriteButton propertyId={property.id} />
               <CompareToggle propertyId={property.id} />
             </div>

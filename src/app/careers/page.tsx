@@ -24,7 +24,7 @@ export default async function CareersPage() {
         image="/media/about-studio.jpg"
         eyebrow="Careers"
         title="Build homes people can return to."
-        description="We work on residences in Bangladesh for families who live overseas. Openings below are demonstration roles."
+        description="We work on residences in Bangladesh for families who live overseas. Open roles in the Dhaka studio are listed below."
       />
       <section className="grid gap-10 px-4 py-14 sm:px-6 md:px-12 md:py-20 lg:grid-cols-3">
         <article>

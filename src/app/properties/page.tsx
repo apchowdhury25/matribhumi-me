@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 export const metadata = createMetadata({
   title: "Properties",
   description:
-    "Demonstration homes in Bangladesh — including Bashundhara’s new districts — for expats, retirees, and families already living in Dhaka.",
+    "Pre-launch homes in Bangladesh — including Bashundhara’s master-planned district — for expats, retirees, and families already living in Dhaka.",
   path: "/properties",
   image: "/media/hero-urban.jpg",
 });
@@ -41,7 +41,7 @@ export default async function PropertiesPage({
         image="/media/hero-urban.jpg"
         eyebrow="Properties"
         title="A Bangladesh address that fits how you live."
-        description="Search demonstration homes for holidays, retirement, and everyday living in Bashundhara and beyond. Nothing here is a live offering or a financial recommendation."
+        description="Search pre-launch homes for holidays, retirement, and everyday living in Bashundhara and beyond. Prices are indicative until a reservation is signed."
       />
       <section className="px-4 py-10 sm:px-6 md:px-12 md:py-12">
         <form className="grid gap-3 border border-charcoal/10 bg-paper p-4 md:grid-cols-4 lg:grid-cols-6">
@@ -94,7 +94,7 @@ export default async function PropertiesPage({
         </div>
 
         {data.items.length === 0 ? (
-          <p className="mt-16 text-muted">No demonstration homes match those filters.</p>
+          <p className="mt-16 text-muted">No homes match those filters.</p>
         ) : (
           <div className={view === "list" ? "mt-8 grid gap-6" : "mt-8 grid gap-8 md:grid-cols-2 xl:grid-cols-3"}>
             {data.items.map((property) => (
