@@ -39,6 +39,29 @@ test("pre-launch homepage, waitlist, and brochure", async ({ page }) => {
   await expect(brochure.getByRole("heading", { name: "Your portfolio is on its way." })).toBeVisible();
 });
 
+test("selecting a development moves the Google map", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  const map = page.getByTitle(/^Map of /);
+  await expect(map).toBeVisible();
+  const before = await map.getAttribute("src");
+  expect(before).toContain("maps.google.com/maps");
+  expect(before).toContain("output=embed");
+
+  const tabs = page.getByRole("tablist", { name: "Developments on the map" }).getByRole("tab");
+  const count = await tabs.count();
+  expect(count).toBeGreaterThan(1);
+  const nextName = (await tabs.nth(1).innerText()).trim();
+  await tabs.nth(1).click();
+  await expect(page.getByTitle(`Map of ${nextName}`, { exact: false })).toBeVisible();
+  const after = await page.getByTitle(/^Map of /).getAttribute("src");
+  expect(after).not.toBe(before);
+  expect(after).toContain("maps.google.com/maps");
+  await expect(
+    page.locator("article").filter({ has: page.getByRole("heading", { level: 3, name: nextName }) }).last(),
+  ).toBeVisible();
+});
+
 test("pre-launch homepage on a phone", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");

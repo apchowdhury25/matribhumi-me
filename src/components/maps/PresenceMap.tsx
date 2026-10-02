@@ -18,77 +18,53 @@ export type MapPin = {
   location: { city: string; country: string };
 };
 
-function project(lat: number, lng: number) {
-  const x = ((lng + 180) / 360) * 100;
-  const y = ((90 - lat) / 180) * 100;
-  return { x, y };
+function mapSrc(pin: MapPin) {
+  const query = `${pin.latitude},${pin.longitude}`;
+  return `https://maps.google.com/maps?q=${encodeURIComponent(query)}&z=14&hl=en&output=embed`;
 }
 
 export function PresenceMap({ pins }: { pins: MapPin[] }) {
   const [active, setActive] = useState<string | null>(pins[0]?.id ?? null);
-  const [zoom, setZoom] = useState(1);
   const current = useMemo(() => pins.find((p) => p.id === active) ?? pins[0], [active, pins]);
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1.4fr_0.8fr]">
-      <div className="relative min-h-[240px] overflow-hidden bg-charcoal sm:min-h-[320px] lg:min-h-[420px]">
-        <svg viewBox="0 0 1000 560" className="h-full w-full" role="img" aria-label="MatriBhumi developments">
-          <rect width="1000" height="560" fill="#1A1916" />
-          <g opacity="0.35" fill="none" stroke="#D8C9B0" strokeWidth="0.8">
-            <path d="M120 180c80-40 160-20 220 10 80 40 140-10 210 20 70 30 130 10 190-30 40-26 90-10 140 18" />
-            <path d="M80 300c90 10 150-40 230-20 90 24 150 8 220-18 90-34 160 10 250 4" />
-            <path d="M140 390c70-10 130 30 200 10 110-30 170 20 260 8 90-12 150 24 230 6" />
-            <path d="M200 120c40 30 30 70 10 110" />
-            <path d="M620 90c20 40 10 80-20 120" />
-          </g>
-          <g style={{ transform: `scale(${zoom})`, transformOrigin: "center" }}>
-            {pins.map((pin) => {
-              const { x, y } = project(pin.latitude, pin.longitude);
-              const cx = x * 10;
-              const cy = y * 5.6;
-              const on = pin.id === active;
-              return (
-                <g key={pin.id}>
-                  <circle
-                    cx={cx}
-                    cy={cy}
-                    r={on ? 9 : 5}
-                    fill={on ? "#A4895A" : "#F7F3EB"}
-                    className="cursor-pointer"
-                    onMouseEnter={() => setActive(pin.id)}
-                    onClick={() => setActive(pin.id)}
-                  />
-                  <text
-                    x={cx + 12}
-                    y={cy - 8}
-                    fill="#F7F3EB"
-                    fontSize="11"
-                    className="pointer-events-none"
-                  >
-                    {pin.location.city}
-                  </text>
-                </g>
-              );
-            })}
-          </g>
-        </svg>
-        <div className="absolute bottom-4 left-4 flex gap-2">
-          <button
-            type="button"
-            className="h-9 w-9 bg-ivory text-charcoal"
-            onClick={() => setZoom((z) => Math.min(2.2, z + 0.2))}
-            aria-label="Zoom in"
-          >
-            +
-          </button>
-          <button
-            type="button"
-            className="h-9 w-9 bg-ivory text-charcoal"
-            onClick={() => setZoom((z) => Math.max(1, z - 0.2))}
-            aria-label="Zoom out"
-          >
-            −
-          </button>
+      <div className="min-w-0">
+        <div className="relative h-[320px] overflow-hidden bg-stone sm:h-[380px] lg:h-[460px]">
+          {current ? (
+            <iframe
+              key={current.id}
+              title={`Map of ${current.name}`}
+              src={mapSrc(current)}
+              className="absolute inset-0 h-full w-full border-0"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+          ) : null}
+        </div>
+        <div
+          role="tablist"
+          aria-label="Developments on the map"
+          className="no-scrollbar flex gap-2 overflow-x-auto border border-t-0 border-charcoal/10 bg-paper p-3"
+        >
+          {pins.map((pin) => {
+            const on = pin.id === current?.id;
+            return (
+              <button
+                key={pin.id}
+                type="button"
+                role="tab"
+                aria-selected={on}
+                onClick={() => setActive(pin.id)}
+                className={`shrink-0 px-3 py-2 text-left text-[11px] uppercase tracking-[0.16em] ${
+                  on ? "bg-charcoal text-ivory" : "text-earth hover:text-charcoal"
+                }`}
+              >
+                {pin.name}
+              </button>
+            );
+          })}
         </div>
       </div>
       {current ? (

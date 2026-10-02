@@ -161,7 +161,7 @@ export default async function HomePage() {
         <SectionHeader
           eyebrow="Bangladesh, and a few studies abroad"
           title="Most of our work is at home — especially Dhaka’s new districts."
-          description="Dhaka, Bashundhara, and Chattogram hold the pre-launch portfolio. Pins farther away mark cities where our clients already live."
+          description="Select a development and the map moves to it. Dhaka, Bashundhara, and Chattogram hold the pre-launch portfolio. Cities farther away are where our clients already live."
         />
         <div className="mt-12">
           <PresenceMap
@@ -174,7 +174,7 @@ export default async function HomePage() {
               heroImage: pin.heroImage,
               locationNote: pin.locationNote,
               status: pin.status,
-              startingPrice: pin.startingPrice,
+              startingPrice: Number(pin.startingPrice.toString()),
               currency: pin.currency,
               location: pin.location,
             }))}
