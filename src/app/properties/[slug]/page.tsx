@@ -81,10 +81,15 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
               {property.location.city}, {property.location.country} · {statusLabel(property.status)}
             </p>
             <h1 className="font-display mt-4 text-[2.1rem] leading-[1.05] sm:text-5xl md:text-7xl">{property.name}</h1>
-            <p className="mt-4 text-[11px] uppercase tracking-[0.2em] text-ivory/70">Listed through MatriBhumi</p>
+            {developerName ? (
+              <p className="mt-4 text-[11px] uppercase tracking-[0.2em] text-ivory/70">
+                Developer: {developerName}
+                {verified ? " · Verified" : ""}
+              </p>
+            ) : null}
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Button href="/advise" variant="invert" className="w-full sm:w-auto">
-                {buyerCtas.talkToMatriBhumiAdvisor}
+                {buyerCtas.talkToAdvisor}
               </Button>
               <Button href="#inquire" variant="outline" className="w-full border-ivory/40 text-ivory hover:bg-ivory hover:text-charcoal sm:w-auto">
                 {buyerCtas.requestDetails}

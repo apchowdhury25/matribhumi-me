@@ -23,7 +23,7 @@ export function PageHero({
         alt=""
         className="absolute inset-0 h-full w-full object-cover ken-burns"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/45 to-charcoal/20" />
+      <div className="absolute inset-0 bg-charcoal/50" />
       <div className="relative flex min-h-[inherit] items-end px-4 pb-12 pt-28 sm:px-6 md:px-12 md:pb-24 md:pt-32">
         <div className="max-w-4xl">
           {eyebrow ? (

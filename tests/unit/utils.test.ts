@@ -32,12 +32,14 @@ describe("publicDeveloperName", () => {
 });
 
 describe("markets", () => {
-  it("resolves the Bangladesh market only", () => {
+  it("resolves Bangladesh, UAE, and Malaysia as advisory markets", () => {
     expect(getMarket("bangladesh")?.country).toBe("Bangladesh");
     expect(getMarketByCountry("Bangladesh")?.slug).toBe("bangladesh");
     expect(countryFilterValues("bangladesh")).toEqual(["Bangladesh"]);
-    expect(getMarket("uae")).toBeNull();
-    expect(getMarket("malaysia")).toBeNull();
+    expect(getMarket("uae")?.shortName).toBe("UAE");
+    expect(getMarket("malaysia")?.shortName).toBe("Malaysia");
+    expect(getMarket("uae")?.listingsPublished).toBe(false);
+    expect(getMarket("malaysia")?.listingsPublished).toBe(false);
     expect(getMarket("bangladesh")?.cities.map((city) => city.name)).toEqual([
       "Dhaka",
       "Chattogram",

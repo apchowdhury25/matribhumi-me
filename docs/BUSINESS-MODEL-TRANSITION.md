@@ -1,5 +1,17 @@
 # Business-model transition
 
+## Step 7 — premium international advisory presentation
+
+Redesign the public visual presentation so MatriBhumi reads as a premium international property advisory and brokerage — not a property developer or a construction company.
+
+- Hero: “Find the right property. We coordinate the rest.” Supporting copy covers Bangladesh, the UAE and Malaysia. Primary CTA “Talk to an Advisor”; secondary “Explore Properties”; country selector for the three markets.
+- Property cards lead with project name, city/country, developer (when `publicDeveloperName` returns a value), starting price, “View Property”, and “Talk to Advisor”. No “MatriBhumi Property” or “Listed through MatriBhumi” label.
+- Trust section “Why buyers choose MatriBhumi”: independent guidance, curated developer network, cross-border support, one point of coordination, transparent buyer-fee policy, property comparison, viewing coordination, developer introductions.
+- Buyer-fee marketing headline and copy live in `buyerFeeHeadline` / `buyerFeeMarketing`. Legal disclosure stays in How MatriBhumi is paid / `buyerFeeNote`.
+- Developer B2B: “Are you a property developer?” / “Reach qualified buyers across Bangladesh, the UAE and Malaysia.” CTA “Partner with MatriBhumi”.
+- `/locations/uae` and `/locations/malaysia` are restored as advisory market pages. Public catalogue listings remain Bangladesh-only until real partnerships exist (`listingsPublished`). No invented developers or listings.
+- Mobile WhatsApp + advisor bar sits above the safe area and does not cover compare controls. Existing URLs are unchanged.
+
 ## Step 6 — advisory CRM
 
 Turn the existing staff console into a practical buyer-advisory and developer-relationship CRM. Keep catalogue admin pages.

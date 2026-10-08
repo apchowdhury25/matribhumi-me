@@ -10,7 +10,7 @@ import { BuyerFeeNotice } from "@/components/site/BuyerFeeNotice";
 export const metadata = createMetadata({
   title: "Contact",
   description:
-    "Speak with a MatriBhumi advisor about selected developer properties in Bangladesh. There is no buyer fee for this conversation.",
+    "Speak with a MatriBhumi advisor about selected developer properties across Bangladesh, the UAE and Malaysia. There is no buyer fee for this conversation.",
   path: "/contact",
   image: "/media/about-lobby.jpg",
 });
@@ -22,7 +22,7 @@ export default function ContactPage() {
         image="/media/about-lobby.jpg"
         eyebrow="Contact"
         title="Talk to a property advisor."
-        description="Tell us the city in Bangladesh, the kind of home, and how you will use it. MatriBhumi helps you compare selected developer properties and coordinate the journey — with no buyer fee."
+        description="Tell us the market, the kind of home, and how you will use it. MatriBhumi helps you compare selected developer properties and coordinate the journey — with no buyer fee."
       />
       <section className="grid gap-16 px-4 py-14 sm:px-6 md:px-12 md:py-20 lg:grid-cols-[0.8fr_1.2fr]">
         <div>
@@ -49,7 +49,7 @@ export default function ContactPage() {
         <div>
           <h2 className="font-display text-4xl">Write to us</h2>
           <p className="mt-3 text-sm text-muted">
-            For a full requirements brief, use Talk to a Property Advisor. This form is for general messages. We introduce qualified buyers to the relevant developer. MatriBhumi is not the seller.
+            For a full requirements brief, use Talk to an Advisor. This form is for general messages. We introduce qualified buyers to the relevant developer. MatriBhumi is not the seller.
           </p>
           <BuyerFeeNotice className="mt-4" />
           <Button href="/advise" className="mt-6">{buyerCtas.talkToAdvisor}</Button>

@@ -25,6 +25,7 @@ export function SectionHeader({
           {eyebrow}
         </p>
       ) : null}
+      {eyebrow ? <div className={cn("section-rule mt-4", light && "bg-sand/70")} /> : null}
       <h2
         className={cn(
           "font-display mt-3 text-[1.85rem] leading-[1.15] tracking-tight sm:text-4xl md:text-5xl",

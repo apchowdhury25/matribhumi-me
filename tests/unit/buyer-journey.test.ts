@@ -1,11 +1,13 @@
 import { describe, expect, it } from "vitest";
 import {
   advisorFollowUpMessage,
+  buyerFeeHeadline,
+  buyerFeeMarketing,
   buyerJourneyFeeMessage,
   propertySourceDisclosure,
 } from "@/config/businessModel";
-import { buyerCtas } from "@/config/ctas";
-import { howItWorksSteps } from "@/config/site";
+import { buyerCtas, developerCtas } from "@/config/ctas";
+import { howItWorksSteps, whyMatriBhumi } from "@/config/site";
 import { advisorRequestEmail } from "@/lib/mail";
 import { rankPropertyMatches, scorePropertyMatch } from "@/lib/matching";
 import { advisorySchema } from "@/lib/validations";
@@ -39,11 +41,33 @@ describe("buyer journey copy", () => {
   });
 
   it("uses advisor CTAs instead of a buy-now primary action", () => {
-    expect(buyerCtas.talkToAdvisor).toBe("Talk to a Property Advisor");
-    expect(buyerCtas.findMyProperty).toBe("Find My Property");
+    expect(buyerCtas.talkToAdvisor).toBe("Talk to an Advisor");
+    expect(buyerCtas.findMyProperty).toBe("Explore Properties");
+    expect(buyerCtas.viewProperty).toBe("View Property");
+    expect(buyerCtas.talkToAdvisorShort).toBe("Talk to Advisor");
     expect(buyerCtas.requestDetails).toBe("Request Property Details");
     expect(buyerCtas.arrangeViewing).toBe("Arrange a Viewing");
+    expect(developerCtas.partner).toBe("Partner with MatriBhumi");
     expect(Object.values(buyerCtas).join(" ")).not.toMatch(/buy now/i);
+  });
+
+  it("keeps marketing buyer-fee copy separate from the legal disclosure", () => {
+    expect(buyerFeeHeadline).toBe("Your property search doesn't come with a MatriBhumi fee.");
+    expect(buyerFeeMarketing).toContain("core property advisory service");
+    expect(buyerFeeMarketing).not.toBe(buyerJourneyFeeMessage);
+  });
+
+  it("states why buyers choose MatriBhumi in eight trust points", () => {
+    expect(whyMatriBhumi.map((item) => item.title)).toEqual([
+      "Independent guidance",
+      "Curated developer network",
+      "Cross-border support",
+      "One point of coordination",
+      "Transparent buyer-fee policy",
+      "Property comparison",
+      "Viewing coordination",
+      "Developer introductions",
+    ]);
   });
 
   it("describes an eight-step buyer journey", () => {

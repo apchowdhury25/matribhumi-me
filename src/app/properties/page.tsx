@@ -13,7 +13,7 @@ export const dynamic = "force-dynamic";
 export const metadata = createMetadata({
   title: "Properties",
   description:
-    "Browse new-development and selected developer properties in Bangladesh. Filter by city, developer, type and price. Listed through MatriBhumi — with no buyer fee.",
+    "Browse selected developer properties. Filter by city, developer, type and price. Independent advisory — with no buyer fee.",
   path: "/properties",
   image: "/media/hero-urban.jpg",
 });
@@ -43,7 +43,7 @@ export default async function PropertiesPage({
         image="/media/hero-urban.jpg"
         eyebrow="Properties"
         title="Find the right property."
-        description="Browse selected developer properties in Bangladesh. Prices are indicative until an agreement is signed with the developer or seller."
+        description="Browse selected developer properties. Prices are indicative until an agreement is signed with the developer or seller."
       />
       <section className="px-4 py-10 sm:px-6 md:px-12 md:py-12">
         <form className="grid gap-3 border border-charcoal/10 bg-paper p-4 md:grid-cols-4 lg:grid-cols-6">

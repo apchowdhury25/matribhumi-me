@@ -32,7 +32,7 @@ test("admin lead matching, shortlist, and deal pipeline", async ({ page }) => {
   await expect(page.getByText(/not guaranteed revenue/i).first()).toBeVisible();
   await expect(page.getByRole("heading", { name: "Leads by country" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Transaction pipeline" })).toBeVisible();
-  await expect(page.getByText("Developer compensation due")).toBeVisible();
+  await expect(page.getByText("Developer compensation due").first()).toBeVisible();
 
   await page.goto("/admin/leads");
   await page.getByRole("link", { name: "Asha Rahman" }).first().click();

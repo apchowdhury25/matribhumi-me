@@ -11,7 +11,7 @@ import { siteConfig, whatWeDo } from "@/config/site";
 export const metadata = createMetadata({
   title: "About",
   description:
-    "MatriBhumi is independent property advisory and transaction coordination. We connect buyers with participating developers in Bangladesh.",
+    "MatriBhumi is independent property advisory and transaction coordination across Bangladesh, the UAE and Malaysia.",
   path: "/about",
   image: "/media/about-lobby.jpg",
 });
@@ -31,15 +31,15 @@ export default function AboutPage() {
           <p className="mt-4 leading-8 text-muted">
             MatriBhumi means mother-land. We are an independent property advisor and transaction-coordination company —
             not a developer that builds homes for sale under this brand, except where a listing is explicitly marked
-            MatriBhumi-owned. Families at home and abroad use us to compare selected developer properties in Bangladesh,
-            then stay with us through introductions, viewings, and follow-up.
+            MatriBhumi-owned. Families at home and abroad use us to compare selected developer properties across
+            Bangladesh, the UAE and Malaysia, then stay with us through introductions, viewings, and follow-up.
           </p>
         </div>
         <div className="grid gap-8">
           <div>
             <h3 className="font-display text-3xl">Vision</h3>
             <p className="mt-3 text-muted">
-              Help buyers find a suitable address in Bangladesh, then coordinate a clean
+              Help buyers find a suitable address, then coordinate a clean
               introduction to the developer who is selling it.
             </p>
           </div>
@@ -73,7 +73,7 @@ export default function AboutPage() {
             How it works
           </Button>
           <Button href="/advise" className="w-full sm:w-auto">
-            Talk to a Property Advisor
+            Talk to an Advisor
           </Button>
         </div>
       </section>

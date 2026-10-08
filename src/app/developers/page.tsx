@@ -12,7 +12,7 @@ export const dynamic = "force-dynamic";
 export const metadata = createMetadata({
   title: "Developers",
   description:
-    "Selected developers whose properties are listed through MatriBhumi. Profiles appear when a participating partner is published.",
+    "Selected developers whose properties are presented through MatriBhumi. Profiles appear when a participating partner is published.",
   path: "/developers",
   image: "/media/about-model.jpg",
 });
@@ -55,8 +55,8 @@ export default async function DevelopersPage() {
           <div className="max-w-2xl">
             <h2 className="font-display text-4xl">No published developer profiles yet.</h2>
             <p className="mt-4 leading-7 text-muted">
-              Properties on this site are listed through MatriBhumi. Named developer pages will appear here when
-              participating partners are published. Browse listings in the meantime, or speak with an advisor.
+              Named developer pages will appear here when participating partners are published. Browse selected
+              developments in the meantime, or speak with an advisor.
             </p>
             <BuyerFeeNotice className="mt-6" />
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">

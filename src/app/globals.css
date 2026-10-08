@@ -1,22 +1,23 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-charcoal: #1a1916;
-  --color-ink: #2c2a26;
-  --color-ivory: #f7f3eb;
-  --color-sand: #d8c9b0;
-  --color-earth: #8a7355;
-  --color-moss: #4a5d4e;
-  --color-bronze: #a4895a;
-  --color-stone: #e9e2d4;
-  --color-mist: #f3eee4;
+  --color-charcoal: #161513;
+  --color-ink: #2a2824;
+  --color-ivory: #f6f1e8;
+  --color-sand: #d4c4aa;
+  --color-earth: #7d6a4f;
+  --color-moss: #3f5344;
+  --color-bronze: #9a8154;
+  --color-stone: #ebe4d6;
+  --color-mist: #f4efe6;
   --color-paper: #fbf8f2;
-  --color-muted: #6b6560;
-  --color-hairline: color-mix(in oklab, var(--color-charcoal) 12%, transparent);
+  --color-muted: #6a645e;
+  --color-hairline: color-mix(in oklab, var(--color-charcoal) 10%, transparent);
   --font-display: var(--font-display), "Iowan Old Style", Georgia, serif;
   --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-mono), ui-monospace, monospace;
-  --shadow-lift: 0 24px 60px -28px rgb(26 25 22 / 0.35);
+  --shadow-lift: 0 28px 64px -32px rgb(22 21 19 / 0.38);
+  --shadow-card: 0 1px 0 rgb(22 21 19 / 0.06), 0 18px 40px -28px rgb(22 21 19 / 0.18);
 }
 
 html {
@@ -86,8 +87,20 @@ a {
   gap: 1.25rem;
 }
 
+.advisory-card {
+  background: var(--color-paper);
+  border: 1px solid var(--color-hairline);
+  box-shadow: var(--shadow-card);
+}
+
+.section-rule {
+  width: 2.5rem;
+  height: 1px;
+  background: var(--color-bronze);
+}
+
 .ken-burns {
-  animation: ken-burns 28s ease-out forwards;
+  animation: ken-burns 36s ease-out forwards;
 }
 
 @keyframes ken-burns {

@@ -64,6 +64,12 @@ export function organizationJsonLd() {
       postalCode: siteConfig.address.postal,
     },
     sameAs: Object.values(siteConfig.social).filter(Boolean),
+    areaServed: [
+      { "@type": "Country", name: "Bangladesh" },
+      { "@type": "Country", name: "United Arab Emirates" },
+      { "@type": "Country", name: "Malaysia" },
+    ],
+    description: siteConfig.description,
   };
 }
 

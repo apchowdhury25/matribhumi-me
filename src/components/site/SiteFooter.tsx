@@ -27,7 +27,7 @@ export function SiteFooter() {
           <LegalCompliance tone="dark" />
         </div>
       </div>
-      <div className="grid gap-10 px-4 py-14 sm:grid-cols-2 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr_1fr] md:gap-12 md:px-12 md:py-16">
+      <div className="grid gap-10 px-4 py-14 sm:grid-cols-2 sm:px-6 md:grid-cols-2 lg:grid-cols-[1.4fr_0.8fr_1fr_1fr_1fr] md:gap-12 md:px-12 md:py-16">
         <div>
           <Logo variant="dark" />
           <p className="mt-6 max-w-sm text-sm leading-7 text-ivory/70">{siteConfig.positioning}</p>
@@ -51,6 +51,7 @@ export function SiteFooter() {
           </a>
           <Socials />
         </div>
+        <FooterCol title="Markets" items={footerNav.markets} />
         <FooterCol title="Explore" items={footerNav.explore} />
         <FooterCol title="Company" items={footerNav.company} />
         <FooterCol title="Legal" items={footerNav.legal} />

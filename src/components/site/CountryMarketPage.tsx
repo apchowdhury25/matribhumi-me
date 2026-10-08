@@ -7,8 +7,9 @@ import { PropertyCard } from "@/components/property/PropertyCard";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/site/JsonLd";
 import { getLocations, getProperties } from "@/lib/data";
-import { getMarket } from "@/lib/markets";
+import { getMarket, marketHasPublicListings } from "@/lib/markets";
 import { breadcrumbJsonLd } from "@/lib/seo";
+import { buyerCtas } from "@/config/ctas";
 
 export async function CountryMarketPage({ slug }: { slug: string }) {
   const market = getMarket(slug);
@@ -16,7 +17,7 @@ export async function CountryMarketPage({ slug }: { slug: string }) {
 
   const [allLocations, propertyData] = await Promise.all([
     getLocations(),
-    getProperties({ country: market.slug }),
+    marketHasPublicListings(market.slug) ? getProperties({ country: market.slug }) : Promise.resolve({ items: [] }),
   ]);
 
   const inCountry = allLocations.filter((location) =>
@@ -47,15 +48,15 @@ export async function CountryMarketPage({ slug }: { slug: string }) {
         description={market.description}
       >
         <div className="flex flex-col gap-3 sm:flex-row">
-          <Button href={`/properties?country=${market.slug}`} variant="invert">
-            Find My Property
+          <Button href="/advise" variant="invert">
+            {buyerCtas.talkToAdvisor}
           </Button>
           <Button
-            href="/advise"
+            href={marketHasPublicListings(market.slug) ? `/properties?country=${market.slug}` : "/properties"}
             variant="outline"
             className="border-ivory/40 text-ivory hover:bg-ivory hover:text-charcoal"
           >
-            Talk to a Property Advisor
+            {buyerCtas.findMyProperty}
           </Button>
         </div>
       </PageHero>
@@ -127,7 +128,7 @@ export async function CountryMarketPage({ slug }: { slug: string }) {
           </div>
         ) : (
           <p className="mt-10 max-w-2xl text-muted">
-            No published properties for {market.name} yet. Talk to a property advisor if you would like us to watch this
+            No published properties for {market.name} yet. Talk to an advisor if you would like us to watch this
             market for you.
           </p>
         )}

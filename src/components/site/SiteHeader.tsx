@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import { SearchOverlay } from "@/components/search/SearchOverlay";
-import { countryNav, navItems, siteConfig } from "@/config/site";
+import { bangladeshCityNav, countryNav, navItems, siteConfig } from "@/config/site";
 import { buyerCtas } from "@/config/ctas";
 import { cn } from "@/lib/utils";
 
@@ -33,7 +33,7 @@ export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-        inverted ? "bg-transparent text-ivory" : "bg-ivory/92 text-charcoal shadow-[0_1px_0_rgb(26_25_22/0.08)] backdrop-blur-md",
+        inverted ? "bg-transparent text-ivory" : "bg-ivory text-charcoal shadow-[0_1px_0_rgb(22_21_19/0.08)]",
       )}
       style={{ paddingTop: "env(safe-area-inset-top)" }}
     >
@@ -76,15 +76,15 @@ export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
       </div>
       <div
         className={cn(
-          "hidden items-center gap-6 px-4 pb-2 sm:px-5 md:px-10 xl:flex",
-          inverted ? "text-ivory/75" : "text-earth",
+          "hidden items-center gap-8 px-4 pb-2 sm:px-5 md:px-10 xl:flex",
+          inverted ? "text-ivory/80" : "text-earth",
         )}
       >
         {countryNav.map((item) => (
           <Link
             key={item.href}
             href={item.href}
-            className="text-[10px] uppercase tracking-[0.2em] transition hover:text-current hover:opacity-100"
+            className="text-[10px] uppercase tracking-[0.22em] transition hover:text-current hover:opacity-100"
           >
             {item.label}
           </Link>
@@ -111,9 +111,22 @@ export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
               </Link>
             ))}
           </nav>
-          <p className="text-[11px] uppercase tracking-[0.22em] text-earth">Bangladesh</p>
-          <nav className="mt-3 grid gap-1 pb-24">
+          <p className="text-[11px] uppercase tracking-[0.22em] text-earth">Markets</p>
+          <nav className="mt-3 grid gap-1">
             {countryNav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="py-2 text-lg"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+          <p className="mt-8 text-[11px] uppercase tracking-[0.22em] text-earth">Bangladesh cities</p>
+          <nav className="mt-3 grid gap-1 pb-28">
+            {bangladeshCityNav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}

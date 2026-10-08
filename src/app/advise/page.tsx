@@ -12,7 +12,7 @@ export const dynamic = "force-dynamic";
 export const metadata = createMetadata({
   title: "Talk to a property advisor",
   description:
-    "Share your property requirements with a MatriBhumi advisor. We shortlist selected developer homes in Bangladesh and coordinate introductions and viewings — with no buyer brokerage or consultation fee.",
+    "Share your property requirements with a MatriBhumi advisor. We shortlist selected developer homes across Bangladesh, the UAE and Malaysia and coordinate introductions and viewings — with no buyer brokerage or consultation fee.",
   path: "/advise",
   image: "/media/about-lobby.jpg",
 });

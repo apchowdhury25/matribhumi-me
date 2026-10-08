@@ -55,7 +55,7 @@ export default async function LocationDetailPage({ params }: { params: Promise<{
         ))}
       </section>
       <section className="bg-mist px-6 py-16 md:px-12">
-        <h2 className="font-display text-4xl">Development opportunities</h2>
+        <h2 className="font-display text-4xl">The district</h2>
         <p className="mt-4 max-w-3xl leading-8 text-muted">{location.opportunities}</p>
       </section>
       <section className="px-4 py-14 sm:px-6 md:px-12 md:py-20">
@@ -85,7 +85,7 @@ export default async function LocationDetailPage({ params }: { params: Promise<{
             ))}
           </ul>
         ) : null}
-        <Button href="/advise" className="mt-10">Talk to a Property Advisor</Button>
+        <Button href="/advise" className="mt-10">Talk to an Advisor</Button>
       </section>
     </PublicShell>
   );

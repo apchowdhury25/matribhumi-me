@@ -18,7 +18,7 @@ test("advisory form collects requirements and confirms advisor follow-up", async
   await page.locator("input[name=bedrooms]").fill("3");
   await page.locator("textarea[name=message]").fill("Looking for a family apartment near schools in Dhaka.");
   await page.locator("input[name=consent]").check();
-  await page.getByRole("button", { name: /Talk to a Property Advisor/i }).click();
+  await page.getByRole("button", { name: /Talk to an Advisor/i }).click();
 
   await expect(page.getByRole("heading", { name: "Thank you." })).toBeVisible();
   await expect(

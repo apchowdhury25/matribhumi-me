@@ -3,28 +3,27 @@ import { PublicShell } from "@/components/site/PublicShell";
 import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/site/SectionHeader";
 import { PresenceMap } from "@/components/maps/PresenceMap";
-import { BrochureButton, DualCta, WaitlistButton } from "@/components/site/LeadCapture";
+import { DualCta } from "@/components/site/LeadCapture";
 import { DiasporaFaq } from "@/components/site/DiasporaFaq";
 import { HowItWorksSteps } from "@/components/site/HowItWorksSteps";
 import { HowWeArePaid } from "@/components/site/HowWeArePaid";
+import { BuyerFeeHighlight } from "@/components/site/BuyerFeeHighlight";
+import { CountrySelector } from "@/components/site/CountrySelector";
 import { PropertyCard } from "@/components/property/PropertyCard";
 import {
   siteConfig,
   whyMatriBhumi,
   whatWeDo,
-  buyerServices,
-  developerServices,
-  countryNav,
 } from "@/config/site";
-import { buyerCtas } from "@/config/ctas";
+import { buyerCtas, developerCtas } from "@/config/ctas";
 import {
   getArticles,
   getFeaturedDevelopers,
   getFeaturedProperties,
-  getLocations,
   getMapDevelopments,
 } from "@/lib/data";
 import { publicDeveloperName } from "@/lib/developer";
+import { markets } from "@/lib/markets";
 import { statusLabel } from "@/lib/format";
 import { createMetadata } from "@/lib/seo";
 
@@ -37,13 +36,12 @@ export const metadata = createMetadata({
 });
 
 export default async function HomePage() {
-  const [featuredProperties, featuredDevelopers, articles, mapPins, locations] = await Promise.all([
+  const [featuredProperties, featuredDevelopers, articles, mapPins] = await Promise.all([
     getFeaturedProperties(6),
     getFeaturedDevelopers(),
     getArticles(),
     getMapDevelopments(),
-    getLocations(),
-  ]).catch(() => [[], [], [], [], []] as const);
+  ]).catch(() => [[], [], [], []] as const);
 
   return (
     <PublicShell transparentHeader>
@@ -53,16 +51,16 @@ export default async function HomePage() {
           alt="A landscaped plaza at a contemporary residential development"
           className="absolute inset-0 h-full w-full object-cover ken-burns"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-charcoal/25" />
+        <div className="absolute inset-0 bg-charcoal/55" />
         <div className="relative flex min-h-[100dvh] flex-col justify-end px-4 pb-16 pt-32 sm:px-6 md:px-16 md:pb-28 md:pt-40">
-          <p className="text-[11px] uppercase tracking-[0.32em] text-sand">MatriBhumi</p>
-          <h1 className="font-display mt-4 max-w-4xl text-[2.15rem] leading-[1.05] text-ivory sm:text-5xl md:mt-5 md:text-8xl md:leading-[0.92]">
+          <p className="text-[11px] uppercase tracking-[0.32em] text-sand">Independent property advisory</p>
+          <h1 className="font-display mt-5 max-w-4xl text-[2.2rem] leading-[1.05] text-ivory sm:text-5xl md:mt-6 md:text-7xl lg:text-8xl md:leading-[0.94]">
             {siteConfig.tagline}
           </h1>
-          <p className="mt-5 max-w-xl text-base leading-7 text-ivory/80 sm:mt-6 sm:text-lg sm:leading-8">
+          <p className="mt-6 max-w-xl text-base leading-7 text-ivory/82 sm:mt-7 sm:text-lg sm:leading-8">
             {siteConfig.supporting}
           </p>
-          <div className="mt-8 flex w-full flex-col gap-3 sm:mt-10 sm:w-auto sm:flex-row sm:flex-wrap sm:gap-4">
+          <div className="mt-9 flex w-full flex-col gap-3 sm:mt-10 sm:w-auto sm:flex-row sm:flex-wrap sm:gap-4">
             <Button href="/advise" variant="invert" size="lg" className="w-full sm:w-auto">
               {buyerCtas.talkToAdvisor}
             </Button>
@@ -74,65 +72,63 @@ export default async function HomePage() {
             >
               {buyerCtas.findMyProperty}
             </Button>
-            <WaitlistButton variant="ghost" size="lg" className="w-full sm:w-auto" />
-            <BrochureButton
-              variant="ghost"
-              size="lg"
-              className="w-full sm:w-auto"
-            />
           </div>
+          <CountrySelector tone="on-dark" label="Choose a market" className="mt-10" />
         </div>
       </section>
 
-      <section className="px-4 py-16 sm:px-6 md:px-12 md:py-20">
+      <section className="px-4 py-20 sm:px-6 md:px-12 md:py-28">
         <SectionHeader
           eyebrow="What MatriBhumi does"
           title="Independent property advisory and transaction coordination."
-          description="MatriBhumi is an independent property advisor and transaction partner. We help buyers find suitable properties, work with participating developers, and coordinate the journey. You do not pay MatriBhumi a fee."
+          description="MatriBhumi is an independent property advisor. We help buyers find suitable properties, work with participating developers, and coordinate the journey. You do not pay MatriBhumi a fee."
         />
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="mt-14 grid gap-8 md:grid-cols-3">
           {whatWeDo.map((item) => (
-            <article key={item.title} className="border border-charcoal/10 bg-paper p-8">
-              <h3 className="font-display text-3xl">{item.title}</h3>
+            <article key={item.title} className="advisory-card p-8 md:p-10">
+              <div className="section-rule" />
+              <h3 className="font-display mt-6 text-3xl">{item.title}</h3>
               <p className="mt-4 text-sm leading-7 text-muted">{item.body}</p>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="bg-mist px-4 py-16 sm:px-6 md:px-12 md:py-20">
+      <section className="bg-mist px-4 py-20 sm:px-6 md:px-12 md:py-28">
         <SectionHeader
-          eyebrow="Bangladesh"
-          title="Explore Bangladesh by city."
-          description="Selected developer properties in Dhaka, Chattogram, and other Bangladesh cities as data is published."
+          eyebrow="Markets"
+          title="Bangladesh, the UAE and Malaysia."
+          description="Choose a market to see how we advise there. Selected developments appear as developer partnerships are published."
         />
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {locations.map((location) => (
-            <Link key={location.id} href={`/locations/${location.slug}`} className="group relative min-h-[280px] overflow-hidden">
+        <div className="mt-14 grid gap-6 md:grid-cols-3">
+          {markets.map((market) => (
+            <Link key={market.slug} href={`/locations/${market.slug}`} className="group relative min-h-[320px] overflow-hidden">
               <img
-                src={location.heroImage}
+                src={market.heroImage}
                 alt=""
-                className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
               />
               <div className="absolute inset-0 bg-charcoal/45" />
-              <div className="relative flex h-full flex-col justify-end p-6 text-ivory">
-                <p className="text-[11px] uppercase tracking-[0.2em] text-sand">{location.country}</p>
-                <h3 className="font-display mt-2 text-4xl">{location.city}</h3>
-                <p className="mt-2 text-sm text-ivory/80">{location.name}</p>
+              <div className="relative flex h-full min-h-[320px] flex-col justify-end p-7 text-ivory">
+                <p className="text-[11px] uppercase tracking-[0.2em] text-sand">{market.region}</p>
+                <h3 className="font-display mt-2 text-4xl">{market.shortName}</h3>
+                <p className="mt-3 max-w-sm text-sm leading-6 text-ivory/80">
+                  {market.cities.map((city) => city.name).join(" · ")}
+                </p>
               </div>
             </Link>
           ))}
         </div>
       </section>
 
-      <section className="px-4 py-16 sm:px-6 md:px-12 md:py-24">
+      <section className="px-4 py-20 sm:px-6 md:px-12 md:py-28">
         <SectionHeader
-          eyebrow="Featured properties"
-          title="Selected listings, listed through MatriBhumi."
+          eyebrow="Selected developments"
+          title="Properties from participating developers."
           description="These homes are offered by participating developers. MatriBhumi is the advisor and coordinator, not the seller, unless a listing is marked MatriBhumi-owned."
         />
         {featuredProperties.length ? (
-          <div className="mt-12 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-14 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
             {featuredProperties.map((property) => (
               <PropertyCard key={property.id} property={property} />
             ))}
@@ -140,20 +136,20 @@ export default async function HomePage() {
         ) : (
           <p className="mt-10 text-muted">Featured listings appear here as published properties are marked featured.</p>
         )}
-        <Button href="/properties" variant="outline" className="mt-10">
+        <Button href="/properties" variant="outline" className="mt-12">
           {buyerCtas.findMyProperty}
         </Button>
       </section>
 
-      <section className="bg-charcoal px-4 py-16 text-ivory sm:px-6 md:px-12 md:py-24">
+      <section className="bg-charcoal px-4 py-20 text-ivory sm:px-6 md:px-12 md:py-28">
         <SectionHeader
-          eyebrow="Featured developers"
-          title="Selected developers we work with."
+          eyebrow="Developers"
+          title="A curated developer network."
           description="Public developer profiles appear when a participating partner is published. We do not invent relationships."
           light
         />
         {featuredDevelopers.length ? (
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {featuredDevelopers.map((developer) => {
               const name = publicDeveloperName(developer);
               if (!name) return null;
@@ -177,92 +173,69 @@ export default async function HomePage() {
         ) : (
           <p className="mt-10 max-w-2xl text-ivory/70">
             Featured developer profiles will appear here when participating partners are published. Until then, browse
-            properties listed through MatriBhumi.
+            selected developments or talk to an advisor.
           </p>
         )}
-        <Button href="/developers" variant="outline" className="mt-10 border-ivory/40 text-ivory hover:bg-ivory hover:text-charcoal">
+        <Button href="/developers" variant="outline" className="mt-12 border-ivory/40 text-ivory hover:bg-ivory hover:text-charcoal">
           All developers
         </Button>
       </section>
 
-      <section className="px-4 py-16 sm:px-6 md:px-12 md:py-24">
+      <section className="px-4 py-20 sm:px-6 md:px-12 md:py-28">
         <SectionHeader
           eyebrow="How MatriBhumi works"
-          title="Six steps from first conversation to a developer purchase."
+          title="From first conversation to a developer purchase."
           description="You complete the purchase directly with the developer. MatriBhumi coordinates the process."
         />
         <HowItWorksSteps />
-        <Button href="/how-it-works" variant="outline" className="mt-10">
+        <Button href="/how-it-works" variant="outline" className="mt-12">
           How it works
         </Button>
       </section>
 
-      <section className="bg-mist px-4 py-16 sm:px-6 md:px-12 md:py-24">
+      <section className="bg-mist px-4 py-20 sm:px-6 md:px-12 md:py-28">
         <SectionHeader
-          eyebrow="Why buyers use MatriBhumi"
-          title="Independent advice, then a coordinated introduction."
+          eyebrow="Trust"
+          title="Why buyers choose MatriBhumi"
           description={siteConfig.audience}
         />
-        <div className="mt-12 grid gap-px bg-charcoal/10 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-px bg-charcoal/10 md:grid-cols-2 lg:grid-cols-4">
           {whyMatriBhumi.map((item) => (
-            <article key={item.title} className="bg-ivory p-8">
-              <h3 className="font-display text-2xl">{item.title}</h3>
+            <article key={item.title} className="bg-ivory p-8 md:p-9">
+              <div className="section-rule" />
+              <h3 className="font-display mt-5 text-2xl leading-snug">{item.title}</h3>
               <p className="mt-3 text-sm leading-7 text-muted">{item.body}</p>
             </article>
           ))}
         </div>
       </section>
 
+      <BuyerFeeHighlight />
       <HowWeArePaid />
 
-      <section className="bg-mist px-4 py-16 sm:px-6 md:px-12 md:py-24">
-        <SectionHeader
-          eyebrow="For buyers"
-          title="Services offered to buyers."
-          description="Property advisory, buying assistance, and viewing coordination — with no buyer fee."
-        />
-        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {buyerServices.map((item) => (
-            <article key={item.title} className="bg-ivory p-6">
-              <h3 className="font-display text-2xl">{item.title}</h3>
-              <p className="mt-3 text-sm leading-7 text-muted">{item.body}</p>
-            </article>
-          ))}
+      <section className="bg-charcoal px-4 py-20 text-ivory sm:px-6 md:px-12 md:py-28">
+        <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+          <SectionHeader
+            eyebrow="For developers"
+            title="Are you a property developer?"
+            description="Reach qualified buyers across Bangladesh, the UAE and Malaysia."
+            light
+          />
+          <div className="lg:justify-self-end">
+            <Button href="/for-developers" variant="invert" size="lg">
+              {developerCtas.partner}
+            </Button>
+          </div>
         </div>
       </section>
 
-      <section className="px-4 py-16 sm:px-6 md:px-12 md:py-24">
-        <SectionHeader
-          eyebrow="For developers"
-          title="Reach qualified buyers in Bangladesh."
-          description="Marketing, referrals, and transaction coordination. MatriBhumi does not promise guaranteed sales."
-        />
-        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-5">
-          {developerServices.map((item) => (
-            <article key={item.title} className="border border-charcoal/10 bg-paper p-5">
-              <h3 className="font-display text-xl">{item.title}</h3>
-              <p className="mt-3 text-sm leading-7 text-muted">{item.body}</p>
-            </article>
-          ))}
-        </div>
-        <Button href="/for-developers" className="mt-10">
-          For developers
-        </Button>
-      </section>
-
-      <section className="bg-mist px-4 py-16 sm:px-6 md:px-12 md:py-24">
+      <section className="bg-mist px-4 py-20 sm:px-6 md:px-12 md:py-28">
         <SectionHeader
           eyebrow="Locations"
-          title="Discover properties by city."
-          description="Select a development and the map moves to it. Listings are in Bangladesh: Dhaka, Chattogram, and other cities as data is published."
+          title="Properties on the map."
+          description="Select a development and the map moves to it. Published listings are in Bangladesh today; UAE and Malaysia pages are advisory surfaces as partnerships are confirmed."
         />
-        <div className="mt-8 flex flex-wrap gap-3">
-          {countryNav.map((item) => (
-            <Button key={item.href} href={item.href} variant="outline">
-              {item.label}
-            </Button>
-          ))}
-        </div>
+        <CountrySelector label="Published markets on the map" className="mt-10" />
         <div className="mt-12">
           <PresenceMap
             pins={mapPins.map((pin) => ({
@@ -284,20 +257,20 @@ export default async function HomePage() {
 
       <DiasporaFaq />
 
-      <section className="px-4 py-16 sm:px-6 md:px-12 md:py-24">
+      <section className="px-4 py-20 sm:px-6 md:px-12 md:py-28">
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <SectionHeader eyebrow="Insights" title="Notes from the market and the street." />
           <Button href="/insights" variant="outline" className="w-full sm:w-auto">
             All insights
           </Button>
         </div>
-        <div className="mt-12 grid gap-8 md:grid-cols-3">
+        <div className="mt-14 grid gap-10 md:grid-cols-3">
           {articles.slice(0, 3).map((article) => (
             <Link key={article.id} href={`/insights/${article.slug}`} className="group">
               <div className="aspect-[16/10] overflow-hidden bg-stone">
-                <img src={article.coverImage} alt="" className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+                <img src={article.coverImage} alt="" className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]" />
               </div>
-              <p className="mt-4 text-[11px] uppercase tracking-[0.2em] text-earth">
+              <p className="mt-5 text-[11px] uppercase tracking-[0.2em] text-earth">
                 {statusLabel(article.category)}
               </p>
               <h3 className="font-display mt-2 text-2xl leading-tight group-hover:text-moss">{article.title}</h3>
@@ -306,11 +279,11 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="bg-charcoal px-4 py-16 text-ivory sm:px-6 md:px-12 md:py-24">
+      <section className="bg-charcoal px-4 py-20 text-ivory sm:px-6 md:px-12 md:py-28">
         <SectionHeader
           eyebrow="Start a conversation"
-          title="Talk to a property advisor."
-          description="Tell us the city in Bangladesh, the kind of home, and how you will use it. There is no buyer fee for this conversation."
+          title="Talk to an advisor."
+          description="Tell us the market, the kind of home, and how you will use it. There is no buyer fee for this conversation."
           light
         />
         <div className="mt-10 flex flex-col gap-3 sm:flex-row">

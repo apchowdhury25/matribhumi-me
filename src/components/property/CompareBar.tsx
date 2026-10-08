@@ -7,7 +7,7 @@ export function CompareBar() {
   const { ids, clear } = useCompare();
   if (!ids.length) return null;
   return (
-    <div className="fixed inset-x-3 z-30 flex flex-wrap items-center justify-between gap-3 border border-charcoal/10 bg-charcoal px-4 py-3 text-ivory shadow-lift sm:inset-x-auto sm:left-1/2 sm:-translate-x-1/2 sm:gap-4 sm:px-5 bottom-[calc(5.75rem+env(safe-area-inset-bottom))] sm:bottom-4">
+    <div className="fixed inset-x-3 z-30 flex flex-wrap items-center justify-between gap-3 border border-charcoal/10 bg-charcoal px-4 py-3 text-ivory shadow-lift sm:inset-x-auto sm:left-1/2 sm:-translate-x-1/2 sm:gap-4 sm:px-5 bottom-[calc(5.25rem+env(safe-area-inset-bottom))] md:bottom-4">
       <p className="text-[11px] uppercase tracking-[0.18em]">
         {ids.length} selected to compare
       </p>

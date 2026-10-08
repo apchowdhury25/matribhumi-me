@@ -6,7 +6,7 @@ export type MarketCity = {
 };
 
 export type Market = {
-  slug: "bangladesh";
+  slug: "bangladesh" | "uae" | "malaysia";
   name: string;
   shortName: string;
   country: string;
@@ -17,6 +17,7 @@ export type Market = {
   description: string;
   intro: string;
   cities: readonly MarketCity[];
+  listingsPublished: boolean;
 };
 
 export const markets = [
@@ -30,14 +31,53 @@ export const markets = [
     heroImage: "/media/location-dhaka.jpg",
     seoTitle: "Bangladesh property advisor",
     description:
-      "Independent Bangladesh property advisor and consultant for local buyers, NRBs, and Bangladeshis living abroad. Compare selected developer properties in Bangladesh and coordinate viewings — with no buyer fee.",
+      "Independent property guidance in Bangladesh. Explore selected developments, compare options, and coordinate your purchase with a MatriBhumi advisor — with no buyer fee.",
     intro:
-      "MatriBhumi helps buyers compare new-development and selected developer properties in Bangladesh, then coordinates introductions and viewings. The purchase agreement is with the developer or seller.",
+      "MatriBhumi helps buyers compare selected developer properties in Bangladesh, then coordinates introductions and viewings. The purchase agreement is with the developer or seller.",
     cities: [
       { name: "Dhaka", slug: "dhaka" },
       { name: "Chattogram", slug: "chattogram" },
       { name: "Bashundhara", slug: "bashundhara" },
     ],
+    listingsPublished: true,
+  },
+  {
+    slug: "uae",
+    name: "United Arab Emirates",
+    shortName: "UAE",
+    country: "United Arab Emirates",
+    countryAliases: ["UAE", "United Arab Emirates"],
+    region: "Middle East",
+    heroImage: "/media/hero-night.jpg",
+    seoTitle: "UAE property advisor",
+    description:
+      "Independent property guidance in the UAE. Share your requirements with a MatriBhumi advisor. Selected developments appear here as developer partnerships are published — with no buyer fee.",
+    intro:
+      "MatriBhumi advises buyers looking at the UAE and coordinates introductions when a participating developer is in place. We do not invent listings. The purchase agreement is with the developer or seller.",
+    cities: [
+      { name: "Dubai", slug: "dubai" },
+      { name: "Abu Dhabi", slug: "abu-dhabi" },
+    ],
+    listingsPublished: false,
+  },
+  {
+    slug: "malaysia",
+    name: "Malaysia",
+    shortName: "Malaysia",
+    country: "Malaysia",
+    countryAliases: ["Malaysia"],
+    region: "Southeast Asia",
+    heroImage: "/media/hero-nature.jpg",
+    seoTitle: "Malaysia property advisor",
+    description:
+      "Independent property guidance in Malaysia. Share your requirements with a MatriBhumi advisor. Selected developments appear here as developer partnerships are published — with no buyer fee.",
+    intro:
+      "MatriBhumi advises buyers looking at Malaysia and coordinates introductions when a participating developer is in place. We do not invent listings. The purchase agreement is with the developer or seller.",
+    cities: [
+      { name: "Kuala Lumpur", slug: "kuala-lumpur" },
+      { name: "Johor Bahru", slug: "johor-bahru" },
+    ],
+    listingsPublished: false,
   },
 ] as const satisfies readonly Market[];
 
@@ -67,4 +107,8 @@ export function countryFilterValues(countryOrSlug: string) {
 
 export function isOperatingCountry(country: string) {
   return country.trim().toLowerCase() === OPERATING_COUNTRY.toLowerCase();
+}
+
+export function marketHasPublicListings(slug: string) {
+  return getMarket(slug)?.listingsPublished === true;
 }

@@ -35,6 +35,12 @@ export const buyerFeeNote =
 export const buyerJourneyFeeMessage =
   "MatriBhumi does not charge buyers a property brokerage or consultation fee. Where applicable, MatriBhumi is compensated by participating developers under separate agreements.";
 
+/** Marketing headline. Keep legal disclosure copy in HowWeArePaid / buyerFeeNote. */
+export const buyerFeeHeadline = "Your property search doesn't come with a MatriBhumi fee.";
+
+export const buyerFeeMarketing =
+  "MatriBhumi does not charge buyers a brokerage or consultation fee for our core property advisory service. Where applicable, we are compensated by participating developers under separate commercial arrangements.";
+
 export const advisorFollowUpMessage =
   "Your MatriBhumi property advisor will review your requirements and contact you.";
 

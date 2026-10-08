@@ -14,7 +14,7 @@ test("pre-launch homepage, waitlist, and brochure", async ({ page }) => {
   await expect(page.getByRole("link", { name: "LinkedIn" })).toBeVisible();
   await expect(page.getByRole("link", { name: "WhatsApp" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "For buyers living in two places: frequently asked questions" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Independent advice, then a coordinated introduction." }).first()).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Why buyers choose MatriBhumi" }).first()).toBeVisible();
   await expect(page.getByText(/independent property advisor/i).first()).toBeVisible();
 
   await page.getByRole("button", { name: "Join Waitlist" }).first().click();
