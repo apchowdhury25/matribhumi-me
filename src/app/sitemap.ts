@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site";
+import { publicVisibilityWhere } from "@/lib/demo-inventory";
 import { prisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
@@ -12,11 +13,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let jobs: { slug: string; updatedAt: Date }[] = [];
   try {
     [properties, developments, locations, articles, jobs] = await Promise.all([
-      prisma.property.findMany({ where: { published: true, location: { country: "Bangladesh" } }, select: { slug: true, updatedAt: true } }),
-      prisma.development.findMany({ where: { published: true, location: { country: "Bangladesh" } }, select: { slug: true, updatedAt: true } }),
+      prisma.property.findMany({ where: { ...publicVisibilityWhere(), location: { country: "Bangladesh" } }, select: { slug: true, updatedAt: true } }),
+      prisma.development.findMany({ where: { ...publicVisibilityWhere(), location: { country: "Bangladesh" } }, select: { slug: true, updatedAt: true } }),
       prisma.location.findMany({ where: { country: "Bangladesh" }, select: { slug: true, updatedAt: true } }),
-      prisma.newsArticle.findMany({ where: { published: true }, select: { slug: true, updatedAt: true } }),
-      prisma.job.findMany({ where: { published: true }, select: { slug: true, updatedAt: true } }),
+      prisma.newsArticle.findMany({ where: publicVisibilityWhere(), select: { slug: true, updatedAt: true } }),
+      prisma.job.findMany({ where: publicVisibilityWhere(), select: { slug: true, updatedAt: true } }),
     ]);
   } catch {
     /* Build hosts may not inject DATABASE_URL into every worker. */

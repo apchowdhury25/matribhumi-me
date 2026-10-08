@@ -33,6 +33,7 @@ export default async function AdminDevelopmentsPage() {
         <input name="heroImage" defaultValue="/media/hero-plaza.jpg" className="h-11 border border-charcoal/15 px-3 text-sm" />
         <input name="completion" placeholder="2028" className="h-11 border border-charcoal/15 px-3 text-sm" />
         <input name="startingPrice" placeholder="180000" className="h-11 border border-charcoal/15 px-3 text-sm" />
+        <input name="currency" defaultValue="BDT" className="h-11 border border-charcoal/15 px-3 text-sm" />
         <select name="locationId" className="h-11 border border-charcoal/15 px-3 text-sm">
           {locations.map((l) => <option key={l.id} value={l.id}>{l.name}</option>)}
         </select>
@@ -40,6 +41,7 @@ export default async function AdminDevelopmentsPage() {
           {developers.map((d) => <option key={d.id} value={d.id}>{d.name}</option>)}
         </select>
         <label className="text-sm"><input type="checkbox" name="published" defaultChecked /> Published</label>
+        <label className="text-sm"><input type="checkbox" name="demo" /> Demo/test development</label>
         <label className="text-sm"><input type="checkbox" name="matribhumiOwned" /> MatriBhumi-owned</label>
         <button className="h-11 bg-charcoal text-[11px] uppercase tracking-[0.18em] text-ivory">Create</button>
       </form>

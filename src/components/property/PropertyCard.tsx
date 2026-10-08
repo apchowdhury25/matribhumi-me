@@ -5,6 +5,7 @@ import { CompareToggle } from "@/components/property/CompareToggle";
 import { Button } from "@/components/ui/button";
 import { isVerifiedDeveloper, publicDeveloperName } from "@/lib/developer";
 import { buyerCtas } from "@/config/ctas";
+import { DemoInventoryBadge } from "@/components/site/DemoInventoryNotice";
 
 export type PropertyCardData = {
   id: string;
@@ -22,6 +23,7 @@ export type PropertyCardData = {
   location: { name: string; city: string; country: string };
   developer?: { name: string; published: boolean; verified?: boolean } | null;
   matribhumiOwned?: boolean;
+  demo?: boolean;
 };
 
 export function PropertyCard({
@@ -40,12 +42,19 @@ export function PropertyCard({
         <img
           src={property.heroImage}
           alt={property.name}
+          loading="lazy"
+          decoding="async"
           className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
         />
       </Link>
       <span className="absolute left-4 top-4 bg-ivory/92 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-charcoal">
         {statusLabel(property.status)}
       </span>
+      {property.demo ? (
+        <span className="absolute left-4 top-12">
+          <DemoInventoryBadge />
+        </span>
+      ) : null}
       <div className="absolute right-3 top-3 flex gap-2">
         <FavoriteButton propertyId={property.id} />
         <CompareToggle propertyId={property.id} />

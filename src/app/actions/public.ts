@@ -94,7 +94,7 @@ export async function submitAdvisory(_prev: State, formData: FormData): Promise<
     preferredCity: formData.get("preferredCity"),
     propertyType: formData.get("propertyType"),
     budget: formData.get("budget"),
-    currency: formData.get("currency") || "USD",
+    currency: formData.get("currency") || "BDT",
     bedrooms: formData.get("bedrooms"),
     purpose: formData.get("purpose"),
     timeline: formData.get("timeline"),
@@ -349,7 +349,7 @@ export async function submitWaitlist(_prev: State, formData: FormData): Promise<
     to: siteConfig.salesEmail,
     replyTo: parsed.data.email,
     subject: `Waitlist: ${parsed.data.name}`,
-    text: `${parsed.data.name} (${parsed.data.email}, ${phone}, ${country.country}) joined the pre-launch waitlist.\nInterest: ${parsed.data.interest}\nDevelopment: ${parsed.data.project ?? "General portfolio"}`,
+    text: `${parsed.data.name} (${parsed.data.email}, ${phone}, ${country.country}) joined the waitlist.\nInterest: ${parsed.data.interest}\nDevelopment: ${parsed.data.project ?? "Selected developer projects"}`,
   });
 
   return { ok: true, error: "" };

@@ -36,6 +36,7 @@ export default async function PropertyFormPage({ params }: { params: Promise<{ i
         {["UPCOMING","LAUNCHED","UNDER_CONSTRUCTION","READY","SOLD_OUT"].map((t) => <option key={t}>{t}</option>)}
       </select>
       <Field name="startingPrice" label="Starting price" defaultValue={property?.startingPrice?.toString()} />
+      <Field name="currency" label="Currency" defaultValue={property?.currency ?? "BDT"} />
       <Field name="bedroomsMin" label="Beds min" defaultValue={property?.bedroomsMin} />
       <Field name="bedroomsMax" label="Beds max" defaultValue={property?.bedroomsMax} />
       <Field name="bathroomsMin" label="Baths min" defaultValue={property?.bathroomsMin} />
@@ -56,6 +57,7 @@ export default async function PropertyFormPage({ params }: { params: Promise<{ i
       </select>
       <label className="flex gap-2 text-sm"><input type="checkbox" name="published" defaultChecked={property?.published ?? true} /> Published</label>
       <label className="flex gap-2 text-sm"><input type="checkbox" name="featured" defaultChecked={property?.featured ?? false} /> Featured</label>
+      <label className="flex gap-2 text-sm"><input type="checkbox" name="demo" defaultChecked={property?.demo ?? false} /> Demo/test listing (hidden on the public site in production)</label>
       <label className="flex gap-2 text-sm"><input type="checkbox" name="matribhumiOwned" defaultChecked={property?.matribhumiOwned ?? false} /> MatriBhumi-owned</label>
       <button className="h-11 bg-charcoal text-[11px] uppercase tracking-[0.18em] text-ivory">Save</button>
     </form>

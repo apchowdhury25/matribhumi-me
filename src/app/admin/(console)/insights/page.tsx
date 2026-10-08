@@ -23,6 +23,7 @@ export default async function AdminInsightsPage() {
           {["NEWS","PROJECT_UPDATES","ARCHITECTURE","DESIGN","SUSTAINABILITY","MARKET_INSIGHTS","LIFESTYLE"].map((c) => <option key={c}>{c}</option>)}
         </select>
         <label className="text-sm"><input type="checkbox" name="published" defaultChecked /> Published</label>
+        <label className="text-sm"><input type="checkbox" name="demo" /> Demo/test article</label>
         <button className="h-11 bg-charcoal text-[11px] uppercase tracking-[0.18em] text-ivory">Publish</button>
       </form>
     </div>

@@ -6,7 +6,6 @@ test("pre-launch homepage, waitlist, and brochure", async ({ page }) => {
   await expect(page.getByRole("button", { name: "Download Brochure" }).first()).toBeVisible();
   await expect(page.getByRole("button", { name: "Join Waitlist" }).first()).toBeVisible();
   await expect(page.getByText(/fictional/i)).toHaveCount(0);
-  await expect(page.getByText(/demonstration/i)).toHaveCount(0);
   await expect(page.getByText("Social channels will appear")).toHaveCount(0);
   await expect(page.getByText("House 12, Road 7").first()).toBeVisible();
   await expect(page.getByRole("link", { name: "+880 1700 000000" })).toBeVisible();
@@ -36,7 +35,7 @@ test("pre-launch homepage, waitlist, and brochure", async ({ page }) => {
   await brochure.getByLabel("Email").fill("asha@example.com");
   await brochure.getByRole("checkbox").check();
   await brochure.getByRole("button", { name: "Download Brochure" }).click();
-  await expect(brochure.getByRole("heading", { name: "Your portfolio is on its way." })).toBeVisible();
+  await expect(brochure.getByRole("heading", { name: "Your brochure is on its way." })).toBeVisible();
 });
 
 test("selecting a development moves the Google map", async ({ page }) => {

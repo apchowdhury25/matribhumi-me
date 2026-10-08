@@ -1,3 +1,4 @@
+/** Residence phone dial codes for buyers living abroad. These are not public property markets. */
 export const countryCodes = [
   { id: "BD", dial: "+880", country: "Bangladesh" },
   { id: "AE", dial: "+971", country: "United Arab Emirates" },

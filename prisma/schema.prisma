@@ -333,6 +333,7 @@ model Development {
   featured     Boolean              @default(false)
   signature    Boolean              @default(false)
   published    Boolean              @default(true)
+  demo         Boolean              @default(false)
   matribhumiOwned Boolean           @default(false)
   latitude     Float
   longitude    Float
@@ -351,6 +352,8 @@ model Development {
   @@index([status])
   @@index([category])
   @@index([featured])
+  @@index([published])
+  @@index([demo])
 }
 
 model Property {
@@ -379,6 +382,7 @@ model Property {
   longitude      Float
   featured       Boolean           @default(false)
   published      Boolean           @default(true)
+  demo           Boolean           @default(false)
   matribhumiOwned Boolean          @default(false)
   whyThisProperty String?
   lifestyle      String?
@@ -407,6 +411,7 @@ model Property {
   @@index([startingPrice])
   @@index([published])
   @@index([featured])
+  @@index([demo])
   @@index([bedroomsMin])
 }
 
@@ -713,6 +718,7 @@ model NewsArticle {
   author      User            @relation(fields: [authorId], references: [id])
   readingTime Int
   published   Boolean         @default(true)
+  demo        Boolean         @default(false)
   publishedAt DateTime        @default(now())
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
@@ -720,6 +726,7 @@ model NewsArticle {
   @@index([category])
   @@index([publishedAt])
   @@index([published])
+  @@index([demo])
 }
 
 model Job {
@@ -732,12 +739,14 @@ model Job {
   description  String
   requirements String
   published    Boolean          @default(true)
+  demo         Boolean          @default(false)
   applications JobApplication[]
   createdAt    DateTime         @default(now())
   updatedAt    DateTime         @updatedAt
 
   @@index([department])
   @@index([published])
+  @@index([demo])
 }
 
 model JobApplication {

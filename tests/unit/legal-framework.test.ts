@@ -48,7 +48,7 @@ describe("canonical buyer-fee disclosure", () => {
 describe("how we work and transaction flows", () => {
   it("states the Bangladesh advisory role and purchase agreement", () => {
     expect(howWeWork.summary).toBe(
-      "MatriBhumi helps buyers discover and compare selected properties from participating developers and coordinates introductions, viewings and transaction-related communication.",
+      "MatriBhumi helps buyers find and evaluate properties from participating developers in Bangladesh and coordinates the buyer’s interaction with the developer.",
     );
     expect(howWeWork.purchaseAgreement).toBe(
       "The property purchase agreement is between the buyer and the relevant developer/seller.",

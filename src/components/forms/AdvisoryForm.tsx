@@ -66,7 +66,7 @@ export function AdvisoryForm({
         <Field name="budget" label="Budget" required />
         <label className="grid gap-2 text-[11px] uppercase tracking-[0.18em] text-earth">
           Currency
-          <select name="currency" defaultValue="USD" className="h-12 w-full border border-charcoal/15 bg-paper px-3 text-base text-charcoal">
+          <select name="currency" defaultValue="BDT" className="h-12 w-full border border-charcoal/15 bg-paper px-3 text-base text-charcoal">
             {currencies.map((code) => (
               <option key={code}>{code}</option>
             ))}

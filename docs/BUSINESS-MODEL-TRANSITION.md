@@ -11,16 +11,16 @@ Public presentation is Bangladesh-only. `/locations/uae` and `/locations/malaysi
 - Property information may change and is not a guarantee. No investment promises. Independent legal, tax, financial, and financing advice is recommended.
 - Public APIs keep using `publicDeveloperSelect` and `stripConfidential`. `/api/upload` requires a staff session. Compensation remains ADMIN-only.
 
-## Step 7 — premium international advisory presentation
+## Step 7 — premium advisory presentation (later limited to Bangladesh)
 
-Redesign the public visual presentation so MatriBhumi reads as a premium international property advisory and brokerage — not a property developer or a construction company.
+Redesign the public visual presentation so MatriBhumi reads as a premium property advisory — not a property developer or a construction company. Step 8 restored Bangladesh-only public coordination; former `/locations/uae` and `/locations/malaysia` URLs permanently redirect to `/locations`.
 
-- Hero: “Find the right property. We coordinate the rest.” Supporting copy covers Bangladesh, the UAE and Malaysia. Primary CTA “Talk to an Advisor”; secondary “Explore Properties”; country selector for the three markets.
+- Hero: “Find the right property. We coordinate the rest.” Supporting copy covers Bangladesh. Primary CTA “Talk to an Advisor”; secondary “Explore Properties”; country selector for Bangladesh locations.
 - Property cards lead with project name, city/country, developer (when `publicDeveloperName` returns a value), starting price, “View Property”, and “Talk to Advisor”. No “MatriBhumi Property” or “Listed through MatriBhumi” label.
-- Trust section “Why buyers choose MatriBhumi”: independent guidance, curated developer network, cross-border support, one point of coordination, transparent buyer-fee policy, property comparison, viewing coordination, developer introductions.
+- Trust section “Why buyers choose MatriBhumi”: independent guidance, curated developer network, support from abroad, one point of coordination, transparent buyer-fee policy, property comparison, viewing coordination, developer introductions.
 - Buyer-fee marketing headline and copy live in `buyerFeeHeadline` / `buyerFeeMarketing`. Legal disclosure stays in How MatriBhumi is paid / `buyerFeeNote`.
-- Developer B2B: “Are you a property developer?” / “Reach qualified buyers across Bangladesh, the UAE and Malaysia.” CTA “Partner with MatriBhumi”.
-- `/locations/uae` and `/locations/malaysia` are restored as advisory market pages. Public catalogue listings remain Bangladesh-only until real partnerships exist (`listingsPublished`). No invented developers or listings.
+- Developer B2B: “Are you a property developer?” / “Reach qualified buyers looking at selected Bangladesh developments.” CTA “Partner with MatriBhumi”.
+- Public catalogue listings remain Bangladesh-only until real partnerships exist. No invented developers or listings.
 - Mobile WhatsApp + advisor bar sits above the safe area and does not cover compare controls. Existing URLs are unchanged.
 
 ## Step 6 — advisory CRM

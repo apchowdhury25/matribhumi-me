@@ -50,6 +50,7 @@ test("properties search and filter", async ({ page }) => {
 test("property detail and inquiry", async ({ page }) => {
   await page.goto("/properties/heights-residences");
   await expect(page.getByRole("heading", { name: "Heights Residences" })).toBeVisible();
+  await expect(page.getByText("Demonstration listing").first()).toBeVisible();
   await expect(page.getByText("Unpublished partner")).toHaveCount(0);
   await expect(page.getByText("MatriBhumi Developments")).toHaveCount(0);
   await page.locator("#inquire input[name=name]").fill("Asha Rahman");

@@ -23,14 +23,14 @@ export function brochureDownloadUrl() {
 export function brochureEmail(fullName: string) {
   const firstName = firstNameFrom(fullName);
   const downloadUrl = brochureDownloadUrl();
-  const subject = "Your MatriBhumi curated portfolio & brochure";
+  const subject = "Your MatriBhumi property brochure";
   const text = `Dear ${firstName},
 
 Thank you for your interest in MatriBhumi. Enclosed is a brochure of selected projects from participating developers in Bangladesh — including Dhaka, Chattogram, and Bashundhara.
 
 ${downloadUrl}
 
-MatriBhumi is your independent property advisor and transaction partner. We help you compare developer projects and coordinate introductions, viewings, and follow-up. There is no brokerage, consultation, or property-search fee for the buyer. The participating developer is the seller.
+MatriBhumi helps buyers find and evaluate properties from participating developers in Bangladesh and coordinates the buyer’s interaction with the developer. ${buyerFeeDisclosure} The participating developer is the seller.
 
 Because you have downloaded the brochure, we will keep you on the list for floor plans and viewing slots as they are released.
 
@@ -70,7 +70,7 @@ www.matribhumi.me`;
             </tr>
             <tr>
               <td style="padding-top:28px;font-family:Georgia,serif;font-size:16px;line-height:1.7;color:#2c2a26;">
-                MatriBhumi is your independent property advisor and transaction partner. We help you compare developer projects and coordinate introductions, viewings, and follow-up. There is no brokerage, consultation, or property-search fee for the buyer. The participating developer is the seller.
+                MatriBhumi helps buyers find and evaluate properties from participating developers in Bangladesh and coordinates the buyer’s interaction with the developer. ${escapeHtml(buyerFeeDisclosure)} The participating developer is the seller.
               </td>
             </tr>
             <tr>

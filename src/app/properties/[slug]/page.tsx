@@ -17,6 +17,7 @@ import { buyerCtas } from "@/config/ctas";
 import { propertySourceDisclosure } from "@/config/businessModel";
 import { BuyerFeeNotice } from "@/components/site/BuyerFeeNotice";
 import { ProfessionalAdviceNotice } from "@/components/site/ProfessionalAdviceNotice";
+import { DemoInventoryNotice } from "@/components/site/DemoInventoryNotice";
 
 export const dynamic = "force-dynamic";
 
@@ -29,6 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description: property.description.slice(0, 160),
     path: `/properties/${property.slug}`,
     image: property.heroImage,
+    noIndex: property.demo,
   });
 }
 
@@ -116,6 +118,7 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
 
       <section className="grid gap-12 px-4 py-14 sm:px-6 md:px-12 md:py-20 lg:grid-cols-[1.4fr_0.8fr]">
         <div>
+          {property.demo ? <div className="mb-8"><DemoInventoryNotice kind="listing" /></div> : null}
           <p className="text-[11px] uppercase tracking-[0.22em] text-earth">Overview</p>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-muted">{property.description}</p>
           <dl className="mt-8 grid grid-cols-2 gap-6 text-sm md:grid-cols-3">

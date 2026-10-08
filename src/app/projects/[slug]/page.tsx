@@ -9,6 +9,7 @@ import { createMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/site/JsonLd";
 import { formatPrice, statusLabel } from "@/lib/format";
 import { ownershipLabel } from "@/lib/developer";
+import { DemoInventoryNotice } from "@/components/site/DemoInventoryNotice";
 
 export const dynamic = "force-dynamic";
 
@@ -21,6 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description: project.tagline,
     path: `/projects/${project.slug}`,
     image: project.heroImage,
+    noIndex: project.demo,
   });
 }
 
@@ -51,6 +53,11 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           </div>
         </div>
       </section>
+      {project.demo ? (
+        <section className="px-4 pt-10 sm:px-6 md:px-12">
+          <DemoInventoryNotice kind="development" />
+        </section>
+      ) : null}
       <section className="grid gap-12 px-4 py-14 sm:px-6 md:px-12 md:py-20 lg:grid-cols-2">
         <div>
           <h2 className="font-display text-4xl">Architecture</h2>

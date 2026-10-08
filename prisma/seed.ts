@@ -105,7 +105,7 @@ async function main() {
         connectivity:
           "Sites sit near major roads, river crossings, and planned transit corridors.",
         opportunities:
-          "Infill districts, waterfront edges, and family communities in the pre-launch portfolio.",
+          "Infill districts, waterfront edges, and family communities among selected developer projects.",
         attractions: [
           { name: "River promenades", category: "Leisure" },
           { name: "Cultural districts", category: "Culture" },
@@ -125,7 +125,7 @@ async function main() {
         latitude: 22.3569,
         longitude: 91.7832,
         description: "Hills, harbour, and a slower coastal register of living.",
-        overview: "A setting for low-rise homes among trees and gardens, now in the pre-launch portfolio.",
+        overview: "A setting for low-rise homes among trees and gardens. Sample location copy for development only.",
         lifestyle: "Nature living, weekend markets, and harbour light.",
         connectivity: "Port, airport, and hill roads — illustrative only.",
         opportunities: "Villa communities and nature-edge housing studies.",
@@ -196,15 +196,15 @@ async function main() {
   const developments = await prisma.$transaction([
     prisma.development.create({
       data: {
-        name: "MatriBhumi Heights",
+        name: "Heights Tower",
         slug: "matribhumi-heights",
         tagline: "A vertical neighborhood above a planted plaza.",
         description:
-          "MatriBhumi Heights is an upcoming residential tower in Bashundhara, Dhaka — organised around a public podium, shared rooms, and apartments a short way from malls, golf, and district parks.",
+          "Heights Tower is a sample residential tower listing in Bashundhara, Dhaka — organised around a public podium, shared rooms, and apartments a short way from malls, golf, and district parks. Demonstration data only.",
         architecture:
           "Limestone and bronze-tinted glass, deep shading, and a planted crown. International design standards meeting local heritage.",
         lifestyle: "Urban living with gardens in the sky and Bashundhara’s malls, golf, and amusement parks on the same map.",
-        locationNote: "Bashundhara, Dhaka — pre-launch",
+        locationNote: "Bashundhara, Dhaka — demonstration listing",
         heroImage: "/media/project-heights.jpg",
         category: "RESIDENTIAL",
         propertyType: "APARTMENT",
@@ -213,6 +213,7 @@ async function main() {
         startingPrice: "180000",
         featured: true,
         signature: true,
+        demo: true,
         latitude: 23.821,
         longitude: 90.451,
         locationId: bashundhara.id,
@@ -222,14 +223,14 @@ async function main() {
     }),
     prisma.development.create({
       data: {
-        name: "MatriBhumi Riverside",
+        name: "Riverside Walk",
         slug: "matribhumi-riverside",
         tagline: "Homes that turn toward the water.",
         description:
-          "An upcoming waterfront district of terraced apartments, boardwalks, and rooms for gathering at the river's edge.",
+          "A sample waterfront district of terraced apartments, boardwalks, and rooms for gathering at the river's edge. Demonstration data only.",
         architecture: "Timber balconies, pale stone, and a public walk that never privatises the shore.",
         lifestyle: "Morning walks, evening light on water, everyday shops along the path.",
-        locationNote: "Buriganga edge, Dhaka — pre-launch",
+        locationNote: "Buriganga edge, Dhaka — demonstration listing",
         heroImage: "/media/project-riverside.jpg",
         category: "WATERFRONT",
         propertyType: "APARTMENT",
@@ -238,6 +239,7 @@ async function main() {
         startingPrice: "220000",
         featured: true,
         signature: true,
+        demo: true,
         latitude: 23.705,
         longitude: 90.411,
         locationId: dhaka.id,
@@ -251,10 +253,10 @@ async function main() {
         slug: "the-grove-residences",
         tagline: "Courtyard villas among existing trees.",
         description:
-          "An upcoming villa community in Chattogram, planned around retained forest patches and shared gardens.",
+          "A sample villa community in Chattogram, planned around retained forest patches and shared gardens. Demonstration data only.",
         architecture: "Rammed earth, timber, and metal roofs that sit low in the canopy.",
         lifestyle: "Nature living with room for extended family and quiet work.",
-        locationNote: "Hill edge, Chattogram — pre-launch",
+        locationNote: "Hill edge, Chattogram — demonstration listing",
         heroImage: "/media/project-grove.jpg",
         category: "VILLAS",
         propertyType: "VILLA",
@@ -263,6 +265,7 @@ async function main() {
         startingPrice: "410000",
         featured: true,
         signature: true,
+        demo: true,
         latitude: 22.37,
         longitude: 91.8,
         locationId: chattogram.id,
@@ -276,10 +279,10 @@ async function main() {
         slug: "bhumi-gardens",
         tagline: "A family neighborhood around a central park.",
         description:
-          "Townhouses and low apartments organised around play, walking, and everyday errands. An exclusive pre-launch community.",
+          "Sample townhouses and low apartments organised around play, walking, and everyday errands. Demonstration data only.",
         architecture: "Pale brick, timber, and streets sized for people first.",
         lifestyle: "Family communities with a park you can see from the kitchen.",
-        locationNote: "Uttara edge, Dhaka — pre-launch",
+        locationNote: "Uttara edge, Dhaka — demonstration listing",
         heroImage: "/media/project-gardens.jpg",
         category: "COMMUNITIES",
         propertyType: "TOWNHOUSE",
@@ -288,6 +291,7 @@ async function main() {
         startingPrice: "160000",
         featured: true,
         signature: true,
+        demo: true,
         latitude: 23.874,
         longitude: 90.398,
         locationId: dhaka.id,
@@ -297,15 +301,15 @@ async function main() {
     }),
     prisma.development.create({
       data: {
-        name: "MatriBhumi Bashundhara",
+        name: "District Residences",
         slug: "matribhumi-bashundhara",
         tagline: "A home next to the mall, the fairway, and the park.",
         description:
-          "A mixed-use community integrated within Dhaka’s master-planned Bashundhara district: residences, a planted street, and walking distance to shopping, golf, and family leisure. MatriBhumi is an independent advisor, not Bashundhara Group.",
+          "A sample mixed-use community within Dhaka’s master-planned Bashundhara district: residences, a planted street, and walking distance to shopping, golf, and family leisure. Demonstration data only. MatriBhumi is an independent advisor, not Bashundhara Group.",
         architecture: "Mid-rise stone and glass, podiums with shade, and a civic ground floor that opens to the district.",
         lifestyle:
           "For expats visiting, retirees staying, and Dhaka families who want modern amenities without a long drive: malls, golf, amusement parks, and a proper home.",
-        locationNote: "Bashundhara, Dhaka — pre-launch district living",
+        locationNote: "Bashundhara, Dhaka — demonstration listing",
         heroImage: "/media/lifestyle-mixed.jpg",
         category: "MIXED_USE",
         propertyType: "MIXED_USE",
@@ -314,6 +318,7 @@ async function main() {
         startingPrice: "195000",
         featured: true,
         signature: true,
+        demo: true,
         latitude: 23.818,
         longitude: 90.454,
         locationId: bashundhara.id,
@@ -328,7 +333,7 @@ async function main() {
   const gallery = (hero: string, extras: string[]) =>
     [hero, ...extras].map((url, i) => ({
       url,
-      alt: "MatriBhumi interior or architecture",
+      alt: "Selected development interior or architecture",
       sortOrder: i,
     }));
 
@@ -340,7 +345,7 @@ async function main() {
     images: { url: string; alt: string; sortOrder: number }[];
   }) {
     const { amenitySlugs, nearby, units, plans, images, ...rest } = data;
-    const property = await prisma.property.create({ data: rest });
+    const property = await prisma.property.create({ data: { ...rest, demo: true } });
     await prisma.propertyImage.createMany({
       data: images.map((img) => ({ ...img, propertyId: property.id })),
     });
@@ -385,7 +390,7 @@ async function main() {
     name: "Heights Residences",
     slug: "heights-residences",
     description:
-      "One- to three-bedroom apartments in MatriBhumi Heights, Bashundhara — deep balconies, podium gardens, and walking distance to malls, golf, and district parks. Pre-launch.",
+      "Sample one- to three-bedroom apartments in Heights Tower, Bashundhara — deep balconies, podium gardens, and walking distance to malls, golf, and district parks. Demonstration listing only.",
     type: "APARTMENT",
     status: "UNDER_CONSTRUCTION",
     completionDate: new Date("2027-11-01"),
@@ -431,7 +436,7 @@ async function main() {
     name: "Riverside Terraces",
     slug: "riverside-terraces",
     description:
-      "Apartments stepping down to a public boardwalk. Every home has a river-facing outdoor room. Pre-launch.",
+      "Sample apartments stepping down to a public boardwalk. Every home has a river-facing outdoor room. Demonstration listing only.",
     type: "APARTMENT",
     status: "LAUNCHED",
     completionDate: new Date("2026-08-01"),
@@ -471,7 +476,7 @@ async function main() {
     name: "Grove Courtyard Villas",
     slug: "grove-courtyard-villas",
     description:
-      "Four-bedroom courtyard villas with private gardens and a shared forest edge. Pre-launch.",
+      "Sample four-bedroom courtyard villas with private gardens and a shared forest edge. Demonstration listing only.",
     type: "VILLA",
     status: "READY",
     completionDate: new Date("2025-03-01"),
@@ -510,7 +515,7 @@ async function main() {
     name: "Bhumi Park Townhomes",
     slug: "bhumi-park-townhomes",
     description:
-      "Two- and three-bedroom townhomes facing a central park. Pre-launch family housing.",
+      "Sample two- and three-bedroom townhomes facing a central park. Demonstration listing only.",
     type: "TOWNHOUSE",
     status: "LAUNCHED",
     completionDate: new Date("2027-04-01"),
@@ -547,7 +552,7 @@ async function main() {
   await addProperty({
     name: "Heights Penthouses",
     slug: "heights-penthouses",
-    description: "Upper residences with planted terraces. Pre-launch penthouses in MatriBhumi Heights.",
+    description: "Sample upper residences with planted terraces. Demonstration penthouses in Heights Tower.",
     type: "PENTHOUSE",
     status: "UNDER_CONSTRUCTION",
     completionDate: new Date("2027-11-01"),
@@ -579,7 +584,7 @@ async function main() {
   await addProperty({
     name: "Grove Forest Houses",
     slug: "grove-forest-houses",
-    description: "Quiet houses at the tree line. Pre-launch homes for longer winter stays.",
+    description: "Sample quiet houses at the tree line. Demonstration homes for longer winter stays.",
     type: "VILLA",
     status: "READY",
     completionDate: new Date("2025-03-01"),
@@ -611,7 +616,7 @@ async function main() {
     name: "Bashundhara District Residences",
     slug: "bashundhara-district-residences",
     description:
-      "One- to four-bedroom homes in Bashundhara: a curated community listing for expats, retirees, and Dhaka families who want malls, golf, amusement parks, and a modern building on the same map. A participating-developer project within the district — not a Bashundhara Group project.",
+      "Sample one- to four-bedroom homes in Bashundhara. Demonstration listing only. A participating-developer project within the district — not a Bashundhara Group project.",
     type: "MIXED_USE",
     status: "LAUNCHED",
     completionDate: new Date("2027-06-01"),
@@ -654,7 +659,7 @@ async function main() {
   const riversideHomes = await addProperty({
     name: "Canal Lofts",
     slug: "canal-lofts",
-    description: "Compact lofts along the canal edge at MatriBhumi Riverside. Pre-launch.",
+    description: "Sample compact lofts along the canal edge at Riverside Walk. Demonstration listing only.",
     type: "APARTMENT",
     status: "LAUNCHED",
     completionDate: new Date("2026-08-01"),
@@ -689,7 +694,7 @@ async function main() {
   const gardensFlats = await addProperty({
     name: "Parkside Apartments",
     slug: "parkside-apartments",
-    description: "Low apartments facing the central park at Bhumi Gardens. Pre-launch family housing.",
+    description: "Sample low apartments facing the central park at Bhumi Gardens. Demonstration listing only.",
     type: "APARTMENT",
     status: "LAUNCHED",
     completionDate: new Date("2027-04-01"),
@@ -740,46 +745,46 @@ async function main() {
 
   const articles = [
     {
-      title: "How we plan a street that people will actually use",
+      title: "How to read a street before you buy",
       slug: "planning-streets-people-use",
-      excerpt: "Shade, seating, and a reason to linger — notes from MatriBhumi's advisory desk.",
+      excerpt: "Shade, seating, and a reason to linger — questions buyers can take to a participating developer.",
       category: "ARCHITECTURE" as const,
       coverImage: "/media/about-studio.jpg",
       body: `## A street is a room
 
-MatriBhumi treats the space between buildings as seriously as the buildings themselves. This note describes how we size sidewalks, plant for shade, and keep ground floors open to daily life.
+Buyers comparing developer projects in Bangladesh can treat the space between buildings as seriously as the buildings themselves. Ask how sidewalks are sized, where shade falls, and whether ground floors stay open to daily life.
 
-We do not claim a proprietary method. We share a way of looking: start with walking, then light, then the shops and rooms that keep a street company after dusk.
+MatriBhumi does not design or construct these streets. Advisors help you inspect what a developer publishes and what a viewing shows.
 
-### What we measure
+### Questions worth asking
 
 - How far a child can walk to a park without crossing a fast road
 - Where the afternoon sun actually falls in June
 - Whether a building's edge offers a place to wait
 
-These are planning questions, not marketing lines.`,
+These are planning questions, not marketing lines or a guarantee of quality.`,
     },
     {
-      title: "Water, quietly: designing with rain in Dhaka",
+      title: "Water, quietly: asking about rain in Dhaka",
       slug: "designing-with-rain-dhaka",
-      excerpt: "Courtyards, bioswales, and roofs that hold a storm. A note on water.",
+      excerpt: "Courtyards, bioswales, and roofs that hold a storm. Questions for a viewing.",
       category: "SUSTAINABILITY" as const,
       coverImage: "/media/sustain-water.jpg",
       body: `## Hold the rain
 
-In a monsoon city, water is not a problem to hide. Permeable courts, planted roofs, and cisterns sized for dry weeks.
+In a monsoon city, water is not a problem to hide. Ask the developer about permeable courts, planted roofs, and cisterns sized for dry weeks.
 
-No certification is claimed. The work is to make wet days livable and dry days less brittle.`,
+No certification is claimed. MatriBhumi does not design drainage systems. The aim is to help buyers inspect wet-day livability before they commit.`,
     },
     {
       title: "A handover is a relationship",
       slug: "handover-is-a-relationship",
-      excerpt: "What we try to get right when keys change hands.",
+      excerpt: "What to ask the developer when keys change hands.",
       category: "NEWS" as const,
       coverImage: "/media/about-lobby.jpg",
       body: `## After the photograph
 
-A home is not finished at the photoshoot. Snagging, building manuals, and the people residents can actually call.`,
+A home is not finished at the photoshoot. Snagging, building manuals, and the people residents can actually call belong to the developer or building manager. MatriBhumi helps you obtain those details.`,
     },
     {
       title: "Reading a location without reading the future",
@@ -794,32 +799,32 @@ MatriBhumi discusses transport, schools, and daily amenities because they shape 
     {
       title: "Kitchen windows and the park",
       slug: "kitchen-windows-and-the-park",
-      excerpt: "A short note on family planning at Bhumi Gardens.",
+      excerpt: "A short note on what to look for in family-oriented layouts.",
       category: "LIFESTYLE" as const,
       coverImage: "/media/lifestyle-family.jpg",
       body: `## See the green from the sink
 
-At Bhumi Gardens we placed kitchens toward the park so the day's ordinary work still looks onto trees and play.`,
+When you view a family-oriented layout, ask whether kitchens face a park or court so ordinary work still looks onto trees and play. Layout decisions belong to the developer of record.`,
     },
     {
-      title: "Update: Heights podium gardens take root",
+      title: "Update: asking about podium gardens",
       slug: "heights-podium-gardens",
-      excerpt: "A project note from MatriBhumi Heights.",
+      excerpt: "A sample project note on shared outdoor rooms. Demonstration article only.",
       category: "PROJECT_UPDATES" as const,
       coverImage: "/media/about-construction.jpg",
       body: `## Planting a plaza in the air
 
-The podium gardens at MatriBhumi Heights are part of the pre-launch architectural concept: shade at the door, and a plaza that belongs to the building.`,
+Shared podium gardens are an architectural idea some developers publish: shade at the door, and a plaza that belongs to the building. Confirm the current specification with the developer. This note is demonstration content.`,
     },
     {
-      title: "Materials we return to",
+      title: "Materials to ask a developer about",
       slug: "materials-we-return-to",
       excerpt: "Stone, timber, lime, and metal that can be maintained.",
       category: "DESIGN" as const,
       coverImage: "/media/sustain-courtyard.jpg",
       body: `## Quiet materials
 
-We prefer surfaces that age in public: limewash, timber that can be oiled, stone that can be repaired.`,
+Ask which surfaces can be maintained in public: limewash, timber that can be oiled, stone that can be repaired. Material specifications belong to the developer of record.`,
     },
     {
       title: "What a clubhouse is for",
@@ -829,17 +834,17 @@ We prefer surfaces that age in public: limewash, timber that can be oiled, stone
       coverImage: "/media/amenity-clubhouse.jpg",
       body: `## Borrowed living rooms
 
-A clubhouse should work on a Tuesday afternoon: shade, a table, a kitchen someone can actually use.`,
+A clubhouse should work on a Tuesday afternoon: shade, a table, a kitchen someone can actually use. Confirm access and management with the developer before you rely on an amenity list.`,
     },
     {
-      title: "Drawing the mixed-use block",
+      title: "Reading a mixed-use block",
       slug: "drawing-the-mixed-use-block",
-      excerpt: "How a Bashundhara mixed-use block stacks living, work, and a civic street.",
+      excerpt: "How a Bashundhara mixed-use block can stack living, work, and a civic street.",
       category: "ARCHITECTURE" as const,
       coverImage: "/media/project-central.jpg",
       body: `## One plot, several days
 
-The ground floor stays public. The middle holds work. The top is home. This is a study, not a completed building.`,
+Some mixed-use schemes keep the ground floor public, the middle for work, and the top as home. This is a way of looking at a plan, not a completed MatriBhumi building.`,
     },
     {
       title: "A note on talking about money",
@@ -849,7 +854,7 @@ The ground floor stays public. The middle holds work. The top is home. This is a
       coverImage: "/media/about-model.jpg",
       body: `## No forecasts
 
-If a number cannot be stood beside in a quiet room, it does not belong on a MatriBhumi page.`,
+If a number cannot be stood beside in a quiet room, it does not belong on a MatriBhumi page. MatriBhumi does not promise rental income, appreciation, or returns.`,
     },
   ];
 
@@ -860,6 +865,7 @@ If a number cannot be stood beside in a quiet room, it does not belong on a Matr
         authorId: admin.id,
         readingTime: 4,
         published: true,
+        demo: true,
         publishedAt: new Date(),
       },
     });
@@ -868,76 +874,45 @@ If a number cannot be stood beside in a quiet room, it does not belong on a Matr
   await prisma.job.createMany({
     data: [
       {
-        title: "Project Architect",
-        slug: "project-architect",
-        department: "Design",
+        title: "Property Advisor",
+        slug: "property-advisor",
+        department: "Advisory",
         location: "Dhaka",
         type: "Full-time",
-        description: "Lead a residential project from sketch through site.",
-        requirements: "A portfolio of built or academic housing work. Care with climate and construction.",
+        description:
+          "Help buyers compare selected developer properties in Bangladesh and coordinate introductions and viewings.",
+        requirements: "Clarity, patience, and comfort saying MatriBhumi does not forecast returns.",
+        demo: true,
       },
       {
-        title: "Landscape Designer",
-        slug: "landscape-designer",
-        department: "Design",
+        title: "Partnership Coordinator",
+        slug: "partnership-coordinator",
+        department: "Developer relations",
         location: "Dhaka",
         type: "Full-time",
-        description: "Planting, water, and the spaces between buildings.",
-        requirements: "Experience with tropical or monsoon landscapes preferred.",
+        description: "Support relationships with participating developers so buyer questions reach the people who can answer them.",
+        requirements: "Organised correspondence and care with confidential commercial terms.",
+        demo: true,
       },
       {
-        title: "Community Manager",
-        slug: "community-manager",
-        department: "Customer experience",
+        title: "Buyer Support Associate",
+        slug: "buyer-support-associate",
+        department: "Advisory",
         location: "Dhaka",
         type: "Full-time",
-        description: "Be the person residents can reach after handover.",
+        description: "Keep follow-up moving after the first enquiry: viewings, documents the developer requests, and next steps.",
         requirements: "Patience, clarity, and comfort with operations.",
+        demo: true,
       },
       {
-        title: "Development Analyst",
-        slug: "development-analyst",
-        department: "Development",
-        location: "Dhaka",
-        type: "Full-time",
-        description: "Study sites, infrastructure, and program mix. Not a sales role.",
-        requirements: "Numeracy and a respect for uncertainty.",
-      },
-      {
-        title: "Site Engineer",
-        slug: "site-engineer",
-        department: "Construction",
-        location: "Dhaka",
-        type: "Full-time",
-        description: "Keep the site honest: quality, programme, and the people doing the work.",
-        requirements: "Construction experience and a calm way with contractors.",
-      },
-      {
-        title: "Interior Designer",
-        slug: "interior-designer",
-        department: "Design",
-        location: "Dhaka",
-        type: "Full-time",
-        description: "Joinery, light, and rooms that can be lived in without a stylist.",
-        requirements: "A portfolio of residential interiors.",
-      },
-      {
-        title: "Sales Consultant",
-        slug: "sales-consultant",
-        department: "Sales",
-        location: "Dhaka",
-        type: "Full-time",
-        description: "Help people understand a home without promising a market.",
-        requirements: "Clarity, patience, and comfort saying 'we do not forecast returns'.",
-      },
-      {
-        title: "Communications Lead",
-        slug: "communications-lead",
+        title: "Content Editor",
+        slug: "content-editor",
         department: "Communications",
         location: "Dhaka",
         type: "Full-time",
-        description: "Write in public the way we advise: carefully, without invented claims.",
+        description: "Write in public the way we advise: carefully, without invented claims, licences, or forecasts.",
         requirements: "Writing samples. No press-release theatre.",
+        demo: true,
       },
     ],
   });

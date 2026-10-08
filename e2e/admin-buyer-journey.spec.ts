@@ -1,6 +1,21 @@
 import { test, expect } from "@playwright/test";
 
 test("admin lead matching, shortlist, and deal pipeline", async ({ page }) => {
+  test.setTimeout(60000);
+
+  await page.goto("/advise");
+  await page.locator("input[name=name]").fill("Asha Rahman");
+  await page.locator("input[name=email]").fill("asha.pipeline@example.com");
+  await page.locator("input[name=phone]").fill("+8801700112233");
+  await page.locator("input[name=residenceCountry]").fill("Bangladesh");
+  await page.locator("input[name=preferredCity]").fill("Dhaka");
+  await page.locator("input[name=budget]").fill("250000");
+  await page.locator("input[name=bedrooms]").fill("3");
+  await page.locator("textarea[name=message]").fill("Need a Dhaka apartment shortlist for the advisory pipeline test.");
+  await page.locator("input[name=consent]").check();
+  await page.getByRole("button", { name: /Talk to an Advisor/i }).click();
+  await expect(page.getByRole("heading", { name: "Thank you." })).toBeVisible();
+
   await page.goto("/admin/login");
   await page.locator("input[name=email]").fill(process.env.ADMIN_EMAIL ?? "admin@matribhumi.me");
   await page.locator("input[name=password]").fill(process.env.ADMIN_PASSWORD ?? "MatriBhumiAdmin!2026");

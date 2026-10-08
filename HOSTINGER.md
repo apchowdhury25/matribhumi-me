@@ -55,7 +55,10 @@ NEXTAUTH_SECRET=generate-a-random-string-at-least-32-characters
 NEXT_PUBLIC_SITE_URL=https://matribhumi.me
 ADMIN_EMAIL=admin@matribhumi.me
 ADMIN_PASSWORD=choose-a-strong-password-and-change-the-demo-one
+ALLOW_DEMO_LISTINGS=false
 ```
+
+Leave `ALLOW_DEMO_LISTINGS` unset or `false` in production. Seed/sample properties, developments, articles, and jobs are marked `demo` and stay off the public site unless this flag is `true`.
 
 Your Hostinger system user from the last build log is **`u763041062`**. Create `domains/matribhumi.me/data/` in File Manager before deploying.
 

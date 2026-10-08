@@ -42,7 +42,7 @@ export const positioning = {
 export const howWeWork = {
   title: "How we work",
   summary:
-    "MatriBhumi helps buyers discover and compare selected properties from participating developers and coordinates introductions, viewings and transaction-related communication.",
+    "MatriBhumi helps buyers find and evaluate properties from participating developers in Bangladesh and coordinates the buyer’s interaction with the developer.",
   purchaseAgreement:
     "The property purchase agreement is between the buyer and the relevant developer/seller.",
   funds:
@@ -342,7 +342,7 @@ export const legalPages = {
     path: "/disclaimer/buyer-fee",
     title: "Buyer Fee Disclosure",
     navLabel: "Buyer-fee disclosure",
-    description: "MatriBhumi does not charge buyers a core property advisory fee. Participating developers may compensate MatriBhumi.",
+    description: buyerFeeDisclosure,
     sections: [
       {
         heading: "About this page",

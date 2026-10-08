@@ -43,10 +43,96 @@ run("npx", ["prisma", "db", "push"]);
 const { PrismaClient } = await import("@prisma/client");
 const prisma = new PrismaClient();
 const count = await prisma.property.count().catch(() => 0);
+
+const DEMO_PROPERTY_SLUGS = [
+  "heights-residences",
+  "riverside-terraces",
+  "grove-courtyard-villas",
+  "bhumi-park-townhomes",
+  "heights-penthouses",
+  "grove-forest-houses",
+  "bashundhara-district-residences",
+  "canal-lofts",
+  "parkside-apartments",
+];
+const DEMO_DEVELOPMENT_RENAMES = {
+  "matribhumi-heights": "Heights Tower",
+  "matribhumi-riverside": "Riverside Walk",
+  "matribhumi-bashundhara": "District Residences",
+};
+const DEMO_DEVELOPMENT_SLUGS = [
+  ...Object.keys(DEMO_DEVELOPMENT_RENAMES),
+  "the-grove-residences",
+  "bhumi-gardens",
+];
+const CONSTRUCTION_JOB_SLUGS = [
+  "project-architect",
+  "landscape-designer",
+  "community-manager",
+  "development-analyst",
+  "site-engineer",
+  "interior-designer",
+];
+
+try {
+  await prisma.property.updateMany({
+    where: { slug: { in: DEMO_PROPERTY_SLUGS } },
+    data: { demo: true },
+  });
+  await prisma.development.updateMany({
+    where: { slug: { in: DEMO_DEVELOPMENT_SLUGS } },
+    data: { demo: true },
+  });
+  for (const [slug, name] of Object.entries(DEMO_DEVELOPMENT_RENAMES)) {
+    await prisma.development.updateMany({ where: { slug }, data: { name } });
+  }
+  await prisma.newsArticle.updateMany({
+    where: {
+      slug: {
+        in: [
+          "planning-streets-people-use",
+          "designing-with-rain-dhaka",
+          "handover-is-a-relationship",
+          "reading-a-location",
+          "kitchen-windows-and-the-park",
+          "heights-podium-gardens",
+          "materials-we-return-to",
+          "what-a-clubhouse-is-for",
+          "drawing-the-mixed-use-block",
+          "a-note-on-talking-about-money",
+        ],
+      },
+    },
+    data: { demo: true },
+  }).catch(() => 0);
+  await prisma.job.updateMany({
+    where: { slug: { in: CONSTRUCTION_JOB_SLUGS } },
+    data: { published: false, demo: true },
+  }).catch(() => 0);
+  await prisma.job.updateMany({
+    where: {
+      slug: {
+        in: [
+          "sales-consultant",
+          "communications-lead",
+          "property-advisor",
+          "partnership-coordinator",
+          "buyer-support-associate",
+          "content-editor",
+        ],
+      },
+    },
+    data: { demo: true },
+  }).catch(() => 0);
+  console.log("Marked known seed rows as demonstration inventory.");
+} catch (error) {
+  console.warn("Demo-inventory backfill skipped:", error instanceof Error ? error.message : error);
+}
+
 await prisma.$disconnect();
 
 if (count === 0) {
-  console.log("No properties found — seeding demonstration data.");
+  console.log("No properties found — seeding demonstration data (demo: true).");
   run("npx", ["tsx", "prisma/seed.ts"]);
 } else {
   console.log(`Database already has ${count} properties — skipping seed.`);

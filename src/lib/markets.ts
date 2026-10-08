@@ -33,7 +33,7 @@ export const markets = [
     description:
       "Independent property guidance in Bangladesh. Explore selected developments, compare options, and coordinate your purchase with a MatriBhumi advisor.",
     intro:
-      "MatriBhumi helps buyers discover and compare selected properties from participating developers in Bangladesh and coordinates introductions, viewings and transaction-related communication. The property purchase agreement is between the buyer and the relevant developer/seller.",
+      "MatriBhumi helps buyers find and evaluate properties from participating developers in Bangladesh and coordinates the buyer’s interaction with the developer. The property purchase agreement is between the buyer and the relevant developer/seller.",
     cities: [
       { name: "Dhaka", slug: "dhaka" },
       { name: "Chattogram", slug: "chattogram" },

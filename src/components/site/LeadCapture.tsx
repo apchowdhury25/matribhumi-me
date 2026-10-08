@@ -127,10 +127,10 @@ function CaptureForm({ kind, projectName }: { kind: Kind; projectName?: string }
       <div>
         <p className="text-[11px] uppercase tracking-[0.24em] text-earth">Brochure</p>
         <h2 id="lead-capture-title" className="font-display mt-3 text-4xl leading-tight">
-          Your portfolio is on its way.
+          Your brochure is on its way.
         </h2>
         <p className="mt-4 text-sm leading-7 text-muted">
-          A note titled “Your MatriBhumi curated portfolio &amp; brochure” is on its way to your inbox, with the selected-project list and next steps.
+          A note titled “Your MatriBhumi property brochure” is on its way to your inbox, with the selected-project list and next steps.
         </p>
         <a
           href={siteConfig.brochurePath}
@@ -148,7 +148,7 @@ function CaptureForm({ kind, projectName }: { kind: Kind; projectName?: string }
     <form action={formAction} className="grid gap-4">
       <div>
         <p className="text-[11px] uppercase tracking-[0.24em] text-earth">
-          {kind === "waitlist" ? "Waitlist" : "Portfolio"}
+          {kind === "waitlist" ? "Waitlist" : "Brochure"}
         </p>
         <h2 id="lead-capture-title" className="font-display mt-3 text-4xl leading-tight">
           {kind === "waitlist" ? "Join the waitlist." : "Download the brochure."}
@@ -201,7 +201,7 @@ function CaptureForm({ kind, projectName }: { kind: Kind; projectName?: string }
       ) : null}
       <label className="flex items-start gap-3 text-sm normal-case tracking-normal text-muted">
         <input type="checkbox" name="consent" value="true" required className="mt-1" />
-        I agree to MatriBhumi storing these details to send the brochure and respond about the pre-launch portfolio.
+        I agree to MatriBhumi storing these details to send the brochure and respond about selected developer projects.
       </label>
       {state.error ? <p className="text-sm text-red-800">{state.error}</p> : null}
       <Button type="submit" disabled={pending} className="w-full sm:w-auto">

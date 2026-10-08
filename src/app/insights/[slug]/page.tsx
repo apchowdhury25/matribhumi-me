@@ -9,6 +9,7 @@ import { siteConfig } from "@/config/site";
 import { getArticle, getArticles } from "@/lib/data";
 import { formatDate, statusLabel } from "@/lib/format";
 import { createMetadata, breadcrumbJsonLd, articleJsonLd } from "@/lib/seo";
+import { DemoInventoryNotice } from "@/components/site/DemoInventoryNotice";
 
 export const dynamic = "force-dynamic";
 
@@ -19,7 +20,7 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const article = await getArticle(slug);
-  if (!article || !article.published) {
+  if (!article) {
     return createMetadata({
       title: "Insight",
       description: "A MatriBhumi advisory note.",
@@ -33,6 +34,7 @@ export async function generateMetadata({
     path: `/insights/${article.slug}`,
     image: article.coverImage,
     type: "article",
+    noIndex: article.demo,
   });
 }
 
@@ -43,7 +45,7 @@ export default async function InsightArticlePage({
 }) {
   const { slug } = await params;
   const article = await getArticle(slug);
-  if (!article || !article.published) notFound();
+  if (!article) notFound();
 
   const related = (await getArticles(article.category))
     .filter((item) => item.id !== article.id)
@@ -81,6 +83,7 @@ export default async function InsightArticlePage({
 
       <article className="px-6 py-16 md:px-12">
         <div className="mx-auto max-w-3xl">
+          {article.demo ? <div className="mb-8"><DemoInventoryNotice kind="article" /></div> : null}
           <p className="text-[11px] uppercase tracking-[0.2em] text-earth">
             {formatDate(article.publishedAt)} · {article.readingTime} min read · {article.author.name}
           </p>

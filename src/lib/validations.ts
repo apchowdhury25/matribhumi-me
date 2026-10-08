@@ -61,7 +61,7 @@ export const advisorySchema = z.object({
   preferredCity: z.string().trim().min(2).max(80),
   propertyType: z.enum(propertyTypes),
   budget: z.string().trim().min(1).max(80),
-  currency: z.enum(currencies).default("USD"),
+  currency: z.enum(currencies).default("BDT"),
   bedrooms: z.coerce.number().int().min(0).max(20),
   purpose: z.enum(leadPurposes),
   timeline: z.enum(purchaseTimelines),

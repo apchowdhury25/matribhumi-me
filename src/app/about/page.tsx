@@ -54,7 +54,7 @@ export default function AboutPage() {
         </div>
       </section>
       <section className="bg-mist px-4 py-14 sm:px-6 md:px-12 md:py-20">
-        <SectionHeader title="How we work" eyebrow="Independent of any one developer" />
+        <SectionHeader title="How we work" eyebrow="Selected participating developers" />
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {whatWeDo.map((item) => (
             <article key={item.title} className="bg-ivory p-6">

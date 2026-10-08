@@ -113,7 +113,11 @@ export default async function PropertiesPage({
         </div>
 
         {data.items.length === 0 ? (
-          <p className="mt-16 text-muted">No properties match those filters.</p>
+          <p className="mt-16 text-muted">
+            {filters.q || filters.city || filters.location || filters.type || filters.status
+              ? "No properties match those filters."
+              : "Selected developer properties in Bangladesh appear here when a partnership is published."}
+          </p>
         ) : (
           <div className={view === "list" ? "mt-8 grid gap-6" : "mt-8 grid gap-8 md:grid-cols-2 xl:grid-cols-3"}>
             {data.items.map((property) => (

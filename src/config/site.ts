@@ -100,11 +100,11 @@ export const whatWeDo = [
   },
   {
     title: "Work with developers",
-    body: "MatriBhumi is an independent advisor. We introduce you to the relevant participating developer and coordinate viewings and discussions.",
+    body: "MatriBhumi introduces you to the relevant participating developer and coordinates viewings and discussions. Commercial relationships with developers can apply.",
   },
   {
     title: "No buyer fee",
-    body: "MatriBhumi does not charge buyers a core property advisory fee. Where applicable, participating developers may compensate MatriBhumi under separate commercial agreements.",
+    body: buyerFeeStatement,
   },
 ] as const;
 
@@ -181,7 +181,7 @@ export const developerServices = [
   { title: "Buyer requirement matching", body: "Route enquiries to the project that actually fits." },
   { title: "Viewing coordination", body: "Schedule and follow up viewings with the buyer and your sales team." },
   { title: "Lead management", body: "Keep the conversation moving after the first enquiry." },
-  { title: "Cross-border buyer access", body: "Reach buyers living abroad, relocators, and local buyers we already advise." },
+  { title: "Buyers living abroad", body: "Reach buyers living abroad, relocators, and local buyers we already advise." },
   { title: "Transaction coordination", body: "Stay on the process until the buyer is in your contracting workflow." },
   { title: "Project presentation", body: "Help buyers understand the scheme, unit mix, and next steps." },
   { title: "Market exposure", body: "A public listing on MatriBhumi.me when a partnership is in place." },
@@ -271,7 +271,7 @@ export const whyMatriBhumi = [
   },
   {
     title: "Transparent buyer-fee policy",
-    body: "MatriBhumi does not charge buyers a core property advisory fee. Where applicable, participating developers may compensate MatriBhumi under separate commercial agreements.",
+    body: buyerFeeStatement,
   },
   {
     title: "Property comparison",
@@ -317,8 +317,7 @@ export const comingHomePrinciples = [
 export const diasporaFaq = [
   {
     question: "Does MatriBhumi charge the buyer a fee?",
-    answer:
-      "No. MatriBhumi charges the buyer no brokerage fee, no consultation fee, and no property-search fee. Participating developers compensate MatriBhumi under a separate commercial agreement. Those agreements differ by developer, so no universal commission percentage is published here.",
+    answer: buyerFeeStatement,
   },
   {
     question: "Who is the seller of a listed property?",

@@ -3,24 +3,26 @@ import { PublicShell } from "@/components/site/PublicShell";
 import { ApplicationForm } from "@/components/forms/ApplicationForm";
 import { getJob } from "@/lib/data";
 import { createMetadata } from "@/lib/seo";
+import { DemoInventoryNotice } from "@/components/site/DemoInventoryNotice";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const job = await getJob(slug);
-  if (!job) return createMetadata({ title: "Role", description: "MatriBhumi careers", path: `/careers/${slug}` });
+  if (!job) return createMetadata({ title: "Role", description: "MatriBhumi careers", path: `/careers/${slug}`, noIndex: true });
   return createMetadata({
     title: job.title,
     description: job.description.slice(0, 160),
     path: `/careers/${job.slug}`,
+    noIndex: job.demo,
   });
 }
 
 export default async function JobPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const job = await getJob(slug);
-  if (!job || !job.published) notFound();
+  if (!job) notFound();
 
   return (
     <PublicShell>
@@ -29,6 +31,7 @@ export default async function JobPage({ params }: { params: Promise<{ slug: stri
           {job.department} · {job.location} · {job.type}
         </p>
         <h1 className="font-display mt-4 max-w-3xl text-[2.1rem] leading-tight sm:text-5xl md:text-6xl">{job.title}</h1>
+        {job.demo ? <div className="mt-8 max-w-3xl"><DemoInventoryNotice kind="role" /></div> : null}
         <div className="mt-10 grid gap-12 lg:grid-cols-2">
           <div className="space-y-6 text-muted leading-8">
             <p>{job.description}</p>

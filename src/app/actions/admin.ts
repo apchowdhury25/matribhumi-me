@@ -118,8 +118,10 @@ export async function upsertProperty(formData: FormData) {
     heroImage: String(formData.get("heroImage") || "/media/hero-urban.jpg"),
     latitude: Number(formData.get("latitude") || 0),
     longitude: Number(formData.get("longitude") || 0),
+    currency: String(formData.get("currency") || "BDT"),
     published: formData.get("published") === "on",
     featured: formData.get("featured") === "on",
+    demo: formData.get("demo") === "on",
     matribhumiOwned: formData.get("matribhumiOwned") === "on",
     whyThisProperty: String(formData.get("whyThisProperty") || "") || null,
     developmentId: String(formData.get("developmentId")),
@@ -150,12 +152,14 @@ export async function upsertDevelopment(formData: FormData) {
     status: String(formData.get("status") || "LAUNCHED") as never,
     completion: String(formData.get("completion") || ""),
     startingPrice: String(formData.get("startingPrice") || "0"),
+    currency: String(formData.get("currency") || "BDT"),
     stats: {},
     latitude: Number(formData.get("latitude") || 0),
     longitude: Number(formData.get("longitude") || 0),
     published: formData.get("published") === "on",
     featured: formData.get("featured") === "on",
     signature: formData.get("signature") === "on",
+    demo: formData.get("demo") === "on",
     matribhumiOwned: formData.get("matribhumiOwned") === "on",
     locationId: String(formData.get("locationId")),
     developerId: String(formData.get("developerId")),
@@ -174,7 +178,7 @@ export async function upsertLocation(formData: FormData) {
     name,
     slug: String(formData.get("slug") || slugify(name)),
     city: String(formData.get("city") || name),
-    country: String(formData.get("country") || ""),
+    country: String(formData.get("country") || "Bangladesh"),
     description: String(formData.get("description") || ""),
     overview: String(formData.get("overview") || ""),
     lifestyle: String(formData.get("lifestyle") || ""),
@@ -238,6 +242,7 @@ export async function upsertArticle(formData: FormData) {
     category: String(formData.get("category") || "NEWS") as never,
     readingTime: Number(formData.get("readingTime") || 4),
     published: formData.get("published") === "on",
+    demo: formData.get("demo") === "on",
     authorId: user.id,
   };
   if (id) await prisma.newsArticle.update({ where: { id }, data });
@@ -259,6 +264,7 @@ export async function upsertJob(formData: FormData) {
     description: String(formData.get("description") || ""),
     requirements: String(formData.get("requirements") || ""),
     published: formData.get("published") === "on",
+    demo: formData.get("demo") === "on",
   };
   if (id) await prisma.job.update({ where: { id }, data });
   else await prisma.job.create({ data });

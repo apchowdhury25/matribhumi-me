@@ -21,6 +21,7 @@ export default async function AdminCareersPage() {
         <textarea name="description" placeholder="Description" className="border border-charcoal/15 p-3" />
         <textarea name="requirements" placeholder="Requirements" className="border border-charcoal/15 p-3" />
         <label className="text-sm"><input type="checkbox" name="published" defaultChecked /> Published</label>
+        <label className="text-sm"><input type="checkbox" name="demo" /> Demo/test role</label>
         <button className="h-11 bg-charcoal text-[11px] uppercase tracking-[0.18em] text-ivory">Save</button>
       </form>
     </div>
