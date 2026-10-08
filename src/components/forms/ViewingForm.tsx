@@ -26,6 +26,14 @@ export function ViewingForm({ propertyId }: { propertyId: string }) {
       <Field name="preferredDate" label="Preferred date" type="date" required />
       <Field name="preferredTime" label="Preferred time" type="time" required />
       <label className="grid gap-2 text-[11px] uppercase tracking-[0.18em] text-earth">
+        Viewing type
+        <select name="viewingType" defaultValue="IN_PERSON" className="h-12 w-full border border-charcoal/15 bg-paper px-3 text-base text-charcoal">
+          <option value="IN_PERSON">In person</option>
+          <option value="VIRTUAL">Virtual</option>
+          <option value="SITE_VISIT">Site visit</option>
+        </select>
+      </label>
+      <label className="grid gap-2 text-[11px] uppercase tracking-[0.18em] text-earth">
         Contact method
         <select name="contactMethod" className="h-12 w-full border border-charcoal/15 bg-paper px-3 text-base text-charcoal">
           <option value="EMAIL">Email</option>

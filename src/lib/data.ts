@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
 import { publicDeveloperName } from "@/lib/developer";
 import { isOperatingCountry, OPERATING_COUNTRY } from "@/lib/markets";
+import { publicDeveloperSelect } from "@/lib/public-fields";
 import type { PropertyFilters } from "@/lib/validations";
 
 const inBangladesh = { country: OPERATING_COUNTRY };
@@ -9,7 +10,7 @@ const inBangladesh = { country: OPERATING_COUNTRY };
 const propertyCardInclude = {
   location: true,
   development: true,
-  developer: true,
+  developer: { select: publicDeveloperSelect },
 } satisfies Prisma.PropertyInclude;
 
 const PAGE_SIZE = 12;
@@ -69,7 +70,7 @@ export async function getDevelopment(slug: string) {
       where: { slug },
       include: {
         location: true,
-        developer: true,
+        developer: { select: publicDeveloperSelect },
         properties: { where: { published: true }, include: propertyCardInclude },
       },
     });
@@ -111,7 +112,7 @@ export async function getProperty(slug: string) {
       include: {
         location: true,
         development: true,
-        developer: true,
+        developer: { select: publicDeveloperSelect },
         images: { orderBy: { sortOrder: "asc" } },
         amenities: { include: { amenity: true } },
         units: { orderBy: { name: "asc" } },
@@ -207,6 +208,7 @@ export async function getProperties(filters: PropertyFilters = {}) {
         prisma.amenity.findMany({ orderBy: { name: "asc" } }),
         prisma.developer.findMany({
           where: { published: true },
+          select: publicDeveloperSelect,
           orderBy: { name: "asc" },
         }),
       ]);
@@ -251,7 +253,8 @@ export async function getPublishedDevelopers() {
   return safe(async () => {
     const items = await prisma.developer.findMany({
       where: { published: true },
-      include: {
+      select: {
+        ...publicDeveloperSelect,
         _count: { select: { properties: true, developments: true } },
       },
       orderBy: { name: "asc" },
@@ -264,7 +267,8 @@ export async function getFeaturedDevelopers() {
   return safe(async () => {
     const items = await prisma.developer.findMany({
       where: { published: true, featured: true },
-      include: {
+      select: {
+        ...publicDeveloperSelect,
         _count: { select: { properties: true, developments: true } },
       },
       orderBy: { name: "asc" },
@@ -277,7 +281,8 @@ export async function getPublishedDeveloper(slug: string) {
   return safe(async () => {
     const developer = await prisma.developer.findUnique({
       where: { slug },
-      include: {
+      select: {
+        ...publicDeveloperSelect,
         properties: {
           where: { published: true, location: inBangladesh },
           include: propertyCardInclude,
@@ -390,19 +395,21 @@ export async function searchAll(q: string) {
 export async function getAdminMetrics() {
   return safe(
     async () => {
-      const [properties, developments, units, leads, inquiries, viewings, articles] =
+      const [properties, developments, units, leads, inquiries, viewings, articles, deals, developers] =
         await Promise.all([
           prisma.property.count(),
           prisma.development.count(),
           prisma.unit.count(),
           prisma.lead.count(),
           prisma.lead.count({ where: { status: "NEW" } }),
-          prisma.viewingRequest.count({ where: { status: "NEW" } }),
+          prisma.viewingRequest.count(),
           prisma.newsArticle.count({ where: { published: true } }),
+          prisma.deal.count({ where: { status: "OPEN" } }),
+          prisma.developer.count(),
         ]);
-      return { properties, developments, units, leads, inquiries, viewings, articles };
+      return { properties, developments, units, leads, inquiries, viewings, articles, deals, developers };
     },
-    { properties: 0, developments: 0, units: 0, leads: 0, inquiries: 0, viewings: 0, articles: 0 },
+    { properties: 0, developments: 0, units: 0, leads: 0, inquiries: 0, viewings: 0, articles: 0, deals: 0, developers: 0 },
   );
 }
 

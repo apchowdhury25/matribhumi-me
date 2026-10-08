@@ -16,9 +16,11 @@ export default async function AdminHome() {
   const cards = [
     ["Properties", metrics.properties, "/admin/properties"],
     ["Developments", metrics.developments, "/admin/developments"],
+    ["Developers", metrics.developers, "/admin/developers"],
     ["Units", metrics.units, "/admin/units"],
     ["Leads", metrics.leads, "/admin/leads"],
     ["New inquiries", metrics.inquiries, "/admin/leads"],
+    ["Open deals", metrics.deals, "/admin/deals"],
     ["Viewing requests", metrics.viewings, "/admin/viewings"],
     ["Published articles", metrics.articles, "/admin/insights"],
   ] as const;

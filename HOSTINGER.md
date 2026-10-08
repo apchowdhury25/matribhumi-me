@@ -87,7 +87,7 @@ Saving environment variables triggers a rebuild.
 Click **Deploy**. Hostinger will:
 
 1. Install npm packages (`postinstall` runs `prisma generate`).
-2. Run `npm run build`, which creates the database schema and seeds demonstration content **only if the database is empty**.
+2. Run `npm run build`, which runs `prisma generate` then `prisma db push`. Additive schema changes (developer partnerships, deals, expanded leads) are applied without dropping existing rows. Demonstration content is seeded **only if the database is empty**. Do not reseed production if leads already exist.
 3. Start the Next.js server on the port Hostinger assigns (`PORT`).
 
 When the deployment is **Current** and the process badge is **Running**, open **https://matribhumi.me**.

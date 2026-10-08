@@ -1,3 +1,5 @@
+import { buyerFeeNote, buyerFeeStatement } from "./businessModel";
+
 export const siteConfig = {
   name: "MatriBhumi",
   legalName: "MatriBhumi",
@@ -15,10 +17,8 @@ export const siteConfig = {
     "Selected developer projects in Bangladesh, including Dhaka, Chattogram, and Dhaka’s master-planned Bashundhara district.",
   audience:
     "For Bangladeshi expats, returning retirees, and households already in Bangladesh who want help choosing a home and coordinating the process.",
-  buyerFee:
-    "You pay MatriBhumi nothing for our property advisory and transaction-coordination service. Where applicable, participating developers compensate MatriBhumi under separate commercial agreements.",
-  buyerFeeNote:
-    "Developer arrangements vary by project. The buyer's purchase agreement is with the property developer/seller.",
+  buyerFee: buyerFeeStatement,
+  buyerFeeNote,
   email: "hello@matribhumi.me",
   salesEmail: "sales@matribhumi.me",
   pressEmail: "press@matribhumi.me",

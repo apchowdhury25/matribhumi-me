@@ -6,8 +6,12 @@ const prisma = new PrismaClient();
 async function main() {
   await prisma.favorite.deleteMany();
   await prisma.jobApplication.deleteMany();
+  await prisma.dealCompensation.deleteMany();
+  await prisma.developerCompensation.deleteMany();
   await prisma.viewingRequest.deleteMany();
+  await prisma.deal.deleteMany();
   await prisma.lead.deleteMany();
+  await prisma.developerPartnership.deleteMany();
   await prisma.nearbyPlace.deleteMany();
   await prisma.floorPlan.deleteMany();
   await prisma.unit.deleteMany();
@@ -53,9 +57,27 @@ async function main() {
       published: false,
       verified: false,
       featured: false,
+      status: "PROSPECT",
+      country: "Bangladesh",
+      cities: ["Dhaka", "Chattogram", "Bashundhara"],
       description:
         "Internal placeholder for curated listings. Named developer details are unpublished until a partnership is confirmed. MatriBhumi is the advisor, not the developer of record.",
+      publicDescription: "",
       logoUrl: "/brand/logo-mark.svg",
+      internalNotes:
+        "Placeholder developer row for listing foreign keys. Do not publish until a real partnership is confirmed. No commercial terms are recorded.",
+    },
+  });
+
+  await prisma.developerPartnership.create({
+    data: {
+      developerId: developer.id,
+      relationshipStatus: "PROSPECT",
+      markets: ["Bangladesh"],
+      active: true,
+      publicVisibility: false,
+      internalNotes:
+        "Prospect relationship for the unpublished placeholder. No agreement reference or compensation terms.",
     },
   });
 

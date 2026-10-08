@@ -23,6 +23,7 @@ export const viewingSchema = z.object({
   propertyId: z.string().min(1),
   preferredDate: z.string().min(1),
   preferredTime: z.string().min(1),
+  viewingType: z.enum(["IN_PERSON", "VIRTUAL", "SITE_VISIT"]).optional(),
   contactMethod: z.enum(["EMAIL", "PHONE", "WHATSAPP"]).default("EMAIL"),
   message: z.string().trim().max(2000).optional(),
   consent: z.literal(true, { error: "Consent is required." }),

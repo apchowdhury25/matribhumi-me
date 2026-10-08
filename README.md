@@ -17,9 +17,9 @@ Projects, people, prices, and locations shipped in the seed are **placeholder li
 ```
 src/app            App Router pages, API routes, server actions
 src/components     UI, layout, property, forms, maps, admin, analytics
-src/config         Central brand and navigation (site.ts)
+src/config         Brand, navigation, and buyer-fee business model
 src/lib            Prisma, auth, SEO, storage, validation, analytics, mail
-prisma             Schema and seed
+prisma             Schema, migrations, and seed
 public/brand       Logo, favicon, Open Graph — replace files without code changes
 public/media       Demonstration photography and plans
 ```
@@ -96,7 +96,9 @@ docker compose up -d db
 
 Then set `DATABASE_URL` to `postgresql://matribhumi:matribhumi@localhost:5432/matribhumi?schema=public` and change the Prisma provider to `postgresql`.
 
-Seed includes 10+ properties, 6 developments, 6 locations, 30+ units, 15 amenities, 10 articles, and 8 jobs. The seed developer row is an unpublished placeholder; public pages hide the developer name until a published partner exists. Reseeding clears existing leads.
+Seed includes 10+ properties, 6 developments, 6 locations, 30+ units, 15 amenities, 10 articles, and 8 jobs. The seed developer row is an unpublished placeholder with a prospect partnership and no compensation terms; public pages hide the developer name until a published partner exists. Reseeding clears existing leads, deals, and viewings.
+
+Staff console: developers and partnerships, lead qualification, deal pipeline, viewings. Compensation and agreement references are administrator-only and are excluded from public APIs.
 
 ## Testing
 

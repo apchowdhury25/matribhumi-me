@@ -8,6 +8,7 @@ import { rateLimit } from "@/lib/rate-limit";
 import { brochureEmail, sendMail } from "@/lib/mail";
 import { findCountry } from "@/lib/countries";
 import { siteConfig } from "@/config/site";
+import { openDealForLead } from "@/lib/deals";
 
 type State = { ok: boolean; error: string };
 
@@ -40,7 +41,13 @@ export async function submitLead(_prev: State, formData: FormData): Promise<Stat
     return { ok: false, error: "Please check the form and try again." };
   }
 
-  await prisma.lead.create({
+  const property = parsed.data.propertyId
+    ? await prisma.property.findUnique({
+        where: { id: parsed.data.propertyId },
+        select: { id: true, developerId: true, developmentId: true },
+      })
+    : null;
+  const lead = await prisma.lead.create({
     data: {
       name: parsed.data.name,
       email: parsed.data.email,
@@ -51,8 +58,19 @@ export async function submitLead(_prev: State, formData: FormData): Promise<Stat
       message: parsed.data.message,
       inquiryType: parsed.data.inquiryType,
       propertyId: parsed.data.propertyId || null,
+      developerId: property?.developerId ?? null,
+      developmentId: property?.developmentId ?? null,
+      source: "WEBSITE",
     },
   });
+  if (parsed.data.inquiryType === "SALES") {
+    await openDealForLead({
+      leadId: lead.id,
+      propertyId: property?.id,
+      developerId: property?.developerId,
+      developmentId: property?.developmentId,
+    });
+  }
   await sendMail({
     to: process.env.SMTP_FROM || "hello@matribhumi.me",
     subject: `Inquiry from ${parsed.data.name}`,
@@ -77,6 +95,12 @@ export async function submitContact(_prev: State, formData: FormData): Promise<S
     consent: formData.get("consent") === "true",
   });
   if (!parsed.success) return { ok: false, error: "Please check the form and try again." };
+  const property = parsed.data.propertyId
+    ? await prisma.property.findUnique({
+        where: { id: parsed.data.propertyId },
+        select: { id: true, developerId: true, developmentId: true },
+      })
+    : null;
   await prisma.lead.create({
     data: {
       name: parsed.data.name,
@@ -88,6 +112,9 @@ export async function submitContact(_prev: State, formData: FormData): Promise<S
       message: parsed.data.message,
       inquiryType: parsed.data.inquiryType,
       propertyId: parsed.data.propertyId || null,
+      developerId: property?.developerId ?? null,
+      developmentId: property?.developmentId ?? null,
+      source: "WEBSITE",
     },
   });
   return { ok: true, error: "" };
@@ -103,11 +130,29 @@ export async function submitViewing(_prev: State, formData: FormData): Promise<S
     propertyId: formData.get("propertyId"),
     preferredDate: formData.get("preferredDate"),
     preferredTime: formData.get("preferredTime"),
+    viewingType: formData.get("viewingType") || "IN_PERSON",
     contactMethod: formData.get("contactMethod") || "EMAIL",
     message: formData.get("message") || undefined,
     consent: formData.get("consent") === "true",
   });
   if (!parsed.success) return { ok: false, error: "Please check the viewing details and try again." };
+  const property = await prisma.property.findUnique({
+    where: { id: parsed.data.propertyId },
+    select: { id: true, developerId: true, developmentId: true },
+  });
+  if (!property) return { ok: false, error: "Please check the viewing details and try again." };
+  const lead = await prisma.lead.findFirst({
+    where: { email: parsed.data.email, propertyId: parsed.data.propertyId },
+    select: { id: true },
+  });
+  const deal = lead
+    ? await openDealForLead({
+        leadId: lead.id,
+        propertyId: property.id,
+        developerId: property.developerId,
+        developmentId: property.developmentId,
+      })
+    : null;
   await prisma.viewingRequest.create({
     data: {
       name: parsed.data.name,
@@ -116,14 +161,25 @@ export async function submitViewing(_prev: State, formData: FormData): Promise<S
       propertyId: parsed.data.propertyId,
       preferredDate: new Date(parsed.data.preferredDate),
       preferredTime: parsed.data.preferredTime,
+      viewingType: parsed.data.viewingType ?? "IN_PERSON",
       contactMethod: parsed.data.contactMethod,
       message: parsed.data.message,
+      developerId: property.developerId,
+      leadId: lead?.id ?? null,
+      dealId: deal?.id ?? null,
+      status: "REQUESTED",
     },
   });
-  await prisma.lead.updateMany({
-    where: { email: parsed.data.email, propertyId: parsed.data.propertyId },
-    data: { status: "VIEWING_SCHEDULED" },
-  });
+  if (lead) {
+    await prisma.lead.update({
+      where: { id: lead.id },
+      data: { status: "VIEWING_SCHEDULED" },
+    });
+    await prisma.deal.updateMany({
+      where: { id: deal?.id, status: "OPEN" },
+      data: { stage: "VIEWING", viewingAt: new Date() },
+    });
+  }
   return { ok: true, error: "" };
 }
 
@@ -160,6 +216,8 @@ export async function submitWaitlist(_prev: State, formData: FormData): Promise<
       contactMethod: "EMAIL",
       message: `Pre-launch waitlist. Primary interest: ${parsed.data.interest}.${parsed.data.project ? ` Development: ${parsed.data.project}.` : ""}`,
       inquiryType: "SALES",
+      source: "WAITLIST",
+      purpose: parsed.data.interest === "Investment" ? "INVESTMENT" : parsed.data.interest === "Retirement" ? "PRIMARY_RESIDENCE" : "SECOND_HOME",
     },
   });
 
@@ -195,6 +253,7 @@ export async function submitBrochure(_prev: State, formData: FormData): Promise<
       contactMethod: "EMAIL",
       message: `Brochure download.${parsed.data.project ? ` Development: ${parsed.data.project}.` : ""} ${letter.downloadUrl}`,
       inquiryType: "SALES",
+      source: "BROCHURE",
     },
   });
 

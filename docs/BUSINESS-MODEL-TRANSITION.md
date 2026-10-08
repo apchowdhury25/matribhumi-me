@@ -1,5 +1,18 @@
 # Business-model transition
 
+## Step 4 — advisory platform schema
+
+Evolve the existing Prisma schema for a multi-developer advisory and transaction-coordination platform. Do not rebuild the database. Keep Developer → Development → Property → Unit.
+
+- `Developer` now holds company profile, public vs internal copy, Bangladesh-default country, cities, contacts, status, verified/featured flags, and timestamps.
+- `DeveloperPartnership` records the MatriBhumi relationship (status, dates, markets, agreement reference, public visibility). Commercial agreement details stay off public pages.
+- `DeveloperCompensation` and `DealCompensation` store compensation type, percentage or amount, currency, payment status, and transaction references. ADMIN-only via `canViewCompensation`. Public APIs use `publicDeveloperSelect` and `stripConfidential`.
+- Central buyer-fee config in `src/config/businessModel.ts`: `buyerPaysMatriBhumi = false`, `buyerFee = 0`, `developerCompensation = true`.
+- `Lead` records optional buyer geography, budget range, purpose, timeline, financing, source, assigned staff, developer/development referral, qualification, and follow-up. Sensitive fields stay optional.
+- `Deal` tracks BuyerLead → Qualification → DeveloperIntroduction → Viewing → PropertySelected → Reservation → Contract → Completion → Closed. Estimated transaction value is the buyer purchase with the developer/seller. MatriBhumi compensation is a separate record.
+- `ViewingRequest` adds viewing type, location, lead/developer/advisor/deal links, and developer confirmation.
+- Migrations: `20261008000000_init` (baseline of the pre-Step-4 schema), `20261008010000_advisory_platform` (additive tables/columns), and `20261008010001_backfill_developer_partnerships` (prospect partnership for existing developers, Bangladesh market, not public, no compensation terms). Existing developer rows keep their names and listings; `publicDescription` is copied from `description`. No invented partners or commission percentages.
+
 ## Step 3 — Bangladesh-only coordination
 
 Public pages, filters, sitemap, and seed listings coordinate with developers in Bangladesh only.
