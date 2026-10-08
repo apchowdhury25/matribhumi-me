@@ -25,27 +25,29 @@ export const businessModel = {
 
 export type BusinessModel = typeof businessModel;
 
+/** Canonical public buyer-fee disclosure. Edit here to change site-wide wording. */
+export const buyerFeeDisclosure =
+  "MatriBhumi does not charge buyers a property brokerage or consultation fee for its core property advisory service. Where applicable, MatriBhumi may receive compensation from participating developers under separate commercial agreements.";
+
 export const buyerFeeStatement = businessModel.buyerPaysMatriBhumi
   ? `Buyers pay MatriBhumi a fee of ${businessModel.buyerFee} ${businessModel.buyerFeeCurrency}.`
-  : "You pay MatriBhumi nothing for our property advisory and transaction-coordination service. Where applicable, participating developers compensate MatriBhumi under separate commercial agreements.";
+  : buyerFeeDisclosure;
 
 export const buyerFeeNote =
-  "Developer arrangements vary by project. The buyer's purchase agreement is with the property developer/seller. MatriBhumi does not receive the buyer's property purchase funds.";
+  "Developer commercial arrangements can differ. The property purchase agreement is between the buyer and the relevant developer/seller. MatriBhumi does not receive or hold the buyer’s property purchase funds. Buyers may ask MatriBhumi about relevant developer relationships.";
 
-export const buyerJourneyFeeMessage =
-  "MatriBhumi does not charge buyers a property brokerage or consultation fee. Where applicable, MatriBhumi is compensated by participating developers under separate agreements.";
+export const buyerJourneyFeeMessage = buyerFeeStatement;
 
-/** Marketing headline. Keep legal disclosure copy in HowWeArePaid / buyerFeeNote. */
-export const buyerFeeHeadline = "Your property search doesn't come with a MatriBhumi fee.";
+/** Marketing headline. Pair it with buyerFeeDisclosure; do not claim independence from developers. */
+export const buyerFeeHeadline = "No MatriBhumi brokerage or consultation fee for buyers.";
 
-export const buyerFeeMarketing =
-  "MatriBhumi does not charge buyers a brokerage or consultation fee for our core property advisory service. Where applicable, we are compensated by participating developers under separate commercial arrangements.";
+export const buyerFeeMarketing = buyerFeeDisclosure;
 
 export const advisorFollowUpMessage =
   "Your MatriBhumi property advisor will review your requirements and contact you.";
 
 export const propertySourceDisclosure =
-  "Property information is provided by or sourced from the relevant developer. Availability, pricing, specifications and completion dates should be confirmed directly before making a purchase decision.";
+  "Prices, availability, specifications, unit availability, completion schedules, service charges, taxes, title information and other property details may change. Buyers should confirm important information with the relevant developer/seller and qualified professionals before making a purchase decision. Property information on this website is not a guarantee.";
 
 export function buyerPaysNothing() {
   return !businessModel.buyerPaysMatriBhumi && businessModel.buyerFee === 0;

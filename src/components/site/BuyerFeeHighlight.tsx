@@ -1,4 +1,6 @@
-import { buyerFeeHeadline, buyerFeeMarketing } from "@/config/businessModel";
+import Link from "next/link";
+import { buyerFeeHeadline } from "@/config/businessModel";
+import { compensationTransparency } from "@/config/legal";
 import { cn } from "@/lib/utils";
 
 export function BuyerFeeHighlight({ className }: { className?: string }) {
@@ -16,7 +18,13 @@ export function BuyerFeeHighlight({ className }: { className?: string }) {
           {buyerFeeHeadline}
         </h2>
         <p className="mx-auto mt-8 max-w-2xl text-base leading-8 text-muted sm:text-lg">
-          {buyerFeeMarketing}
+          {compensationTransparency.disclosure}
+        </p>
+        <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-muted">
+          {compensationTransparency.points.slice(1).join(" ")}{" "}
+          <Link href="/disclaimer/buyer-fee" className="text-earth underline-offset-4 hover:underline">
+            Full disclosure
+          </Link>
         </p>
       </div>
     </section>

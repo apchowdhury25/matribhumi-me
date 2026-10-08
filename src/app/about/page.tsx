@@ -11,7 +11,7 @@ import { siteConfig, whatWeDo } from "@/config/site";
 export const metadata = createMetadata({
   title: "About",
   description:
-    "MatriBhumi is independent property advisory and transaction coordination across Bangladesh, the UAE and Malaysia.",
+    "MatriBhumi is independent property advisory and transaction coordination in Bangladesh.",
   path: "/about",
   image: "/media/about-lobby.jpg",
 });
@@ -31,8 +31,8 @@ export default function AboutPage() {
           <p className="mt-4 leading-8 text-muted">
             MatriBhumi means mother-land. We are an independent property advisor and transaction-coordination company —
             not a developer that builds homes for sale under this brand, except where a listing is explicitly marked
-            MatriBhumi-owned. Families at home and abroad use us to compare selected developer properties across
-            Bangladesh, the UAE and Malaysia, then stay with us through introductions, viewings, and follow-up.
+            MatriBhumi-owned. Families at home and abroad use us to compare selected developer properties in
+            Bangladesh, then stay with us through introductions, viewings, and follow-up.
           </p>
         </div>
         <div className="grid gap-8">

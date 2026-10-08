@@ -5,45 +5,46 @@ import { SectionHeader } from "@/components/site/SectionHeader";
 import { getLocations } from "@/lib/data";
 import { markets } from "@/lib/markets";
 import { createMetadata } from "@/lib/seo";
+import { howWeWork } from "@/config/legal";
 
 export const dynamic = "force-dynamic";
 export const metadata = createMetadata({
   title: "Locations",
   description:
-    "Independent property guidance across Bangladesh, the UAE and Malaysia. City pages cover Dhaka, Chattogram, and other published locations.",
+    "Independent property guidance in Bangladesh. City pages cover Dhaka, Chattogram, and other published locations.",
   path: "/locations",
   image: "/media/location-aerial.jpg",
 });
 
 export default async function LocationsPage() {
   const locations = await getLocations();
+  const bangladesh = markets[0];
   return (
     <PublicShell transparentHeader>
       <PageHero
         image="/media/location-aerial.jpg"
         eyebrow="Locations"
-        title="Bangladesh, the UAE and Malaysia."
-        description="Independent property advisory across three markets. Selected developer properties appear as partnerships are published. MatriBhumi is the advisor; the developer is the seller."
+        title="Property advisory in Bangladesh."
+        description={`${howWeWork.summary} ${howWeWork.purchaseAgreement}`}
       />
       <section className="px-4 py-16 sm:px-6 md:px-12 md:py-24">
         <SectionHeader
-          eyebrow="Markets"
-          title="Choose a country."
-          description="Each market page explains how we advise there. Listings are published as developer partnerships are confirmed."
+          eyebrow="Bangladesh"
+          title="Explore by city."
+          description="City pages open when location data has been published. MatriBhumi is the advisor; the developer is the seller."
         />
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {markets.map((market) => (
-            <Link key={market.slug} href={`/locations/${market.slug}`} className="group relative min-h-[280px] overflow-hidden">
+          {bangladesh.cities.map((city) => (
+            <Link key={city.slug} href={`/locations/${city.slug}`} className="group relative min-h-[280px] overflow-hidden">
               <img
-                src={market.heroImage}
+                src={bangladesh.heroImage}
                 alt=""
                 className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
               />
               <div className="absolute inset-0 bg-charcoal/45" />
               <div className="relative flex h-full min-h-[280px] flex-col justify-end p-6 text-ivory">
-                <p className="text-[11px] uppercase tracking-[0.2em] text-sand">{market.region}</p>
-                <h2 className="font-display mt-2 text-4xl">{market.shortName}</h2>
-                <p className="mt-2 text-sm text-ivory/80">{market.cities.map((city) => city.name).join(" · ")}</p>
+                <p className="text-[11px] uppercase tracking-[0.2em] text-sand">Bangladesh</p>
+                <h2 className="font-display mt-2 text-4xl">{city.name}</h2>
               </div>
             </Link>
           ))}

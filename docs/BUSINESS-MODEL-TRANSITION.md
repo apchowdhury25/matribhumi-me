@@ -1,5 +1,16 @@
 # Business-model transition
 
+## Step 8 — Bangladesh legal, trust, and disclosure framework
+
+Public presentation is Bangladesh-only. `/locations/uae` and `/locations/malaysia` permanently redirect to `/locations`.
+
+- Central copy in `src/config/legal.ts` and `src/config/businessModel.ts`. The public buyer-fee sentence is configurable and used consistently. Developer compensation terminology stays configurable (`developerFeeTerm`) and unpublished.
+- How we work: MatriBhumi helps buyers discover and compare selected properties from participating developers and coordinates introductions, viewings and transaction-related communication. The property purchase agreement is between the buyer and the relevant developer/seller.
+- Transaction distinction: Buyer → property purchase → developer/seller, separate from Developer → commercial agreement → MatriBhumi. MatriBhumi does not receive or hold the buyer’s purchase funds.
+- Legal pages (operational copy, pending Bangladesh counsel review, not legal advice): Terms, Privacy, Cookies, Property Disclaimer, Buyer Fee Disclosure, Developer Partner Disclosure, General Disclaimer, plus `/legal/bangladesh` placeholders.
+- Property information may change and is not a guarantee. No investment promises. Independent legal, tax, financial, and financing advice is recommended.
+- Public APIs keep using `publicDeveloperSelect` and `stripConfidential`. `/api/upload` requires a staff session. Compensation remains ADMIN-only.
+
 ## Step 7 — premium international advisory presentation
 
 Redesign the public visual presentation so MatriBhumi reads as a premium international property advisory and brokerage — not a property developer or a construction company.

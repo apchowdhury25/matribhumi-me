@@ -23,6 +23,26 @@ const nextConfig = {
         destination: "https://matribhumi.me/:path*",
         permanent: true,
       },
+      {
+        source: "/locations/uae",
+        destination: "/locations",
+        permanent: true,
+      },
+      {
+        source: "/locations/uae/",
+        destination: "/locations",
+        permanent: true,
+      },
+      {
+        source: "/locations/malaysia",
+        destination: "/locations",
+        permanent: true,
+      },
+      {
+        source: "/locations/malaysia/",
+        destination: "/locations",
+        permanent: true,
+      },
     ];
   },
   async headers() {

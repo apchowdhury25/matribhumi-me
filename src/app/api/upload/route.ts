@@ -2,10 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 import { ALLOWED_UPLOADS, assertMime, getStorage } from "@/lib/storage";
 import { rateLimit } from "@/lib/rate-limit";
 import { getClientIp } from "@/lib/utils";
+import { canUpload, requireUser } from "@/lib/auth";
 
 const MAX = 8 * 1024 * 1024;
 
 export async function POST(request: NextRequest) {
+  const user = await requireUser();
+  if (!user || !canUpload(user.role)) {
+    return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
+  }
   const ip = getClientIp(request.headers);
   if (!rateLimit(`upload:${ip}`, 10, 60_000).ok) {
     return NextResponse.json({ error: "Too many uploads." }, { status: 429 });

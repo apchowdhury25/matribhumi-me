@@ -19,11 +19,19 @@ export const publicDeveloperSelect = {
 const CONFIDENTIAL_DEVELOPER_KEYS = [
   "internalNotes",
   "relationshipNotes",
+  "staffNotes",
+  "advisorNotes",
+  "leadNotes",
+  "dealNotes",
   "contactName",
   "contactEmail",
   "contactPhone",
   "partnerships",
   "compensations",
+  "followUps",
+  "introductions",
+  "deals",
+  "shortlist",
 ] as const;
 
 const CONFIDENTIAL_KEY_FRAGMENTS = [
@@ -31,15 +39,30 @@ const CONFIDENTIAL_KEY_FRAGMENTS = [
   "percentage",
   "fixedAmount",
   "expectedAmount",
+  "estimatedValue",
   "paymentStatus",
   "paymentDate",
   "transactionReference",
   "compensation",
   "internalNotes",
+  "staffNotes",
+  "advisorNotes",
+  "leadNotes",
+  "dealNotes",
+  "relationshipNotes",
+  "commercialTerms",
+  "confidential",
+  "feeAmount",
 ];
 
 export function stripConfidential<T>(value: T): T {
   return stripValue(value) as T;
+}
+
+export function containsConfidentialKey(key: string) {
+  if ((CONFIDENTIAL_DEVELOPER_KEYS as readonly string[]).includes(key)) return true;
+  if (key === "description") return false;
+  return CONFIDENTIAL_KEY_FRAGMENTS.some((fragment) => key.toLowerCase().includes(fragment.toLowerCase()));
 }
 
 function stripValue(value: unknown): unknown {
@@ -48,10 +71,7 @@ function stripValue(value: unknown): unknown {
   const source = value as Record<string, unknown>;
   const next: Record<string, unknown> = {};
   for (const [key, nested] of Object.entries(source)) {
-    if ((CONFIDENTIAL_DEVELOPER_KEYS as readonly string[]).includes(key)) continue;
-    if (CONFIDENTIAL_KEY_FRAGMENTS.some((fragment) => key.toLowerCase().includes(fragment.toLowerCase()) && key !== "description")) {
-      continue;
-    }
+    if (containsConfidentialKey(key)) continue;
     next[key] = stripValue(nested);
   }
   return next;

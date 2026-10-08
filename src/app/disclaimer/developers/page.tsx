@@ -2,7 +2,7 @@ import { LegalDocument } from "@/components/site/LegalDocument";
 import { legalPages } from "@/config/legal";
 import { createMetadata } from "@/lib/seo";
 
-const page = legalPages.terms;
+const page = legalPages.developers;
 
 export const metadata = createMetadata({
   title: page.title,
@@ -10,6 +10,6 @@ export const metadata = createMetadata({
   path: page.path,
 });
 
-export default function TermsPage() {
+export default function DeveloperPartnerDisclosurePage() {
   return <LegalDocument page={page} />;
 }

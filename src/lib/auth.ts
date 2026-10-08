@@ -7,7 +7,9 @@ import {
   canAccessSales,
   canEditDevelopers,
   canManage,
+  canUpload,
   canViewCompensation,
+  canViewInternalNotes,
   canViewReports,
 } from "@/lib/auth-roles";
 import type { UserRole } from "@prisma/client";
@@ -103,6 +105,8 @@ export {
   canAccessSales,
   canEditDevelopers,
   canManage,
+  canUpload,
   canViewCompensation,
+  canViewInternalNotes,
   canViewReports,
 };

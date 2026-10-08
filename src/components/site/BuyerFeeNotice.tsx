@@ -1,4 +1,4 @@
-import { buyerJourneyFeeMessage } from "@/config/businessModel";
+import { buyerFeeDisclosure } from "@/config/businessModel";
 import { cn } from "@/lib/utils";
 
 export function BuyerFeeNotice({
@@ -18,7 +18,7 @@ export function BuyerFeeNotice({
         className,
       )}
     >
-      {buyerJourneyFeeMessage}
+      {buyerFeeDisclosure}
     </p>
   );
 }

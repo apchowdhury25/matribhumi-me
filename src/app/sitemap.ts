@@ -39,8 +39,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/projects",
     "/locations",
     "/locations/bangladesh",
-    "/locations/uae",
-    "/locations/malaysia",
     "/how-it-works",
     "/advise",
     "/for-developers",
@@ -55,6 +53,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/terms",
     "/cookies",
     "/disclaimer",
+    "/disclaimer/property",
+    "/disclaimer/buyer-fee",
+    "/disclaimer/developers",
+    "/legal/bangladesh",
   ];
 
   return [

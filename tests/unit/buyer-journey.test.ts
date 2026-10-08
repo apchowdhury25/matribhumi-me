@@ -28,7 +28,7 @@ const listing = {
 describe("buyer journey copy", () => {
   it("keeps the configurable public fee message exact", () => {
     expect(buyerJourneyFeeMessage).toBe(
-      "MatriBhumi does not charge buyers a property brokerage or consultation fee. Where applicable, MatriBhumi is compensated by participating developers under separate agreements.",
+      "MatriBhumi does not charge buyers a property brokerage or consultation fee for its core property advisory service. Where applicable, MatriBhumi may receive compensation from participating developers under separate commercial agreements.",
     );
   });
 
@@ -36,7 +36,8 @@ describe("buyer journey copy", () => {
     expect(advisorFollowUpMessage).toBe(
       "Your MatriBhumi property advisor will review your requirements and contact you.",
     );
-    expect(propertySourceDisclosure).toContain("provided by or sourced from the relevant developer");
+    expect(propertySourceDisclosure).toContain("Prices, availability, specifications, unit availability");
+    expect(propertySourceDisclosure).toContain("not a guarantee");
     expect(propertySourceDisclosure.toLowerCase()).not.toMatch(/yield|appreciation|return/);
   });
 
@@ -51,17 +52,17 @@ describe("buyer journey copy", () => {
     expect(Object.values(buyerCtas).join(" ")).not.toMatch(/buy now/i);
   });
 
-  it("keeps marketing buyer-fee copy separate from the legal disclosure", () => {
-    expect(buyerFeeHeadline).toBe("Your property search doesn't come with a MatriBhumi fee.");
+  it("keeps the marketing headline paired with the canonical fee disclosure", () => {
+    expect(buyerFeeHeadline).toBe("No MatriBhumi brokerage or consultation fee for buyers.");
+    expect(buyerFeeMarketing).toBe(buyerJourneyFeeMessage);
     expect(buyerFeeMarketing).toContain("core property advisory service");
-    expect(buyerFeeMarketing).not.toBe(buyerJourneyFeeMessage);
   });
 
   it("states why buyers choose MatriBhumi in eight trust points", () => {
     expect(whyMatriBhumi.map((item) => item.title)).toEqual([
       "Independent guidance",
       "Curated developer network",
-      "Cross-border support",
+      "Support from abroad",
       "One point of coordination",
       "Transparent buyer-fee policy",
       "Property comparison",

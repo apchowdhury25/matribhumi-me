@@ -44,13 +44,14 @@ export function AdvisoryForm({
       <Field name="email" label="Email" type="email" required autoComplete="email" />
       <Field name="phone" label="WhatsApp / phone" required autoComplete="tel" />
       <Field name="residenceCountry" label="Country of residence" required autoComplete="country-name" />
+      <input type="hidden" name="preferredMarket" value="Bangladesh" />
       <label className="grid gap-2 text-[11px] uppercase tracking-[0.18em] text-earth">
         Preferred country
-        <select name="preferredMarket" required defaultValue="Bangladesh" className="h-12 w-full border border-charcoal/15 bg-paper px-3 text-base text-charcoal">
-          <option value="Bangladesh">Bangladesh</option>
-          <option value="UAE">UAE</option>
-          <option value="Malaysia">Malaysia</option>
-        </select>
+        <input
+          value="Bangladesh"
+          readOnly
+          className="h-12 w-full border border-charcoal/15 bg-paper px-3 text-base text-charcoal"
+        />
       </label>
       <Field name="preferredCity" label="Preferred city" required />
       <label className="grid gap-2 text-[11px] uppercase tracking-[0.18em] text-earth">

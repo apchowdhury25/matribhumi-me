@@ -18,20 +18,26 @@ test("country landings and how it works", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: /Talk to a property advisor/i })).toBeVisible();
   await page.goto("/for-developers");
   await expect(page.getByRole("heading", { level: 1, name: /Are you a property developer/i })).toBeVisible();
-  await expect(page.getByText(/Reach qualified buyers across Bangladesh, the UAE and Malaysia/i).first()).toBeVisible();
-  await expect(page.getByText(/guaranteed sales/i)).toBeVisible();
+  await expect(page.getByText(/Reach qualified buyers looking at selected Bangladesh developments/i).first()).toBeVisible();
+  await expect(page.getByText(/guaranteed sales/i).first()).toBeVisible();
 });
 
-test("UAE and Malaysia market landings", async ({ page }) => {
+test("former UAE and Malaysia URLs redirect to locations", async ({ page }) => {
   await page.goto("/locations/uae");
-  await expect(page).toHaveURL(/\/locations\/uae\/?$/);
-  await expect(page.getByRole("heading", { level: 1, name: /United Arab Emirates property advisory/i })).toBeVisible();
+  await expect(page).toHaveURL(/\/locations\/?$/);
   await page.goto("/locations/malaysia");
-  await expect(page).toHaveURL(/\/locations\/malaysia\/?$/);
-  await expect(page.getByRole("heading", { level: 1, name: /Malaysia property advisory/i })).toBeVisible();
-  await page.goto("/");
-  await expect(page.getByRole("link", { name: "UAE", exact: true }).first()).toBeVisible();
-  await expect(page.getByRole("link", { name: "Malaysia", exact: true }).first()).toBeVisible();
+  await expect(page).toHaveURL(/\/locations\/?$/);
+});
+
+test("legal disclosure pages", async ({ page }) => {
+  await page.goto("/disclaimer/buyer-fee");
+  await expect(page.getByRole("heading", { level: 1, name: "Buyer Fee Disclosure" })).toBeVisible();
+  await expect(
+    page.getByText(/MatriBhumi does not charge buyers a property brokerage or consultation fee for its core property advisory service/i).first(),
+  ).toBeVisible();
+  await page.goto("/legal/bangladesh");
+  await expect(page.getByRole("heading", { level: 1, name: "Bangladesh legal information" })).toBeVisible();
+  await expect(page.getByText(/not legal advice/i).first()).toBeVisible();
 });
 
 test("properties search and filter", async ({ page }) => {

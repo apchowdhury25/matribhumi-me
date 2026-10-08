@@ -6,6 +6,7 @@ import { propertyFilterSchema } from "@/lib/validations";
 import { createMetadata } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
 import { BuyerFeeNotice } from "@/components/site/BuyerFeeNotice";
+import { PropertyDisclaimerNotice } from "@/components/site/PropertyDisclaimerNotice";
 import { buyerCtas } from "@/config/ctas";
 import { statusLabel } from "@/lib/format";
 
@@ -13,7 +14,7 @@ export const dynamic = "force-dynamic";
 export const metadata = createMetadata({
   title: "Properties",
   description:
-    "Browse selected developer properties. Filter by city, developer, type and price. Independent advisory — with no buyer fee.",
+    "Browse selected developer properties in Bangladesh. Filter by city, developer, type and price.",
   path: "/properties",
   image: "/media/hero-urban.jpg",
 });
@@ -135,7 +136,8 @@ export default async function PropertiesPage({
           </div>
         ) : null}
         <div className="mt-16">
-          <BuyerFeeNotice className="mb-6 max-w-3xl" />
+          <BuyerFeeNotice className="mb-4 max-w-3xl" />
+          <PropertyDisclaimerNotice className="mb-6 max-w-3xl" />
           <Button href="/advise" variant="outline">{buyerCtas.talkToAdvisor}</Button>
         </div>
       </section>

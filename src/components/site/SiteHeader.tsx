@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import { SearchOverlay } from "@/components/search/SearchOverlay";
-import { bangladeshCityNav, countryNav, navItems, siteConfig } from "@/config/site";
+import { countryNav, navItems, siteConfig } from "@/config/site";
 import { buyerCtas } from "@/config/ctas";
 import { cn } from "@/lib/utils";
 
@@ -111,22 +111,9 @@ export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
               </Link>
             ))}
           </nav>
-          <p className="text-[11px] uppercase tracking-[0.22em] text-earth">Markets</p>
-          <nav className="mt-3 grid gap-1">
-            {countryNav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="py-2 text-lg"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-          <p className="mt-8 text-[11px] uppercase tracking-[0.22em] text-earth">Bangladesh cities</p>
+          <p className="text-[11px] uppercase tracking-[0.22em] text-earth">Bangladesh</p>
           <nav className="mt-3 grid gap-1 pb-28">
-            {bangladeshCityNav.map((item) => (
+            {countryNav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}

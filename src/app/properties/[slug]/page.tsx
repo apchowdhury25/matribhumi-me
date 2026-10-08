@@ -16,6 +16,7 @@ import { isVerifiedDeveloper, ownershipLabel, publicDeveloperName } from "@/lib/
 import { buyerCtas } from "@/config/ctas";
 import { propertySourceDisclosure } from "@/config/businessModel";
 import { BuyerFeeNotice } from "@/components/site/BuyerFeeNotice";
+import { ProfessionalAdviceNotice } from "@/components/site/ProfessionalAdviceNotice";
 
 export const dynamic = "force-dynamic";
 
@@ -176,6 +177,7 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
           </div>
         </div>
         <p className="mt-10 max-w-3xl text-sm leading-7 text-muted">{propertySourceDisclosure}</p>
+        <ProfessionalAdviceNotice className="mt-3 max-w-3xl" />
       </section>
 
       <section className="px-4 pb-16 sm:px-6 md:px-12 md:pb-20">

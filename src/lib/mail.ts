@@ -1,4 +1,6 @@
 import nodemailer from "nodemailer";
+import { buyerFeeDisclosure } from "@/config/businessModel";
+import { howWeWork } from "@/config/legal";
 import { siteConfig } from "@/config/site";
 
 function escapeHtml(value: string) {
@@ -118,7 +120,7 @@ Thank you for sharing your requirements with MatriBhumi.
 
 A property advisor will review what you sent — ${input.propertyType.toLowerCase().replace(/_/g, " ")} in ${input.preferredCity}, ${input.preferredMarket}, around ${input.budget} ${input.currency} — and contact you. This is a human review, not an automated valuation or legal opinion.
 
-MatriBhumi does not charge buyers a property brokerage or consultation fee. Where applicable, MatriBhumi is compensated by participating developers under separate agreements. The purchase agreement is with the developer or seller.
+${buyerFeeDisclosure} ${howWeWork.purchaseAgreement}
 
 Warm regards,
 The MatriBhumi Team

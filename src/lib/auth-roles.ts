@@ -26,3 +26,13 @@ export function canViewReports(role: UserRole) {
 export function canViewCompensation(role: UserRole) {
   return role === "ADMIN";
 }
+
+/** Internal staff notes on developers, leads, and deals. */
+export function canViewInternalNotes(role: UserRole) {
+  return role === "ADMIN" || role === "SALES" || role === "EDITOR";
+}
+
+/** Media and document uploads. Content staff only; never public. */
+export function canUpload(role: UserRole) {
+  return canAccessContent(role);
+}

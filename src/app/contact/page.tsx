@@ -10,7 +10,7 @@ import { BuyerFeeNotice } from "@/components/site/BuyerFeeNotice";
 export const metadata = createMetadata({
   title: "Contact",
   description:
-    "Speak with a MatriBhumi advisor about selected developer properties across Bangladesh, the UAE and Malaysia. There is no buyer fee for this conversation.",
+    "Speak with a MatriBhumi advisor about selected developer properties in Bangladesh.",
   path: "/contact",
   image: "/media/about-lobby.jpg",
 });
@@ -22,7 +22,7 @@ export default function ContactPage() {
         image="/media/about-lobby.jpg"
         eyebrow="Contact"
         title="Talk to a property advisor."
-        description="Tell us the market, the kind of home, and how you will use it. MatriBhumi helps you compare selected developer properties and coordinate the journey — with no buyer fee."
+        description="Tell us the kind of home and how you will use it. MatriBhumi helps you compare selected developer properties in Bangladesh and coordinate the journey."
       />
       <section className="grid gap-16 px-4 py-14 sm:px-6 md:px-12 md:py-20 lg:grid-cols-[0.8fr_1.2fr]">
         <div>

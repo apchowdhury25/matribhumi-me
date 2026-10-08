@@ -1,4 +1,5 @@
 import { buyerFeeNote, buyerFeeStatement } from "./businessModel";
+import { legalCompliance as legalComplianceItems, legalNav } from "./legal";
 
 export const siteConfig = {
   name: "MatriBhumi",
@@ -7,16 +8,16 @@ export const siteConfig = {
   url: "https://matribhumi.me",
   domain: "matribhumi.me",
   description:
-    "Independent property guidance across Bangladesh, the UAE and Malaysia. Explore selected developments, compare options, connect with developers and coordinate your purchase — with no buyer fee.",
+    "Independent property advisory and transaction coordination in Bangladesh. Explore selected developments, compare options, connect with developers and coordinate your purchase.",
   tagline: "Find the right property. We coordinate the rest.",
   supporting:
-    "Independent property guidance across Bangladesh, the UAE and Malaysia. Explore selected developments, compare options, connect with developers and coordinate your purchase — with no buyer fee.",
+    "Independent property advisory and transaction coordination in Bangladesh. Explore selected developments, compare options, connect with developers and coordinate your purchase.",
   positioning:
     "Independent property advisory and transaction coordination.",
   districtRelation:
-    "Selected developer projects across Bangladesh, the UAE and Malaysia, including Dhaka, Chattogram, and Dhaka’s master-planned Bashundhara district as listings are published.",
+    "Selected developer projects in Bangladesh, including Dhaka, Chattogram, and Dhaka’s master-planned Bashundhara district as listings are published.",
   audience:
-    "For buyers looking across Bangladesh, the UAE and Malaysia — including households already in those markets and people living abroad who want independent guidance.",
+    "For buyers looking in Bangladesh — including households already in the country and people living abroad who want independent guidance.",
   buyerFee: buyerFeeStatement,
   buyerFeeNote,
   email: "hello@matribhumi.me",
@@ -54,8 +55,9 @@ export const navItems = [
 
 export const countryNav = [
   { href: "/locations/bangladesh", label: "Bangladesh" },
-  { href: "/locations/uae", label: "UAE" },
-  { href: "/locations/malaysia", label: "Malaysia" },
+  { href: "/locations/dhaka", label: "Dhaka" },
+  { href: "/locations/chattogram", label: "Chattogram" },
+  { href: "/locations/bashundhara", label: "Bashundhara" },
 ] as const;
 
 export const bangladeshCityNav = [
@@ -67,8 +69,9 @@ export const bangladeshCityNav = [
 export const footerNav = {
   markets: [
     { href: "/locations/bangladesh", label: "Bangladesh" },
-    { href: "/locations/uae", label: "UAE" },
-    { href: "/locations/malaysia", label: "Malaysia" },
+    { href: "/locations/dhaka", label: "Dhaka" },
+    { href: "/locations/chattogram", label: "Chattogram" },
+    { href: "/locations/bashundhara", label: "Bashundhara" },
   ],
   explore: [
     { href: "/properties", label: "Properties" },
@@ -87,18 +90,13 @@ export const footerNav = {
     { href: "/careers", label: "Careers" },
     { href: "/contact", label: "Contact" },
   ],
-  legal: [
-    { href: "/privacy", label: "Privacy" },
-    { href: "/terms", label: "Terms" },
-    { href: "/cookies", label: "Cookies" },
-    { href: "/disclaimer", label: "Disclaimer" },
-  ],
+  legal: legalNav,
 } as const;
 
 export const whatWeDo = [
   {
     title: "Find a suitable property",
-    body: "Tell us how you will live in the home. We shortlist selected developer properties across Bangladesh, the UAE and Malaysia as partnerships are published.",
+    body: "Tell us how you will live in the home. We shortlist selected developer properties in Bangladesh as partnerships are published.",
   },
   {
     title: "Work with developers",
@@ -106,14 +104,14 @@ export const whatWeDo = [
   },
   {
     title: "No buyer fee",
-    body: "You pay MatriBhumi nothing for our core property advisory service. Where applicable, participating developers compensate MatriBhumi under separate agreements.",
+    body: "MatriBhumi does not charge buyers a core property advisory fee. Where applicable, participating developers may compensate MatriBhumi under separate commercial agreements.",
   },
 ] as const;
 
 export const whoItsFor = [
   {
     title: "Local property buyers",
-    body: "Households already in Bangladesh, the UAE, or Malaysia who want help comparing developer projects before they buy.",
+    body: "Households already in Bangladesh who want help comparing developer projects before they buy.",
   },
   {
     title: "Buyers living abroad",
@@ -174,11 +172,11 @@ export const buyerServices = [
   { title: "Viewing coordination", body: "Arrange viewings with the developer and keep the diary across time zones." },
   { title: "Developer introductions", body: "A qualified introduction to the developer of record for the project you choose." },
   { title: "Transaction coordination", body: "Follow-up on the developer’s process so the purchase does not stall." },
-  { title: "Cross-border support", body: "Help for buyers living abroad or relocating across Bangladesh, the UAE and Malaysia, within what local law allows." },
+  { title: "Support from abroad", body: "Help for buyers living abroad or relocating to Bangladesh, within what local law allows." },
 ] as const;
 
 export const developerServices = [
-  { title: "Property marketing", body: "Present selected projects to buyers already looking with MatriBhumi across Bangladesh, the UAE and Malaysia." },
+  { title: "Property marketing", body: "Present selected projects to buyers already looking with MatriBhumi in Bangladesh." },
   { title: "Qualified buyer referrals", body: "Introductions after we understand budget, timing, and intent." },
   { title: "Buyer requirement matching", body: "Route enquiries to the project that actually fits." },
   { title: "Viewing coordination", body: "Schedule and follow up viewings with the buyer and your sales team." },
@@ -264,8 +262,8 @@ export const whyMatriBhumi = [
     body: "We present selected developments from participating developers. Public names appear when a partnership is published.",
   },
   {
-    title: "Cross-border support",
-    body: "Guidance for buyers looking across Bangladesh, the UAE and Malaysia, including households living abroad.",
+    title: "Support from abroad",
+    body: "Guidance for buyers looking in Bangladesh, including households living abroad.",
   },
   {
     title: "One point of coordination",
@@ -273,7 +271,7 @@ export const whyMatriBhumi = [
   },
   {
     title: "Transparent buyer-fee policy",
-    body: "You pay MatriBhumi nothing for our core property advisory service. Where applicable, participating developers compensate us under separate arrangements.",
+    body: "MatriBhumi does not charge buyers a core property advisory fee. Where applicable, participating developers may compensate MatriBhumi under separate commercial agreements.",
   },
   {
     title: "Property comparison",
@@ -370,19 +368,6 @@ export const leadership = [
   },
 ] as const;
 
-export const legalCompliance = [
-  {
-    title: "Developer of record",
-    body: "Approvals, structural certificates, and developer registration belong to the participating developer for each listing. References are published when that developer provides them. MatriBhumi is the advisor and coordinator unless a listing is marked MatriBhumi-owned.",
-  },
-  {
-    title: "Buyer fees",
-    body: "You pay MatriBhumi nothing for our property advisory and transaction-coordination service. Where applicable, participating developers compensate MatriBhumi under separate commercial agreements. Developer arrangements vary by project. The buyer's purchase agreement is with the property developer/seller.",
-  },
-  {
-    title: "Office",
-    body: "MatriBhumi. House 12, Road 7, Gulshan, Dhaka 1212, Bangladesh. This site does not claim a real-estate licence in Bangladesh.",
-  },
-] as const;
+export const legalCompliance = legalComplianceItems;
 
 export type SiteConfig = typeof siteConfig;

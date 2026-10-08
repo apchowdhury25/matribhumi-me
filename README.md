@@ -4,9 +4,9 @@ Official website for **MatriBhumi**.
 
 Canonical site: **[https://matribhumi.me](https://matribhumi.me)**
 
-MatriBhumi is **independent property advisory and transaction coordination** across Bangladesh, the UAE and Malaysia. It helps buyers find suitable properties from selected developers, introduces them to the developer of record, and coordinates viewings and follow-up. Buyers pay MatriBhumi nothing for this service. The purchase agreement is with the developer or seller.
+MatriBhumi is **independent property advisory and transaction coordination** in Bangladesh. It helps buyers discover and compare selected properties from participating developers, then coordinates introductions, viewings, and transaction-related communication. MatriBhumi does not charge buyers a property brokerage or consultation fee for its core property advisory service. Where applicable, MatriBhumi may receive compensation from participating developers under separate commercial agreements. The property purchase agreement is between the buyer and the relevant developer/seller.
 
-Public navigation: Home, Properties, Developers, Locations, How It Works, For Developers, About, Insights, Contact, with a market bar for Bangladesh, the UAE and Malaysia.
+Public navigation: Home, Properties, Developers, Locations, How It Works, For Developers, About, Insights, Contact, with a Bangladesh location bar for Bangladesh, Dhaka, Chattogram, and Bashundhara. Legal pages live in the footer and in `src/config/legal.ts`.
 
 This repository is the public marketing site, property discovery, inquiries, viewings, and a staff advisory CRM (leads, pipeline, follow-ups, developer relationships, and internal reports).
 
@@ -17,7 +17,7 @@ Projects, people, prices, and locations shipped in the seed are **placeholder li
 ```
 src/app            App Router pages, API routes, server actions
 src/components     UI, layout, property, forms, maps, admin, analytics
-src/config         Brand, navigation, and buyer-fee business model
+src/config         Brand, navigation, buyer-fee, and Bangladesh legal/disclosure copy
 src/lib            Prisma, auth, SEO, storage, validation, analytics, mail
 prisma             Schema, migrations, and seed
 public/brand       Logo, favicon, Open Graph — replace files without code changes

@@ -6,9 +6,12 @@ import { PresenceMap } from "@/components/maps/PresenceMap";
 import { DualCta } from "@/components/site/LeadCapture";
 import { DiasporaFaq } from "@/components/site/DiasporaFaq";
 import { HowItWorksSteps } from "@/components/site/HowItWorksSteps";
+import { HowWeWork } from "@/components/site/HowWeWork";
 import { HowWeArePaid } from "@/components/site/HowWeArePaid";
+import { TransactionFlows } from "@/components/site/TransactionFlows";
 import { BuyerFeeHighlight } from "@/components/site/BuyerFeeHighlight";
 import { CountrySelector } from "@/components/site/CountrySelector";
+import { howWeWork } from "@/config/legal";
 import { PropertyCard } from "@/components/property/PropertyCard";
 import {
   siteConfig,
@@ -73,7 +76,7 @@ export default async function HomePage() {
               {buyerCtas.findMyProperty}
             </Button>
           </div>
-          <CountrySelector tone="on-dark" label="Choose a market" className="mt-10" />
+          <CountrySelector tone="on-dark" label="Choose a Bangladesh location" className="mt-10" />
         </div>
       </section>
 
@@ -81,7 +84,7 @@ export default async function HomePage() {
         <SectionHeader
           eyebrow="What MatriBhumi does"
           title="Independent property advisory and transaction coordination."
-          description="MatriBhumi is an independent property advisor. We help buyers find suitable properties, work with participating developers, and coordinate the journey. You do not pay MatriBhumi a fee."
+          description={howWeWork.summary}
         />
         <div className="mt-14 grid gap-8 md:grid-cols-3">
           {whatWeDo.map((item) => (
@@ -96,25 +99,22 @@ export default async function HomePage() {
 
       <section className="bg-mist px-4 py-20 sm:px-6 md:px-12 md:py-28">
         <SectionHeader
-          eyebrow="Markets"
-          title="Bangladesh, the UAE and Malaysia."
-          description="Choose a market to see how we advise there. Selected developments appear as developer partnerships are published."
+          eyebrow="Bangladesh"
+          title="Dhaka, Chattogram and Bashundhara."
+          description="Selected developments appear as developer partnerships are published. The property purchase agreement is between the buyer and the relevant developer/seller."
         />
         <div className="mt-14 grid gap-6 md:grid-cols-3">
-          {markets.map((market) => (
-            <Link key={market.slug} href={`/locations/${market.slug}`} className="group relative min-h-[320px] overflow-hidden">
+          {markets[0].cities.map((city) => (
+            <Link key={city.slug} href={`/locations/${city.slug}`} className="group relative min-h-[320px] overflow-hidden">
               <img
-                src={market.heroImage}
+                src={markets[0].heroImage}
                 alt=""
                 className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
               />
               <div className="absolute inset-0 bg-charcoal/45" />
               <div className="relative flex h-full min-h-[320px] flex-col justify-end p-7 text-ivory">
-                <p className="text-[11px] uppercase tracking-[0.2em] text-sand">{market.region}</p>
-                <h3 className="font-display mt-2 text-4xl">{market.shortName}</h3>
-                <p className="mt-3 max-w-sm text-sm leading-6 text-ivory/80">
-                  {market.cities.map((city) => city.name).join(" · ")}
-                </p>
+                <p className="text-[11px] uppercase tracking-[0.2em] text-sand">Bangladesh</p>
+                <h3 className="font-display mt-2 text-4xl">{city.name}</h3>
               </div>
             </Link>
           ))}
@@ -181,11 +181,13 @@ export default async function HomePage() {
         </Button>
       </section>
 
+      <HowWeWork />
+
       <section className="px-4 py-20 sm:px-6 md:px-12 md:py-28">
         <SectionHeader
           eyebrow="How MatriBhumi works"
           title="From first conversation to a developer purchase."
-          description="You complete the purchase directly with the developer. MatriBhumi coordinates the process."
+          description={`${howWeWork.purchaseAgreement} MatriBhumi coordinates the process.`}
         />
         <HowItWorksSteps />
         <Button href="/how-it-works" variant="outline" className="mt-12">
@@ -212,13 +214,14 @@ export default async function HomePage() {
 
       <BuyerFeeHighlight />
       <HowWeArePaid />
+      <TransactionFlows tone="mist" />
 
       <section className="bg-charcoal px-4 py-20 text-ivory sm:px-6 md:px-12 md:py-28">
         <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
           <SectionHeader
             eyebrow="For developers"
             title="Are you a property developer?"
-            description="Reach qualified buyers across Bangladesh, the UAE and Malaysia."
+            description="Reach qualified buyers looking at selected Bangladesh developments."
             light
           />
           <div className="lg:justify-self-end">
@@ -233,9 +236,9 @@ export default async function HomePage() {
         <SectionHeader
           eyebrow="Locations"
           title="Properties on the map."
-          description="Select a development and the map moves to it. Published listings are in Bangladesh today; UAE and Malaysia pages are advisory surfaces as partnerships are confirmed."
+          description="Select a development and the map moves to it. Published listings are in Bangladesh."
         />
-        <CountrySelector label="Published markets on the map" className="mt-10" />
+        <CountrySelector label="Published locations on the map" className="mt-10" />
         <div className="mt-12">
           <PresenceMap
             pins={mapPins.map((pin) => ({

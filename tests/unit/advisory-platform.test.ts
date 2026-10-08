@@ -10,7 +10,7 @@ describe("businessModel", () => {
     expect(businessModel.buyerFee).toBe(0);
     expect(businessModel.developerCompensation).toBe(true);
     expect(buyerPaysNothing()).toBe(true);
-    expect(buyerFeeStatement.toLowerCase()).toContain("nothing");
+    expect(buyerFeeStatement).toContain("does not charge buyers a property brokerage or consultation fee");
     expect(buyerFeeStatement.toLowerCase()).not.toContain("%");
   });
 });

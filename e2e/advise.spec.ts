@@ -5,7 +5,7 @@ test("advisory form collects requirements and confirms advisor follow-up", async
   await expect(page.getByRole("heading", { level: 1, name: /Talk to a property advisor/i })).toBeVisible();
   await expect(
     page.getByText(
-      "MatriBhumi does not charge buyers a property brokerage or consultation fee. Where applicable, MatriBhumi is compensated by participating developers under separate agreements.",
+      "MatriBhumi does not charge buyers a property brokerage or consultation fee for its core property advisory service. Where applicable, MatriBhumi may receive compensation from participating developers under separate commercial agreements.",
     ).first(),
   ).toBeVisible();
 

@@ -9,7 +9,7 @@ import { createMetadata } from "@/lib/seo";
 export const metadata = createMetadata({
   title: "For developers",
   description:
-    "Reach qualified buyers across Bangladesh, the UAE and Malaysia. MatriBhumi offers property marketing, buyer referrals, viewing coordination and transaction coordination. Sales are not guaranteed.",
+    "Reach qualified buyers looking at selected Bangladesh developments. MatriBhumi offers property marketing, buyer referrals, viewing coordination and transaction coordination. Sales are not guaranteed.",
   path: "/for-developers",
   image: "/media/about-lobby.jpg",
 });
@@ -21,7 +21,7 @@ export default function ForDevelopersPage() {
         image="/media/about-lobby.jpg"
         eyebrow="For developers"
         title="Are you a property developer?"
-        description="Reach qualified buyers across Bangladesh, the UAE and Malaysia."
+        description="Reach qualified buyers looking at selected Bangladesh developments."
       >
         <Button href="/contact" variant="invert">
           {developerCtas.partner}
