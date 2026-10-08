@@ -48,14 +48,14 @@ export async function CountryMarketPage({ slug }: { slug: string }) {
       >
         <div className="flex flex-col gap-3 sm:flex-row">
           <Button href={`/properties?country=${market.slug}`} variant="invert">
-            Browse properties
+            Find My Property
           </Button>
           <Button
-            href="/contact"
+            href="/advise"
             variant="outline"
             className="border-ivory/40 text-ivory hover:bg-ivory hover:text-charcoal"
           >
-            Speak with an advisor
+            Talk to a Property Advisor
           </Button>
         </div>
       </PageHero>
@@ -127,7 +127,7 @@ export async function CountryMarketPage({ slug }: { slug: string }) {
           </div>
         ) : (
           <p className="mt-10 max-w-2xl text-muted">
-            No published properties for {market.name} yet. Speak with an advisor if you would like us to watch this
+            No published properties for {market.name} yet. Talk to a property advisor if you would like us to watch this
             market for you.
           </p>
         )}

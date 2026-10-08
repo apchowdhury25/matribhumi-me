@@ -12,6 +12,7 @@ const pages = [
   "/locations/bashundhara",
   "/developers",
   "/how-it-works",
+  "/advise",
   "/for-developers",
   "/about",
   "/sustainability",

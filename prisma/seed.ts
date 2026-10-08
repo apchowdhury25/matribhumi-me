@@ -8,6 +8,8 @@ async function main() {
   await prisma.jobApplication.deleteMany();
   await prisma.dealCompensation.deleteMany();
   await prisma.developerCompensation.deleteMany();
+  await prisma.developerIntroduction.deleteMany();
+  await prisma.leadShortlistItem.deleteMany();
   await prisma.viewingRequest.deleteMany();
   await prisma.deal.deleteMany();
   await prisma.lead.deleteMany();

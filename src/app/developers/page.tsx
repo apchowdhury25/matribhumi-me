@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { getPublishedDevelopers } from "@/lib/data";
 import { publicDeveloperName } from "@/lib/developer";
 import { createMetadata } from "@/lib/seo";
+import { buyerCtas } from "@/config/ctas";
+import { BuyerFeeNotice } from "@/components/site/BuyerFeeNotice";
 
 export const dynamic = "force-dynamic";
 export const metadata = createMetadata({
@@ -56,8 +58,12 @@ export default async function DevelopersPage() {
               Properties on this site are listed through MatriBhumi. Named developer pages will appear here when
               participating partners are published. Browse listings in the meantime, or speak with an advisor.
             </p>
+            <BuyerFeeNotice className="mt-6" />
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button href="/properties">Browse properties</Button>
+              <Button href="/properties">{buyerCtas.findMyProperty}</Button>
+              <Button href="/advise" variant="outline">
+                {buyerCtas.talkToAdvisor}
+              </Button>
               <Button href="/for-developers" variant="outline">
                 For developers
               </Button>

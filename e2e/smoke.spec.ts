@@ -12,8 +12,10 @@ test("country landings and how it works", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Chattogram" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Bashundhara", exact: true })).toBeVisible();
   await page.goto("/how-it-works");
-  await expect(page.getByText("Tell us what you are looking for.").first()).toBeVisible();
-  await expect(page.getByText("You complete the purchase with the developer.").first()).toBeVisible();
+  await expect(page.getByText("Share your requirements.").first()).toBeVisible();
+  await expect(page.getByText("MatriBhumi is not the seller.").first()).toBeVisible();
+  await page.goto("/advise");
+  await expect(page.getByRole("heading", { level: 1, name: /Talk to a property advisor/i })).toBeVisible();
   await page.goto("/for-developers");
   await expect(page.getByRole("heading", { level: 1, name: /Reach qualified buyers/i })).toBeVisible();
   await expect(page.getByText(/guaranteed sales/i)).toBeVisible();

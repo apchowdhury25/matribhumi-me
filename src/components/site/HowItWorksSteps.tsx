@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 export function HowItWorksSteps({ light = false }: { light?: boolean }) {
   return (
-    <ol className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+    <ol className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
       {howItWorksSteps.map((item) => (
         <li
           key={item.step}

@@ -5,6 +5,8 @@ import { getProperties } from "@/lib/data";
 import { propertyFilterSchema } from "@/lib/validations";
 import { createMetadata } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
+import { BuyerFeeNotice } from "@/components/site/BuyerFeeNotice";
+import { buyerCtas } from "@/config/ctas";
 import { statusLabel } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
@@ -133,7 +135,8 @@ export default async function PropertiesPage({
           </div>
         ) : null}
         <div className="mt-16">
-          <Button href="/contact" variant="outline">Speak with an advisor</Button>
+          <BuyerFeeNotice className="mb-6 max-w-3xl" />
+          <Button href="/advise" variant="outline">{buyerCtas.talkToAdvisor}</Button>
         </div>
       </section>
     </PublicShell>

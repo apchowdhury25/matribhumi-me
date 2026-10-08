@@ -102,6 +102,45 @@ www.matribhumi.me`;
   return { subject, text, html, downloadUrl };
 }
 
+export function advisorRequestEmail(input: {
+  name: string;
+  preferredCity: string;
+  preferredMarket: string;
+  propertyType: string;
+  budget: string;
+  currency: string;
+}) {
+  const firstName = firstNameFrom(input.name);
+  const subject = "We received your MatriBhumi property requirements";
+  const text = `Dear ${firstName},
+
+Thank you for sharing your requirements with MatriBhumi.
+
+A property advisor will review what you sent — ${input.propertyType.toLowerCase().replace(/_/g, " ")} in ${input.preferredCity}, ${input.preferredMarket}, around ${input.budget} ${input.currency} — and contact you. This is a human review, not an automated valuation or legal opinion.
+
+MatriBhumi does not charge buyers a property brokerage or consultation fee. Where applicable, MatriBhumi is compensated by participating developers under separate agreements. The purchase agreement is with the developer or seller.
+
+Warm regards,
+The MatriBhumi Team
+${siteConfig.url}`;
+  return { subject, text };
+}
+
+export function viewingRequestEmail(input: { name: string; propertyName?: string }) {
+  const firstName = firstNameFrom(input.name);
+  const subject = "Your MatriBhumi viewing request";
+  const text = `Dear ${firstName},
+
+We have received your viewing request${input.propertyName ? ` for ${input.propertyName}` : ""}. A MatriBhumi advisor will coordinate with the developer and confirm availability. Preferred times are requests, not confirmed appointments.
+
+The purchase, if you proceed, is completed with the developer or seller.
+
+Warm regards,
+The MatriBhumi Team
+${siteConfig.url}`;
+  return { subject, text };
+}
+
 export async function sendMail(options: {
   to: string;
   subject: string;

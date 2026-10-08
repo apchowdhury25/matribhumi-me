@@ -4,9 +4,12 @@ import { PublicShell } from "@/components/site/PublicShell";
 import { PropertyCard } from "@/components/property/PropertyCard";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/site/JsonLd";
+import { InquiryForm } from "@/components/forms/InquiryForm";
+import { BuyerFeeNotice } from "@/components/site/BuyerFeeNotice";
 import { getPublishedDeveloper } from "@/lib/data";
 import { publicDeveloperName } from "@/lib/developer";
 import { createMetadata, breadcrumbJsonLd } from "@/lib/seo";
+import { buyerCtas } from "@/config/ctas";
 
 export const dynamic = "force-dynamic";
 
@@ -29,6 +32,7 @@ export default async function DeveloperDetailPage({ params }: { params: Promise<
   const developer = await getPublishedDeveloper(slug);
   const name = publicDeveloperName(developer);
   if (!developer || !name) notFound();
+  const markets = Array.isArray(developer.cities) ? developer.cities.map(String) : [];
 
   return (
     <PublicShell transparentHeader>
@@ -44,12 +48,18 @@ export default async function DeveloperDetailPage({ params }: { params: Promise<
           {developer.verified ? "Verified developer" : "Selected developer"}
         </p>
         <h1 className="font-display mt-4 text-4xl sm:text-6xl md:text-7xl">{name}</h1>
-        <p className="mt-6 max-w-2xl text-ivory/75">{developer.description}</p>
+        <p className="mt-6 max-w-2xl text-ivory/75">{developer.publicDescription || developer.description}</p>
+        {markets.length ? (
+          <p className="mt-4 text-sm text-ivory/70">Markets: {markets.join(", ")}</p>
+        ) : (
+          <p className="mt-4 text-sm text-ivory/70">Market: {developer.country}</p>
+        )}
         {developer.website ? (
           <a href={developer.website} className="mt-6 inline-block text-sand hover:text-ivory" rel="noreferrer" target="_blank">
             Developer website
           </a>
         ) : null}
+        <BuyerFeeNotice className="mt-8" tone="sand" />
       </section>
       <section className="px-4 py-16 sm:px-6 md:px-12 md:py-20">
         <h2 className="font-display text-4xl">Properties listed through MatriBhumi</h2>
@@ -76,9 +86,18 @@ export default async function DeveloperDetailPage({ params }: { params: Promise<
             </ul>
           </div>
         ) : null}
-        <Button href="/contact" className="mt-12">
-          Speak with an advisor
-        </Button>
+        <div className="mt-12 max-w-xl">
+          <h2 className="font-display text-3xl">Request information</h2>
+          <p className="mt-3 text-sm text-muted">
+            Ask a MatriBhumi advisor about this developer&apos;s published listings. We do not publish commercial partnership terms here.
+          </p>
+          <div className="mt-6">
+            <InquiryForm inquiryType="SALES" />
+          </div>
+          <Button href="/advise" variant="outline" className="mt-6">
+            {buyerCtas.talkToAdvisor}
+          </Button>
+        </div>
       </section>
     </PublicShell>
   );

@@ -4,6 +4,7 @@ import { FavoriteButton } from "@/components/property/FavoriteButton";
 import { CompareToggle } from "@/components/property/CompareToggle";
 import { Button } from "@/components/ui/button";
 import { isVerifiedDeveloper, publicDeveloperName } from "@/lib/developer";
+import { buyerCtas } from "@/config/ctas";
 
 export type PropertyCardData = {
   id: string;
@@ -79,15 +80,15 @@ export function PropertyCard({
           {formatPrice(property.startingPrice, property.currency)}
         </p>
         <div className="mt-5 flex flex-col gap-2">
-          <Button href={`${href}#inquire`} className="w-full">Request details</Button>
+          <Button href={`${href}#inquire`} className="w-full">{buyerCtas.requestDetails}</Button>
           <Button href={`${href}#viewing`} variant="outline" className="w-full">
-            Arrange a viewing
+            {buyerCtas.arrangeViewing}
           </Button>
           <Link
-            href="/contact"
+            href="/advise"
             className="text-center text-[11px] uppercase tracking-[0.18em] text-earth hover:text-charcoal"
           >
-            Speak with an advisor
+            {buyerCtas.talkToAdvisor}
           </Link>
         </div>
       </div>

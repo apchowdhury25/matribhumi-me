@@ -21,6 +21,15 @@ export const buyerFeeStatement = businessModel.buyerPaysMatriBhumi
 export const buyerFeeNote =
   "Developer arrangements vary by project. The buyer's purchase agreement is with the property developer/seller. MatriBhumi does not receive the buyer's property purchase funds.";
 
+export const buyerJourneyFeeMessage =
+  "MatriBhumi does not charge buyers a property brokerage or consultation fee. Where applicable, MatriBhumi is compensated by participating developers under separate agreements.";
+
+export const advisorFollowUpMessage =
+  "Your MatriBhumi property advisor will review your requirements and contact you.";
+
+export const propertySourceDisclosure =
+  "Property information is provided by or sourced from the relevant developer. Availability, pricing, specifications and completion dates should be confirmed directly before making a purchase decision.";
+
 export function buyerPaysNothing() {
   return !businessModel.buyerPaysMatriBhumi && businessModel.buyerFee === 0;
 }

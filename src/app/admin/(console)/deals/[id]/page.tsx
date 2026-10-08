@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { requireUser, canViewCompensation } from "@/lib/auth";
-import { upsertDeal, upsertDealCompensation } from "@/app/actions/admin";
-import { formatDate } from "@/lib/format";
+import { recordDeveloperIntroduction, selectPropertyForDeal, upsertDeal, upsertDealCompensation } from "@/app/actions/admin";
+import { formatDate, statusLabel } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
 
@@ -21,6 +21,8 @@ const statuses = ["OPEN", "WON", "LOST", "CANCELLED"];
 const compensationTypes = ["PERCENTAGE", "FIXED", "HYBRID", "OTHER"];
 const agreementStatuses = ["DRAFT", "AGREED", "ACTIVE", "EXPIRED"];
 const paymentStatuses = ["NOT_DUE", "EXPECTED", "INVOICED", "PAID", "WRITTEN_OFF"];
+const introMethods = ["EMAIL", "PHONE", "WHATSAPP", "MEETING", "OTHER"];
+const introStatuses = ["PLANNED", "SENT", "CONFIRMED", "COMPLETED", "CANCELLED"];
 
 function dateValue(value?: Date | null) {
   if (!value) return "";
@@ -40,6 +42,7 @@ export default async function AdminDealDetailPage({ params }: { params: Promise<
       property: true,
       unit: true,
       assignedAdvisor: true,
+      introductions: { include: { developer: true }, orderBy: { introducedAt: "desc" } },
     },
   });
   if (!deal) notFound();
@@ -128,6 +131,70 @@ export default async function AdminDealDetailPage({ params }: { params: Promise<
         <textarea name="internalNotes" defaultValue={deal.internalNotes ?? ""} rows={4} className="border border-charcoal/15 bg-paper p-3 text-sm" />
         <button className="h-11 bg-charcoal text-[11px] uppercase tracking-[0.18em] text-ivory">Update deal</button>
       </form>
+
+      <section>
+        <h2 className="font-display text-2xl">Transaction pipeline</h2>
+        <p className="mt-2 text-sm text-muted">
+          Viewing → Property Selected → Reservation → Contract → Completion. The buyer purchases from the developer or seller. MatriBhumi is not the seller.
+        </p>
+        <ol className="mt-4 flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.14em]">
+          {stages.map((stage) => (
+            <li
+              key={stage}
+              className={stage === deal.stage ? "bg-charcoal px-3 py-2 text-ivory" : "border border-charcoal/15 px-3 py-2"}
+            >
+              {statusLabel(stage)}
+            </li>
+          ))}
+        </ol>
+        <form action={selectPropertyForDeal} className="mt-6 grid gap-3 border border-charcoal/10 bg-paper p-5">
+          <p className="text-sm text-muted">When the buyer chooses a listing, mark the property selected. This does not complete a sale.</p>
+          <input type="hidden" name="dealId" value={deal.id} />
+          <select name="propertyId" defaultValue={deal.propertyId ?? ""} required className="h-11 border border-charcoal/15 px-3 text-sm">
+            <option value="">Select property</option>
+            {properties.map((property) => (
+              <option key={property.id} value={property.id}>{property.name}</option>
+            ))}
+          </select>
+          <button className="h-11 bg-charcoal text-[11px] uppercase tracking-[0.18em] text-ivory">Mark property selected</button>
+        </form>
+      </section>
+
+      <section>
+        <h2 className="font-display text-2xl">Developer introductions</h2>
+        <ul className="mt-4 space-y-2 text-sm">
+          {deal.introductions.map((item) => (
+            <li key={item.id}>
+              {item.developer.name} · {dateValue(item.introducedAt)} · {item.method} · {item.status}
+              {item.contactPerson ? ` · ${item.contactPerson}` : ""}
+            </li>
+          ))}
+        </ul>
+        <form action={recordDeveloperIntroduction} className="mt-6 grid gap-3 border border-charcoal/10 bg-paper p-5">
+          <input type="hidden" name="leadId" value={deal.leadId} />
+          <input type="hidden" name="dealId" value={deal.id} />
+          <select name="developerId" defaultValue={deal.developerId ?? ""} required className="h-11 border border-charcoal/15 px-3 text-sm">
+            <option value="">Developer</option>
+            {developers.map((developer) => (
+              <option key={developer.id} value={developer.id}>{developer.name}</option>
+            ))}
+          </select>
+          <input name="introducedAt" type="date" className="h-11 border border-charcoal/15 px-3 text-sm" />
+          <input name="contactPerson" placeholder="Contact person" className="h-11 border border-charcoal/15 px-3 text-sm" />
+          <select name="method" defaultValue="EMAIL" className="h-11 border border-charcoal/15 px-3 text-sm">
+            {introMethods.map((method) => (
+              <option key={method}>{method}</option>
+            ))}
+          </select>
+          <select name="status" defaultValue="SENT" className="h-11 border border-charcoal/15 px-3 text-sm">
+            {introStatuses.map((status) => (
+              <option key={status}>{status}</option>
+            ))}
+          </select>
+          <textarea name="notes" placeholder="Notes" className="border border-charcoal/15 p-3 text-sm" />
+          <button className="h-11 bg-charcoal text-[11px] uppercase tracking-[0.18em] text-ivory">Record introduction</button>
+        </form>
+      </section>
 
       {showCompensation ? (
         <form action={upsertDealCompensation} className="grid gap-3 border border-charcoal/10 bg-paper p-5">

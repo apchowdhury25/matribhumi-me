@@ -85,7 +85,7 @@ export default async function LocationDetailPage({ params }: { params: Promise<{
             ))}
           </ul>
         ) : null}
-        <Button href="/contact" className="mt-10">Speak with an advisor</Button>
+        <Button href="/advise" className="mt-10">Talk to a Property Advisor</Button>
       </section>
     </PublicShell>
   );

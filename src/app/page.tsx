@@ -16,6 +16,7 @@ import {
   developerServices,
   countryNav,
 } from "@/config/site";
+import { buyerCtas } from "@/config/ctas";
 import {
   getArticles,
   getFeaturedDevelopers,
@@ -62,16 +63,16 @@ export default async function HomePage() {
             {siteConfig.supporting}
           </p>
           <div className="mt-8 flex w-full flex-col gap-3 sm:mt-10 sm:w-auto sm:flex-row sm:flex-wrap sm:gap-4">
-            <Button href="/properties" variant="invert" size="lg" className="w-full sm:w-auto">
-              Browse properties
+            <Button href="/advise" variant="invert" size="lg" className="w-full sm:w-auto">
+              {buyerCtas.talkToAdvisor}
             </Button>
             <Button
-              href="/contact"
+              href="/properties"
               variant="outline"
               size="lg"
               className="w-full border-ivory/40 text-ivory hover:bg-ivory hover:text-charcoal sm:w-auto"
             >
-              Speak with an advisor
+              {buyerCtas.findMyProperty}
             </Button>
             <WaitlistButton variant="ghost" size="lg" className="w-full sm:w-auto" />
             <BrochureButton
@@ -140,7 +141,7 @@ export default async function HomePage() {
           <p className="mt-10 text-muted">Featured listings appear here as published properties are marked featured.</p>
         )}
         <Button href="/properties" variant="outline" className="mt-10">
-          Browse all properties
+          {buyerCtas.findMyProperty}
         </Button>
       </section>
 
@@ -308,19 +309,19 @@ export default async function HomePage() {
       <section className="bg-charcoal px-4 py-16 text-ivory sm:px-6 md:px-12 md:py-24">
         <SectionHeader
           eyebrow="Start a conversation"
-          title="Speak with an advisor."
+          title="Talk to a property advisor."
           description="Tell us the city in Bangladesh, the kind of home, and how you will use it. There is no buyer fee for this conversation."
           light
         />
-        <DualCta tone="dark" className="mt-10" />
-        <div className="mt-4 flex flex-col gap-3 sm:flex-row">
-          <Button href="/contact" variant="outline" className="border-ivory/40 text-ivory hover:bg-ivory hover:text-charcoal">
-            Speak with an advisor
+        <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+          <Button href="/advise" variant="invert">
+            {buyerCtas.talkToAdvisor}
           </Button>
-          <Button href="/properties" variant="ghost">
-            Browse properties
+          <Button href="/properties" variant="outline" className="border-ivory/40 text-ivory hover:bg-ivory hover:text-charcoal">
+            {buyerCtas.findMyProperty}
           </Button>
         </div>
+        <DualCta tone="dark" className="mt-4" />
       </section>
     </PublicShell>
   );

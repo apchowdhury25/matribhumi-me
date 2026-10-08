@@ -72,8 +72,8 @@ export default function AboutPage() {
           <Button href="/how-it-works" variant="outline" className="w-full sm:w-auto">
             How it works
           </Button>
-          <Button href="/contact" className="w-full sm:w-auto">
-            Speak with an advisor
+          <Button href="/advise" className="w-full sm:w-auto">
+            Talk to a Property Advisor
           </Button>
         </div>
       </section>

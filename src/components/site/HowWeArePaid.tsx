@@ -1,3 +1,4 @@
+import { buyerJourneyFeeMessage } from "@/config/businessModel";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
@@ -18,7 +19,7 @@ export function HowWeArePaid({ tone = "light" }: { tone?: "light" | "mist" | "da
         How MatriBhumi is paid
       </h2>
       <p className={cn("mt-6 max-w-3xl text-lg leading-8", dark ? "text-ivory/80" : "text-muted")}>
-        {siteConfig.buyerFee}
+        {buyerJourneyFeeMessage}
       </p>
       <p className={cn("mt-4 max-w-3xl text-sm leading-7", dark ? "text-ivory/65" : "text-muted")}>
         {siteConfig.buyerFeeNote}

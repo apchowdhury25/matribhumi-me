@@ -65,6 +65,7 @@ export const footerNav = {
     { href: "/developers", label: "Developers" },
     { href: "/locations", label: "Locations" },
     { href: "/how-it-works", label: "How It Works" },
+    { href: "/advise", label: "Talk to an advisor" },
     { href: "/projects", label: "Projects" },
     { href: "/favorites", label: "Saved homes" },
     { href: "/compare", label: "Compare" },
@@ -117,33 +118,43 @@ export const whoItsFor = [
 export const howItWorksSteps = [
   {
     step: "01",
-    title: "Tell us what you are looking for.",
-    body: "Share the city in Bangladesh, your budget, property type, and how you will use the home.",
+    title: "Share your requirements.",
+    body: "Name, contact, residence, preferred city, property type, budget, bedrooms, purpose, and timeline. Sensitive documents are not required at this stage.",
   },
   {
     step: "02",
-    title: "We understand your requirements.",
-    body: "An advisor reviews location, layout, timing, and any constraints that matter to your household.",
+    title: "We match published listings.",
+    body: "An advisor screens location, developer, type, price, bedrooms, and status. Matching is a staff aid, not an AI valuation or legal opinion.",
   },
   {
     step: "03",
-    title: "We shortlist suitable properties.",
-    body: "You receive selected developer listings that fit — not every project on the market.",
+    title: "An advisor contacts you.",
+    body: "Your MatriBhumi property advisor will review your requirements and contact you.",
   },
   {
     step: "04",
-    title: "You compare and choose.",
-    body: "Side-by-side facts, questions for the developer, and space to decide without pressure.",
+    title: "We prepare a shortlist.",
+    body: "Staff assemble selected properties with location, estimated price, features, and advisor notes for you to compare.",
   },
   {
     step: "05",
-    title: "We introduce you to the developer.",
-    body: "We connect you with the relevant developer and coordinate viewings and discussions.",
+    title: "Developer introduction.",
+    body: "When you choose a property, we introduce you to the developer of record and record the date, method, and follow-up.",
   },
   {
     step: "06",
-    title: "You complete the purchase with the developer.",
-    body: "The purchase agreement is with the developer or seller. MatriBhumi coordinates the process alongside you.",
+    title: "Viewings.",
+    body: "You request a viewing. MatriBhumi coordinates with the developer to confirm time and place.",
+  },
+  {
+    step: "07",
+    title: "Transaction coordination.",
+    body: "Viewing → property selected → reservation → contract → completion. You purchase from the developer or seller. MatriBhumi is not the seller.",
+  },
+  {
+    step: "08",
+    title: "Closed.",
+    body: "When the developer’s process completes, the file is marked closed. Any developer compensation is recorded internally, never on public pages.",
   },
 ] as const;
 

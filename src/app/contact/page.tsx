@@ -3,6 +3,9 @@ import { PageHero } from "@/components/site/PageHero";
 import { InquiryForm } from "@/components/forms/InquiryForm";
 import { createMetadata } from "@/lib/seo";
 import { siteConfig } from "@/config/site";
+import { buyerCtas } from "@/config/ctas";
+import { Button } from "@/components/ui/button";
+import { BuyerFeeNotice } from "@/components/site/BuyerFeeNotice";
 
 export const metadata = createMetadata({
   title: "Contact",
@@ -18,7 +21,7 @@ export default function ContactPage() {
       <PageHero
         image="/media/about-lobby.jpg"
         eyebrow="Contact"
-        title="Speak with an advisor."
+        title="Talk to a property advisor."
         description="Tell us the city in Bangladesh, the kind of home, and how you will use it. MatriBhumi helps you compare selected developer properties and coordinate the journey — with no buyer fee."
       />
       <section className="grid gap-16 px-4 py-14 sm:px-6 md:px-12 md:py-20 lg:grid-cols-[0.8fr_1.2fr]">
@@ -46,8 +49,10 @@ export default function ContactPage() {
         <div>
           <h2 className="font-display text-4xl">Write to us</h2>
           <p className="mt-3 text-sm text-muted">
-            Mention where you live now, and whether you are thinking of vacation weeks, retirement in Dhaka, or a home in Bashundhara. We introduce qualified buyers to the relevant developer. Inquiry forms also live on each property.
+            For a full requirements brief, use Talk to a Property Advisor. This form is for general messages. We introduce qualified buyers to the relevant developer. MatriBhumi is not the seller.
           </p>
+          <BuyerFeeNotice className="mt-4" />
+          <Button href="/advise" className="mt-6">{buyerCtas.talkToAdvisor}</Button>
           <div className="mt-8">
             <InquiryForm inquiryType="GENERAL" showTypeSelect />
           </div>

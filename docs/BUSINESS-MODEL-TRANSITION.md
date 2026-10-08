@@ -1,5 +1,22 @@
 # Business-model transition
 
+## Step 5 — buyer journey
+
+Build the complete buyer journey around MatriBhumi as a property advisor and transaction coordinator. MatriBhumi is not the seller.
+
+- Primary CTA: “Talk to a Property Advisor”. Secondary: “Find My Property”, “Request Property Details”, “Arrange a Viewing”. Configurable in `src/config/ctas.ts`.
+- Public fee message (configurable in `src/config/businessModel.ts`): “MatriBhumi does not charge buyers a property brokerage or consultation fee. Where applicable, MatriBhumi is compensated by participating developers under separate agreements.”
+- `/advise` collects a requirements brief (name, email, WhatsApp/phone, residence, preferred country/city, type, budget, currency, bedrooms, purpose, timeline, contact method, message; optional developer, project, financing). No passport or bank documents.
+- Submission creates a `Lead` with `source = ADVISORY` and an open `Deal`, then emails the buyer and sales inbox when SMTP is configured.
+- Staff matching scores published Bangladesh listings on location, developer, development, type, price, bedrooms, and status. The score is a screening aid, not an AI valuation or legal opinion.
+- Staff shortlist (`LeadShortlistItem`) stores property, developer, development, estimated price, location, features, notes, and advisor recommendation.
+- Staff record a `DeveloperIntroduction` (date, developer, contact person, method, notes, status) and can mark a deal property selected.
+- Buyer viewing requests enter `/admin/viewings`, create or attach a lead, and move the open deal to `VIEWING`.
+- Deal pipeline: Viewing → Property Selected → Reservation → Contract → Completion → Closed. Developer compensation stays ADMIN-only.
+- Property pages include developer, location, type, availability, price, units, features, floor plans, amenities, developer information, “Why this property?”, advisor CTAs, and a source disclosure. No appreciation, yield, or return promises.
+- Developer pages show public name, description, markets, developments, properties, website, and a request form. “Verified developer” only when `verified` is true. Commercial terms stay hidden.
+- Migration: `20261008020000_buyer_journey` adds `Property.whyThisProperty`, `LeadShortlistItem`, and `DeveloperIntroduction`. Additive; do not reseed production.
+
 ## Step 4 — advisory platform schema
 
 Evolve the existing Prisma schema for a multi-developer advisory and transaction-coordination platform. Do not rebuild the database. Keep Developer → Development → Property → Unit.

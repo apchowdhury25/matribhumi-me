@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import { SearchOverlay } from "@/components/search/SearchOverlay";
 import { countryNav, navItems, siteConfig } from "@/config/site";
+import { buyerCtas } from "@/config/ctas";
 import { cn } from "@/lib/utils";
 
 export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
@@ -52,6 +53,15 @@ export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
           ))}
         </nav>
         <div className="flex shrink-0 items-center gap-1 sm:gap-2">
+          <Link
+            href="/advise"
+            className={cn(
+              "hidden h-10 items-center px-3 text-[10px] uppercase tracking-[0.16em] xl:inline-flex",
+              inverted ? "bg-ivory text-charcoal" : "bg-charcoal text-ivory",
+            )}
+          >
+            {buyerCtas.talkToAdvisor}
+          </Link>
           <SearchOverlay />
           <button
             type="button"
@@ -83,6 +93,13 @@ export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
       {open ? (
         <div className="fixed inset-x-0 bottom-0 top-[calc(3.25rem+env(safe-area-inset-top))] overflow-y-auto border-t border-charcoal/10 bg-ivory px-6 py-8 text-charcoal xl:hidden">
           <nav className="grid gap-1 pb-8">
+            <Link
+              href="/advise"
+              onClick={() => setOpen(false)}
+              className="font-display py-2 text-3xl leading-tight sm:text-4xl"
+            >
+              {buyerCtas.talkToAdvisor}
+            </Link>
             {navItems.map((item) => (
               <Link
                 key={item.href}

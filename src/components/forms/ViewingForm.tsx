@@ -3,6 +3,8 @@
 import { useActionState } from "react";
 import { submitViewing } from "@/app/actions/public";
 import { Button } from "@/components/ui/button";
+import { buyerCtas } from "@/config/ctas";
+import { BuyerFeeNotice } from "@/components/site/BuyerFeeNotice";
 
 const initial = { ok: false, error: "" };
 
@@ -11,8 +13,8 @@ export function ViewingForm({ propertyId }: { propertyId: string }) {
   if (state.ok) {
     return (
       <div className="border border-moss/20 bg-mist p-6 text-sm leading-7">
-        Your viewing request has been received. A consultant will confirm availability.
-        Demonstration only — no appointment is guaranteed.
+        <p>Your viewing request has entered the MatriBhumi pipeline. An advisor will coordinate with the developer to confirm availability. Preferred times are requests, not confirmed appointments.</p>
+        <BuyerFeeNotice className="mt-3" />
       </div>
     );
   }
@@ -50,8 +52,9 @@ export function ViewingForm({ propertyId }: { propertyId: string }) {
         I agree to be contacted about this viewing request.
       </label>
       {state.error ? <p className="text-sm text-red-800">{state.error}</p> : null}
+      <BuyerFeeNotice />
       <Button type="submit" disabled={pending} className="w-full sm:w-auto">
-        {pending ? "Sending…" : "Schedule a Viewing"}
+        {pending ? "Sending…" : buyerCtas.arrangeViewing}
       </Button>
     </form>
   );

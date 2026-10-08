@@ -1,5 +1,41 @@
 import { z } from "zod";
 
+export const propertyTypes = [
+  "APARTMENT",
+  "VILLA",
+  "TOWNHOUSE",
+  "PENTHOUSE",
+  "COMMERCIAL",
+  "HOSPITALITY",
+  "MIXED_USE",
+  "PLOT",
+] as const;
+
+export const leadPurposes = [
+  "PRIMARY_RESIDENCE",
+  "SECOND_HOME",
+  "RELOCATION",
+  "INVESTMENT",
+  "OTHER",
+] as const;
+
+export const purchaseTimelines = [
+  "Immediately",
+  "1–3 months",
+  "3–6 months",
+  "6–12 months",
+  "12+ months",
+  "Exploring",
+] as const;
+
+export const financingOptions = [
+  "Cash",
+  "Bank finance",
+  "Undecided",
+] as const;
+
+export const currencies = ["USD", "BDT", "GBP", "EUR"] as const;
+
 export const leadSchema = z.object({
   name: z.string().trim().min(2).max(120),
   email: z.string().trim().email().max(180),
@@ -12,6 +48,28 @@ export const leadSchema = z.object({
   inquiryType: z
     .enum(["GENERAL", "SALES", "PARTNERSHIP", "MEDIA", "CAREER"])
     .default("SALES"),
+  consent: z.literal(true, { error: "Consent is required." }),
+  website: z.string().max(0).optional(),
+});
+
+export const advisorySchema = z.object({
+  name: z.string().trim().min(2).max(120),
+  email: z.string().trim().email().max(180),
+  phone: z.string().trim().min(6).max(40),
+  residenceCountry: z.string().trim().min(2).max(80),
+  preferredMarket: z.string().trim().min(2).max(80),
+  preferredCity: z.string().trim().min(2).max(80),
+  propertyType: z.enum(propertyTypes),
+  budget: z.string().trim().min(1).max(80),
+  currency: z.enum(currencies).default("USD"),
+  bedrooms: z.coerce.number().int().min(0).max(20),
+  purpose: z.enum(leadPurposes),
+  timeline: z.enum(purchaseTimelines),
+  contactMethod: z.enum(["EMAIL", "PHONE", "WHATSAPP"]).default("WHATSAPP"),
+  message: z.string().trim().min(10).max(4000),
+  developerId: z.string().optional(),
+  developmentId: z.string().optional(),
+  financingStatus: z.enum(financingOptions).optional(),
   consent: z.literal(true, { error: "Consent is required." }),
   website: z.string().max(0).optional(),
 });
@@ -94,6 +152,7 @@ export const propertyFilterSchema = z.object({
 });
 
 export type LeadInput = z.infer<typeof leadSchema>;
+export type AdvisoryInput = z.infer<typeof advisorySchema>;
 export type WaitlistInput = z.infer<typeof waitlistSchema>;
 export type BrochureInput = z.infer<typeof brochureSchema>;
 export type ViewingInput = z.infer<typeof viewingSchema>;

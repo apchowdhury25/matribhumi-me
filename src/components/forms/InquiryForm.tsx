@@ -3,6 +3,9 @@
 import { useActionState } from "react";
 import { submitLead } from "@/app/actions/public";
 import { Button } from "@/components/ui/button";
+import { advisorFollowUpMessage } from "@/config/businessModel";
+import { buyerCtas } from "@/config/ctas";
+import { BuyerFeeNotice } from "@/components/site/BuyerFeeNotice";
 
 const initial = { ok: false, error: "" };
 
@@ -28,9 +31,9 @@ export function InquiryForm({
   if (state.ok) {
     return (
       <div className="border border-moss/20 bg-mist p-6 text-sm leading-7 text-charcoal">
-        Thank you. A member of the MatriBhumi team will be in touch about how
-        you might use a home in Bangladesh — for a visit, a retirement, or a
-        longer stay.
+        <p className="font-medium">Thank you.</p>
+        <p className="mt-2">{advisorFollowUpMessage}</p>
+        <BuyerFeeNotice className="mt-3" />
       </div>
     );
   }
@@ -81,7 +84,7 @@ export function InquiryForm({
       </label>
       {state.error ? <p className="text-sm text-red-800">{state.error}</p> : null}
       <Button type="submit" disabled={pending} className="w-full sm:w-auto">
-        {pending ? "Sending…" : "Request Information"}
+        {pending ? "Sending…" : buyerCtas.requestDetails}
       </Button>
     </form>
   );

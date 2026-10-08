@@ -12,7 +12,10 @@ import { JsonLd } from "@/components/site/JsonLd";
 import { getProperty } from "@/lib/data";
 import { createMetadata, propertyJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { formatArea, formatBedrooms, formatDate, formatPrice, statusLabel } from "@/lib/format";
-import { ownershipLabel } from "@/lib/developer";
+import { isVerifiedDeveloper, ownershipLabel, publicDeveloperName } from "@/lib/developer";
+import { buyerCtas } from "@/config/ctas";
+import { propertySourceDisclosure } from "@/config/businessModel";
+import { BuyerFeeNotice } from "@/components/site/BuyerFeeNotice";
 
 export const dynamic = "force-dynamic";
 
@@ -38,6 +41,15 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
     acc[place.category].push(place);
     return acc;
   }, {});
+  const developerName = publicDeveloperName(property.developer);
+  const verified = isVerifiedDeveloper(property.developer);
+  const availableUnits = property.units.filter((unit) => unit.status === "AVAILABLE").length;
+  const whyThis =
+    property.whyThisProperty?.trim() ||
+    [property.lifestyle, property.development.tagline, property.description.split(/(?<=\.)\s/)[0]]
+      .filter(Boolean)
+      .slice(0, 2)
+      .join(" ");
 
   return (
     <PublicShell transparentHeader>
@@ -71,14 +83,17 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
             <h1 className="font-display mt-4 text-[2.1rem] leading-[1.05] sm:text-5xl md:text-7xl">{property.name}</h1>
             <p className="mt-4 text-[11px] uppercase tracking-[0.2em] text-ivory/70">Listed through MatriBhumi</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-              <Button href="#inquire" variant="invert" className="w-full sm:w-auto">
-                Request details
+              <Button href="/advise" variant="invert" className="w-full sm:w-auto">
+                {buyerCtas.talkToMatriBhumiAdvisor}
               </Button>
-              <Button href="#viewing" variant="outline" className="w-full border-ivory/40 text-ivory hover:bg-ivory hover:text-charcoal sm:w-auto">
-                Arrange a viewing
+              <Button href="#inquire" variant="outline" className="w-full border-ivory/40 text-ivory hover:bg-ivory hover:text-charcoal sm:w-auto">
+                {buyerCtas.requestDetails}
               </Button>
-              <Button href="/contact" variant="ghost" className="w-full sm:w-auto">
-                Speak with an advisor
+              <Button href="#viewing" variant="ghost" className="w-full sm:w-auto">
+                {buyerCtas.arrangeViewing}
+              </Button>
+              <Button href="/compare" variant="ghost" className="w-full sm:w-auto">
+                {buyerCtas.compareProperty}
               </Button>
               <WaitlistButton projectName={property.name} variant="ghost" className="w-full sm:w-auto" />
               <BrochureButton
@@ -104,14 +119,17 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
                 value={ownershipLabel({ matribhumiOwned: property.matribhumiOwned, developer: property.developer }) ?? ""}
               />
             ) : null}
+            <Fact label="Location" value={`${property.location.city}, ${property.location.country}`} />
             <Fact label="Type" value={statusLabel(property.type)} />
+            <Fact label="Availability" value={`${statusLabel(property.status)}${availableUnits ? ` · ${availableUnits} units listed available` : ""}`} />
+            <Fact label="Price" value={`From ${formatPrice(property.startingPrice, property.currency)}`} />
             <Fact label="Completion" value={property.completionDate ? formatDate(property.completionDate, { month: "short", year: "numeric" }) : "—"} />
-            <Fact label="Units" value={property.totalUnits ? String(property.totalUnits) : "—"} />
+            <Fact label="Units" value={property.totalUnits ? String(property.totalUnits) : String(property.units.length)} />
             <Fact label="Development" value={property.development.name} />
           </dl>
         </div>
         <aside className="border border-charcoal/10 bg-paper p-6">
-          <p className="text-[11px] uppercase tracking-[0.2em] text-earth">Key facts</p>
+          <p className="text-[11px] uppercase tracking-[0.2em] text-earth">Features</p>
           <ul className="mt-4 space-y-3 text-sm">
             <li>From {formatPrice(property.startingPrice, property.currency)}</li>
             <li>{formatBedrooms(property.bedroomsMin, property.bedroomsMax)}</li>
@@ -120,6 +138,39 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
             {property.floors ? <li>{property.floors} floors</li> : null}
           </ul>
         </aside>
+      </section>
+
+      <section className="px-4 pb-8 sm:px-6 md:px-12">
+        <div className="grid gap-10 lg:grid-cols-2">
+          <div>
+            <h2 className="font-display text-4xl">Why this property?</h2>
+            <p className="mt-4 max-w-2xl text-lg leading-8 text-muted">{whyThis}</p>
+            <p className="mt-4 text-sm text-muted">This description is for orientation. It is not a forecast of price, rent, or investment return.</p>
+          </div>
+          <div className="border border-charcoal/10 bg-paper p-6">
+            <h2 className="font-display text-3xl">Developer information</h2>
+            {developerName ? (
+              <>
+                <p className="mt-3 text-lg">
+                  {developerName}
+                  {verified ? " · Verified developer" : ""}
+                </p>
+                <p className="mt-3 text-sm leading-7 text-muted">
+                  {property.developer.publicDescription || property.developer.description}
+                </p>
+                <Button href={`/developers/${property.developer.slug}`} variant="outline" className="mt-6">
+                  Developer profile
+                </Button>
+              </>
+            ) : (
+              <p className="mt-3 text-sm leading-7 text-muted">
+                This listing is presented through MatriBhumi. The developer of record is confirmed when a published partnership is in place.
+              </p>
+            )}
+            <BuyerFeeNotice className="mt-6" />
+          </div>
+        </div>
+        <p className="mt-10 max-w-3xl text-sm leading-7 text-muted">{propertySourceDisclosure}</p>
       </section>
 
       <section className="px-4 pb-16 sm:px-6 md:px-12 md:pb-20">
@@ -183,7 +234,7 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
                   <td className="border-b border-charcoal/10 py-3 pr-4">{formatPrice(unit.price, property.currency)}</td>
                   <td className="border-b border-charcoal/10 py-3 pr-4">{statusLabel(unit.status)}</td>
                   <td className="border-b border-charcoal/10 py-3 pr-4">
-                    <a href="#inquire" className="text-[11px] uppercase tracking-[0.16em] text-earth">Inquire</a>
+                    <a href="#inquire" className="text-[11px] uppercase tracking-[0.16em] text-earth">{buyerCtas.requestDetails}</a>
                   </td>
                 </tr>
               ))}
@@ -219,15 +270,15 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
 
       <section className="grid gap-12 px-4 py-14 sm:px-6 md:px-12 md:py-20 lg:grid-cols-2">
         <div id="inquire">
-          <h2 className="font-display text-4xl">Request details</h2>
-          <p className="mt-3 text-sm text-muted">Tell us what you need. An advisor will follow up and, where it fits, introduce you to the developer.</p>
+          <h2 className="font-display text-4xl">{buyerCtas.requestDetails}</h2>
+          <p className="mt-3 text-sm text-muted">Tell us what you need. An advisor will follow up and, where it fits, introduce you to the developer. MatriBhumi is not the seller.</p>
           <div className="mt-8">
             <InquiryForm propertyId={property.id} />
           </div>
         </div>
         <div id="viewing">
-          <h2 className="font-display text-4xl">Arrange a viewing</h2>
-          <p className="mt-3 text-sm text-muted">Preferred times are requests. We coordinate with the developer to confirm.</p>
+          <h2 className="font-display text-4xl">{buyerCtas.arrangeViewing}</h2>
+          <p className="mt-3 text-sm text-muted">Preferred times are requests. We coordinate with the developer to confirm. This request enters the staff pipeline.</p>
           <div className="mt-8">
             <ViewingForm propertyId={property.id} />
           </div>

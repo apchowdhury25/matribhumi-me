@@ -5,6 +5,8 @@ import { HowWeArePaid } from "@/components/site/HowWeArePaid";
 import { Button } from "@/components/ui/button";
 import { createMetadata } from "@/lib/seo";
 import { siteConfig } from "@/config/site";
+import { buyerCtas } from "@/config/ctas";
+import { BuyerFeeNotice } from "@/components/site/BuyerFeeNotice";
 
 export const metadata = createMetadata({
   title: "How it works",
@@ -25,9 +27,10 @@ export default function HowItWorksPage() {
       />
       <section className="px-4 py-16 sm:px-6 md:px-12 md:py-24">
         <HowItWorksSteps />
-        <p className="mt-10 max-w-3xl text-sm leading-7 text-muted">
+        <BuyerFeeNotice className="mt-10 max-w-3xl" />
+        <p className="mt-4 max-w-3xl text-sm leading-7 text-muted">
           The legal transaction structure belongs to the developer or seller and to the lawyers you appoint. MatriBhumi
-          coordinates the process and does not replace those parties.
+          coordinates the process and does not replace those parties. Matching scores used internally are screening aids, not financial or legal advice.
         </p>
       </section>
       <HowWeArePaid tone="mist" />
@@ -35,9 +38,9 @@ export default function HowItWorksPage() {
         <h2 className="font-display text-4xl">Ready to start?</h2>
         <p className="mt-4 max-w-2xl text-muted">{siteConfig.supporting}</p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <Button href="/contact">Speak with an advisor</Button>
+          <Button href="/advise">{buyerCtas.talkToAdvisor}</Button>
           <Button href="/properties" variant="outline">
-            Browse properties
+            {buyerCtas.findMyProperty}
           </Button>
         </div>
       </section>

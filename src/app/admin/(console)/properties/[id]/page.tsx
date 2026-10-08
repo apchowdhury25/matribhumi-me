@@ -25,6 +25,10 @@ export default async function PropertyFormPage({ params }: { params: Promise<{ i
         Description
         <textarea name="description" defaultValue={property?.description} rows={5} className="border border-charcoal/15 bg-paper p-3 text-sm text-charcoal" />
       </label>
+      <label className="grid gap-2 text-[11px] uppercase tracking-[0.16em] text-earth">
+        Why this property
+        <textarea name="whyThisProperty" defaultValue={property?.whyThisProperty ?? ""} rows={4} className="border border-charcoal/15 bg-paper p-3 text-sm text-charcoal" />
+      </label>
       <select name="type" defaultValue={property?.type ?? "APARTMENT"} className="h-11 border border-charcoal/15 bg-paper px-3">
         {["APARTMENT","VILLA","TOWNHOUSE","PENTHOUSE","COMMERCIAL","HOSPITALITY","MIXED_USE","PLOT"].map((t) => <option key={t}>{t}</option>)}
       </select>

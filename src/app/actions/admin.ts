@@ -12,6 +12,8 @@ import type {
   DealStage,
   DealStatus,
   DeveloperStatus,
+  IntroductionMethod,
+  IntroductionStatus,
   LeadQualification,
   LeadStatus,
   PartnershipStatus,
@@ -94,6 +96,7 @@ export async function upsertProperty(formData: FormData) {
     published: formData.get("published") === "on",
     featured: formData.get("featured") === "on",
     matribhumiOwned: formData.get("matribhumiOwned") === "on",
+    whyThisProperty: String(formData.get("whyThisProperty") || "") || null,
     developmentId: String(formData.get("developmentId")),
     locationId: String(formData.get("locationId")),
     developerId: String(formData.get("developerId")),
@@ -412,4 +415,115 @@ export async function updateViewing(formData: FormData) {
     },
   });
   revalidatePath("/admin/viewings");
+}
+
+export async function addShortlistItem(formData: FormData) {
+  await guard();
+  const leadId = String(formData.get("leadId"));
+  const propertyId = String(formData.get("propertyId"));
+  const property = await prisma.property.findUnique({
+    where: { id: propertyId },
+    include: { location: true, development: true, amenities: { include: { amenity: true } } },
+  });
+  if (!property) redirect(`/admin/leads/${leadId}`);
+  const features = property.amenities.map((row) => row.amenity.name).slice(0, 8).join(", ");
+  await prisma.leadShortlistItem.upsert({
+    where: { leadId_propertyId: { leadId, propertyId } },
+    create: {
+      leadId,
+      propertyId,
+      developerId: property.developerId,
+      developmentId: property.developmentId,
+      estimatedPrice: property.startingPrice,
+      currency: property.currency,
+      locationNote: `${property.location.city}, ${property.location.country}`,
+      keyFeatures: features || null,
+      notes: String(formData.get("notes") || "") || null,
+      advisorRecommendation: String(formData.get("advisorRecommendation") || "") || null,
+    },
+    update: {
+      notes: String(formData.get("notes") || "") || null,
+      advisorRecommendation: String(formData.get("advisorRecommendation") || "") || null,
+    },
+  });
+  revalidatePath(`/admin/leads/${leadId}`);
+}
+
+export async function updateShortlistItem(formData: FormData) {
+  await guard();
+  const id = String(formData.get("id"));
+  const item = await prisma.leadShortlistItem.update({
+    where: { id },
+    data: {
+      estimatedPrice: String(formData.get("estimatedPrice") || "") || null,
+      currency: String(formData.get("currency") || "USD"),
+      locationNote: String(formData.get("locationNote") || "") || null,
+      keyFeatures: String(formData.get("keyFeatures") || "") || null,
+      notes: String(formData.get("notes") || "") || null,
+      advisorRecommendation: String(formData.get("advisorRecommendation") || "") || null,
+    },
+  });
+  revalidatePath(`/admin/leads/${item.leadId}`);
+}
+
+export async function removeShortlistItem(formData: FormData) {
+  await guard();
+  const id = String(formData.get("id"));
+  const item = await prisma.leadShortlistItem.delete({ where: { id } });
+  revalidatePath(`/admin/leads/${item.leadId}`);
+}
+
+export async function recordDeveloperIntroduction(formData: FormData) {
+  await guard();
+  const leadId = String(formData.get("leadId"));
+  const developerId = String(formData.get("developerId"));
+  const dealId = String(formData.get("dealId") || "") || null;
+  const introducedAt = formData.get("introducedAt")
+    ? new Date(String(formData.get("introducedAt")))
+    : new Date();
+  await prisma.developerIntroduction.create({
+    data: {
+      leadId,
+      dealId,
+      developerId,
+      introducedAt,
+      contactPerson: String(formData.get("contactPerson") || "") || null,
+      method: String(formData.get("method") || "EMAIL") as IntroductionMethod,
+      notes: String(formData.get("notes") || "") || null,
+      status: String(formData.get("status") || "SENT") as IntroductionStatus,
+    },
+  });
+  if (dealId) {
+    await prisma.deal.update({
+      where: { id: dealId },
+      data: {
+        stage: "DEVELOPER_INTRODUCTION",
+        developerId,
+        developerReferralAt: introducedAt,
+      },
+    });
+    revalidatePath(`/admin/deals/${dealId}`);
+  }
+  revalidatePath(`/admin/leads/${leadId}`);
+}
+
+export async function selectPropertyForDeal(formData: FormData) {
+  await guard();
+  const dealId = String(formData.get("dealId"));
+  const propertyId = String(formData.get("propertyId"));
+  const property = await prisma.property.findUnique({
+    where: { id: propertyId },
+    select: { id: true, developerId: true, developmentId: true },
+  });
+  if (!property) redirect("/admin/deals");
+  await prisma.deal.update({
+    where: { id: dealId },
+    data: {
+      propertyId: property.id,
+      developerId: property.developerId,
+      developmentId: property.developmentId,
+      stage: "PROPERTY_SELECTED",
+    },
+  });
+  revalidatePath(`/admin/deals/${dealId}`);
 }

@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { PublicShell } from "@/components/site/PublicShell";
 import { useCompare } from "@/components/providers/CompareProvider";
 import { Button } from "@/components/ui/button";
+import { buyerCtas } from "@/config/ctas";
+import { BuyerFeeNotice } from "@/components/site/BuyerFeeNotice";
 import { formatBedrooms, formatPrice, statusLabel } from "@/lib/format";
 import type { PropertyCardData } from "@/components/property/PropertyCard";
 
@@ -45,7 +47,8 @@ export default function ComparePage() {
         {items.length === 0 ? (
           <div className="mt-16">
             <p className="text-muted">Select up to three homes from the property list.</p>
-            <Button href="/properties" className="mt-6">Browse properties</Button>
+            <BuyerFeeNotice className="mt-4 max-w-2xl" />
+            <Button href="/properties" className="mt-6">{buyerCtas.findMyProperty}</Button>
           </div>
         ) : (
           <div className="mt-10 overflow-x-auto">
