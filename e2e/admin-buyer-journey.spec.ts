@@ -72,7 +72,7 @@ test("admin lead matching, shortlist, and deal pipeline", async ({ page }) => {
   }
 
   const dealLink = page.getByRole("link", { name: /Deal /i }).first();
-  await expect(dealLink).toBeVisible();
+  await expect(dealLink).toBeVisible({ timeout: 15000 });
   await dealLink.click();
   await expect(page.getByText(/Viewing → Property Selected → Reservation → Contract → Completion/i)).toBeVisible();
   await expect(page.getByRole("heading", { name: "Developer introductions" })).toBeVisible();

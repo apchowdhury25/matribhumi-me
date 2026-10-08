@@ -74,7 +74,7 @@ describe("brochureEmail", () => {
     expect(letter.subject).toBe("Your MatriBhumi property brochure");
     expect(letter.text.startsWith("Dear Asha,")).toBe(true);
     expect(letter.text).toContain("https://matribhumi.me/media/brochures/matribhumi-preview.pdf");
-    expect(letter.text).toContain("House 12, Road 7, Gulshan, Dhaka, Bangladesh");
+    expect(letter.text).toContain("House 05, Road 04, Nikunja-1, Khilkhet, Dhaka 1229, Bangladesh");
     expect(letter.text).toContain("Welcome back to the idea of home.");
     expect(letter.html).toContain("Download brochure");
   });

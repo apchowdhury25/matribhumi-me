@@ -28,7 +28,7 @@ export const markets = [
     country: "Bangladesh",
     countryAliases: ["Bangladesh"],
     region: "South Asia",
-    heroImage: "/media/location-dhaka.jpg",
+    heroImage: "/media/locations/dhaka.jpg",
     seoTitle: "Bangladesh property advisor",
     description:
       "Independent property guidance in Bangladesh. Explore selected developments, compare options, and coordinate your purchase with a MatriBhumi advisor.",
@@ -37,7 +37,6 @@ export const markets = [
     cities: [
       { name: "Dhaka", slug: "dhaka" },
       { name: "Chattogram", slug: "chattogram" },
-      { name: "Bashundhara", slug: "bashundhara" },
     ],
     listingsPublished: true,
   },

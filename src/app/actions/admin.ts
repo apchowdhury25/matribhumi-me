@@ -174,11 +174,17 @@ export async function upsertLocation(formData: FormData) {
   await guardContent();
   const id = String(formData.get("id") || "");
   const name = String(formData.get("name"));
+  const kind = String(formData.get("kind") || "NEIGHBORHOOD") === "CITY" ? "CITY" : "NEIGHBORHOOD";
+  const parentId = String(formData.get("parentId") || "") || null;
   const data = {
     name,
     slug: String(formData.get("slug") || slugify(name)),
     city: String(formData.get("city") || name),
     country: String(formData.get("country") || "Bangladesh"),
+    kind: kind as "CITY" | "NEIGHBORHOOD",
+    parentId: kind === "CITY" ? null : parentId,
+    category: String(formData.get("category") || "") || null,
+    sortOrder: Number(formData.get("sortOrder") || 0),
     description: String(formData.get("description") || ""),
     overview: String(formData.get("overview") || ""),
     lifestyle: String(formData.get("lifestyle") || ""),

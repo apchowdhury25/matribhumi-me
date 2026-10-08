@@ -223,7 +223,7 @@ export const legalPages = {
       {
         heading: "Contact",
         paragraphs: [
-          "Questions about these terms: hello@matribhumi.me. Office: House 12, Road 7, Gulshan, Dhaka 1212, Bangladesh.",
+          "Questions about these terms: anwar.chowdhury@matribhumi.me. Office: House 05, Road 04, Nikunja-1, Khilkhet, Dhaka 1229, Bangladesh.",
         ],
       },
     ],
@@ -274,7 +274,7 @@ export const legalPages = {
       },
       {
         heading: "Contact",
-        paragraphs: ["Privacy questions: hello@matribhumi.me."],
+        paragraphs: ["Privacy questions: anwar.chowdhury@matribhumi.me."],
       },
     ],
   },
@@ -466,6 +466,6 @@ export const legalCompliance = [
   },
   {
     title: "Office",
-    body: "MatriBhumi. House 12, Road 7, Gulshan, Dhaka 1212, Bangladesh. This website does not claim a real-estate licence in Bangladesh.",
+    body: "MatriBhumi. House 05, Road 04, Nikunja-1, Khilkhet, Dhaka 1229, Bangladesh. This website does not claim a real-estate licence in Bangladesh.",
   },
 ] as const;

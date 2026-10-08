@@ -84,7 +84,7 @@ export const metadata: Metadata = {
   alternates: { canonical: siteConfig.url },
   icons: {
     icon: "/brand/favicon.svg",
-    apple: "/brand/favicon.svg",
+    apple: "/brand/favicon.png",
   },
 };
 

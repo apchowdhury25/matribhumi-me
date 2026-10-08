@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import hierarchy from "../src/config/location-hierarchy.json";
 
 const prisma = new PrismaClient();
 
@@ -66,7 +67,7 @@ async function main() {
       description:
         "Internal placeholder for curated listings. Named developer details are unpublished until a partnership is confirmed. MatriBhumi is the advisor, not the developer of record.",
       publicDescription: "",
-      logoUrl: "/brand/logo-mark.svg",
+      logoUrl: "/brand/logo-mark.png",
       internalNotes:
         "Placeholder developer row for listing foreign keys. Do not publish until a real partnership is confirmed. No commercial terms are recorded.",
     },
@@ -84,85 +85,56 @@ async function main() {
     },
   });
 
-  const [dhaka, chattogram] = await Promise.all([
-    prisma.location.create({
+  const cityRows: Record<string, { id: string }> = {};
+  for (const city of hierarchy.cities) {
+    const row = await prisma.location.create({
       data: {
-        name: "Dhaka",
-        slug: "dhaka",
-        city: "Dhaka",
-        country: "Bangladesh",
+        name: city.name,
+        slug: city.slug,
+        city: city.name,
+        country: hierarchy.country,
         region: "South Asia",
+        kind: "CITY",
         featured: true,
-        heroImage: "/media/location-dhaka.jpg",
-        latitude: 23.8103,
-        longitude: 90.4125,
-        description:
-          "A river metropolis of work, culture, and kinship — home ground for many of the buyers MatriBhumi advises.",
-        overview:
-          "Dhaka is dense, water-shaped, and in need of housing that respects climate, family life, and the public realm.",
-        lifestyle:
-          "Tree-lined streets, shaded courtyards, and mixed streets where shops, schools, and homes share a block.",
-        connectivity:
-          "Sites sit near major roads, river crossings, and planned transit corridors.",
-        opportunities:
-          "Infill districts, waterfront edges, and family communities among selected developer projects.",
-        attractions: [
-          { name: "River promenades", category: "Leisure" },
-          { name: "Cultural districts", category: "Culture" },
-          { name: "University campuses", category: "Education" },
-        ],
+        heroImage: city.heroImage,
+        latitude: city.latitude,
+        longitude: city.longitude,
+        description: city.description,
+        overview: city.overview,
+        lifestyle: city.lifestyle,
+        connectivity: city.connectivity,
+        opportunities: city.opportunities,
       },
-    }),
-    prisma.location.create({
-      data: {
-        name: "Chattogram",
-        slug: "chattogram",
-        city: "Chattogram",
-        country: "Bangladesh",
-        region: "South Asia",
-        featured: true,
-        heroImage: "/media/hero-nature.jpg",
-        latitude: 22.3569,
-        longitude: 91.7832,
-        description: "Hills, harbour, and a slower coastal register of living.",
-        overview: "A setting for low-rise homes among trees and gardens. Sample location copy for development only.",
-        lifestyle: "Nature living, weekend markets, and harbour light.",
-        connectivity: "Port, airport, and hill roads — illustrative only.",
-        opportunities: "Villa communities and nature-edge housing studies.",
-        attractions: [{ name: "Hill forests", category: "Nature" }],
-      },
-    }),
-  ]);
-
-  const bashundhara = await prisma.location.create({
-    data: {
-      name: "Bashundhara",
-      slug: "bashundhara",
-      city: "Dhaka",
-      country: "Bangladesh",
-      region: "South Asia",
-      featured: true,
-      heroImage: "/media/project-central.jpg",
-      latitude: 23.8199,
-      longitude: 90.4526,
-      description:
-        "Dhaka’s master-planned district: malls, golf, amusement parks, and modern streets. Selected developer projects sit within it. MatriBhumi is an independent advisor, not Bashundhara Group.",
-      overview:
-        "Selected developer projects integrated within Dhaka’s master-planned Bashundhara district. Residences sit near shopping, leisure, and open ground.",
-      lifestyle:
-        "Everyday errands at a mall, weekends on a golf edge, family afternoons at an amusement park — and a home you can live in full-time or return to from overseas.",
-      connectivity:
-        "Airport-adjacent east Dhaka, major roads, and the city’s newer service network.",
-      opportunities:
-        "Pre-launch apartments and mixed-use blocks for expats, retirees, and households already in Dhaka.",
-      attractions: [
-        { name: "Shopping malls", category: "Shopping" },
-        { name: "Golf course", category: "Leisure" },
-        { name: "Amusement park", category: "Leisure" },
-        { name: "Convention and events", category: "Culture" },
-      ],
-    },
-  });
+    });
+    cityRows[city.slug] = row;
+    for (const neighborhood of city.neighborhoods) {
+      await prisma.location.create({
+        data: {
+          name: neighborhood.name,
+          slug: neighborhood.slug,
+          city: city.name,
+          country: hierarchy.country,
+          region: "South Asia",
+          kind: "NEIGHBORHOOD",
+          parentId: row.id,
+          category: neighborhood.category,
+          sortOrder: neighborhood.sortOrder,
+          featured: neighborhood.sortOrder <= 4,
+          heroImage: neighborhood.heroImage,
+          latitude: neighborhood.latitude,
+          longitude: neighborhood.longitude,
+          description: neighborhood.description,
+          overview: neighborhood.overview,
+          lifestyle: neighborhood.lifestyle,
+          connectivity: neighborhood.connectivity,
+          opportunities: neighborhood.opportunities,
+        },
+      });
+    }
+  }
+  const dhaka = cityRows.dhaka;
+  const chattogram = cityRows.chattogram;
+  const bashundhara = await prisma.location.findUniqueOrThrow({ where: { slug: "bashundhara" } });
 
   const amenitySeed = [
     ["Swimming pool", "pool", "wellness"],

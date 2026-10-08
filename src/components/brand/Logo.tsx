@@ -9,7 +9,7 @@ type LogoProps = {
 
 export function Logo({ variant = "light", className }: LogoProps) {
   const src =
-    variant === "mark" ? "/brand/logo-mark.svg" : `/brand/logo-${variant}.svg`;
+    variant === "mark" ? "/brand/logo-mark.png" : `/brand/logo-${variant}.svg`;
   const isMark = variant === "mark";
   return (
     <img
@@ -19,7 +19,7 @@ export function Logo({ variant = "light", className }: LogoProps) {
       height={isMark ? 36 : 24}
       className={cn(
         "h-7 w-auto select-none",
-        isMark ? "h-8 w-8" : "h-7 md:h-8",
+        isMark ? "h-8 w-8 object-contain" : "h-7 md:h-8",
         className,
       )}
     />

@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site";
+import { locationCities, neighborhoodPath } from "@/config/locations";
 import { publicVisibilityWhere } from "@/lib/demo-inventory";
 import { prisma } from "@/lib/prisma";
 
@@ -40,6 +41,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/projects",
     "/locations",
     "/locations/bangladesh",
+    ...locationCities.flatMap((city) => [
+      `/locations/${city.slug}`,
+      ...city.neighborhoods.map((neighborhood) => neighborhoodPath(city.slug, neighborhood.slug)),
+    ]),
     "/how-it-works",
     "/advise",
     "/for-developers",
@@ -75,10 +80,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${siteConfig.url}/projects/${item.slug}`,
       lastModified: item.updatedAt,
     })),
-    ...locations.map((item) => ({
-      url: `${siteConfig.url}/locations/${item.slug}`,
-      lastModified: item.updatedAt,
-    })),
+    ...locations
+      .filter((item) => !locationCities.some((city) => city.slug === item.slug || city.neighborhoods.some((n) => n.slug === item.slug)))
+      .map((item) => ({
+        url: `${siteConfig.url}/locations/${item.slug}`,
+        lastModified: item.updatedAt,
+      })),
     ...articles.map((item) => ({
       url: `${siteConfig.url}/insights/${item.slug}`,
       lastModified: item.updatedAt,

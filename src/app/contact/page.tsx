@@ -30,7 +30,7 @@ export default function ContactPage() {
           <p className="mt-4 leading-7">
             {siteConfig.address.line1}<br />
             {siteConfig.address.line2}<br />
-            {siteConfig.address.city}, {siteConfig.address.country} {siteConfig.address.postal}
+            {siteConfig.address.city} {siteConfig.address.postal}, {siteConfig.address.country}
           </p>
           <p className="mt-6 text-sm text-muted">
             <a href={`mailto:${siteConfig.email}`} className="hover:text-charcoal">{siteConfig.email}</a>

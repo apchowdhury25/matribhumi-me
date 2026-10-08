@@ -129,6 +129,93 @@ try {
   console.warn("Demo-inventory backfill skipped:", error instanceof Error ? error.message : error);
 }
 
+try {
+  const hierarchyPath = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "src", "config", "location-hierarchy.json");
+  const hierarchy = JSON.parse(readFileSync(hierarchyPath, "utf8"));
+  for (const city of hierarchy.cities) {
+    const cityRow = await prisma.location.upsert({
+      where: { slug: city.slug },
+      update: {
+        name: city.name,
+        city: city.name,
+        country: hierarchy.country,
+        kind: "CITY",
+        parentId: null,
+        heroImage: city.heroImage,
+        latitude: city.latitude,
+        longitude: city.longitude,
+        description: city.description,
+        overview: city.overview,
+        lifestyle: city.lifestyle,
+        connectivity: city.connectivity,
+        opportunities: city.opportunities,
+        featured: true,
+      },
+      create: {
+        name: city.name,
+        slug: city.slug,
+        city: city.name,
+        country: hierarchy.country,
+        region: "South Asia",
+        kind: "CITY",
+        heroImage: city.heroImage,
+        latitude: city.latitude,
+        longitude: city.longitude,
+        description: city.description,
+        overview: city.overview,
+        lifestyle: city.lifestyle,
+        connectivity: city.connectivity,
+        opportunities: city.opportunities,
+        featured: true,
+      },
+    });
+    for (const neighborhood of city.neighborhoods) {
+      await prisma.location.upsert({
+        where: { slug: neighborhood.slug },
+        update: {
+          name: neighborhood.name,
+          city: city.name,
+          country: hierarchy.country,
+          kind: "NEIGHBORHOOD",
+          parentId: cityRow.id,
+          category: neighborhood.category,
+          sortOrder: neighborhood.sortOrder,
+          heroImage: neighborhood.heroImage,
+          latitude: neighborhood.latitude,
+          longitude: neighborhood.longitude,
+          description: neighborhood.description,
+          overview: neighborhood.overview,
+          lifestyle: neighborhood.lifestyle,
+          connectivity: neighborhood.connectivity,
+          opportunities: neighborhood.opportunities,
+        },
+        create: {
+          name: neighborhood.name,
+          slug: neighborhood.slug,
+          city: city.name,
+          country: hierarchy.country,
+          region: "South Asia",
+          kind: "NEIGHBORHOOD",
+          parentId: cityRow.id,
+          category: neighborhood.category,
+          sortOrder: neighborhood.sortOrder,
+          heroImage: neighborhood.heroImage,
+          latitude: neighborhood.latitude,
+          longitude: neighborhood.longitude,
+          description: neighborhood.description,
+          overview: neighborhood.overview,
+          lifestyle: neighborhood.lifestyle,
+          connectivity: neighborhood.connectivity,
+          opportunities: neighborhood.opportunities,
+        },
+      });
+    }
+  }
+  console.log("Upserted city and neighborhood hierarchy.");
+} catch (error) {
+  console.warn("Location hierarchy backfill skipped:", error instanceof Error ? error.message : error);
+}
+
 await prisma.$disconnect();
 
 if (count === 0) {

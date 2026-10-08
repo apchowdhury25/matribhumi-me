@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PublicShell } from "@/components/site/PublicShell";
 import { PageHero } from "@/components/site/PageHero";
@@ -6,8 +5,10 @@ import { SectionHeader } from "@/components/site/SectionHeader";
 import { PropertyCard } from "@/components/property/PropertyCard";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/site/JsonLd";
-import { getLocations, getProperties } from "@/lib/data";
+import { countPublicPropertiesForCity, getProperties } from "@/lib/data";
 import { getMarket, marketHasPublicListings } from "@/lib/markets";
+import { locationCities } from "@/config/locations";
+import { CityCard } from "@/components/site/CityCard";
 import { breadcrumbJsonLd } from "@/lib/seo";
 import { buyerCtas } from "@/config/ctas";
 
@@ -15,22 +16,11 @@ export async function CountryMarketPage({ slug }: { slug: string }) {
   const market = getMarket(slug);
   if (!market) notFound();
 
-  const [allLocations, propertyData] = await Promise.all([
-    getLocations(),
+  const [propertyData, cityCounts] = await Promise.all([
     marketHasPublicListings(market.slug) ? getProperties({ country: market.slug }) : Promise.resolve({ items: [] }),
+    Promise.all(locationCities.map(async (city) => ({ slug: city.slug, count: await countPublicPropertiesForCity(city.slug) }))),
   ]);
-
-  const inCountry = allLocations.filter((location) =>
-    market.countryAliases.some((alias) => alias.toLowerCase() === location.country.toLowerCase()),
-  );
-  const bySlug = new Map(inCountry.map((location) => [location.slug, location]));
-  const namedCities = market.cities.map((city) => ({
-    ...city,
-    location: bySlug.get(city.slug) ?? null,
-  }));
-  const extraLocations = inCountry.filter(
-    (location) => !market.cities.some((city) => city.slug === location.slug),
-  );
+  const cityCountBySlug = Object.fromEntries(cityCounts.map((row) => [row.slug, row.count]));
 
   return (
     <PublicShell transparentHeader>
@@ -73,45 +63,13 @@ export async function CountryMarketPage({ slug }: { slug: string }) {
         <SectionHeader
           eyebrow="Cities"
           title={`Explore ${market.shortName} by city.`}
-          description="City pages open when location data has been published. Other cities will appear as data becomes available."
+          description="Open a city to browse its neighborhoods. Neighborhoods are not listed on this page."
         />
-        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {namedCities.map((city) =>
-            city.location ? (
-              <Link key={city.slug} href={`/locations/${city.location.slug}`} className="group bg-ivory p-6">
-                <p className="text-[11px] uppercase tracking-[0.2em] text-earth">{market.shortName}</p>
-                <h3 className="font-display mt-2 text-3xl group-hover:text-moss">{city.name}</h3>
-                <p className="mt-3 text-sm text-muted">{city.location.description}</p>
-                <p className="mt-4 text-[11px] uppercase tracking-[0.16em] text-earth">
-                  {city.location._count.properties} properties
-                </p>
-              </Link>
-            ) : (
-              <article key={city.slug} className="border border-dashed border-charcoal/20 bg-ivory/60 p-6">
-                <p className="text-[11px] uppercase tracking-[0.2em] text-earth">{market.shortName}</p>
-                <h3 className="font-display mt-2 text-3xl">{city.name}</h3>
-                <p className="mt-3 text-sm text-muted">As data becomes available.</p>
-              </article>
-            ),
-          )}
+        <div className="mt-12 grid gap-6 md:grid-cols-2">
+          {locationCities.map((city) => (
+            <CityCard key={city.slug} city={city} propertyCount={cityCountBySlug[city.slug]} />
+          ))}
         </div>
-        {extraLocations.length ? (
-          <div className="mt-12">
-            <h3 className="font-display text-2xl">Also listed</h3>
-            <ul className="mt-4 flex flex-wrap gap-3">
-              {extraLocations.map((location) => (
-                <li key={location.id}>
-                  <Link
-                    href={`/locations/${location.slug}`}
-                    className="border border-charcoal/15 px-4 py-2 text-sm hover:border-charcoal"
-                  >
-                    {location.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
       </section>
 
       <section className="px-4 py-16 sm:px-6 md:px-12 md:py-20">

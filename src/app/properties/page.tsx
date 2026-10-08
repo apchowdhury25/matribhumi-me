@@ -9,6 +9,7 @@ import { BuyerFeeNotice } from "@/components/site/BuyerFeeNotice";
 import { PropertyDisclaimerNotice } from "@/components/site/PropertyDisclaimerNotice";
 import { buyerCtas } from "@/config/ctas";
 import { statusLabel } from "@/lib/format";
+import { CityNeighborhoodFields } from "@/components/search/CityNeighborhoodFields";
 
 export const dynamic = "force-dynamic";
 export const metadata = createMetadata({
@@ -49,18 +50,7 @@ export default async function PropertiesPage({
       <section className="px-4 py-10 sm:px-6 md:px-12 md:py-12">
         <form className="grid gap-3 border border-charcoal/10 bg-paper p-4 md:grid-cols-4 lg:grid-cols-6">
           <input name="q" defaultValue={filters.q} placeholder="Search" className="h-12 border border-charcoal/15 bg-ivory px-3 text-base md:col-span-2" />
-          <select name="city" defaultValue={filters.city ?? ""} className="h-11 border border-charcoal/15 bg-ivory px-3 text-sm">
-            <option value="">All cities</option>
-            {[...new Map(data.locations.map((loc) => [loc.city, loc])).values()].map((loc) => (
-              <option key={loc.city} value={loc.city}>{loc.city}</option>
-            ))}
-          </select>
-          <select name="location" defaultValue={filters.location ?? ""} className="h-11 border border-charcoal/15 bg-ivory px-3 text-sm">
-            <option value="">All locations</option>
-            {data.locations.map((loc) => (
-              <option key={loc.id} value={loc.slug}>{loc.name}</option>
-            ))}
-          </select>
+          <CityNeighborhoodFields defaultCity={filters.city ?? ""} defaultNeighborhood={filters.location ?? ""} />
           <select name="developer" defaultValue={filters.developer ?? ""} className="h-11 border border-charcoal/15 bg-ivory px-3 text-sm">
             <option value="">All developers</option>
             {data.developers.map((developer) => (

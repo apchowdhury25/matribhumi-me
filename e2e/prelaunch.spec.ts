@@ -7,8 +7,8 @@ test("pre-launch homepage, waitlist, and brochure", async ({ page }) => {
   await expect(page.getByRole("button", { name: "Join Waitlist" }).first()).toBeVisible();
   await expect(page.getByText(/fictional/i)).toHaveCount(0);
   await expect(page.getByText("Social channels will appear")).toHaveCount(0);
-  await expect(page.getByText("House 12, Road 7").first()).toBeVisible();
-  await expect(page.getByRole("link", { name: "+880 1700 000000" })).toBeVisible();
+  await expect(page.getByText("House 05, Road 04").first()).toBeVisible();
+  await expect(page.getByRole("link", { name: "+1 760-290-9110" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Instagram" })).toBeVisible();
   await expect(page.getByRole("link", { name: "LinkedIn" })).toBeVisible();
   await expect(page.getByRole("link", { name: "WhatsApp" })).toBeVisible();

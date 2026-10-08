@@ -20,7 +20,7 @@ export type PropertyCardData = {
   bedroomsMax: number;
   areaMin: number;
   areaUnit: string;
-  location: { name: string; city: string; country: string };
+  location: { name: string; slug?: string; city: string; country: string };
   developer?: { name: string; published: boolean; verified?: boolean } | null;
   matribhumiOwned?: boolean;
   demo?: boolean;
@@ -71,7 +71,9 @@ export function PropertyCard({
           </Link>
         </h3>
         <p className="mt-2 text-[11px] uppercase tracking-[0.2em] text-earth">
-          {property.location.city}, {property.location.country}
+          {property.location.name && property.location.name !== property.location.city
+            ? `${property.location.name}, ${property.location.city}`
+            : `${property.location.city}, ${property.location.country}`}
         </p>
         {developerName ? (
           <p className="mt-4 text-sm leading-6 text-charcoal">

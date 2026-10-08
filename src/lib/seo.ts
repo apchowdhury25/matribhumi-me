@@ -53,7 +53,7 @@ export function organizationJsonLd() {
     name: siteConfig.name,
     legalName: siteConfig.legalName,
     url: siteConfig.url,
-    logo: absoluteUrl("/brand/logo-mark.svg"),
+    logo: absoluteUrl("/brand/logo-mark.png"),
     email: siteConfig.email,
     telephone: siteConfig.phone,
     address: {
@@ -101,7 +101,7 @@ export function articleJsonLd(article: {
     publisher: {
       "@type": "Organization",
       name: siteConfig.name,
-      logo: { "@type": "ImageObject", url: absoluteUrl("/brand/logo-mark.svg") },
+      logo: { "@type": "ImageObject", url: absoluteUrl("/brand/logo-mark.png") },
     },
     mainEntityOfPage: absoluteUrl(`/insights/${article.slug}`),
   };

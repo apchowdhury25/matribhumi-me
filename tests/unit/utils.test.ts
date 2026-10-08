@@ -42,7 +42,6 @@ describe("markets", () => {
     expect(getMarket("bangladesh")?.cities.map((city) => city.name)).toEqual([
       "Dhaka",
       "Chattogram",
-      "Bashundhara",
     ]);
   });
 });

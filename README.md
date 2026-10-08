@@ -145,7 +145,7 @@ Full checklist: **[HOSTINGER.md](./HOSTINGER.md)**
 
 Replace files in `public/brand/` to drop in a final logo without changing application code:
 
-- `logo-light.svg` / `logo-dark.svg` / `logo-mark.svg` / `favicon.svg` / `og-default.jpg`
+- `logo-light.svg` / `logo-dark.svg` / `logo-mark.png` / `logo-mark.svg` / `favicon.svg` / `og-default.jpg`
 
 Demonstration photography lives in `public/media/`. The storage adapter writes to `public/uploads` locally, or to S3-compatible storage when credentials are present.
 

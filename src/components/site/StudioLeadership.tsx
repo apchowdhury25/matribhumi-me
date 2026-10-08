@@ -7,12 +7,16 @@ export function StudioLeadership() {
       <SectionHeader
         eyebrow="Team & leadership"
         title="Independent advice, then a coordinated introduction."
-        description={`${siteConfig.positioning} The portraits below are held for the team book. The standard is already the work.`}
+        description={`${siteConfig.positioning} Leadership for the Bangladesh practice, with remaining portraits to follow as the team book is completed.`}
       />
       <div className="mt-12 grid gap-10 md:grid-cols-3">
         {leadership.map((person) => (
           <article key={person.name}>
-            <img src={person.image} alt="" className="aspect-[3/4] w-full bg-stone object-cover" />
+            <img
+              src={person.image}
+              alt={`${person.name}, ${person.role}`}
+              className="aspect-[3/4] w-full bg-stone object-cover object-top"
+            />
             <p className="mt-5 text-[11px] uppercase tracking-[0.2em] text-earth">{person.role}</p>
             <h3 className="font-display mt-2 text-3xl">{person.name}</h3>
             <p className="mt-3 text-sm leading-7 text-muted">{person.bio}</p>

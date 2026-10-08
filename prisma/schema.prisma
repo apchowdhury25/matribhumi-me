@@ -191,6 +191,11 @@ enum ArticleCategory {
   LIFESTYLE
 }
 
+enum LocationKind {
+  CITY
+  NEIGHBORHOOD
+}
+
 enum DevelopmentCategory {
   RESIDENTIAL
   VILLAS
@@ -297,6 +302,12 @@ model Location {
   city             String
   country          String
   region           String?
+  kind             LocationKind   @default(CITY)
+  parentId         String?
+  parent           Location?      @relation("LocationTree", fields: [parentId], references: [id], onDelete: SetNull)
+  children         Location[]     @relation("LocationTree")
+  category         String?
+  sortOrder        Int            @default(0)
   description      String
   overview         String
   lifestyle        String
@@ -311,6 +322,10 @@ model Location {
   updatedAt        DateTime       @updatedAt
   developments     Development[]
   properties       Property[]
+
+  @@index([parentId])
+  @@index([kind])
+  @@index([city])
 }
 
 model Development {

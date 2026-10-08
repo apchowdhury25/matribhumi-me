@@ -43,6 +43,16 @@ const nextConfig = {
         destination: "/locations",
         permanent: true,
       },
+      {
+        source: "/locations/bashundhara",
+        destination: "/locations/dhaka/bashundhara",
+        permanent: true,
+      },
+      {
+        source: "/locations/bashundhara/",
+        destination: "/locations/dhaka/bashundhara",
+        permanent: true,
+      },
     ];
   },
   async headers() {

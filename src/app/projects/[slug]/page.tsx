@@ -10,6 +10,7 @@ import { JsonLd } from "@/components/site/JsonLd";
 import { formatPrice, statusLabel } from "@/lib/format";
 import { ownershipLabel } from "@/lib/developer";
 import { DemoInventoryNotice } from "@/components/site/DemoInventoryNotice";
+import { publicLocationHref } from "@/config/locations";
 
 export const dynamic = "force-dynamic";
 
@@ -99,7 +100,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
       <section className="px-6 pb-20 md:px-12">
         <h2 className="font-display mb-6 text-4xl">On the map</h2>
         <PropertyMap latitude={project.latitude} longitude={project.longitude} name={project.name} />
-        <Link href={`/locations/${project.location.slug}`} className="mt-6 inline-block text-[11px] uppercase tracking-[0.2em] text-earth">
+        <Link href={publicLocationHref(project.location)} className="mt-6 inline-block text-[11px] uppercase tracking-[0.2em] text-earth">
           All of {project.location.name}
         </Link>
       </section>

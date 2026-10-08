@@ -20,13 +20,15 @@ import {
 } from "@/config/site";
 import { buyerCtas, developerCtas } from "@/config/ctas";
 import {
+  countPublicPropertiesForCity,
   getArticles,
   getFeaturedDevelopers,
   getFeaturedProperties,
   getMapDevelopments,
 } from "@/lib/data";
 import { publicDeveloperName } from "@/lib/developer";
-import { markets } from "@/lib/markets";
+import { locationCities } from "@/config/locations";
+import { CityCard } from "@/components/site/CityCard";
 import { statusLabel } from "@/lib/format";
 import { createMetadata } from "@/lib/seo";
 
@@ -45,6 +47,10 @@ export default async function HomePage() {
     getArticles(),
     getMapDevelopments(),
   ]).catch(() => [[], [], [], []] as const);
+  const cityCounts = await Promise.all(
+    locationCities.map(async (city) => ({ slug: city.slug, count: await countPublicPropertiesForCity(city.slug) })),
+  ).catch(() => [] as { slug: string; count: number }[]);
+  const cityCountBySlug = Object.fromEntries(cityCounts.map((row) => [row.slug, row.count]));
 
   return (
     <PublicShell transparentHeader>
@@ -76,7 +82,7 @@ export default async function HomePage() {
               {buyerCtas.findMyProperty}
             </Button>
           </div>
-          <CountrySelector tone="on-dark" label="Choose a Bangladesh location" className="mt-10" />
+          <CountrySelector tone="on-dark" label="Choose a Bangladesh city" className="mt-10" />
         </div>
       </section>
 
@@ -100,23 +106,12 @@ export default async function HomePage() {
       <section className="bg-mist px-4 py-20 sm:px-6 md:px-12 md:py-28">
         <SectionHeader
           eyebrow="Bangladesh"
-          title="Dhaka, Chattogram and Bashundhara."
-          description="Selected developments appear as developer partnerships are published. The property purchase agreement is between the buyer and the relevant developer/seller."
+          title="Explore Properties by City"
+          description="Start with a city, then open a neighborhood. MatriBhumi helps buyers find and evaluate properties from participating developers in Bangladesh."
         />
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
-          {markets[0].cities.map((city) => (
-            <Link key={city.slug} href={`/locations/${city.slug}`} className="group relative min-h-[320px] overflow-hidden">
-              <img
-                src={markets[0].heroImage}
-                alt=""
-                className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
-              />
-              <div className="absolute inset-0 bg-charcoal/45" />
-              <div className="relative flex h-full min-h-[320px] flex-col justify-end p-7 text-ivory">
-                <p className="text-[11px] uppercase tracking-[0.2em] text-sand">Bangladesh</p>
-                <h3 className="font-display mt-2 text-4xl">{city.name}</h3>
-              </div>
-            </Link>
+        <div className="mt-14 grid gap-6 md:grid-cols-2">
+          {locationCities.map((city) => (
+            <CityCard key={city.slug} city={city} propertyCount={cityCountBySlug[city.slug]} />
           ))}
         </div>
       </section>

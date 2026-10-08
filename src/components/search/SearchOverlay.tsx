@@ -3,11 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Search, X } from "lucide-react";
+import { publicLocationHref } from "@/config/locations";
 
 type Results = {
   properties: { slug: string; name: string; location: { city: string } }[];
   developments: { slug: string; name: string; location: { city: string } }[];
-  locations: { slug: string; name: string; country: string }[];
+  locations: { slug: string; name: string; country: string; city?: string; kind?: string; parent?: { slug: string } | null }[];
   articles: { slug: string; title: string }[];
 };
 
@@ -112,9 +113,9 @@ export function SearchOverlay() {
                   </Group>
                   <Group title="Locations" onPick={() => setOpen(false)}>
                     {results.locations.map((item) => (
-                      <Link key={item.slug} href={`/locations/${item.slug}`}>
+                      <Link key={item.slug} href={publicLocationHref(item)}>
                         {item.name}
-                        <span className="ml-2 text-muted">{item.country}</span>
+                        <span className="ml-2 text-muted">{item.city ?? item.country}</span>
                       </Link>
                     ))}
                   </Group>

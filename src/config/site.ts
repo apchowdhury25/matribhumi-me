@@ -15,29 +15,29 @@ export const siteConfig = {
   positioning:
     "Independent property advisory and transaction coordination.",
   districtRelation:
-    "Selected developer projects in Bangladesh, including Dhaka, Chattogram, and Dhaka’s master-planned Bashundhara district as listings are published.",
+    "Selected developer projects in Bangladesh, starting with Dhaka and Chattogram neighborhoods as listings are published.",
   audience:
     "For buyers looking in Bangladesh — including households already in the country and people living abroad who want independent guidance.",
   buyerFee: buyerFeeStatement,
   buyerFeeNote,
-  email: "hello@matribhumi.me",
-  salesEmail: "sales@matribhumi.me",
-  pressEmail: "press@matribhumi.me",
-  careersEmail: "careers@matribhumi.me",
-  phone: "+880 1700 000000",
-  phoneHref: "tel:+8801700000000",
+  email: "anwar.chowdhury@matribhumi.me",
+  salesEmail: "anwar.chowdhury@matribhumi.me",
+  pressEmail: "anwar.chowdhury@matribhumi.me",
+  careersEmail: "anwar.chowdhury@matribhumi.me",
+  phone: "+1 760-290-9110",
+  phoneHref: "tel:+17602909110",
   brochurePath: "/media/brochures/matribhumi-preview.pdf",
   address: {
-    line1: "House 12, Road 7",
-    line2: "Gulshan",
+    line1: "House 05, Road 04",
+    line2: "Nikunja-1, Khilkhet",
     city: "Dhaka",
     country: "Bangladesh",
-    postal: "1212",
+    postal: "1229",
   },
   social: {
     instagram: "https://www.instagram.com/matribhumi",
     linkedin: "https://www.linkedin.com/company/matribhumi",
-    whatsapp: "https://wa.me/8801700000000",
+    whatsapp: "https://wa.me/17602909110",
   },
 } as const;
 
@@ -54,16 +54,13 @@ export const navItems = [
 ] as const;
 
 export const countryNav = [
-  { href: "/locations/bangladesh", label: "Bangladesh" },
   { href: "/locations/dhaka", label: "Dhaka" },
   { href: "/locations/chattogram", label: "Chattogram" },
-  { href: "/locations/bashundhara", label: "Bashundhara" },
 ] as const;
 
 export const bangladeshCityNav = [
   { href: "/locations/dhaka", label: "Dhaka" },
   { href: "/locations/chattogram", label: "Chattogram" },
-  { href: "/locations/bashundhara", label: "Bashundhara" },
 ] as const;
 
 export const footerNav = {
@@ -71,7 +68,6 @@ export const footerNav = {
     { href: "/locations/bangladesh", label: "Bangladesh" },
     { href: "/locations/dhaka", label: "Dhaka" },
     { href: "/locations/chattogram", label: "Chattogram" },
-    { href: "/locations/bashundhara", label: "Bashundhara" },
   ],
   explore: [
     { href: "/properties", label: "Properties" },
@@ -348,10 +344,10 @@ export const diasporaFaq = [
 
 export const leadership = [
   {
-    name: "Amina Rahman",
-    role: "Founder",
-    image: "/media/leader-founder.jpg",
-    bio: "Portrait and full biography to follow. The standard is independent advice: the right home for how you live, then a clean introduction to the developer who is selling it.",
+    name: "Anwar Chowdhury",
+    role: "Managing Director / CEO",
+    image: "/media/leader-ceo.jpg",
+    bio: "Leads MatriBhumi’s independent property advisory and transaction-coordination practice in Bangladesh. The work is matching buyers with participating developers, then coordinating the path until the developer of record takes the sale.",
   },
   {
     name: "Farhan Kabir",

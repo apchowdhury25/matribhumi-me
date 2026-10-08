@@ -35,7 +35,7 @@ export function SiteFooter() {
             <a href={mapsHref} target="_blank" rel="noreferrer" className="hover:text-ivory">
               {siteConfig.address.line1}, {siteConfig.address.line2}
               <br />
-              {siteConfig.address.city}, {siteConfig.address.country}
+              {siteConfig.address.city} {siteConfig.address.postal}, {siteConfig.address.country}
             </a>
             <br />
             <a href={siteConfig.phoneHref} className="mt-2 inline-block text-sand hover:text-ivory">

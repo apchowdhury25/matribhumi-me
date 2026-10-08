@@ -40,7 +40,7 @@ Welcome back to the idea of home.
 
 Warm regards,
 The MatriBhumi Team
-House 12, Road 7, Gulshan, Dhaka, Bangladesh
+${siteConfig.address.line1}, ${siteConfig.address.line2}, ${siteConfig.address.city} ${siteConfig.address.postal}, ${siteConfig.address.country}
 www.matribhumi.me`;
 
   const safeName = escapeHtml(firstName);
@@ -90,7 +90,7 @@ www.matribhumi.me`;
               <td style="padding-top:28px;font-family:Georgia,serif;font-size:16px;line-height:1.7;color:#1a1916;">
                 Warm regards,<br />
                 The MatriBhumi Team<br />
-                House 12, Road 7, Gulshan, Dhaka, Bangladesh<br />
+                ${siteConfig.address.line1}, ${siteConfig.address.line2}, ${siteConfig.address.city} ${siteConfig.address.postal}, ${siteConfig.address.country}<br />
                 <a href="${siteConfig.url}" style="color:#8a7355;text-decoration:none;">www.matribhumi.me</a>
               </td>
             </tr>
