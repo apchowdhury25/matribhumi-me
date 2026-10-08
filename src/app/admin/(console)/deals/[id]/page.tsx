@@ -1,22 +1,14 @@
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
-import { requireUser, canViewCompensation } from "@/lib/auth";
-import { recordDeveloperIntroduction, selectPropertyForDeal, upsertDeal, upsertDealCompensation } from "@/app/actions/admin";
-import { formatDate, statusLabel } from "@/lib/format";
+import { canViewCompensation } from "@/lib/auth";
+import { requireSalesUser } from "@/lib/admin-access";
+import { moveDealStage, recordDeveloperIntroduction, selectPropertyForDeal, upsertDeal, upsertDealCompensation } from "@/app/actions/admin";
+import { formatDate } from "@/lib/format";
+import { dealStageValues, pipelineColumns, pipelineColumnForDeal, pipelineLabel } from "@/lib/pipeline";
+import { developerFeeLabel } from "@/config/businessModel";
 
 export const dynamic = "force-dynamic";
 
-const stages = [
-  "BUYER_LEAD",
-  "QUALIFICATION",
-  "DEVELOPER_INTRODUCTION",
-  "VIEWING",
-  "PROPERTY_SELECTED",
-  "RESERVATION",
-  "CONTRACT",
-  "COMPLETION",
-  "CLOSED",
-];
 const statuses = ["OPEN", "WON", "LOST", "CANCELLED"];
 const compensationTypes = ["PERCENTAGE", "FIXED", "HYBRID", "OTHER"];
 const agreementStatuses = ["DRAFT", "AGREED", "ACTIVE", "EXPIRED"];
@@ -30,7 +22,7 @@ function dateValue(value?: Date | null) {
 }
 
 export default async function AdminDealDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const user = await requireUser();
+  const user = await requireSalesUser();
   const { id } = await params;
   const showCompensation = Boolean(user && canViewCompensation(user.role));
   const deal = await prisma.deal.findUnique({
@@ -97,8 +89,8 @@ export default async function AdminDealDetailPage({ params }: { params: Promise<
           ))}
         </select>
         <select name="stage" defaultValue={deal.stage} className="h-11 border border-charcoal/15 bg-paper px-3">
-          {stages.map((stage) => (
-            <option key={stage}>{stage}</option>
+          {dealStageValues.map((stage) => (
+            <option key={stage} value={stage}>{pipelineLabel(stage)}</option>
           ))}
         </select>
         <select name="status" defaultValue={deal.status} className="h-11 border border-charcoal/15 bg-paper px-3">
@@ -135,18 +127,27 @@ export default async function AdminDealDetailPage({ params }: { params: Promise<
       <section>
         <h2 className="font-display text-2xl">Transaction pipeline</h2>
         <p className="mt-2 text-sm text-muted">
-          Viewing → Property Selected → Reservation → Contract → Completion. The buyer purchases from the developer or seller. MatriBhumi is not the seller.
+          New lead → Contacted → Qualified → Shortlisted → Developer introduced → Viewing → Property selected → Reservation → Contract → Completion → Closed. Lost / withdrawn is a terminal stage. The buyer purchases from the developer or seller. MatriBhumi is not the seller.
         </p>
         <ol className="mt-4 flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.14em]">
-          {stages.map((stage) => (
+          {pipelineColumns.map((column) => (
             <li
-              key={stage}
-              className={stage === deal.stage ? "bg-charcoal px-3 py-2 text-ivory" : "border border-charcoal/15 px-3 py-2"}
+              key={column.key}
+              className={pipelineColumnForDeal(deal) === column.key ? "bg-charcoal px-3 py-2 text-ivory" : "border border-charcoal/15 px-3 py-2"}
             >
-              {statusLabel(stage)}
+              {column.label}
             </li>
           ))}
         </ol>
+        <form action={moveDealStage} className="mt-4 flex flex-wrap items-end gap-3">
+          <input type="hidden" name="dealId" value={deal.id} />
+          <select name="stage" defaultValue={deal.stage} className="h-11 border border-charcoal/15 px-3 text-sm">
+            {dealStageValues.map((stage) => (
+              <option key={stage} value={stage}>{pipelineLabel(stage)}</option>
+            ))}
+          </select>
+          <button className="h-11 bg-charcoal px-4 text-[11px] uppercase tracking-[0.18em] text-ivory">Move stage</button>
+        </form>
         <form action={selectPropertyForDeal} className="mt-6 grid gap-3 border border-charcoal/10 bg-paper p-5">
           <p className="text-sm text-muted">When the buyer chooses a listing, mark the property selected. This does not complete a sale.</p>
           <input type="hidden" name="dealId" value={deal.id} />
@@ -198,7 +199,7 @@ export default async function AdminDealDetailPage({ params }: { params: Promise<
 
       {showCompensation ? (
         <form action={upsertDealCompensation} className="grid gap-3 border border-charcoal/10 bg-paper p-5">
-          <h2 className="font-display text-2xl">Expected developer compensation</h2>
+          <h2 className="font-display text-2xl">Expected {developerFeeLabel()}</h2>
           <p className="text-sm text-muted">
             Amount MatriBhumi expects from the developer after a successful transaction. Separate from the buyer&apos;s purchase price. Admin only.
           </p>

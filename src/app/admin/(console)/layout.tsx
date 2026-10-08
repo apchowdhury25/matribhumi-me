@@ -1,29 +1,17 @@
 import Link from "next/link";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { requireUser } from "@/lib/auth";
+import { enforceConsolePath, navForRole } from "@/lib/admin-access";
 import { logoutAction } from "@/app/actions/auth";
 import { Logo } from "@/components/brand/Logo";
-
-const links = [
-  { href: "/admin", label: "Dashboard" },
-  { href: "/admin/properties", label: "Properties" },
-  { href: "/admin/developments", label: "Developments" },
-  { href: "/admin/developers", label: "Developers" },
-  { href: "/admin/locations", label: "Locations" },
-  { href: "/admin/units", label: "Units" },
-  { href: "/admin/amenities", label: "Amenities" },
-  { href: "/admin/insights", label: "News" },
-  { href: "/admin/careers", label: "Careers" },
-  { href: "/admin/leads", label: "Leads" },
-  { href: "/admin/deals", label: "Deals" },
-  { href: "/admin/viewings", label: "Viewings" },
-  { href: "/admin/applications", label: "Applications" },
-  { href: "/admin/media", label: "Media" },
-];
 
 export default async function ConsoleLayout({ children }: { children: React.ReactNode }) {
   const user = await requireUser();
   if (!user) redirect("/admin/login");
+  const path = (await headers()).get("x-admin-path") || "/admin";
+  enforceConsolePath(path, user.role);
+  const links = navForRole(user.role);
 
   return (
     <div className="flex min-h-screen bg-ivory">
@@ -31,6 +19,7 @@ export default async function ConsoleLayout({ children }: { children: React.Reac
         <div className="px-6 py-6">
           <Logo variant="dark" />
           <p className="mt-3 text-[11px] uppercase tracking-[0.2em] text-sand">Advisory console</p>
+          <p className="mt-2 text-xs text-ivory/60">{user.name} · {user.role}</p>
         </div>
         <nav className="flex-1 px-3" aria-label="Admin">
           {links.map((link) => (

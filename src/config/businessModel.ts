@@ -5,11 +5,22 @@
  * Change buyerPaysMatriBhumi / buyerFee here if the business model changes.
  * Developer compensation terms stay in the database and are admin-only.
  */
+export const developerFeeTerms = [
+  "developer compensation",
+  "referral fee",
+  "consultant fee",
+  "service fee",
+] as const;
+
+export type DeveloperFeeTerm = (typeof developerFeeTerms)[number];
+
 export const businessModel = {
   buyerPaysMatriBhumi: false,
   buyerFee: 0,
   buyerFeeCurrency: "USD",
   developerCompensation: true,
+  /** Internal CRM label. Change per contract language; do not hard-code "commission". */
+  developerFeeTerm: "developer compensation" as DeveloperFeeTerm,
 } as const;
 
 export type BusinessModel = typeof businessModel;
@@ -32,4 +43,11 @@ export const propertySourceDisclosure =
 
 export function buyerPaysNothing() {
   return !businessModel.buyerPaysMatriBhumi && businessModel.buyerFee === 0;
+}
+
+export function developerFeeLabel(options?: { capitalize?: boolean; plural?: boolean }) {
+  const term = businessModel.developerFeeTerm;
+  const withPlural = options?.plural && !term.endsWith("s") ? `${term}s` : term;
+  if (!options?.capitalize) return withPlural;
+  return withPlural.charAt(0).toUpperCase() + withPlural.slice(1);
 }

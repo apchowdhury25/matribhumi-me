@@ -2,7 +2,14 @@ import bcrypt from "bcryptjs";
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
-import { canManage, canViewCompensation } from "@/lib/auth-roles";
+import {
+  canAccessContent,
+  canAccessSales,
+  canEditDevelopers,
+  canManage,
+  canViewCompensation,
+  canViewReports,
+} from "@/lib/auth-roles";
 import type { UserRole } from "@prisma/client";
 
 const COOKIE = "mb_session";
@@ -90,4 +97,12 @@ export async function requireAdmin() {
   return user;
 }
 
-export { COOKIE as SESSION_COOKIE, canManage, canViewCompensation };
+export {
+  COOKIE as SESSION_COOKIE,
+  canAccessContent,
+  canAccessSales,
+  canEditDevelopers,
+  canManage,
+  canViewCompensation,
+  canViewReports,
+};

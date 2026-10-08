@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { updateViewing } from "@/app/actions/admin";
+import { requireSalesUser } from "@/lib/admin-access";
 import { formatDate } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
@@ -7,6 +8,7 @@ export const dynamic = "force-dynamic";
 const statuses = ["NEW", "REQUESTED", "CONFIRMED", "COMPLETED", "CANCELLED"];
 
 export default async function AdminViewingsPage() {
+  await requireSalesUser();
   const [items, staff] = await Promise.all([
     prisma.viewingRequest.findMany({
       include: { property: true, developer: true, assignedAdvisor: true, lead: true },

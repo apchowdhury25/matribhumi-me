@@ -17,7 +17,9 @@ export async function proxy(request: NextRequest) {
     const secret = process.env.SESSION_SECRET;
     if (!secret || secret.length < 32) throw new Error("missing secret");
     await jwtVerify(token, new TextEncoder().encode(secret));
-    return NextResponse.next();
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set("x-admin-path", pathname);
+    return NextResponse.next({ request: { headers: requestHeaders } });
   } catch {
     return NextResponse.redirect(new URL("/admin/login", request.url));
   }

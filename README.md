@@ -8,7 +8,7 @@ MatriBhumi is **independent property advisory and transaction coordination** in 
 
 Public navigation: Home, Properties, Developers, Locations, How It Works, For Developers, About, Insights, Contact, with a Bangladesh city bar for Dhaka, Chattogram and Bashundhara.
 
-This repository is the public marketing site, property discovery, inquiries, viewings, and a staff console.
+This repository is the public marketing site, property discovery, inquiries, viewings, and a staff advisory CRM (leads, pipeline, follow-ups, developer relationships, and internal reports).
 
 Projects, people, prices, and locations shipped in the seed are **placeholder listing content**. Named partner developers are unpublished until a real partnership is stored. MatriBhumi does not guarantee returns, appreciation, rental income, or any investment outcome. See `docs/BUSINESS-MODEL-TRANSITION.md`.
 
@@ -50,6 +50,8 @@ npm run dev
 Open [http://localhost:3000](http://localhost:3000).
 
 Staff console: [http://localhost:3000/admin](http://localhost:3000/admin)
+
+Roles: **ADMIN** (full, including confidential developer compensation), **EDITOR** (catalogue and developer profiles), **SALES** (leads, viewings, pipeline, follow-ups). Internal reports are a workflow snapshot, not guaranteed revenue.
 
 Demonstration login (change immediately):
 

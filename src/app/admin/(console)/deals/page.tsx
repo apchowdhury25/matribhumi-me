@@ -1,24 +1,15 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { upsertDeal } from "@/app/actions/admin";
+import { requireSalesUser } from "@/lib/admin-access";
 import { formatDate, statusLabel } from "@/lib/format";
+import { dealStageValues, pipelineLabel } from "@/lib/pipeline";
 
 export const dynamic = "force-dynamic";
-
-const stages = [
-  "BUYER_LEAD",
-  "QUALIFICATION",
-  "DEVELOPER_INTRODUCTION",
-  "VIEWING",
-  "PROPERTY_SELECTED",
-  "RESERVATION",
-  "CONTRACT",
-  "COMPLETION",
-  "CLOSED",
-];
 const statuses = ["OPEN", "WON", "LOST", "CANCELLED"];
 
 export default async function AdminDealsPage() {
+  await requireSalesUser();
   const [deals, leads, developers, properties, staff] = await Promise.all([
     prisma.deal.findMany({
       orderBy: { updatedAt: "desc" },
@@ -88,8 +79,8 @@ export default async function AdminDealsPage() {
           ))}
         </select>
         <select name="stage" defaultValue="BUYER_LEAD" className="h-11 border border-charcoal/15 px-3 text-sm">
-          {stages.map((stage) => (
-            <option key={stage}>{stage}</option>
+          {dealStageValues.map((stage) => (
+            <option key={stage} value={stage}>{pipelineLabel(stage)}</option>
           ))}
         </select>
         <select name="status" defaultValue="OPEN" className="h-11 border border-charcoal/15 px-3 text-sm">

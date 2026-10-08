@@ -3,7 +3,14 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
-import { canViewCompensation, requireUser } from "@/lib/auth";
+import {
+  canAccessContent,
+  canAccessSales,
+  canEditDevelopers,
+  canViewCompensation,
+  requireUser,
+} from "@/lib/auth";
+import { statusForStage } from "@/lib/pipeline";
 import { slugify } from "@/lib/utils";
 import type {
   CompensationAgreementStatus,
@@ -26,8 +33,26 @@ async function guard() {
   return user;
 }
 
+async function guardSales() {
+  const user = await guard();
+  if (!canAccessSales(user.role)) redirect("/admin");
+  return user;
+}
+
+async function guardContent() {
+  const user = await guard();
+  if (!canAccessContent(user.role)) redirect("/admin");
+  return user;
+}
+
+async function guardDeveloperEdit() {
+  const user = await guard();
+  if (!canEditDevelopers(user.role)) redirect("/admin/developers");
+  return user;
+}
+
 export async function updateLeadStatus(formData: FormData) {
-  await guard();
+  await guardSales();
   const id = String(formData.get("id"));
   const status = String(formData.get("status")) as LeadStatus;
   const notes = String(formData.get("notes") ?? "");
@@ -67,14 +92,14 @@ export async function updateLeadStatus(formData: FormData) {
 }
 
 export async function deleteProperty(formData: FormData) {
-  await guard();
+  await guardContent();
   await prisma.property.delete({ where: { id: String(formData.get("id")) } });
   revalidatePath("/admin/properties");
   redirect("/admin/properties");
 }
 
 export async function upsertProperty(formData: FormData) {
-  await guard();
+  await guardContent();
   const id = String(formData.get("id") || "");
   const name = String(formData.get("name"));
   const data = {
@@ -108,7 +133,7 @@ export async function upsertProperty(formData: FormData) {
 }
 
 export async function upsertDevelopment(formData: FormData) {
-  await guard();
+  await guardContent();
   const id = String(formData.get("id") || "");
   const name = String(formData.get("name"));
   const data = {
@@ -142,7 +167,7 @@ export async function upsertDevelopment(formData: FormData) {
 }
 
 export async function upsertLocation(formData: FormData) {
-  await guard();
+  await guardContent();
   const id = String(formData.get("id") || "");
   const name = String(formData.get("name"));
   const data = {
@@ -166,7 +191,7 @@ export async function upsertLocation(formData: FormData) {
 }
 
 export async function upsertUnit(formData: FormData) {
-  await guard();
+  await guardContent();
   const id = String(formData.get("id") || "");
   const data = {
     name: String(formData.get("name")),
@@ -185,7 +210,7 @@ export async function upsertUnit(formData: FormData) {
 }
 
 export async function upsertAmenity(formData: FormData) {
-  await guard();
+  await guardContent();
   const id = String(formData.get("id") || "");
   const name = String(formData.get("name"));
   const data = {
@@ -201,7 +226,7 @@ export async function upsertAmenity(formData: FormData) {
 }
 
 export async function upsertArticle(formData: FormData) {
-  const user = await guard();
+  const user = await guardContent();
   const id = String(formData.get("id") || "");
   const title = String(formData.get("title"));
   const data = {
@@ -222,7 +247,7 @@ export async function upsertArticle(formData: FormData) {
 }
 
 export async function upsertJob(formData: FormData) {
-  await guard();
+  await guardContent();
   const id = String(formData.get("id") || "");
   const title = String(formData.get("title"));
   const data = {
@@ -242,7 +267,7 @@ export async function upsertJob(formData: FormData) {
 }
 
 export async function createMediaAsset(formData: FormData) {
-  await guard();
+  await guardContent();
   await prisma.mediaAsset.create({
     data: {
       url: String(formData.get("url")),
@@ -257,7 +282,7 @@ export async function createMediaAsset(formData: FormData) {
 }
 
 export async function upsertDeveloper(formData: FormData) {
-  await guard();
+  await guardDeveloperEdit();
   const id = String(formData.get("id") || "");
   const name = String(formData.get("name"));
   const cities = String(formData.get("cities") || "")
@@ -290,7 +315,7 @@ export async function upsertDeveloper(formData: FormData) {
 }
 
 export async function upsertPartnership(formData: FormData) {
-  const user = await guard();
+  const user = await guardDeveloperEdit();
   const id = String(formData.get("id") || "");
   const developerId = String(formData.get("developerId"));
   const markets = String(formData.get("markets") || "Bangladesh")
@@ -350,7 +375,7 @@ export async function upsertDeveloperCompensation(formData: FormData) {
 }
 
 export async function upsertDeal(formData: FormData) {
-  await guard();
+  await guardSales();
   const id = String(formData.get("id") || "");
   const leadId = String(formData.get("leadId"));
   const data = {
@@ -402,7 +427,7 @@ export async function upsertDealCompensation(formData: FormData) {
 }
 
 export async function updateViewing(formData: FormData) {
-  await guard();
+  await guardSales();
   const id = String(formData.get("id"));
   await prisma.viewingRequest.update({
     where: { id },
@@ -418,7 +443,7 @@ export async function updateViewing(formData: FormData) {
 }
 
 export async function addShortlistItem(formData: FormData) {
-  await guard();
+  await guardSales();
   const leadId = String(formData.get("leadId"));
   const propertyId = String(formData.get("propertyId"));
   const property = await prisma.property.findUnique({
@@ -450,7 +475,7 @@ export async function addShortlistItem(formData: FormData) {
 }
 
 export async function updateShortlistItem(formData: FormData) {
-  await guard();
+  await guardSales();
   const id = String(formData.get("id"));
   const item = await prisma.leadShortlistItem.update({
     where: { id },
@@ -467,14 +492,14 @@ export async function updateShortlistItem(formData: FormData) {
 }
 
 export async function removeShortlistItem(formData: FormData) {
-  await guard();
+  await guardSales();
   const id = String(formData.get("id"));
   const item = await prisma.leadShortlistItem.delete({ where: { id } });
   revalidatePath(`/admin/leads/${item.leadId}`);
 }
 
 export async function recordDeveloperIntroduction(formData: FormData) {
-  await guard();
+  await guardSales();
   const leadId = String(formData.get("leadId"));
   const developerId = String(formData.get("developerId"));
   const dealId = String(formData.get("dealId") || "") || null;
@@ -508,7 +533,7 @@ export async function recordDeveloperIntroduction(formData: FormData) {
 }
 
 export async function selectPropertyForDeal(formData: FormData) {
-  await guard();
+  await guardSales();
   const dealId = String(formData.get("dealId"));
   const propertyId = String(formData.get("propertyId"));
   const property = await prisma.property.findUnique({
@@ -526,4 +551,91 @@ export async function selectPropertyForDeal(formData: FormData) {
     },
   });
   revalidatePath(`/admin/deals/${dealId}`);
+  revalidatePath("/admin/pipeline");
+}
+
+export async function moveDealStage(formData: FormData) {
+  await guardSales();
+  const dealId = String(formData.get("dealId"));
+  const stage = String(formData.get("stage") || "BUYER_LEAD") as DealStage;
+  const deal = await prisma.deal.findUnique({ where: { id: dealId } });
+  if (!deal) redirect("/admin/pipeline");
+  await prisma.deal.update({
+    where: { id: dealId },
+    data: {
+      stage,
+      status: statusForStage(stage, deal.status),
+    },
+  });
+  revalidatePath("/admin/pipeline");
+  revalidatePath("/admin/deals");
+  revalidatePath(`/admin/deals/${dealId}`);
+}
+
+export async function addFollowUp(formData: FormData) {
+  const user = await guardSales();
+  const leadId = String(formData.get("leadId") || "") || null;
+  const dealId = String(formData.get("dealId") || "") || null;
+  const developerId = String(formData.get("developerId") || "") || null;
+  const dueAt = String(formData.get("dueAt") || "");
+  const task = String(formData.get("task") || "").trim();
+  if (!dueAt || !task || (!leadId && !dealId && !developerId)) {
+    redirect(leadId ? `/admin/leads/${leadId}` : "/admin/follow-ups");
+  }
+  const assignedAdvisorId = String(formData.get("assignedAdvisorId") || "") || user.id;
+  await prisma.followUp.create({
+    data: {
+      leadId,
+      dealId,
+      developerId,
+      assignedAdvisorId,
+      dueAt: new Date(dueAt),
+      task,
+      note: String(formData.get("note") || "") || null,
+    },
+  });
+  if (leadId) {
+    const lead = await prisma.lead.findUnique({ where: { id: leadId }, select: { nextFollowUpAt: true } });
+    const due = new Date(dueAt);
+    if (!lead?.nextFollowUpAt || due < lead.nextFollowUpAt) {
+      await prisma.lead.update({ where: { id: leadId }, data: { nextFollowUpAt: due } });
+    }
+    revalidatePath(`/admin/leads/${leadId}`);
+  }
+  if (dealId) revalidatePath(`/admin/deals/${dealId}`);
+  if (developerId) revalidatePath(`/admin/developers/${developerId}`);
+  revalidatePath("/admin/follow-ups");
+  revalidatePath("/admin");
+}
+
+export async function completeFollowUp(formData: FormData) {
+  await guardSales();
+  const id = String(formData.get("id"));
+  const completed = formData.get("completed") !== "false";
+  const item = await prisma.followUp.update({
+    where: { id },
+    data: {
+      completed,
+      completedAt: completed ? new Date() : null,
+    },
+  });
+  if (item.leadId) revalidatePath(`/admin/leads/${item.leadId}`);
+  if (item.developerId) revalidatePath(`/admin/developers/${item.developerId}`);
+  revalidatePath("/admin/follow-ups");
+  revalidatePath("/admin");
+}
+
+export async function addLeadNote(formData: FormData) {
+  const user = await guardSales();
+  const id = String(formData.get("leadId"));
+  const body = String(formData.get("body") || "").trim();
+  if (!body) redirect(`/admin/leads/${id}`);
+  const lead = await prisma.lead.findUnique({ where: { id }, select: { notes: true } });
+  if (!lead) redirect("/admin/leads");
+  const stamp = `${new Date().toISOString().slice(0, 16).replace("T", " ")} ${user.name}: ${body}`;
+  await prisma.lead.update({
+    where: { id },
+    data: { notes: [lead.notes, stamp].filter(Boolean).join("\n\n") },
+  });
+  revalidatePath(`/admin/leads/${id}`);
 }

@@ -1,5 +1,20 @@
 # Business-model transition
 
+## Step 6 — advisory CRM
+
+Turn the existing staff console into a practical buyer-advisory and developer-relationship CRM. Keep catalogue admin pages.
+
+- Dashboard **Today** cards: new buyer leads, qualified leads, viewing requests, developer introductions, active transactions, closed transactions, follow-ups due, developer relationships requiring attention.
+- Visual pipeline: New lead → Contacted → Qualified → Shortlisted → Developer introduced → Viewing → Property selected → Reservation → Contract → Completion → Closed, plus Lost / withdrawn. Staff can move a deal between stages (`moveDealStage`).
+- Lead list search and filters: country, market, developer, status, advisor, date, budget, property. Lead detail shows buyer information, requirements, matching, shortlist, notes, introductions, viewings, transaction history, and follow-up dates.
+- Follow-up records (`FollowUp`): due date, task, note, assigned advisor, completed status.
+- Developer CRM: profile, markets, developments, active listings, buyer referrals, active and completed transactions, relationship status, internal notes, confidential compensation records.
+- Confidential developer compensation and agreement references stay ADMIN-only (`canViewCompensation`). Reports omit those totals unless an administrator requests them. Public APIs still use `publicDeveloperSelect` and `stripConfidential`.
+- Internal reports: leads by country/source/developer/property, pipeline, closed transactions, estimated transaction value, conversion rate, viewing-to-transaction conversion, and (admin) developer compensation due/received. Copy states these are an operational snapshot, not guaranteed revenue.
+- Configurable internal fee language in `src/config/businessModel.ts` (`developerFeeTerm`: developer compensation, referral fee, consultant fee, or service fee). Do not hard-code “commission” in the CRM.
+- Roles: ADMIN (full, including confidential terms), EDITOR (content and developer profiles), SALES (leads, viewings, shortlists, pipeline, follow-ups). Enforced in layout, page guards, and server actions.
+- Migration: `20261008030000_advisory_crm` adds `FollowUp`. DealStage additions are SQLite TEXT and need no ALTER. Hostinger still uses `prisma db push`. Do not reseed production.
+
 ## Step 5 — buyer journey
 
 Build the complete buyer journey around MatriBhumi as a property advisor and transaction coordinator. MatriBhumi is not the seller.

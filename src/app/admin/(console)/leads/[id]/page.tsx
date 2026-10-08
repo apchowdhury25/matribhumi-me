@@ -2,7 +2,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import {
+  addFollowUp,
+  addLeadNote,
   addShortlistItem,
+  completeFollowUp,
   recordDeveloperIntroduction,
   removeShortlistItem,
   updateLeadStatus,
@@ -11,7 +14,8 @@ import {
 } from "@/app/actions/admin";
 import { rankPropertyMatches } from "@/lib/matching";
 import { OPERATING_COUNTRY } from "@/lib/markets";
-import { formatPrice, statusLabel } from "@/lib/format";
+import { requireSalesUser } from "@/lib/admin-access";
+import { formatDate, formatPrice, statusLabel } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
 
@@ -27,6 +31,7 @@ function dateValue(value?: Date | null) {
 }
 
 export default async function LeadDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  await requireSalesUser();
   const { id } = await params;
   const [lead, staff, properties, developers] = await Promise.all([
     prisma.lead.findUnique({
@@ -36,7 +41,9 @@ export default async function LeadDetailPage({ params }: { params: Promise<{ id:
         developer: true,
         development: true,
         assignedStaff: true,
-        deals: true,
+        deals: { include: { property: true, developer: true }, orderBy: { updatedAt: "desc" } },
+        viewings: { include: { property: true }, orderBy: { createdAt: "desc" } },
+        followUps: { include: { assignedAdvisor: true }, orderBy: { dueAt: "asc" } },
         shortlistItems: {
           include: { property: true, developer: true, development: true },
           orderBy: { createdAt: "desc" },
@@ -89,6 +96,16 @@ export default async function LeadDetailPage({ params }: { params: Promise<{ id:
         <p className="mt-2 text-sm text-earth">
           {lead.source} · {lead.preferredCity ?? "—"}, {lead.preferredMarket ?? "—"} · {lead.propertyType ?? "type open"} · {lead.budget ?? "budget open"} {lead.currency}
         </p>
+        <dl className="mt-6 grid gap-2 text-sm md:grid-cols-2">
+          <div><span className="text-earth">Residence</span> · {lead.residenceCountry || lead.country}</div>
+          <div><span className="text-earth">Preferred market</span> · {lead.preferredMarket ?? "—"}</div>
+          <div><span className="text-earth">City</span> · {lead.preferredCity ?? "—"}</div>
+          <div><span className="text-earth">Type</span> · {lead.propertyType ?? "open"}</div>
+          <div><span className="text-earth">Bedrooms</span> · {lead.bedrooms ?? "—"}</div>
+          <div><span className="text-earth">Purpose</span> · {lead.purpose ?? "—"}</div>
+          <div><span className="text-earth">Timeline</span> · {lead.timeline ?? "—"}</div>
+          <div><span className="text-earth">Financing</span> · {lead.financingStatus ?? "—"}</div>
+        </dl>
         <p className="mt-6 leading-7">{lead.message}</p>
         {lead.property ? <p className="mt-4 text-sm text-earth">Property: {lead.property.name}</p> : null}
         {lead.developer ? <p className="text-sm text-earth">Developer referral: {lead.developer.name}</p> : null}
@@ -241,6 +258,73 @@ export default async function LeadDetailPage({ params }: { params: Promise<{ id:
           </select>
           <textarea name="notes" placeholder="Notes" className="border border-charcoal/15 p-3 text-sm" />
           <button className="h-11 bg-charcoal text-[11px] uppercase tracking-[0.18em] text-ivory">Record introduction</button>
+        </form>
+      </section>
+
+      <section>
+        <h2 className="font-display text-3xl">Viewing requests</h2>
+        <ul className="mt-4 space-y-2 text-sm">
+          {lead.viewings.length ? lead.viewings.map((item) => (
+            <li key={item.id}>
+              {item.property.name} · {formatDate(item.preferredDate)} {item.preferredTime} · {statusLabel(item.status)}
+            </li>
+          )) : <li className="text-muted">No viewing requests yet.</li>}
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="font-display text-3xl">Transaction history</h2>
+        <ul className="mt-4 space-y-2 text-sm">
+          {lead.deals.length ? lead.deals.map((deal) => (
+            <li key={deal.id}>
+              <Link href={`/admin/deals/${deal.id}`}>
+                {statusLabel(deal.stage)} · {deal.status} · {deal.property?.name ?? "No property"} · {formatDate(deal.updatedAt)}
+              </Link>
+            </li>
+          )) : <li className="text-muted">No transactions yet.</li>}
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="font-display text-3xl">Communication notes</h2>
+        <pre className="mt-4 whitespace-pre-wrap font-sans text-sm leading-7">{lead.notes || "No notes yet."}</pre>
+        <form action={addLeadNote} className="mt-4 grid max-w-xl gap-3">
+          <input type="hidden" name="leadId" value={lead.id} />
+          <textarea name="body" required placeholder="Add a note" className="border border-charcoal/15 p-3 text-sm" />
+          <button className="h-11 bg-charcoal text-[11px] uppercase tracking-[0.18em] text-ivory">Add note</button>
+        </form>
+      </section>
+
+      <section>
+        <h2 className="font-display text-3xl">Follow-ups</h2>
+        <ul className="mt-4 space-y-3 text-sm">
+          {lead.followUps.map((item) => (
+            <li key={item.id} className="border border-charcoal/10 p-4">
+              <p>{item.task} · {formatDate(item.dueAt)} · {item.completed ? "Completed" : "Open"}</p>
+              <p className="text-muted">{item.assignedAdvisor?.name ?? "Unassigned"}{item.note ? ` · ${item.note}` : ""}</p>
+              <form action={completeFollowUp} className="mt-2">
+                <input type="hidden" name="id" value={item.id} />
+                <input type="hidden" name="completed" value={item.completed ? "false" : "true"} />
+                <button className="text-[11px] uppercase tracking-[0.16em] text-earth">
+                  {item.completed ? "Reopen" : "Mark completed"}
+                </button>
+              </form>
+            </li>
+          ))}
+        </ul>
+        <form action={addFollowUp} className="mt-6 grid max-w-xl gap-3 border border-charcoal/10 bg-paper p-5">
+          <input type="hidden" name="leadId" value={lead.id} />
+          {openDeal ? <input type="hidden" name="dealId" value={openDeal.id} /> : null}
+          <input name="dueAt" type="date" required className="h-11 border border-charcoal/15 px-3 text-sm" />
+          <input name="task" required placeholder="Task" className="h-11 border border-charcoal/15 px-3 text-sm" />
+          <select name="assignedAdvisorId" defaultValue={lead.assignedStaffId ?? ""} className="h-11 border border-charcoal/15 px-3 text-sm">
+            <option value="">Advisor</option>
+            {staff.map((person) => (
+              <option key={person.id} value={person.id}>{person.name}</option>
+            ))}
+          </select>
+          <textarea name="note" placeholder="Note" className="border border-charcoal/15 p-3 text-sm" />
+          <button className="h-11 bg-charcoal text-[11px] uppercase tracking-[0.18em] text-ivory">Create follow-up</button>
         </form>
       </section>
     </div>

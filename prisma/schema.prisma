@@ -101,7 +101,10 @@ enum LeadSource {
 
 enum DealStage {
   BUYER_LEAD
+  CONTACTED
   QUALIFICATION
+  QUALIFIED
+  SHORTLISTED
   DEVELOPER_INTRODUCTION
   VIEWING
   PROPERTY_SELECTED
@@ -109,6 +112,8 @@ enum DealStage {
   CONTRACT
   COMPLETION
   CLOSED
+  LOST
+  WITHDRAWN
 }
 
 enum DealStatus {
@@ -206,9 +211,10 @@ model User {
   updatedAt        DateTime         @updatedAt
   articles         NewsArticle[]
   favorites        Favorite[]
-  assignedLeads    Lead[]           @relation("LeadAssignee")
-  assignedDeals    Deal[]           @relation("DealAdvisor")
-  assignedViewings ViewingRequest[] @relation("ViewingAdvisor")
+  assignedLeads     Lead[]           @relation("LeadAssignee")
+  assignedDeals     Deal[]           @relation("DealAdvisor")
+  assignedViewings  ViewingRequest[] @relation("ViewingAdvisor")
+  assignedFollowUps FollowUp[]       @relation("FollowUpAdvisor")
 }
 
 model Developer {
@@ -240,6 +246,7 @@ model Developer {
   viewings            ViewingRequest[]
   shortlistItems      LeadShortlistItem[]
   introductions       DeveloperIntroduction[]
+  followUps           FollowUp[]
 }
 
 model DeveloperPartnership {
@@ -519,6 +526,7 @@ model Lead {
   viewings            ViewingRequest[]
   shortlistItems      LeadShortlistItem[]
   introductions       DeveloperIntroduction[]
+  followUps           FollowUp[]
 
   @@index([status])
   @@index([email])
@@ -592,6 +600,7 @@ model Deal {
   viewings              ViewingRequest[]
   compensation          DealCompensation?
   introductions         DeveloperIntroduction[]
+  followUps             FollowUp[]
 
   @@index([leadId])
   @@index([developerId])
@@ -664,6 +673,32 @@ model DeveloperIntroduction {
   @@index([dealId])
   @@index([developerId])
   @@index([status])
+}
+
+model FollowUp {
+  id                 String     @id @default(cuid())
+  leadId             String?
+  lead               Lead?      @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  dealId             String?
+  deal               Deal?      @relation(fields: [dealId], references: [id], onDelete: SetNull)
+  developerId        String?
+  developer          Developer? @relation(fields: [developerId], references: [id], onDelete: Cascade)
+  assignedAdvisorId  String?
+  assignedAdvisor    User?      @relation("FollowUpAdvisor", fields: [assignedAdvisorId], references: [id], onDelete: SetNull)
+  dueAt              DateTime
+  task               String
+  note               String?
+  completed          Boolean    @default(false)
+  completedAt        DateTime?
+  createdAt          DateTime   @default(now())
+  updatedAt          DateTime   @updatedAt
+
+  @@index([dueAt])
+  @@index([completed])
+  @@index([leadId])
+  @@index([dealId])
+  @@index([developerId])
+  @@index([assignedAdvisorId])
 }
 
 model NewsArticle {

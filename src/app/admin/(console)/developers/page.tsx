@@ -2,12 +2,17 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { upsertDeveloper } from "@/app/actions/admin";
 import { statusLabel } from "@/lib/format";
+import { requireUser, canEditDevelopers } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
 const statuses = ["PROSPECT", "ACTIVE", "PAUSED", "ENDED"];
 
 export default async function AdminDevelopersPage() {
+  const user = await requireUser();
+  if (!user) redirect("/admin/login");
+  const canEdit = canEditDevelopers(user.role);
   const items = await prisma.developer.findMany({
     orderBy: { name: "asc" },
     include: { _count: { select: { properties: true, partnerships: true } } },
@@ -16,6 +21,7 @@ export default async function AdminDevelopersPage() {
     <div className="grid gap-12 lg:grid-cols-[1fr_360px]">
       <div>
         <h1 className="font-display text-4xl">Developers</h1>
+        <p className="mt-3 max-w-2xl text-sm text-muted">Developer relationship CRM. Public names stay unpublished until a partnership is confirmed.</p>
         <table className="mt-8 w-full text-left text-sm">
           <thead className="text-[11px] uppercase tracking-[0.16em] text-earth">
             <tr>
@@ -39,7 +45,7 @@ export default async function AdminDevelopersPage() {
           </tbody>
         </table>
       </div>
-      <form action={upsertDeveloper} className="grid gap-3 self-start border border-charcoal/10 bg-paper p-5">
+      {canEdit ? <form action={upsertDeveloper} className="grid gap-3 self-start border border-charcoal/10 bg-paper p-5">
         <h2 className="font-display text-2xl">New developer</h2>
         <input name="name" required placeholder="Company name" className="h-11 border border-charcoal/15 px-3 text-sm" />
         <input name="slug" placeholder="slug" className="h-11 border border-charcoal/15 px-3 text-sm" />
@@ -58,7 +64,9 @@ export default async function AdminDevelopersPage() {
         <label className="text-sm"><input type="checkbox" name="verified" /> Verified</label>
         <label className="text-sm"><input type="checkbox" name="featured" /> Featured</label>
         <button className="h-11 bg-charcoal text-[11px] uppercase tracking-[0.18em] text-ivory">Create</button>
-      </form>
+      </form> : (
+        <p className="text-sm text-muted">Developer records can be edited by administrators and editors.</p>
+      )}
     </div>
   );
 }
