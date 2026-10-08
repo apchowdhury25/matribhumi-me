@@ -5,18 +5,20 @@ export const siteConfig = {
   url: "https://matribhumi.me",
   domain: "matribhumi.me",
   description:
-    "Your independent property advisor and transaction partner. Curated developer projects across Bangladesh, UAE and Malaysia — at no cost to the buyer.",
+    "Independent property advisory and transaction coordination across Bangladesh, the UAE and Malaysia. Compare selected developer properties — with no buyer fee.",
   tagline: "Find the right property. We coordinate the rest.",
   supporting:
-    "Independent property guidance across Bangladesh, UAE and Malaysia. We help buyers compare participating developer projects and coordinate the transaction — at no cost to the buyer.",
+    "Explore selected properties from selected developers across Bangladesh, the UAE and Malaysia. Our advisors help you compare options, connect with the right developer and coordinate the transaction — with no buyer fee.",
   positioning:
-    "Your independent property advisor and transaction partner.",
+    "Independent property advisory and transaction coordination.",
   districtRelation:
     "Selected developer projects in and around Dhaka’s master-planned Bashundhara district, and other markets we cover with participating developers.",
   audience:
     "For Bangladeshi expats, returning retirees, and households already in Bangladesh who want help choosing a home and coordinating the process.",
   buyerFee:
-    "MatriBhumi charges the buyer no brokerage fee, no consultation fee, and no property-search fee. Participating developers compensate MatriBhumi under a separate agreement. Those agreements differ; no commission percentage is published here.",
+    "You pay MatriBhumi nothing for our property advisory and transaction-coordination service. Where applicable, participating developers compensate MatriBhumi under separate commercial agreements.",
+  buyerFeeNote:
+    "Developer arrangements vary by project and jurisdiction. The buyer's purchase agreement is with the property developer/seller.",
   email: "hello@matribhumi.me",
   salesEmail: "sales@matribhumi.me",
   pressEmail: "press@matribhumi.me",
@@ -39,27 +41,36 @@ export const siteConfig = {
 } as const;
 
 export const navItems = [
-  { href: "/projects", label: "Developments" },
+  { href: "/", label: "Home" },
   { href: "/properties", label: "Properties" },
+  { href: "/developers", label: "Developers" },
   { href: "/locations", label: "Locations" },
+  { href: "/how-it-works", label: "How It Works" },
+  { href: "/for-developers", label: "For Developers" },
   { href: "/about", label: "About" },
-  { href: "/sustainability", label: "Sustainability" },
   { href: "/insights", label: "Insights" },
-  { href: "/careers", label: "Careers" },
   { href: "/contact", label: "Contact" },
+] as const;
+
+export const countryNav = [
+  { href: "/locations/bangladesh", label: "Bangladesh" },
+  { href: "/locations/uae", label: "UAE" },
+  { href: "/locations/malaysia", label: "Malaysia" },
 ] as const;
 
 export const footerNav = {
   explore: [
-    { href: "/projects", label: "Developments" },
     { href: "/properties", label: "Properties" },
+    { href: "/developers", label: "Developers" },
     { href: "/locations", label: "Locations" },
+    { href: "/how-it-works", label: "How It Works" },
+    { href: "/projects", label: "Projects" },
     { href: "/favorites", label: "Saved homes" },
     { href: "/compare", label: "Compare" },
   ],
   company: [
     { href: "/about", label: "About MatriBhumi" },
-    { href: "/sustainability", label: "Sustainability" },
+    { href: "/for-developers", label: "For Developers" },
     { href: "/insights", label: "Insights" },
     { href: "/careers", label: "Careers" },
     { href: "/contact", label: "Contact" },
@@ -72,19 +83,89 @@ export const footerNav = {
   ],
 } as const;
 
+export const whatWeDo = [
+  {
+    title: "Find a suitable property",
+    body: "Tell us how you will live in the home. We shortlist selected developer properties across Bangladesh, the UAE and Malaysia.",
+  },
+  {
+    title: "Work with developers",
+    body: "MatriBhumi is an independent advisor. We introduce you to the relevant participating developer and coordinate viewings and discussions.",
+  },
+  {
+    title: "No buyer fee",
+    body: "You pay MatriBhumi nothing for advisory and transaction coordination. Where applicable, participating developers compensate MatriBhumi under separate agreements.",
+  },
+] as const;
+
 export const whoItsFor = [
   {
-    title: "Expats overseas",
-    body: "A Bangladesh address you can fly into for Eid, a winter month, or part of the year — then lock up and leave.",
+    title: "Local property buyers",
+    body: "Households already in Bangladesh, the UAE or Malaysia who want help comparing developer projects before they buy.",
   },
   {
-    title: "Retirees coming home",
-    body: "Quieter plans, guest rooms for children visiting from abroad, and neighbourhoods with hospitals, walks, and company close by.",
+    title: "Bangladeshis living abroad",
+    body: "NRBs and the diaspora looking for a home to visit, retire into, or live in — with an advisor who coordinates across time zones.",
   },
   {
-    title: "Living in Bangladesh now",
-    body: "Households already in Dhaka who want a modern home in Bashundhara’s new districts — malls, golf, amusement parks, and daily amenities on the same map.",
+    title: "Relocating families",
+    body: "Buyers moving to Bangladesh, the UAE or Malaysia who need a residential shortlist, viewings, and a clear path to the developer.",
   },
+] as const;
+
+export const howItWorksSteps = [
+  {
+    step: "01",
+    title: "Tell us what you are looking for.",
+    body: "Share your markets, budget, property type, and how you will use the home.",
+  },
+  {
+    step: "02",
+    title: "We understand your requirements.",
+    body: "An advisor reviews location, layout, timing, and any constraints that matter to your household.",
+  },
+  {
+    step: "03",
+    title: "We shortlist suitable properties.",
+    body: "You receive selected developer listings that fit — not every project on the market.",
+  },
+  {
+    step: "04",
+    title: "You compare and choose.",
+    body: "Side-by-side facts, questions for the developer, and space to decide without pressure.",
+  },
+  {
+    step: "05",
+    title: "We introduce you to the developer.",
+    body: "We connect you with the relevant developer and coordinate viewings and discussions.",
+  },
+  {
+    step: "06",
+    title: "You complete the purchase with the developer.",
+    body: "The purchase agreement is with the developer or seller. MatriBhumi coordinates the process alongside you.",
+  },
+] as const;
+
+export const buyerServices = [
+  { title: "Property advisory", body: "Requirements, budget, and a shortlist of selected developer properties." },
+  { title: "Buying assistance", body: "Questions, documents, and a clear sequence from first enquiry to introduction." },
+  { title: "Viewing coordination", body: "Arrange viewings with the developer and keep the diary across time zones." },
+  { title: "Developer introductions", body: "A qualified introduction to the developer of record for the project you choose." },
+  { title: "Transaction coordination", body: "Follow-up on the developer’s process so the purchase does not stall." },
+  { title: "Cross-border support", body: "Help for buyers living abroad or relocating, within what each jurisdiction allows." },
+] as const;
+
+export const developerServices = [
+  { title: "Property marketing", body: "Present selected projects to buyers already looking across our three markets." },
+  { title: "Qualified buyer referrals", body: "Introductions after we understand budget, timing, and intent." },
+  { title: "Buyer requirement matching", body: "Route enquiries to the project that actually fits." },
+  { title: "Viewing coordination", body: "Schedule and follow up viewings with the buyer and your sales team." },
+  { title: "Lead management", body: "Keep the conversation moving after the first enquiry." },
+  { title: "Cross-border buyer access", body: "Reach Bangladeshis abroad, relocators, and local buyers we already advise." },
+  { title: "Transaction coordination", body: "Stay on the process until the buyer is in your contracting workflow." },
+  { title: "Project presentation", body: "Help buyers understand the scheme, unit mix, and next steps." },
+  { title: "Market exposure", body: "A public listing on MatriBhumi.me when a partnership is in place." },
+  { title: "Buyer follow-up", body: "Reminders and answers so qualified interest does not go quiet." },
 ] as const;
 
 export const districtLife = [
@@ -154,15 +235,15 @@ export const lifestyles = [
 export const whyMatriBhumi = [
   {
     title: "Independent of any one developer",
-    body: "We curate projects from a network of participating developers. The developer is the seller. MatriBhumi is the advisor and coordinator.",
+    body: "We connect buyers with participating developers. The developer is the seller. MatriBhumi is the advisor and coordinator.",
   },
   {
     title: "Compare before you commit",
-    body: "Budget, location, layout, and how you will actually use the home — we help you set those requirements and compare selected developments side by side.",
+    body: "Budget, location, layout, and how you will actually use the home — we help you set those requirements and compare selected developer properties side by side.",
   },
   {
     title: "No fee to the buyer",
-    body: "There is no brokerage fee, consultation fee, or property-search fee for the buyer. The participating developer compensates MatriBhumi under a separate agreement.",
+    body: "You pay MatriBhumi nothing for advisory and transaction coordination. Where applicable, participating developers compensate MatriBhumi under separate commercial agreements.",
   },
   {
     title: "Introductions you can follow",
@@ -270,7 +351,7 @@ export const legalCompliance = [
   },
   {
     title: "Buyer fees",
-    body: "MatriBhumi charges the buyer no brokerage, consultation, or property-search fee. Compensation comes from the participating developer under a separate agreement. No universal percentage is shown because those agreements differ.",
+    body: "You pay MatriBhumi nothing for our property advisory and transaction-coordination service. Where applicable, participating developers compensate MatriBhumi under separate commercial agreements. Developer arrangements vary by project and jurisdiction. The buyer's purchase agreement is with the property developer/seller.",
   },
   {
     title: "Office",

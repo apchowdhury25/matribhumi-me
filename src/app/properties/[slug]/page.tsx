@@ -69,16 +69,23 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
               {property.location.city}, {property.location.country} · {statusLabel(property.status)}
             </p>
             <h1 className="font-display mt-4 text-[2.1rem] leading-[1.05] sm:text-5xl md:text-7xl">{property.name}</h1>
+            <p className="mt-4 text-[11px] uppercase tracking-[0.2em] text-ivory/70">Listed through MatriBhumi</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-              <WaitlistButton projectName={property.name} variant="invert" className="w-full sm:w-auto" />
+              <Button href="#inquire" variant="invert" className="w-full sm:w-auto">
+                Request details
+              </Button>
+              <Button href="#viewing" variant="outline" className="w-full border-ivory/40 text-ivory hover:bg-ivory hover:text-charcoal sm:w-auto">
+                Arrange a viewing
+              </Button>
+              <Button href="/contact" variant="ghost" className="w-full sm:w-auto">
+                Speak with an advisor
+              </Button>
+              <WaitlistButton projectName={property.name} variant="ghost" className="w-full sm:w-auto" />
               <BrochureButton
                 label="Download Brochure"
-                variant="outline"
-                className="w-full border-ivory/40 text-ivory hover:bg-ivory hover:text-charcoal sm:w-auto"
+                variant="ghost"
+                className="w-full sm:w-auto"
               />
-              <Button href="#viewing" variant="ghost" className="w-full sm:w-auto">
-                Schedule a Viewing
-              </Button>
               <FavoriteButton propertyId={property.id} />
               <CompareToggle propertyId={property.id} />
             </div>
@@ -212,15 +219,15 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
 
       <section className="grid gap-12 px-4 py-14 sm:px-6 md:px-12 md:py-20 lg:grid-cols-2">
         <div id="inquire">
-          <h2 className="font-display text-4xl">Request information</h2>
-          <p className="mt-3 text-sm text-muted">Demonstration inquiry — stored for the admin console only.</p>
+          <h2 className="font-display text-4xl">Request details</h2>
+          <p className="mt-3 text-sm text-muted">Tell us what you need. An advisor will follow up and, where it fits, introduce you to the developer.</p>
           <div className="mt-8">
             <InquiryForm propertyId={property.id} />
           </div>
         </div>
         <div id="viewing">
-          <h2 className="font-display text-4xl">Schedule a viewing</h2>
-          <p className="mt-3 text-sm text-muted">Preferred times are requests, not confirmed appointments.</p>
+          <h2 className="font-display text-4xl">Arrange a viewing</h2>
+          <p className="mt-3 text-sm text-muted">Preferred times are requests. We coordinate with the developer to confirm.</p>
           <div className="mt-8">
             <ViewingForm propertyId={property.id} />
           </div>

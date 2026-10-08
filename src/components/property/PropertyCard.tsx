@@ -2,7 +2,8 @@ import Link from "next/link";
 import { formatBedrooms, formatPrice, statusLabel } from "@/lib/format";
 import { FavoriteButton } from "@/components/property/FavoriteButton";
 import { CompareToggle } from "@/components/property/CompareToggle";
-import { DualCta } from "@/components/site/LeadCapture";
+import { Button } from "@/components/ui/button";
+import { isVerifiedDeveloper, publicDeveloperName } from "@/lib/developer";
 
 export type PropertyCardData = {
   id: string;
@@ -18,6 +19,8 @@ export type PropertyCardData = {
   areaMin: number;
   areaUnit: string;
   location: { name: string; city: string; country: string };
+  developer?: { name: string; published: boolean; verified?: boolean } | null;
+  matribhumiOwned?: boolean;
 };
 
 export function PropertyCard({
@@ -28,6 +31,8 @@ export function PropertyCard({
   layout?: "grid" | "list";
 }) {
   const href = `/properties/${property.slug}`;
+  const developerName = publicDeveloperName(property.developer);
+  const verified = isVerifiedDeveloper(property.developer);
   const media = (
     <div className="relative h-full overflow-hidden bg-stone">
       <Link href={href} className="block h-full">
@@ -60,13 +65,31 @@ export function PropertyCard({
           {statusLabel(property.type)} · {formatBedrooms(property.bedroomsMin, property.bedroomsMax)} ·{" "}
           {property.areaMin.toLocaleString()} {property.areaUnit}
         </p>
+        <p className="mt-3 text-[11px] uppercase tracking-[0.16em] text-muted">Listed through MatriBhumi</p>
+        {developerName ? (
+          <p className="mt-1 text-sm text-charcoal">
+            Developer: {developerName}
+            {verified ? " · Verified" : ""}
+          </p>
+        ) : null}
       </div>
       <div className="mt-6">
         <p className="text-[10px] uppercase tracking-[0.18em] text-muted">Starting from</p>
         <p className="mt-1 text-lg text-charcoal">
           {formatPrice(property.startingPrice, property.currency)}
         </p>
-        <DualCta projectName={property.name} className="mt-5" />
+        <div className="mt-5 flex flex-col gap-2">
+          <Button href={`${href}#inquire`} className="w-full">Request details</Button>
+          <Button href={`${href}#viewing`} variant="outline" className="w-full">
+            Arrange a viewing
+          </Button>
+          <Link
+            href="/contact"
+            className="text-center text-[11px] uppercase tracking-[0.18em] text-earth hover:text-charcoal"
+          >
+            Speak with an advisor
+          </Link>
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,14 @@
 import { prisma } from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
+import { publicDeveloperName } from "@/lib/developer";
+import { countryFilterValues } from "@/lib/markets";
 import type { PropertyFilters } from "@/lib/validations";
+
+const propertyCardInclude = {
+  location: true,
+  development: true,
+  developer: true,
+} satisfies Prisma.PropertyInclude;
 
 const PAGE_SIZE = 12;
 
@@ -60,7 +68,7 @@ export async function getDevelopment(slug: string) {
     include: {
       location: true,
       developer: true,
-      properties: { where: { published: true }, include: { location: true } },
+      properties: { where: { published: true }, include: propertyCardInclude },
     },
       }),
     null,
@@ -85,7 +93,7 @@ export async function getLocation(slug: string) {
         where: { slug },
         include: {
           developments: { where: { published: true } },
-          properties: { where: { published: true, featured: true }, include: { location: true } },
+          properties: { where: { published: true, featured: true }, include: propertyCardInclude },
         },
       }),
     null,
@@ -112,8 +120,25 @@ export async function getProperty(slug: string) {
   );
 }
 
+function locationWhere(filters: PropertyFilters): Prisma.LocationWhereInput | undefined {
+  const countryValues = filters.country ? countryFilterValues(filters.country) : [];
+  const clauses: Prisma.LocationWhereInput[] = [];
+  if (countryValues.length) {
+    clauses.push({ OR: countryValues.map((country) => ({ country })) });
+  }
+  if (filters.city) {
+    clauses.push({ OR: [{ slug: filters.city }, { city: filters.city }, { name: filters.city }] });
+  }
+  if (filters.location) {
+    clauses.push({ slug: filters.location });
+  }
+  if (!clauses.length) return undefined;
+  return clauses.length === 1 ? clauses[0] : { AND: clauses };
+}
+
 export async function getProperties(filters: PropertyFilters = {}) {
   const page = filters.page ?? 1;
+  const location = locationWhere(filters);
   const where: Prisma.PropertyWhereInput = {
     published: true,
     ...(filters.q
@@ -125,9 +150,15 @@ export async function getProperties(filters: PropertyFilters = {}) {
           ],
         }
       : {}),
-    ...(filters.location ? { location: { slug: filters.location } } : {}),
+    ...(location ? { location } : {}),
+    ...(filters.developer ? { developer: { slug: filters.developer, published: true } } : {}),
     ...(filters.type ? { type: filters.type as never } : {}),
     ...(filters.status ? { status: filters.status as never } : {}),
+    ...(filters.completionStatus === "ready" ? { status: "READY" } : {}),
+    ...(filters.completionStatus === "off-plan"
+      ? { status: { in: ["UPCOMING", "LAUNCHED", "UNDER_CONSTRUCTION"] } }
+      : {}),
+    ...(filters.featured === "true" ? { featured: true } : {}),
     ...(filters.minPrice || filters.maxPrice
       ? {
           startingPrice: {
@@ -164,10 +195,10 @@ export async function getProperties(filters: PropertyFilters = {}) {
 
   return safe(
     async () => {
-      const [items, total, locations, amenities] = await Promise.all([
+      const [items, total, locations, amenities, developers] = await Promise.all([
         prisma.property.findMany({
           where,
-          include: { location: true, development: true },
+          include: propertyCardInclude,
           orderBy,
           skip: (page - 1) * PAGE_SIZE,
           take: PAGE_SIZE,
@@ -175,6 +206,10 @@ export async function getProperties(filters: PropertyFilters = {}) {
         prisma.property.count({ where }),
         prisma.location.findMany({ orderBy: { name: "asc" } }),
         prisma.amenity.findMany({ orderBy: { name: "asc" } }),
+        prisma.developer.findMany({
+          where: { published: true },
+          orderBy: { name: "asc" },
+        }),
       ]);
       return {
         items,
@@ -184,6 +219,7 @@ export async function getProperties(filters: PropertyFilters = {}) {
         pages: Math.max(1, Math.ceil(total / PAGE_SIZE)),
         locations,
         amenities,
+        developers: developers.filter((developer) => publicDeveloperName(developer)),
       };
     },
     {
@@ -194,8 +230,70 @@ export async function getProperties(filters: PropertyFilters = {}) {
       pages: 1,
       locations: [],
       amenities: [],
+      developers: [],
     },
   );
+}
+
+export async function getFeaturedProperties(take = 6) {
+  return safe(
+    () =>
+      prisma.property.findMany({
+        where: { published: true, featured: true },
+        include: propertyCardInclude,
+        orderBy: { name: "asc" },
+        take,
+      }),
+    [],
+  );
+}
+
+export async function getPublishedDevelopers() {
+  return safe(async () => {
+    const items = await prisma.developer.findMany({
+      where: { published: true },
+      include: {
+        _count: { select: { properties: true, developments: true } },
+      },
+      orderBy: { name: "asc" },
+    });
+    return items.filter((developer) => publicDeveloperName(developer));
+  }, []);
+}
+
+export async function getFeaturedDevelopers() {
+  return safe(async () => {
+    const items = await prisma.developer.findMany({
+      where: { published: true, featured: true },
+      include: {
+        _count: { select: { properties: true, developments: true } },
+      },
+      orderBy: { name: "asc" },
+    });
+    return items.filter((developer) => publicDeveloperName(developer));
+  }, []);
+}
+
+export async function getPublishedDeveloper(slug: string) {
+  return safe(async () => {
+    const developer = await prisma.developer.findUnique({
+      where: { slug },
+      include: {
+        properties: {
+          where: { published: true },
+          include: propertyCardInclude,
+          orderBy: { name: "asc" },
+        },
+        developments: {
+          where: { published: true },
+          include: { location: true },
+          orderBy: { name: "asc" },
+        },
+      },
+    });
+    if (!developer || !publicDeveloperName(developer)) return null;
+    return developer;
+  }, null);
 }
 
 export async function getPropertiesByIds(ids: string[]) {
@@ -205,7 +303,7 @@ export async function getPropertiesByIds(ids: string[]) {
   return safe(async () => {
     const items = await prisma.property.findMany({
       where: { id: { in: unique }, published: true },
-      include: { location: true },
+      include: propertyCardInclude,
     });
     const order = new Map(unique.map((id, index) => [id, index]));
     return items.sort((a, b) => (order.get(a.id) ?? 0) - (order.get(b.id) ?? 0));

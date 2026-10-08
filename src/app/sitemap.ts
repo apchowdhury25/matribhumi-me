@@ -22,11 +22,27 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     /* Build hosts may not inject DATABASE_URL into every worker. */
   }
 
+  let developers: { slug: string }[] = [];
+  try {
+    developers = await prisma.developer.findMany({
+      where: { published: true },
+      select: { slug: true, name: true },
+    }).then((rows) => rows.filter((row) => row.name.trim() && !["unpublished partner", "participating developer"].includes(row.name.trim().toLowerCase())));
+  } catch {
+    developers = [];
+  }
+
   const staticPaths = [
     "",
     "/properties",
+    "/developers",
     "/projects",
     "/locations",
+    "/locations/bangladesh",
+    "/locations/uae",
+    "/locations/malaysia",
+    "/how-it-works",
+    "/for-developers",
     "/about",
     "/sustainability",
     "/insights",
@@ -66,6 +82,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...jobs.map((item) => ({
       url: `${siteConfig.url}/careers/${item.slug}`,
       lastModified: item.updatedAt,
+    })),
+    ...developers.map((item) => ({
+      url: `${siteConfig.url}/developers/${item.slug}`,
+      lastModified: new Date(),
     })),
   ];
 }

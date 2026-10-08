@@ -1,4 +1,20 @@
-# Business-model transition — step 1
+# Business-model transition
+
+## Step 2 — public information architecture
+
+Public navigation, homepage, and discovery now match the advisory / brokerage / transaction-coordination model.
+
+- Primary nav: Home, Properties, Developers, Locations, How It Works, For Developers, About, Insights, Contact.
+- Secondary nav: Bangladesh, UAE, Malaysia → `/locations/bangladesh`, `/locations/uae`, `/locations/malaysia`.
+- Properties is the central discovery surface (country, city, location, developer, type, price, bedrooms, completion status, development status, featured).
+- Property cards say “Listed through MatriBhumi”, show a public developer name only when published, and use Request details / Arrange a viewing / Speak with an advisor.
+- Homepage follows the 13-section advisory structure, including “How MatriBhumi is paid”.
+- `/how-it-works` is a six-step buyer journey. `/for-developers` is the developer proposition without guaranteed-sales claims.
+- `/developers` lists published partners only. The seed partner stays unpublished, so the index is an empty state until a real partner is stored.
+- Copy uses “selected developers”. “Verified developer” appears only when `Developer.verified` is true.
+- `/projects` remains available from the footer. It is no longer in the primary nav.
+
+## Step 1 — positioning
 
 Internal report for the change from a developer/owner site to an independent advisory, brokerage, referral, and transaction-coordination platform.
 

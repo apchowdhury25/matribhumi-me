@@ -5,6 +5,23 @@ test("homepage renders MatriBhumi", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: /Find the right property/i })).toBeVisible();
 });
 
+test("country landings and how it works", async ({ page }) => {
+  await page.goto("/locations/bangladesh");
+  await expect(page.getByRole("heading", { level: 1, name: /Bangladesh property advisory/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Dhaka" })).toBeVisible();
+  await page.goto("/locations/uae");
+  await expect(page.getByRole("heading", { level: 1, name: /United Arab Emirates property advisory/i })).toBeVisible();
+  await expect(page.getByText(/As data becomes available/i).first()).toBeVisible();
+  await page.goto("/locations/malaysia");
+  await expect(page.getByRole("heading", { level: 1, name: /Malaysia property advisory/i })).toBeVisible();
+  await page.goto("/how-it-works");
+  await expect(page.getByText("Tell us what you are looking for.")).toBeVisible();
+  await expect(page.getByText("You complete the purchase with the developer.")).toBeVisible();
+  await page.goto("/for-developers");
+  await expect(page.getByRole("heading", { level: 1, name: /Reach qualified buyers/i })).toBeVisible();
+  await expect(page.getByText(/guaranteed sales/i)).toBeVisible();
+});
+
 test("properties search and filter", async ({ page }) => {
   await page.goto("/properties");
   await page.getByPlaceholder("Search").fill("Heights");

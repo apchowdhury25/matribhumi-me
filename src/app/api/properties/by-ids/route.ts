@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
   if (!ids.length) return NextResponse.json({ items: [] });
   const items = await prisma.property.findMany({
     where: { id: { in: ids }, published: true },
-    include: { location: true, development: true },
+    include: { location: true, development: true, developer: true },
   });
   items.sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));
   return NextResponse.json({ items });

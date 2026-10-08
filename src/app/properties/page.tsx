@@ -6,12 +6,13 @@ import { propertyFilterSchema } from "@/lib/validations";
 import { createMetadata } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
 import { statusLabel } from "@/lib/format";
+import { markets } from "@/lib/markets";
 
 export const dynamic = "force-dynamic";
 export const metadata = createMetadata({
   title: "Properties",
   description:
-    "Homes from participating developers in Bangladesh — including Bashundhara’s master-planned district — for expats, retirees, and families already living in Dhaka.",
+    "Browse new-development and selected developer properties across Bangladesh, the UAE and Malaysia. Filter by country, city, developer, type and price. Listed through MatriBhumi — with no buyer fee.",
   path: "/properties",
   image: "/media/hero-urban.jpg",
 });
@@ -40,16 +41,34 @@ export default async function PropertiesPage({
       <PageHero
         image="/media/hero-urban.jpg"
         eyebrow="Properties"
-        title="A Bangladesh address that fits how you live."
-        description="Search homes from participating developers for holidays, retirement, and everyday living in Bashundhara and beyond. Prices are indicative until an agreement is signed with the developer."
+        title="Find the right property."
+        description="Browse selected developer properties across Bangladesh, the UAE and Malaysia. Prices are indicative until an agreement is signed with the developer or seller."
       />
       <section className="px-4 py-10 sm:px-6 md:px-12 md:py-12">
         <form className="grid gap-3 border border-charcoal/10 bg-paper p-4 md:grid-cols-4 lg:grid-cols-6">
           <input name="q" defaultValue={filters.q} placeholder="Search" className="h-12 border border-charcoal/15 bg-ivory px-3 text-base md:col-span-2" />
+          <select name="country" defaultValue={filters.country ?? ""} className="h-11 border border-charcoal/15 bg-ivory px-3 text-sm">
+            <option value="">All countries</option>
+            {markets.map((market) => (
+              <option key={market.slug} value={market.slug}>{market.shortName}</option>
+            ))}
+          </select>
+          <select name="city" defaultValue={filters.city ?? ""} className="h-11 border border-charcoal/15 bg-ivory px-3 text-sm">
+            <option value="">All cities</option>
+            {[...new Map(data.locations.map((loc) => [loc.city, loc])).values()].map((loc) => (
+              <option key={loc.city} value={loc.city}>{loc.city}</option>
+            ))}
+          </select>
           <select name="location" defaultValue={filters.location ?? ""} className="h-11 border border-charcoal/15 bg-ivory px-3 text-sm">
             <option value="">All locations</option>
             {data.locations.map((loc) => (
               <option key={loc.id} value={loc.slug}>{loc.name}</option>
+            ))}
+          </select>
+          <select name="developer" defaultValue={filters.developer ?? ""} className="h-11 border border-charcoal/15 bg-ivory px-3 text-sm">
+            <option value="">All developers</option>
+            {data.developers.map((developer) => (
+              <option key={developer.id} value={developer.slug}>{developer.name}</option>
             ))}
           </select>
           <select name="type" defaultValue={filters.type ?? ""} className="h-11 border border-charcoal/15 bg-ivory px-3 text-sm">
@@ -57,20 +76,24 @@ export default async function PropertiesPage({
             {types.map((t) => <option key={t} value={t}>{statusLabel(t)}</option>)}
           </select>
           <select name="status" defaultValue={filters.status ?? ""} className="h-11 border border-charcoal/15 bg-ivory px-3 text-sm">
-            <option value="">All statuses</option>
+            <option value="">Development status</option>
             {statuses.map((t) => <option key={t} value={t}>{statusLabel(t)}</option>)}
+          </select>
+          <select name="completionStatus" defaultValue={filters.completionStatus ?? ""} className="h-11 border border-charcoal/15 bg-ivory px-3 text-sm">
+            <option value="">Completion status</option>
+            <option value="ready">Ready</option>
+            <option value="off-plan">Off-plan</option>
           </select>
           <select name="bedrooms" defaultValue={filters.bedrooms ?? ""} className="h-11 border border-charcoal/15 bg-ivory px-3 text-sm">
             <option value="">Beds</option>
             {[1, 2, 3, 4].map((n) => <option key={n} value={n}>{n}+</option>)}
           </select>
-          <select name="bathrooms" defaultValue={filters.bathrooms ?? ""} className="h-11 border border-charcoal/15 bg-ivory px-3 text-sm">
-            <option value="">Baths</option>
-            {[1, 2, 3].map((n) => <option key={n} value={n}>{n}+</option>)}
+          <select name="featured" defaultValue={filters.featured ?? ""} className="h-11 border border-charcoal/15 bg-ivory px-3 text-sm">
+            <option value="">All listings</option>
+            <option value="true">Featured properties</option>
           </select>
           <input name="minPrice" defaultValue={filters.minPrice ?? ""} placeholder="Min price" className="h-11 border border-charcoal/15 bg-ivory px-3 text-sm" />
           <input name="maxPrice" defaultValue={filters.maxPrice ?? ""} placeholder="Max price" className="h-11 border border-charcoal/15 bg-ivory px-3 text-sm" />
-          <input name="minArea" defaultValue={filters.minArea ?? ""} placeholder="Min area" className="h-11 border border-charcoal/15 bg-ivory px-3 text-sm" />
           <select name="amenity" defaultValue={filters.amenity ?? ""} className="h-11 border border-charcoal/15 bg-ivory px-3 text-sm">
             <option value="">Amenities</option>
             {data.amenities.map((a) => <option key={a.id} value={a.slug}>{a.name}</option>)}
@@ -86,7 +109,7 @@ export default async function PropertiesPage({
         </form>
 
         <div className="mt-8 flex items-center justify-between">
-          <p className="text-sm text-muted">{data.total} homes</p>
+          <p className="text-sm text-muted">{data.total} properties</p>
           <div className="flex gap-2 text-[11px] uppercase tracking-[0.18em]">
             <a href={`?${new URLSearchParams({ ...Object.fromEntries(qs), view: "grid" }).toString()}`} className={view === "grid" ? "text-charcoal" : "text-muted"}>Grid</a>
             <a href={`?${new URLSearchParams({ ...Object.fromEntries(qs), view: "list" }).toString()}`} className={view === "list" ? "text-charcoal" : "text-muted"}>List</a>
@@ -94,7 +117,7 @@ export default async function PropertiesPage({
         </div>
 
         {data.items.length === 0 ? (
-          <p className="mt-16 text-muted">No homes match those filters.</p>
+          <p className="mt-16 text-muted">No properties match those filters.</p>
         ) : (
           <div className={view === "list" ? "mt-8 grid gap-6" : "mt-8 grid gap-8 md:grid-cols-2 xl:grid-cols-3"}>
             {data.items.map((property) => (
@@ -117,7 +140,7 @@ export default async function PropertiesPage({
           </div>
         ) : null}
         <div className="mt-16">
-          <Button href="/contact" variant="outline">Talk with sales</Button>
+          <Button href="/contact" variant="outline">Speak with an advisor</Button>
         </div>
       </section>
     </PublicShell>

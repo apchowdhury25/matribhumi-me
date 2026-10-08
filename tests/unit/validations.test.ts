@@ -85,4 +85,19 @@ describe("propertyFilterSchema", () => {
     const parsed = propertyFilterSchema.parse({ page: "2", view: "grid" });
     expect(parsed.page).toBe(2);
   });
+
+  it("accepts country, city, developer, completion and featured filters", () => {
+    const parsed = propertyFilterSchema.parse({
+      country: "bangladesh",
+      city: "Dhaka",
+      developer: "unpublished-partner",
+      completionStatus: "off-plan",
+      featured: "true",
+    });
+    expect(parsed.country).toBe("bangladesh");
+    expect(parsed.city).toBe("Dhaka");
+    expect(parsed.developer).toBe("unpublished-partner");
+    expect(parsed.completionStatus).toBe("off-plan");
+    expect(parsed.featured).toBe("true");
+  });
 });

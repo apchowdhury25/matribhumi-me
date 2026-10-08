@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { slugify } from "@/lib/utils";
 import { rateLimit } from "@/lib/rate-limit";
-import { ownershipLabel, publicDeveloperName } from "@/lib/developer";
+import { isVerifiedDeveloper, ownershipLabel, publicDeveloperName } from "@/lib/developer";
+import { countryFilterValues, getMarket, getMarketByCountry } from "@/lib/markets";
 
 describe("slugify", () => {
   it("creates url-safe slugs", () => {
@@ -21,6 +22,25 @@ describe("publicDeveloperName", () => {
       "MatriBhumi-owned",
     );
     expect(ownershipLabel({ matribhumiOwned: false, developer: { name: "Unpublished partner", published: false } })).toBeNull();
+  });
+
+  it("treats a developer as trusted only when published and verified", () => {
+    expect(isVerifiedDeveloper({ name: "Horizon Homes", published: true, verified: true })).toBe(true);
+    expect(isVerifiedDeveloper({ name: "Horizon Homes", published: true, verified: false })).toBe(false);
+    expect(isVerifiedDeveloper({ name: "Unpublished partner", published: true, verified: true })).toBe(false);
+  });
+});
+
+describe("markets", () => {
+  it("resolves primary market slugs and country aliases", () => {
+    expect(getMarket("bangladesh")?.country).toBe("Bangladesh");
+    expect(getMarketByCountry("United Arab Emirates")?.slug).toBe("uae");
+    expect(countryFilterValues("uae")).toContain("United Arab Emirates");
+    expect(getMarket("malaysia")?.cities.map((city) => city.name)).toEqual([
+      "Kuala Lumpur",
+      "Johor Bahru",
+      "Penang",
+    ]);
   });
 });
 

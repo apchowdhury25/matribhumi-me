@@ -51,6 +51,8 @@ async function main() {
       name: "Unpublished partner",
       slug: "unpublished-partner",
       published: false,
+      verified: false,
+      featured: false,
       description:
         "Internal placeholder for curated listings. Named developer details are unpublished until a partnership is confirmed. MatriBhumi is the advisor, not the developer of record.",
       logoUrl: "/brand/logo-mark.svg",

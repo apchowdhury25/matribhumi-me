@@ -36,7 +36,7 @@ export async function generateMetadata({
   return createMetadata({
     title: label ? `${label} insights` : "Insights",
     description:
-      "Notes on coming home to Bangladesh: choosing a developer project, family visits, and looking after a house from overseas.",
+      "Insights on property advisory, new-development property, and buying assistance for local buyers, NRBs, and relocators across Bangladesh, the UAE and Malaysia.",
     path: label ? `/insights?category=${category}` : "/insights",
     image: "/media/about-studio.jpg",
   });

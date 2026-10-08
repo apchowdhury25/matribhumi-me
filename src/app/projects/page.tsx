@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 export const metadata = createMetadata({
   title: "Developments",
   description:
-    "Selected developer projects in Bangladesh — including Dhaka’s master-planned Bashundhara district and Chattogram — curated by MatriBhumi.",
+    "Selected developer projects listed through MatriBhumi across Bangladesh, the UAE and Malaysia.",
   path: "/projects",
   image: "/media/hero-plaza.jpg",
 });

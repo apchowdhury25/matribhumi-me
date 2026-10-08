@@ -4,7 +4,9 @@ Official website for **MatriBhumi**.
 
 Canonical site: **[https://matribhumi.me](https://matribhumi.me)**
 
-MatriBhumi is an **independent property advisor and transaction partner**. It curates selected projects from participating developers, helps buyers compare them, and coordinates introductions, viewings, and follow-up. The buyer is not charged a brokerage, consultation, or property-search fee. The participating developer is the seller.
+MatriBhumi is **independent property advisory and transaction coordination** across Bangladesh, the UAE and Malaysia. It helps buyers find suitable properties from selected developers, introduces them to the developer of record, and coordinates viewings and follow-up. Buyers pay MatriBhumi nothing for this service. The purchase agreement is with the developer or seller.
+
+Public navigation: Home, Properties, Developers, Locations, How It Works, For Developers, About, Insights, Contact, with a country bar for Bangladesh, UAE and Malaysia.
 
 This repository is the public marketing site, property discovery, inquiries, viewings, and a staff console.
 

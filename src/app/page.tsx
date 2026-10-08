@@ -5,10 +5,26 @@ import { SectionHeader } from "@/components/site/SectionHeader";
 import { PresenceMap } from "@/components/maps/PresenceMap";
 import { BrochureButton, DualCta, WaitlistButton } from "@/components/site/LeadCapture";
 import { DiasporaFaq } from "@/components/site/DiasporaFaq";
-import { StudioLeadership } from "@/components/site/StudioLeadership";
-import { siteConfig, lifestyles, whyMatriBhumi, comingHomePrinciples, whoItsFor, districtLife } from "@/config/site";
-import { getFeaturedDevelopments, getSignatureDevelopments, getArticles, getMapDevelopments } from "@/lib/data";
-import { formatPrice, statusLabel } from "@/lib/format";
+import { HowItWorksSteps } from "@/components/site/HowItWorksSteps";
+import { HowWeArePaid } from "@/components/site/HowWeArePaid";
+import { PropertyCard } from "@/components/property/PropertyCard";
+import {
+  siteConfig,
+  whyMatriBhumi,
+  whatWeDo,
+  buyerServices,
+  developerServices,
+  countryNav,
+} from "@/config/site";
+import { markets } from "@/lib/markets";
+import {
+  getArticles,
+  getFeaturedDevelopers,
+  getFeaturedProperties,
+  getMapDevelopments,
+} from "@/lib/data";
+import { publicDeveloperName } from "@/lib/developer";
+import { statusLabel } from "@/lib/format";
 import { createMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
@@ -20,9 +36,9 @@ export const metadata = createMetadata({
 });
 
 export default async function HomePage() {
-  const [featured, signature, articles, mapPins] = await Promise.all([
-    getFeaturedDevelopments(),
-    getSignatureDevelopments(),
+  const [featuredProperties, featuredDevelopers, articles, mapPins] = await Promise.all([
+    getFeaturedProperties(6),
+    getFeaturedDevelopers(),
     getArticles(),
     getMapDevelopments(),
   ]).catch(() => [[], [], [], []] as const);
@@ -36,18 +52,31 @@ export default async function HomePage() {
           className="absolute inset-0 h-full w-full object-cover ken-burns"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-charcoal/25" />
-        <div className="relative flex min-h-[100dvh] flex-col justify-end px-4 pb-16 pt-28 sm:px-6 md:px-16 md:pb-28 md:pt-32">
+        <div className="relative flex min-h-[100dvh] flex-col justify-end px-4 pb-16 pt-32 sm:px-6 md:px-16 md:pb-28 md:pt-40">
           <p className="text-[11px] uppercase tracking-[0.32em] text-sand">MatriBhumi</p>
           <h1 className="font-display mt-4 max-w-4xl text-[2.15rem] leading-[1.05] text-ivory sm:text-5xl md:mt-5 md:text-8xl md:leading-[0.92]">
             {siteConfig.tagline}
           </h1>
-          <p className="mt-5 max-w-xl text-base leading-7 text-ivory/80 sm:mt-6 sm:text-lg sm:leading-8">{siteConfig.supporting}</p>
+          <p className="mt-5 max-w-xl text-base leading-7 text-ivory/80 sm:mt-6 sm:text-lg sm:leading-8">
+            {siteConfig.supporting}
+          </p>
           <div className="mt-8 flex w-full flex-col gap-3 sm:mt-10 sm:w-auto sm:flex-row sm:flex-wrap sm:gap-4">
-            <WaitlistButton variant="invert" size="lg" className="w-full sm:w-auto" />
-            <BrochureButton
+            <Button href="/properties" variant="invert" size="lg" className="w-full sm:w-auto">
+              Browse properties
+            </Button>
+            <Button
+              href="/contact"
               variant="outline"
               size="lg"
               className="w-full border-ivory/40 text-ivory hover:bg-ivory hover:text-charcoal sm:w-auto"
+            >
+              Speak with an advisor
+            </Button>
+            <WaitlistButton variant="ghost" size="lg" className="w-full sm:w-auto" />
+            <BrochureButton
+              variant="ghost"
+              size="lg"
+              className="w-full sm:w-auto"
             />
           </div>
         </div>
@@ -55,12 +84,12 @@ export default async function HomePage() {
 
       <section className="px-4 py-16 sm:px-6 md:px-12 md:py-20">
         <SectionHeader
-          eyebrow="Who it is for"
-          title="Three ways of living in Bangladesh."
-          description={siteConfig.audience}
+          eyebrow="What MatriBhumi does"
+          title="Independent property advisory and transaction coordination."
+          description="MatriBhumi is an independent property advisor and transaction partner. We help buyers find suitable properties, work with participating developers, and coordinate the journey. You do not pay MatriBhumi a fee."
         />
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {whoItsFor.map((item) => (
+          {whatWeDo.map((item) => (
             <article key={item.title} className="border border-charcoal/10 bg-paper p-8">
               <h3 className="font-display text-3xl">{item.title}</h3>
               <p className="mt-4 text-sm leading-7 text-muted">{item.body}</p>
@@ -69,100 +98,169 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="px-4 py-16 sm:px-6 md:px-12 md:py-24">
+      <section className="bg-mist px-4 py-16 sm:px-6 md:px-12 md:py-20">
         <SectionHeader
-          eyebrow="Selected developments"
-          title="Addresses in Bangladesh you can come back to — or live in every day."
-          description="Curated projects from participating developers in Dhaka, Chattogram, and other markets we cover. Join the waitlist to compare and request an introduction."
+          eyebrow="Primary markets"
+          title="Choose a country."
+          description="Bangladesh, the UAE and Malaysia. City pages open as location data is published."
         />
-        <div className="mt-12 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-          {featured.map((project) => (
-            <article key={project.id} className="group flex flex-col">
-              <Link href={`/projects/${project.slug}`}>
-                <div className="aspect-[4/3] overflow-hidden bg-stone">
-                  <img src={project.heroImage} alt={project.name} className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]" />
-                </div>
-              </Link>
-              <div className="mt-5 flex flex-1 flex-col">
-                <p className="text-[11px] uppercase tracking-[0.2em] text-earth">
-                  {project.location.city} · {statusLabel(project.propertyType)}
-                </p>
-                <h3 className="font-display mt-1 text-3xl">
-                  <Link href={`/projects/${project.slug}`} className="hover:text-moss">{project.name}</Link>
-                </h3>
-                <p className="mt-2 text-sm text-muted">
-                  {statusLabel(project.status)} · {project.completion} · from {formatPrice(project.startingPrice, project.currency)}
-                </p>
-                <DualCta projectName={project.name} className="mt-6" />
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-charcoal px-4 py-16 text-ivory sm:px-6 md:px-12 md:py-24">
-        <SectionHeader
-          eyebrow="Signature partner projects"
-          title="Places worth a second look, at the scale of a neighbourhood."
-          light
-        />
-        <div className="mt-16 space-y-24">
-          {signature.map((project, index) => (
-            <article
-              key={project.id}
-              className="grid items-center gap-10 lg:grid-cols-12"
-            >
-              <div className={index % 2 ? "lg:col-span-7 lg:col-start-6" : "lg:col-span-7"}>
-                <img src={project.heroImage} alt={project.name} className="aspect-[16/10] w-full object-cover" />
-              </div>
-              <div className={index % 2 ? "lg:col-span-5 lg:col-start-1 lg:row-start-1" : "lg:col-span-5"}>
-                <p className="text-[11px] uppercase tracking-[0.22em] text-sand">
-                  {project.location.city}, {project.location.country}
-                </p>
-                <h3 className="font-display mt-3 text-4xl md:text-5xl">{project.name}</h3>
-                <p className="mt-4 text-ivory/75">{project.tagline}</p>
-                <p className="mt-4 text-sm leading-7 text-ivory/65">{project.architecture}</p>
-                <dl className="mt-6 grid grid-cols-2 gap-4 text-sm">
-                  {Object.entries(project.stats as Record<string, string | number>).map(([key, value]) => (
-                    <div key={key}>
-                      <dt className="text-[10px] uppercase tracking-[0.18em] text-sand">{key}</dt>
-                      <dd className="mt-1 font-mono text-ivory">{String(value)}</dd>
-                    </div>
-                  ))}
-                </dl>
-                <DualCta projectName={project.name} tone="dark" className="mt-8" />
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="px-4 py-16 sm:px-6 md:px-12 md:py-24">
-        <SectionHeader
-          eyebrow="How you might live"
-          title="A visit. A retirement. A full Dhaka week."
-          description="Choose the kind of home that matches how you already live — overseas, coming home, or already here."
-        />
-        <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {lifestyles.map((item) => (
-            <Link key={item.slug} href={`/projects?lifestyle=${item.slug}`} className="group relative min-h-[320px] overflow-hidden">
-              <img src={item.image} alt={item.title} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-charcoal/35" />
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {markets.map((market) => (
+            <Link key={market.slug} href={`/locations/${market.slug}`} className="group relative min-h-[280px] overflow-hidden">
+              <img
+                src={market.heroImage}
+                alt=""
+                className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-charcoal/45" />
               <div className="relative flex h-full flex-col justify-end p-6 text-ivory">
-                <h3 className="font-display text-3xl">{item.title}</h3>
-                <p className="mt-2 max-w-sm text-sm text-ivory/80">{item.description}</p>
+                <p className="text-[11px] uppercase tracking-[0.2em] text-sand">{market.seoTitle}</p>
+                <h3 className="font-display mt-2 text-4xl">{market.shortName}</h3>
+                <p className="mt-2 text-sm text-ivory/80">{market.region}</p>
               </div>
             </Link>
           ))}
         </div>
       </section>
 
+      <section className="px-4 py-16 sm:px-6 md:px-12 md:py-24">
+        <SectionHeader
+          eyebrow="Featured properties"
+          title="Selected listings, listed through MatriBhumi."
+          description="These homes are offered by participating developers. MatriBhumi is the advisor and coordinator, not the seller, unless a listing is marked MatriBhumi-owned."
+        />
+        {featuredProperties.length ? (
+          <div className="mt-12 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+            {featuredProperties.map((property) => (
+              <PropertyCard key={property.id} property={property} />
+            ))}
+          </div>
+        ) : (
+          <p className="mt-10 text-muted">Featured listings appear here as published properties are marked featured.</p>
+        )}
+        <Button href="/properties" variant="outline" className="mt-10">
+          Browse all properties
+        </Button>
+      </section>
+
+      <section className="bg-charcoal px-4 py-16 text-ivory sm:px-6 md:px-12 md:py-24">
+        <SectionHeader
+          eyebrow="Featured developers"
+          title="Selected developers we work with."
+          description="Public developer profiles appear when a participating partner is published. We do not invent relationships."
+          light
+        />
+        {featuredDevelopers.length ? (
+          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {featuredDevelopers.map((developer) => {
+              const name = publicDeveloperName(developer);
+              if (!name) return null;
+              return (
+                <Link
+                  key={developer.id}
+                  href={`/developers/${developer.slug}`}
+                  className="border border-ivory/15 p-8 hover:border-ivory/40"
+                >
+                  <p className="text-[11px] uppercase tracking-[0.2em] text-sand">
+                    {developer.verified ? "Verified developer" : "Selected developer"}
+                  </p>
+                  <h3 className="font-display mt-3 text-3xl">{name}</h3>
+                  <p className="mt-3 text-sm text-ivory/70">
+                    {developer._count.properties} listed properties
+                  </p>
+                </Link>
+              );
+            })}
+          </div>
+        ) : (
+          <p className="mt-10 max-w-2xl text-ivory/70">
+            Featured developer profiles will appear here when participating partners are published. Until then, browse
+            properties listed through MatriBhumi.
+          </p>
+        )}
+        <Button href="/developers" variant="outline" className="mt-10 border-ivory/40 text-ivory hover:bg-ivory hover:text-charcoal">
+          All developers
+        </Button>
+      </section>
+
+      <section className="px-4 py-16 sm:px-6 md:px-12 md:py-24">
+        <SectionHeader
+          eyebrow="How MatriBhumi works"
+          title="Six steps from first conversation to a developer purchase."
+          description="You complete the purchase directly with the developer. MatriBhumi coordinates the process."
+        />
+        <HowItWorksSteps />
+        <Button href="/how-it-works" variant="outline" className="mt-10">
+          How it works
+        </Button>
+      </section>
+
       <section className="bg-mist px-4 py-16 sm:px-6 md:px-12 md:py-24">
         <SectionHeader
-          eyebrow="Bangladesh, UAE, and Malaysia"
-          title="Most of the shortlist is at home — especially Dhaka’s new districts."
-          description="Select a development and the map moves to it. Dhaka, Bashundhara, and Chattogram hold the current curated list. Cities farther away are where many buyers already live."
+          eyebrow="Why buyers use MatriBhumi"
+          title="Independent advice, then a coordinated introduction."
+          description={siteConfig.audience}
         />
+        <div className="mt-12 grid gap-px bg-charcoal/10 md:grid-cols-2 lg:grid-cols-3">
+          {whyMatriBhumi.map((item) => (
+            <article key={item.title} className="bg-ivory p-8">
+              <h3 className="font-display text-2xl">{item.title}</h3>
+              <p className="mt-3 text-sm leading-7 text-muted">{item.body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <HowWeArePaid />
+
+      <section className="bg-mist px-4 py-16 sm:px-6 md:px-12 md:py-24">
+        <SectionHeader
+          eyebrow="For buyers"
+          title="Services offered to buyers."
+          description="Property advisory, buying assistance, and viewing coordination — with no buyer fee."
+        />
+        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {buyerServices.map((item) => (
+            <article key={item.title} className="bg-ivory p-6">
+              <h3 className="font-display text-2xl">{item.title}</h3>
+              <p className="mt-3 text-sm leading-7 text-muted">{item.body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="px-4 py-16 sm:px-6 md:px-12 md:py-24">
+        <SectionHeader
+          eyebrow="For developers"
+          title="Reach qualified buyers across Bangladesh, the UAE and Malaysia."
+          description="Marketing, referrals, and transaction coordination. MatriBhumi does not promise guaranteed sales."
+        />
+        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-5">
+          {developerServices.map((item) => (
+            <article key={item.title} className="border border-charcoal/10 bg-paper p-5">
+              <h3 className="font-display text-xl">{item.title}</h3>
+              <p className="mt-3 text-sm leading-7 text-muted">{item.body}</p>
+            </article>
+          ))}
+        </div>
+        <Button href="/for-developers" className="mt-10">
+          For developers
+        </Button>
+      </section>
+
+      <section className="bg-mist px-4 py-16 sm:px-6 md:px-12 md:py-24">
+        <SectionHeader
+          eyebrow="Markets and locations"
+          title="Discover properties by country and city."
+          description="Select a development and the map moves to it. Country pages cover Bangladesh, the UAE and Malaysia; city pages open as data is published."
+        />
+        <div className="mt-8 flex flex-wrap gap-3">
+          {countryNav.map((item) => (
+            <Button key={item.href} href={item.href} variant="outline">
+              {item.label}
+            </Button>
+          ))}
+        </div>
         <div className="mt-12">
           <PresenceMap
             pins={mapPins.map((pin) => ({
@@ -182,62 +280,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="px-4 py-16 sm:px-6 md:px-12 md:py-24">
-        <SectionHeader
-          eyebrow="Why MatriBhumi"
-          title="Independent advice, then a coordinated introduction."
-          description={siteConfig.audience}
-        />
-        <div className="mt-12 grid gap-px bg-charcoal/10 md:grid-cols-2 lg:grid-cols-3">
-          {whyMatriBhumi.map((item) => (
-            <article key={item.title} className="bg-ivory p-8">
-              <h3 className="font-display text-2xl">{item.title}</h3>
-              <p className="mt-3 text-sm leading-7 text-muted">{item.body}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="grid lg:grid-cols-2">
-        <div className="min-h-[420px] bg-cover bg-center" style={{ backgroundImage: "url(/media/location-aerial.jpg)" }} />
-        <div className="flex flex-col justify-center bg-charcoal px-4 py-14 text-ivory sm:px-8 md:px-16 md:py-16">
-          <p className="text-[11px] uppercase tracking-[0.24em] text-sand">How you will use it</p>
-          <h2 className="font-display mt-4 text-[1.85rem] leading-tight sm:text-4xl md:text-5xl">Look at the life, not at a yield.</h2>
-          <p className="mt-5 max-w-lg text-ivory/70">
-            These listings are meant for vacation and part-year stays, for retirement in Bangladesh, and for everyday living in Bashundhara’s new districts. The developer is the seller. We do not guarantee returns, appreciation, or rental income.
-          </p>
-          <ul className="mt-8 space-y-4">
-            {comingHomePrinciples.slice(0, 3).map((item) => (
-              <li key={item.title}>
-                <p className="text-sm font-medium">{item.title}</p>
-                <p className="text-sm text-ivory/65">{item.body}</p>
-              </li>
-            ))}
-          </ul>
-          <DualCta tone="dark" className="mt-10" />
-        </div>
-      </section>
-
-      <section className="bg-mist px-4 py-16 sm:px-6 md:px-12 md:py-24">
-        <SectionHeader
-          eyebrow="Bashundhara district life"
-          title="Malls, golf, parks — and a home on the same map."
-          description={`${siteConfig.districtRelation} MatriBhumi is an independent advisor. The district is the setting; the developer is the seller.`}
-        />
-        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {districtLife.map((item) => (
-            <article key={item.title} className="bg-ivory p-6">
-              <h3 className="font-display text-2xl">{item.title}</h3>
-              <p className="mt-3 text-sm leading-7 text-muted">{item.body}</p>
-            </article>
-          ))}
-        </div>
-        <Button href="/locations/bashundhara" className="mt-10 w-full sm:w-auto">
-          Bashundhara district
-        </Button>
-      </section>
-
-      <StudioLeadership />
       <DiasporaFaq />
 
       <section className="px-4 py-16 sm:px-6 md:px-12 md:py-24">
@@ -259,6 +301,24 @@ export default async function HomePage() {
               <h3 className="font-display mt-2 text-2xl leading-tight group-hover:text-moss">{article.title}</h3>
             </Link>
           ))}
+        </div>
+      </section>
+
+      <section className="bg-charcoal px-4 py-16 text-ivory sm:px-6 md:px-12 md:py-24">
+        <SectionHeader
+          eyebrow="Start a conversation"
+          title="Speak with an advisor."
+          description="Tell us the country, the kind of home, and how you will use it. There is no buyer fee for this conversation."
+          light
+        />
+        <DualCta tone="dark" className="mt-10" />
+        <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+          <Button href="/contact" variant="outline" className="border-ivory/40 text-ivory hover:bg-ivory hover:text-charcoal">
+            Speak with an advisor
+          </Button>
+          <Button href="/properties" variant="ghost">
+            Browse properties
+          </Button>
         </div>
       </section>
     </PublicShell>

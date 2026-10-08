@@ -71,9 +71,14 @@ export const loginSchema = z.object({
 
 export const propertyFilterSchema = z.object({
   q: z.string().optional(),
+  country: z.string().optional(),
+  city: z.string().optional(),
   location: z.string().optional(),
+  developer: z.string().optional(),
   type: z.string().optional(),
   status: z.string().optional(),
+  completionStatus: z.string().optional(),
+  featured: z.string().optional(),
   minPrice: z.coerce.number().optional(),
   maxPrice: z.coerce.number().optional(),
   bedrooms: z.coerce.number().optional(),

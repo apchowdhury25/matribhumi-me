@@ -105,6 +105,8 @@ model Developer {
   logoUrl      String?
   website      String?
   published    Boolean        @default(false)
+  verified     Boolean        @default(false)
+  featured     Boolean        @default(false)
   properties   Property[]
   developments Development[]
 }

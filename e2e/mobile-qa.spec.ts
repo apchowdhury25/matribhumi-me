@@ -7,8 +7,14 @@ const pages = [
   "/projects",
   "/projects/the-grove-residences",
   "/locations",
+  "/locations/bangladesh",
+  "/locations/uae",
+  "/locations/malaysia",
   "/locations/chattogram",
   "/locations/bashundhara",
+  "/developers",
+  "/how-it-works",
+  "/for-developers",
   "/about",
   "/sustainability",
   "/contact",
@@ -57,7 +63,7 @@ for (const vp of viewports) {
       const menu = page.getByRole("button", { name: /open menu/i });
       if (await menu.isVisible()) {
         await menu.click();
-        await expect(page.getByRole("link", { name: "Developments" }).last()).toBeVisible();
+        await expect(page.getByRole("link", { name: "How It Works" }).last()).toBeVisible();
         await page.getByRole("button", { name: /close menu/i }).click();
       }
       await page.getByRole("button", { name: "Search" }).click();

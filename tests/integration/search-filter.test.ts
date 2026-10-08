@@ -14,4 +14,19 @@ describe("property filtering", () => {
     expect(filters.minPrice).toBe(100000);
     expect(filters.bedrooms).toBe(2);
   });
+
+  it("accepts market discovery filters", () => {
+    const filters = propertyFilterSchema.parse({
+      country: "uae",
+      city: "Dubai",
+      location: "dubai",
+      type: "APARTMENT",
+      status: "UNDER_CONSTRUCTION",
+      completionStatus: "off-plan",
+      featured: "true",
+    });
+    expect(filters.country).toBe("uae");
+    expect(filters.location).toBe("dubai");
+    expect(filters.completionStatus).toBe("off-plan");
+  });
 });
