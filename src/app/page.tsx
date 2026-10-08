@@ -37,7 +37,7 @@ export const metadata = createMetadata({
   title: `${siteConfig.name} — ${siteConfig.tagline.replace(/\.$/, "")}`,
   description: siteConfig.supporting,
   path: "/",
-  image: "/media/hero-plaza.jpg",
+  image: "/media/hero-landing.jpg",
 });
 
 export default async function HomePage() {
@@ -56,9 +56,9 @@ export default async function HomePage() {
     <PublicShell transparentHeader>
       <section className="relative min-h-[100dvh] overflow-hidden">
         <img
-          src="/media/hero-plaza.jpg"
-          alt="A landscaped plaza at a contemporary residential development"
-          className="absolute inset-0 h-full w-full object-cover ken-burns"
+          src="/media/hero-landing.jpg"
+          alt="A dusk waterfront residential tower with MatriBhumi at the entrance"
+          className="absolute inset-0 h-full w-full object-cover object-[62%_center] ken-burns"
         />
         <div className="absolute inset-0 bg-charcoal/55" />
         <div className="relative flex min-h-[100dvh] flex-col justify-end px-4 pb-16 pt-32 sm:px-6 md:px-16 md:pb-28 md:pt-40">

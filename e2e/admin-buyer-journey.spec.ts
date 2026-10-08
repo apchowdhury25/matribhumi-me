@@ -2,10 +2,13 @@ import { test, expect } from "@playwright/test";
 
 test("admin lead matching, shortlist, and deal pipeline", async ({ page }) => {
   test.setTimeout(60000);
+  const stamp = Date.now();
+  const buyerName = `Asha Pipeline ${stamp}`;
+  const buyerEmail = `asha.pipeline.${stamp}@example.com`;
 
   await page.goto("/advise");
-  await page.locator("input[name=name]").fill("Asha Rahman");
-  await page.locator("input[name=email]").fill("asha.pipeline@example.com");
+  await page.locator("input[name=name]").fill(buyerName);
+  await page.locator("input[name=email]").fill(buyerEmail);
   await page.locator("input[name=phone]").fill("+8801700112233");
   await page.locator("input[name=residenceCountry]").fill("Bangladesh");
   await page.locator("input[name=preferredCity]").fill("Dhaka");
@@ -50,7 +53,7 @@ test("admin lead matching, shortlist, and deal pipeline", async ({ page }) => {
   await expect(page.getByText("Developer compensation due").first()).toBeVisible();
 
   await page.goto("/admin/leads");
-  await page.getByRole("link", { name: "Asha Rahman" }).first().click();
+  await page.getByRole("link", { name: buyerName }).click();
   await expect(page.getByRole("heading", { name: "Matching" })).toBeVisible();
   await expect(page.getByText(/not an AI recommendation/i)).toBeVisible();
   await expect(page.getByRole("heading", { name: "Shortlist" })).toBeVisible();
