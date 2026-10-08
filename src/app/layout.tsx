@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Suspense } from "react";
+import { Suspense, type ReactNode } from "react";
 import { Cormorant_Garamond, Outfit, IBM_Plex_Mono } from "next/font/google";
 import { siteConfig } from "@/config/site";
 import { organizationJsonLd } from "@/lib/seo";
@@ -46,11 +46,14 @@ export const metadata: Metadata = {
   applicationName: siteConfig.name,
   keywords: [
     "MatriBhumi",
+    "independent property advisor",
     "Bangladesh homes",
     "expat housing Bangladesh",
     "retire to Bangladesh",
     "Bashundhara apartments",
     "Dhaka new developments",
+    "UAE property advisor",
+    "Malaysia property advisor",
     "Bangladeshi diaspora",
   ],
   authors: [{ name: siteConfig.name, url: siteConfig.url }],
@@ -77,7 +80,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"

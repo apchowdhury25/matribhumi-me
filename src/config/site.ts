@@ -1,20 +1,22 @@
 export const siteConfig = {
   name: "MatriBhumi",
-  legalName: "MatriBhumi Developments",
+  legalName: "MatriBhumi",
   shortName: "MatriBhumi",
   url: "https://matribhumi.me",
   domain: "matribhumi.me",
   description:
-    "An independent, premium boutique architectural design and development firm. Homes for the Bangladeshi diaspora — a home-land, not a launch.",
-  tagline: "A home in Bangladesh — to visit, to retire, to live well.",
+    "Your independent property advisor and transaction partner. Curated developer projects across Bangladesh, UAE and Malaysia — at no cost to the buyer.",
+  tagline: "Find the right property. We coordinate the rest.",
   supporting:
-    "Boutique private developments seamlessly integrated within Dhaka’s master-planned Bashundhara district. An address you can fly into for Eid, a winter month, or the longer stay of retirement.",
+    "Independent property guidance across Bangladesh, UAE and Malaysia. We help buyers compare participating developer projects and coordinate the transaction — at no cost to the buyer.",
   positioning:
-    "MatriBhumi is an independent, premium boutique architectural design and development firm.",
+    "Your independent property advisor and transaction partner.",
   districtRelation:
-    "Boutique private developments seamlessly integrated within Dhaka’s master-planned Bashundhara district.",
+    "Selected developer projects in and around Dhaka’s master-planned Bashundhara district, and other markets we cover with participating developers.",
   audience:
-    "For high-net-worth Bangladeshi expats and retirees who want international design standards, and the warmth of a true home.",
+    "For Bangladeshi expats, returning retirees, and households already in Bangladesh who want help choosing a home and coordinating the process.",
+  buyerFee:
+    "MatriBhumi charges the buyer no brokerage fee, no consultation fee, and no property-search fee. Participating developers compensate MatriBhumi under a separate agreement. Those agreements differ; no commission percentage is published here.",
   email: "hello@matribhumi.me",
   salesEmail: "sales@matribhumi.me",
   pressEmail: "press@matribhumi.me",
@@ -151,39 +153,39 @@ export const lifestyles = [
 
 export const whyMatriBhumi = [
   {
-    title: "Designed to be left and returned to",
-    body: "Layouts, storage, and building management assume you may be away for months — or live here every day. Both kinds of household are planned for.",
+    title: "Independent of any one developer",
+    body: "We curate projects from a network of participating developers. The developer is the seller. MatriBhumi is the advisor and coordinator.",
   },
   {
-    title: "New-district convenience",
-    body: "Residences in and around Bashundhara sit near malls, golf, amusement parks, and the everyday services a modern Dhaka neighbourhood needs.",
+    title: "Compare before you commit",
+    body: "Budget, location, layout, and how you will actually use the home — we help you set those requirements and compare selected developments side by side.",
   },
   {
-    title: "A plan for retirement",
-    body: "Quieter rooms, step-free thinking where we can, and neighbourhoods with clinics, walks, and family close by — for people coming home from overseas to stay.",
+    title: "No fee to the buyer",
+    body: "There is no brokerage fee, consultation fee, or property-search fee for the buyer. The participating developer compensates MatriBhumi under a separate agreement.",
   },
   {
-    title: "Quality you can inspect from overseas",
-    body: "We specify durable materials and work with builders who can stand behind the details — because you cannot visit the site every week.",
+    title: "Introductions you can follow",
+    body: "When a project fits, we introduce qualified buyers to the relevant developer and stay on the communication so questions do not stall.",
   },
   {
-    title: "Rooms for gathering",
-    body: "Courtyards, guest rooms, and shared spaces sized for Eid, weddings, and the relatives who live in Bangladesh year-round.",
+    title: "Viewings and the transaction path",
+    body: "We coordinate property viewings and help you follow the developer’s process — documents, timelines, and follow-up — without pretending to be the seller.",
   },
   {
     title: "Reachable from abroad — and from across town",
-    body: "Clear information, realistic timelines, and people you can actually call, whether you are in Dubai, London, or another neighbourhood of Dhaka.",
+    body: "Clear information and people you can actually call, whether you are in Dubai, Kuala Lumpur, London, or another neighbourhood of Dhaka.",
   },
   {
     title: "A long view of home",
-    body: "We build as if this address will still be yours in twenty years — a home-land, not a launch.",
+    body: "We advise as if this address will still matter in twenty years. Independent legal and tax advice remains yours to seek.",
   },
 ] as const;
 
 export const comingHomePrinciples = [
   {
     title: "How you will actually use it",
-    body: "A few weeks at Eid, a retirement year, or full-time life next to a mall and a park: the plan should fit the calendar you already keep.",
+    body: "A few weeks at Eid, a retirement year, or full-time life next to a mall and a park: the shortlist should fit the calendar you already keep.",
   },
   {
     title: "Location in the new districts",
@@ -191,11 +193,11 @@ export const comingHomePrinciples = [
   },
   {
     title: "Looking after the home while you are away",
-    body: "Building management, neighbours, and simple, durable rooms matter when the house is empty for part of the year.",
+    body: "Ask the developer how building management, neighbours, and upkeep work when the house is empty for part of the year. We help you get those answers.",
   },
   {
     title: "Development quality",
-    body: "Construction standards and the care given to shared spaces influence how a building ages between visits — or through everyday use.",
+    body: "Construction standards and the care given to shared spaces belong to the developer of record. We help you inspect what they publish and what a viewing shows.",
   },
   {
     title: "Not a financial product",
@@ -203,30 +205,40 @@ export const comingHomePrinciples = [
   },
   {
     title: "Title and running costs",
-    body: "Price, size, service charges, and legal title should be reviewed carefully. We do not provide financial advice.",
+    body: "Price, size, service charges, and legal title should be reviewed with the developer and your own counsel. We do not provide financial advice.",
   },
 ] as const;
 
 export const diasporaFaq = [
   {
-    question: "Can I legally purchase and own a MatriBhumi property if I hold foreign citizenship?",
+    question: "Does MatriBhumi charge the buyer a fee?",
     answer:
-      "Yes. Dual citizens and non-resident Bangladeshis (NRBs) enjoy full property ownership rights in Bangladesh. Our legal team handles the complete registration process, ensuring compliance with local property laws seamlessly from abroad.",
+      "No. MatriBhumi charges the buyer no brokerage fee, no consultation fee, and no property-search fee. Participating developers compensate MatriBhumi under a separate commercial agreement. Those agreements differ by developer, so no universal commission percentage is published here.",
   },
   {
-    question: "How can I safely manage payments and wire transfers from overseas?",
+    question: "Who is the seller of a listed property?",
     answer:
-      "We facilitate secure, traceable international wire transfers directly to dedicated project accounts. All transactions are fully documented, compliant with Bangladesh Bank regulations, and aligned with transparent milestone-based construction timelines.",
+      "The participating developer is the seller. MatriBhumi discovers and curates projects, helps you compare them, introduces qualified buyers to the relevant developer, and coordinates communication, viewings, and follow-up. A listing is MatriBhumi-owned only when it is explicitly marked as such.",
   },
   {
-    question: "How is my home looked after when I am away for months at a time?",
+    question: "Can I buy if I hold foreign citizenship?",
     answer:
-      "Every MatriBhumi development features comprehensive, round-the-clock building management. This includes 24/7 smart security, regular structural inspections, and dedicated property upkeep, ensuring your home is pristine and secure the moment you turn the key for Eid or winter holidays.",
+      "Ownership rules depend on the country of the property and on your citizenship and residency. MatriBhumi coordinates introductions and helps you follow the developer’s process. Independent legal advice in that jurisdiction is yours to obtain. We do not claim a licence in Bangladesh, UAE, or Malaysia on this site.",
   },
   {
-    question: "What are the advantages of joining the pre-launch waitlist?",
+    question: "How do payments and registration work from overseas?",
     answer:
-      "Waitlist members receive priority access to architectural floor plans, exclusive early-bird pricing tiers, and the first choice of premium units (such as corner layouts and upper-floor views) before the public launch.",
+      "Payment accounts, milestone schedules, and title registration belong to the developer of record and to the lawyers you appoint. We help you ask the right questions and stay on the correspondence. We do not operate project escrow or complete registration ourselves.",
+  },
+  {
+    question: "Who looks after the home when I am away?",
+    answer:
+      "Building management is the developer’s (or the building’s) responsibility. We help you obtain those details before you commit, including security, inspections, and upkeep between visits.",
+  },
+  {
+    question: "What does joining the waitlist do?",
+    answer:
+      "Waitlist members hear first when curated floor plans, viewing slots, or developer updates are released for a project you asked about. It is a coordination list, not a reservation contract.",
   },
 ] as const;
 
@@ -235,34 +247,34 @@ export const leadership = [
     name: "Amina Rahman",
     role: "Founder",
     image: "/media/leader-founder.jpg",
-    bio: "Portrait and full biography to follow. The founding standard is international design standards meeting local heritage — a home that can be closed for the year and opened again for Eid.",
+    bio: "Portrait and full biography to follow. The standard is independent advice: the right home for how you live, then a clean introduction to the developer who is selling it.",
   },
   {
     name: "Farhan Kabir",
-    role: "Development",
+    role: "Partner relations",
     image: "/media/leader-development.jpg",
-    bio: "Portrait and full biography to follow. Land, structure, and builders who can stand beside a detail when the client is on another continent.",
+    bio: "Portrait and full biography to follow. Relationships with participating developers, so a buyer’s questions reach the people who can answer them.",
   },
   {
     name: "Leila Nassar",
-    role: "Architecture",
+    role: "Buyer advisory",
     image: "/media/leader-design.jpg",
-    bio: "Portrait and full biography to follow. The studio turns a site into shade, courtyards, and rooms that still feel like a Bangladeshi home.",
+    bio: "Portrait and full biography to follow. Requirements, budget, and shortlists — then viewings and follow-up until the transaction is in the developer’s hands.",
   },
 ] as const;
 
 export const legalCompliance = [
   {
-    title: "RAJUK approvals",
-    body: "Each pre-launch development is prepared for submission to RAJUK. Approval references will be published here as they are granted.",
+    title: "Developer of record",
+    body: "Approvals, structural certificates, and developer registration belong to the participating developer for each listing. References are published when that developer provides them. MatriBhumi is the advisor and coordinator unless a listing is marked MatriBhumi-owned.",
   },
   {
-    title: "Structural certifications",
-    body: "Structural design is specified to international standards and certified by the appointed engineer of record. Certificate numbers will be listed with the construction drawings.",
+    title: "Buyer fees",
+    body: "MatriBhumi charges the buyer no brokerage, consultation, or property-search fee. Compensation comes from the participating developer under a separate agreement. No universal percentage is shown because those agreements differ.",
   },
   {
-    title: "Developer registration",
-    body: "MatriBhumi Developments. Registered office: House 12, Road 7, Gulshan, Dhaka 1212, Bangladesh. Full registration particulars will be published before public sales.",
+    title: "Office",
+    body: "MatriBhumi. House 12, Road 7, Gulshan, Dhaka 1212, Bangladesh. This site does not claim a real-estate licence in Bangladesh, UAE, or Malaysia.",
   },
 ] as const;
 

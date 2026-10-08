@@ -12,13 +12,14 @@ import { JsonLd } from "@/components/site/JsonLd";
 import { getProperty } from "@/lib/data";
 import { createMetadata, propertyJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { formatArea, formatBedrooms, formatDate, formatPrice, statusLabel } from "@/lib/format";
+import { ownershipLabel } from "@/lib/developer";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const property = await getProperty(slug);
-  if (!property) return createMetadata({ title: "Property", description: "MatriBhumi property", path: `/properties/${slug}` });
+  if (!property) return createMetadata({ title: "Property", description: "Selected property", path: `/properties/${slug}` });
   return createMetadata({
     title: property.name,
     description: property.description.slice(0, 160),
@@ -90,7 +91,12 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
           <p className="text-[11px] uppercase tracking-[0.22em] text-earth">Overview</p>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-muted">{property.description}</p>
           <dl className="mt-8 grid grid-cols-2 gap-6 text-sm md:grid-cols-3">
-            <Fact label="Developer" value={property.developer.name} />
+            {ownershipLabel({ matribhumiOwned: property.matribhumiOwned, developer: property.developer }) ? (
+              <Fact
+                label={property.matribhumiOwned ? "Ownership" : "Developer"}
+                value={ownershipLabel({ matribhumiOwned: property.matribhumiOwned, developer: property.developer }) ?? ""}
+              />
+            ) : null}
             <Fact label="Type" value={statusLabel(property.type)} />
             <Fact label="Completion" value={property.completionDate ? formatDate(property.completionDate, { month: "short", year: "numeric" }) : "—"} />
             <Fact label="Units" value={property.totalUnits ? String(property.totalUnits) : "—"} />

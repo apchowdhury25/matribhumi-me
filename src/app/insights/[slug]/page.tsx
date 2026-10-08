@@ -22,7 +22,7 @@ export async function generateMetadata({
   if (!article || !article.published) {
     return createMetadata({
       title: "Insight",
-      description: "A MatriBhumi studio note.",
+      description: "A MatriBhumi advisory note.",
       path: `/insights/${slug}`,
       noIndex: true,
     });

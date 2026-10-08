@@ -51,6 +51,7 @@ export async function upsertProperty(formData: FormData) {
     longitude: Number(formData.get("longitude") || 0),
     published: formData.get("published") === "on",
     featured: formData.get("featured") === "on",
+    matribhumiOwned: formData.get("matribhumiOwned") === "on",
     developmentId: String(formData.get("developmentId")),
     locationId: String(formData.get("locationId")),
     developerId: String(formData.get("developerId")),
@@ -85,6 +86,7 @@ export async function upsertDevelopment(formData: FormData) {
     published: formData.get("published") === "on",
     featured: formData.get("featured") === "on",
     signature: formData.get("signature") === "on",
+    matribhumiOwned: formData.get("matribhumiOwned") === "on",
     locationId: String(formData.get("locationId")),
     developerId: String(formData.get("developerId")),
   };

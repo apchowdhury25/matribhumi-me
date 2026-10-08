@@ -21,18 +21,18 @@ export function brochureDownloadUrl() {
 export function brochureEmail(fullName: string) {
   const firstName = firstNameFrom(fullName);
   const downloadUrl = brochureDownloadUrl();
-  const subject = "Your MatriBhumi Pre-Launch Portfolio & Brochure";
+  const subject = "Your MatriBhumi curated portfolio & brochure";
   const text = `Dear ${firstName},
 
-Thank you for your interest in MatriBhumi. Enclosed, you will find our comprehensive pre-launch brochure detailing our upcoming architectural visions in Dhaka and Chattogram.
+Thank you for your interest in MatriBhumi. Enclosed is a brochure of selected projects from participating developers in Dhaka, Chattogram, and other markets we cover.
 
 ${downloadUrl}
 
-We understand that building a life in two places requires a foundation built on absolute trust, meticulous design, and seamless management. MatriBhumi residences are explicitly crafted for those who demand international structural standards without losing the warmth of a true Bangladeshi home—whether you are flying in for Eid, planning a serene retirement, or investing in the future of Dhaka’s newest premium districts.
+MatriBhumi is your independent property advisor and transaction partner. We help you compare developer projects and coordinate introductions, viewings, and follow-up. There is no brokerage, consultation, or property-search fee for the buyer. The participating developer is the seller.
 
-Because you have downloaded our brochure, you have been granted provisional priority status. As floor plans and early-bird pricing tiers lock in, you will be among the very first to receive access.
+Because you have downloaded the brochure, we will keep you on the list for floor plans and viewing slots as they are released.
 
-If you have specific architectural preferences or layout requirements for your return, simply reply directly to this email. Our client relationship team is available across global time zones to assist you.
+If you have specific layout, budget, or location requirements, reply to this email. The advisory team is available across time zones.
 
 Welcome back to the idea of home.
 
@@ -58,7 +58,7 @@ www.matribhumi.me`;
             </tr>
             <tr>
               <td style="padding-top:20px;font-family:Georgia,serif;font-size:16px;line-height:1.7;color:#2c2a26;">
-                Thank you for your interest in MatriBhumi. Enclosed, you will find our comprehensive pre-launch brochure detailing our upcoming architectural visions in Dhaka and Chattogram.
+                Thank you for your interest in MatriBhumi. Enclosed is a brochure of selected projects from participating developers in Dhaka, Chattogram, and other markets we cover.
               </td>
             </tr>
             <tr>
@@ -68,17 +68,17 @@ www.matribhumi.me`;
             </tr>
             <tr>
               <td style="padding-top:28px;font-family:Georgia,serif;font-size:16px;line-height:1.7;color:#2c2a26;">
-                We understand that building a life in two places requires a foundation built on absolute trust, meticulous design, and seamless management. MatriBhumi residences are explicitly crafted for those who demand international structural standards without losing the warmth of a true Bangladeshi home—whether you are flying in for Eid, planning a serene retirement, or investing in the future of Dhaka’s newest premium districts.
+                MatriBhumi is your independent property advisor and transaction partner. We help you compare developer projects and coordinate introductions, viewings, and follow-up. There is no brokerage, consultation, or property-search fee for the buyer. The participating developer is the seller.
               </td>
             </tr>
             <tr>
               <td style="padding-top:18px;font-family:Georgia,serif;font-size:16px;line-height:1.7;color:#2c2a26;">
-                Because you have downloaded our brochure, you have been granted provisional priority status. As floor plans and early-bird pricing tiers lock in, you will be among the very first to receive access.
+                Because you have downloaded the brochure, we will keep you on the list for floor plans and viewing slots as they are released.
               </td>
             </tr>
             <tr>
               <td style="padding-top:18px;font-family:Georgia,serif;font-size:16px;line-height:1.7;color:#2c2a26;">
-                If you have specific architectural preferences or layout requirements for your return, simply reply directly to this email. Our client relationship team is available across global time zones to assist you.
+                If you have specific layout, budget, or location requirements, reply to this email. The advisory team is available across time zones.
               </td>
             </tr>
             <tr>

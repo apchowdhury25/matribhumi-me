@@ -2,8 +2,8 @@ import { test, expect } from "@playwright/test";
 
 test("pre-launch homepage, waitlist, and brochure", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("heading", { name: /A home in Bangladesh/i })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Download Pre-Launch Brochure" }).first()).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1, name: /Find the right property/i })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Download Brochure" }).first()).toBeVisible();
   await expect(page.getByRole("button", { name: "Join Waitlist" }).first()).toBeVisible();
   await expect(page.getByText(/fictional/i)).toHaveCount(0);
   await expect(page.getByText(/demonstration/i)).toHaveCount(0);
@@ -13,9 +13,9 @@ test("pre-launch homepage, waitlist, and brochure", async ({ page }) => {
   await expect(page.getByRole("link", { name: "Instagram" })).toBeVisible();
   await expect(page.getByRole("link", { name: "LinkedIn" })).toBeVisible();
   await expect(page.getByRole("link", { name: "WhatsApp" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Designed for the Diaspora: Frequently Asked Questions" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "International design standards meeting local heritage." })).toBeVisible();
-  await expect(page.getByText("Boutique private developments seamlessly integrated within Dhaka’s master-planned Bashundhara district.").first()).toBeVisible();
+  await expect(page.getByRole("heading", { name: "For buyers living in two places: frequently asked questions" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Independent advice, then a coordinated introduction." }).first()).toBeVisible();
+  await expect(page.getByText(/independent property advisor/i).first()).toBeVisible();
 
   await page.getByRole("button", { name: "Join Waitlist" }).first().click();
   const waitlist = page.getByRole("dialog");
@@ -30,12 +30,12 @@ test("pre-launch homepage, waitlist, and brochure", async ({ page }) => {
   await expect(waitlist.getByRole("option", { name: "Investment" })).toHaveCount(1);
   await waitlist.getByRole("button", { name: "Close" }).click();
 
-  await page.getByRole("button", { name: "Download Pre-Launch Brochure" }).first().click();
+  await page.getByRole("button", { name: "Download Brochure" }).first().click();
   const brochure = page.getByRole("dialog");
   await brochure.getByLabel("Full name").fill("Asha Rahman");
   await brochure.getByLabel("Email").fill("asha@example.com");
   await brochure.getByRole("checkbox").check();
-  await brochure.getByRole("button", { name: "Download Pre-Launch Brochure" }).click();
+  await brochure.getByRole("button", { name: "Download Brochure" }).click();
   await expect(brochure.getByRole("heading", { name: "Your portfolio is on its way." })).toBeVisible();
 });
 
@@ -66,7 +66,7 @@ test("pre-launch homepage on a phone", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
   await expect(page.getByRole("button", { name: "Join Waitlist" }).first()).toBeVisible();
-  await expect(page.getByRole("button", { name: "Download Pre-Launch Brochure" }).first()).toBeVisible();
+  await expect(page.getByRole("button", { name: "Download Brochure" }).first()).toBeVisible();
   const card = page.getByRole("button", { name: "Join Waitlist" }).nth(1);
   await card.scrollIntoViewIfNeeded();
   await expect(card).toBeVisible();

@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 
 test("homepage renders MatriBhumi", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("heading", { name: /A home in Bangladesh/i })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1, name: /Find the right property/i })).toBeVisible();
 });
 
 test("properties search and filter", async ({ page }) => {
@@ -15,6 +15,8 @@ test("properties search and filter", async ({ page }) => {
 test("property detail and inquiry", async ({ page }) => {
   await page.goto("/properties/heights-residences");
   await expect(page.getByRole("heading", { name: "Heights Residences" })).toBeVisible();
+  await expect(page.getByText("Unpublished partner")).toHaveCount(0);
+  await expect(page.getByText("MatriBhumi Developments")).toHaveCount(0);
   await page.locator("#inquire input[name=name]").fill("Asha Rahman");
   await page.locator("#inquire input[name=email]").fill("asha@example.com");
   await page.locator("#inquire input[name=phone]").fill("+88017000000");

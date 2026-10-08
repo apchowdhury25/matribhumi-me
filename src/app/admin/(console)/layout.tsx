@@ -28,7 +28,7 @@ export default async function ConsoleLayout({ children }: { children: React.Reac
       <aside className="hidden w-64 shrink-0 flex-col bg-charcoal text-ivory md:flex">
         <div className="px-6 py-6">
           <Logo variant="dark" />
-          <p className="mt-3 text-[11px] uppercase tracking-[0.2em] text-sand">Studio console</p>
+          <p className="mt-3 text-[11px] uppercase tracking-[0.2em] text-sand">Advisory console</p>
         </div>
         <nav className="flex-1 px-3" aria-label="Admin">
           {links.map((link) => (

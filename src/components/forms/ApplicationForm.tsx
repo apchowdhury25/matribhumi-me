@@ -12,7 +12,7 @@ export function ApplicationForm({ jobId }: { jobId: string }) {
   if (state.ok) {
     return (
       <div className="border border-moss/20 bg-mist p-6 text-sm leading-7 text-charcoal">
-        Your application has been received. The studio will write if there is a fit.
+        Your application has been received. The team will write if there is a fit.
       </div>
     );
   }

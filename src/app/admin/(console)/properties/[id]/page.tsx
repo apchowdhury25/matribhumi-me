@@ -52,6 +52,7 @@ export default async function PropertyFormPage({ params }: { params: Promise<{ i
       </select>
       <label className="flex gap-2 text-sm"><input type="checkbox" name="published" defaultChecked={property?.published ?? true} /> Published</label>
       <label className="flex gap-2 text-sm"><input type="checkbox" name="featured" defaultChecked={property?.featured ?? false} /> Featured</label>
+      <label className="flex gap-2 text-sm"><input type="checkbox" name="matribhumiOwned" defaultChecked={property?.matribhumiOwned ?? false} /> MatriBhumi-owned</label>
       <button className="h-11 bg-charcoal text-[11px] uppercase tracking-[0.18em] text-ivory">Save</button>
     </form>
   );

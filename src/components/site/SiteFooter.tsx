@@ -13,9 +13,9 @@ export function SiteFooter() {
       <div className="border-b border-ivory/10 px-4 py-14 sm:px-6 md:px-12 md:py-16">
         <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-end">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.28em] text-sand">Pre-launch portfolio</p>
+            <p className="text-[11px] uppercase tracking-[0.28em] text-sand">Curated portfolio</p>
             <h2 className="font-display mt-4 max-w-xl text-4xl leading-tight md:text-5xl">
-              A home-land, not a launch.
+              Find the right property. We coordinate the rest.
             </h2>
             <p className="mt-4 max-w-lg text-sm leading-7 text-ivory/70">{siteConfig.districtRelation}</p>
           </div>

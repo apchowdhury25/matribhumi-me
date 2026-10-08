@@ -8,7 +8,7 @@ import { createMetadata } from "@/lib/seo";
 export const dynamic = "force-dynamic";
 export const metadata = createMetadata({
   title: "Careers",
-  description: "Work with MatriBhumi on housing, landscape, and the unglamorous craft of making places.",
+  description: "Work with MatriBhumi on independent property advice, partner relations, and transaction coordination.",
   path: "/careers",
   image: "/media/about-studio.jpg",
 });
@@ -23,17 +23,17 @@ export default async function CareersPage() {
       <PageHero
         image="/media/about-studio.jpg"
         eyebrow="Careers"
-        title="Build homes people can return to."
-        description="We work on residences in Bangladesh for families who live overseas. Open roles in the Dhaka studio are listed below."
+        title="Help people find a home they can return to."
+        description="We advise buyers across Bangladesh, UAE, and Malaysia, and coordinate with participating developers. Open roles in the Dhaka office are listed below."
       />
       <section className="grid gap-10 px-4 py-14 sm:px-6 md:px-12 md:py-20 lg:grid-cols-3">
         <article>
           <h2 className="font-display text-3xl">Culture</h2>
-          <p className="mt-4 leading-7 text-muted">A small studio that prefers a well-made courtyard to a loud launch. We argue about shade, guest rooms, and how a building is handed over to a family who may live most of the year in another country.</p>
+          <p className="mt-4 leading-7 text-muted">A small advisory team that prefers a well-chosen shortlist to a loud launch. We argue about requirements, viewings, and how a family who lives most of the year in another country is introduced to the developer of record.</p>
         </article>
         <article>
           <h2 className="font-display text-3xl">Benefits</h2>
-          <p className="mt-4 leading-7 text-muted">Time to think, a studio library, and leave that assumes people have lives. Specific packages are described per role when hiring is real.</p>
+          <p className="mt-4 leading-7 text-muted">Time to think, a working library, and leave that assumes people have lives. Specific packages are described per role when hiring is real.</p>
         </article>
         <article>
           <h2 className="font-display text-3xl">Where</h2>
@@ -41,7 +41,7 @@ export default async function CareersPage() {
         </article>
       </section>
       <section className="bg-mist px-4 py-14 sm:px-6 md:px-12 md:py-20">
-        <SectionHeader title="Open positions" eyebrow="Join the studio" />
+        <SectionHeader title="Open positions" eyebrow="Join the team" />
         <ul className="mt-10 divide-y divide-charcoal/10 border-y border-charcoal/10">
           {jobs.map((job) => (
             <li key={job.id}>

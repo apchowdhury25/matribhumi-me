@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 export const metadata = createMetadata({
   title: "Properties",
   description:
-    "Pre-launch homes in Bangladesh — including Bashundhara’s master-planned district — for expats, retirees, and families already living in Dhaka.",
+    "Homes from participating developers in Bangladesh — including Bashundhara’s master-planned district — for expats, retirees, and families already living in Dhaka.",
   path: "/properties",
   image: "/media/hero-urban.jpg",
 });
@@ -41,7 +41,7 @@ export default async function PropertiesPage({
         image="/media/hero-urban.jpg"
         eyebrow="Properties"
         title="A Bangladesh address that fits how you live."
-        description="Search pre-launch homes for holidays, retirement, and everyday living in Bashundhara and beyond. Prices are indicative until a reservation is signed."
+        description="Search homes from participating developers for holidays, retirement, and everyday living in Bashundhara and beyond. Prices are indicative until an agreement is signed with the developer."
       />
       <section className="px-4 py-10 sm:px-6 md:px-12 md:py-12">
         <form className="grid gap-3 border border-charcoal/10 bg-paper p-4 md:grid-cols-4 lg:grid-cols-6">

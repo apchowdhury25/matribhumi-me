@@ -48,10 +48,11 @@ async function main() {
 
   const developer = await prisma.developer.create({
     data: {
-      name: "MatriBhumi",
-      slug: "matribhumi",
+      name: "Unpublished partner",
+      slug: "unpublished-partner",
+      published: false,
       description:
-        "MatriBhumi is an independent, premium boutique architectural design and development firm. Homes and districts where architecture, landscape, and daily life belong together.",
+        "Internal placeholder for curated listings. Named developer details are unpublished until a partnership is confirmed. MatriBhumi is the advisor, not the developer of record.",
       logoUrl: "/brand/logo-mark.svg",
     },
   });
@@ -69,7 +70,7 @@ async function main() {
         latitude: 23.8103,
         longitude: 90.4125,
         description:
-          "A river metropolis of work, culture, and kinship — home ground for MatriBhumi.",
+          "A river metropolis of work, culture, and kinship — home ground for many of the buyers MatriBhumi advises.",
         overview:
           "Dhaka is dense, water-shaped, and in need of housing that respects climate, family life, and the public realm.",
         lifestyle:
@@ -115,8 +116,8 @@ async function main() {
         heroImage: "/media/location-coastal.jpg",
         latitude: 25.2048,
         longitude: 55.2708,
-        description: "An international setting for climate-aware urban housing, where many of our clients already live.",
-        overview: "The context for MatriBhumi Horizon, an upcoming architectural concept.",
+        description: "An international setting for climate-aware urban housing, where many buyers already live.",
+        overview: "The context for Horizon, a curated upcoming listing in the UAE advisory market.",
         lifestyle: "Urban apartments with shaded podiums and evening public rooms.",
         connectivity: "Metro-adjacent, with the city’s main roads close at hand.",
         opportunities: "Mid-rise and tower living studies.",
@@ -134,8 +135,8 @@ async function main() {
         heroImage: "/media/location-singapore.jpg",
         latitude: 1.3521,
         longitude: 103.8198,
-        description: "A garden city, and a reference for MatriBhumi’s mixed-use districts.",
-        overview: "MatriBhumi Central is an upcoming concept for living above a civic street.",
+        description: "A garden city, and a reference for mixed-use districts we help buyers compare.",
+        overview: "Central is an upcoming curated concept for living above a civic street.",
         lifestyle: "Cafés, trees, and apartments sharing the same block.",
         connectivity: "Transit-oriented, with daily life on the same block.",
         opportunities: "Mixed-use destinations.",
@@ -153,7 +154,7 @@ async function main() {
         heroImage: "/media/location-london.jpg",
         latitude: 51.5074,
         longitude: -0.1278,
-        description: "A riverside city where many of our clients already live.",
+        description: "A riverside city where many buyers already live.",
         overview: "Shown so a family abroad can place home on the same map.",
         lifestyle: "River walks and compact urban homes.",
         connectivity: "Rail and river.",
@@ -172,7 +173,7 @@ async function main() {
         heroImage: "/media/location-toronto.jpg",
         latitude: 43.6532,
         longitude: -79.3832,
-        description: "A lakeside city where many of our clients already live.",
+        description: "A lakeside city where many buyers already live.",
         overview: "A presence on the map for families writing home from Canada.",
         lifestyle: "Park-oriented mid-rise living.",
         connectivity: "Transit and waterfront trails.",
@@ -194,9 +195,9 @@ async function main() {
       latitude: 23.8199,
       longitude: 90.4526,
       description:
-        "Dhaka’s master-planned district: malls, golf, amusement parks, and modern streets. MatriBhumi’s private developments sit within it. We are not Bashundhara Group.",
+        "Dhaka’s master-planned district: malls, golf, amusement parks, and modern streets. Selected developer projects sit within it. MatriBhumi is an independent advisor, not Bashundhara Group.",
       overview:
-        "Boutique private developments seamlessly integrated within Dhaka’s master-planned Bashundhara district. Residences sit near shopping, leisure, and open ground.",
+        "Selected developer projects integrated within Dhaka’s master-planned Bashundhara district. Residences sit near shopping, leisure, and open ground.",
       lifestyle:
         "Everyday errands at a mall, weekends on a golf edge, family afternoons at an amusement park — and a home you can live in full-time or return to from overseas.",
       connectivity:
@@ -399,7 +400,7 @@ async function main() {
         slug: "matribhumi-bashundhara",
         tagline: "A home next to the mall, the fairway, and the park.",
         description:
-          "A pre-launch mixed-use community seamlessly integrated within Dhaka’s master-planned Bashundhara district: residences, a planted street, and walking distance to shopping, golf, and family leisure. MatriBhumi is an independent studio, not Bashundhara Group.",
+          "A mixed-use community integrated within Dhaka’s master-planned Bashundhara district: residences, a planted street, and walking distance to shopping, golf, and family leisure. MatriBhumi is an independent advisor, not Bashundhara Group.",
         architecture: "Mid-rise stone and glass, podiums with shade, and a civic ground floor that opens to the district.",
         lifestyle:
           "For expats visiting, retirees staying, and Dhaka families who want modern amenities without a long drive: malls, golf, amusement parks, and a proper home.",
@@ -787,7 +788,7 @@ async function main() {
     name: "Bashundhara District Residences",
     slug: "bashundhara-district-residences",
     description:
-      "One- to four-bedroom homes in MatriBhumi Bashundhara: a pre-launch community for expats, retirees, and Dhaka families who want malls, golf, amusement parks, and a modern building on the same map. An independent MatriBhumi development within the district — not a Bashundhara Group project.",
+      "One- to four-bedroom homes in Bashundhara: a curated community listing for expats, retirees, and Dhaka families who want malls, golf, amusement parks, and a modern building on the same map. A participating-developer project within the district — not a Bashundhara Group project.",
     type: "MIXED_USE",
     status: "LAUNCHED",
     completionDate: new Date("2027-06-01"),
@@ -918,7 +919,7 @@ async function main() {
     {
       title: "How we plan a street that people will actually use",
       slug: "planning-streets-people-use",
-      excerpt: "Shade, seating, and a reason to linger — notes from MatriBhumi's urban design studio.",
+      excerpt: "Shade, seating, and a reason to linger — notes from MatriBhumi's advisory desk.",
       category: "ARCHITECTURE" as const,
       coverImage: "/media/about-studio.jpg",
       body: `## A street is a room
@@ -1109,10 +1110,10 @@ If a number cannot be stood beside in a quiet room, it does not belong on a Matr
       {
         title: "Communications Lead",
         slug: "communications-lead",
-        department: "Studio",
+        department: "Communications",
         location: "Dhaka",
         type: "Full-time",
-        description: "Write in public the way we build: carefully, without invented claims.",
+        description: "Write in public the way we advise: carefully, without invented claims.",
         requirements: "Writing samples. No press-release theatre.",
       },
     ],

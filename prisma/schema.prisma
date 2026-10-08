@@ -103,6 +103,8 @@ model Developer {
   slug         String         @unique
   description  String
   logoUrl      String?
+  website      String?
+  published    Boolean        @default(false)
   properties   Property[]
   developments Development[]
 }
@@ -150,6 +152,7 @@ model Development {
   featured     Boolean              @default(false)
   signature    Boolean              @default(false)
   published    Boolean              @default(true)
+  matribhumiOwned Boolean           @default(false)
   latitude     Float
   longitude    Float
   locationId   String
@@ -192,6 +195,7 @@ model Property {
   longitude      Float
   featured       Boolean           @default(false)
   published      Boolean           @default(true)
+  matribhumiOwned Boolean          @default(false)
   lifestyle      String?
   developmentId  String
   development    Development       @relation(fields: [developmentId], references: [id])

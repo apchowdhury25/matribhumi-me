@@ -8,13 +8,14 @@ import { getDevelopment } from "@/lib/data";
 import { createMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/site/JsonLd";
 import { formatPrice, statusLabel } from "@/lib/format";
+import { ownershipLabel } from "@/lib/developer";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const project = await getDevelopment(slug);
-  if (!project) return createMetadata({ title: "Development", description: "MatriBhumi development", path: `/projects/${slug}` });
+  if (!project) return createMetadata({ title: "Development", description: "Selected development", path: `/projects/${slug}` });
   return createMetadata({
     title: project.name,
     description: project.tagline,
@@ -27,6 +28,10 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
   const { slug } = await params;
   const project = await getDevelopment(slug);
   if (!project) notFound();
+  const sellerLabel = ownershipLabel({
+    matribhumiOwned: project.matribhumiOwned,
+    developer: project.developer,
+  });
 
   return (
     <PublicShell transparentHeader>
@@ -38,6 +43,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           <div className="max-w-3xl text-ivory">
             <p className="text-[11px] uppercase tracking-[0.24em] text-sand">
               {project.location.city}, {project.location.country}
+              {sellerLabel ? ` · ${sellerLabel}` : ""}
             </p>
             <h1 className="font-display mt-4 text-[2.1rem] leading-[1.05] sm:text-5xl md:text-7xl">{project.name}</h1>
             <p className="mt-4 text-lg text-ivory/80">{project.tagline}</p>

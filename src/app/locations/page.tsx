@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 export const metadata = createMetadata({
   title: "Locations",
   description:
-    "Bashundhara, Dhaka, and Chattogram hold MatriBhumi’s pre-launch portfolio — for expats, retirees, and families already in Bangladesh.",
+    "Bashundhara, Dhaka, and Chattogram hold the current curated list — for expats, retirees, and families already in Bangladesh.",
   path: "/locations",
   image: "/media/location-aerial.jpg",
 });
@@ -21,7 +21,7 @@ export default async function LocationsPage() {
         image="/media/location-aerial.jpg"
         eyebrow="Locations"
         title="Bangladesh first — especially Bashundhara."
-        description="Homes for coming back, retiring, or living every day in Dhaka’s new districts. Other cities mark where our clients already live."
+        description="Homes for coming back, retiring, or living every day in Dhaka’s new districts. Other cities mark where many buyers already live, including UAE and Malaysia as advisory markets."
       />
       <section className="grid gap-8 px-4 py-14 sm:px-6 md:grid-cols-2 md:px-12 md:py-20">
         {locations.map((location) => (

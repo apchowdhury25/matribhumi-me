@@ -193,7 +193,7 @@ export async function submitBrochure(_prev: State, formData: FormData): Promise<
       phone: "Not provided",
       country: "Not specified",
       contactMethod: "EMAIL",
-      message: `Pre-launch brochure download.${parsed.data.project ? ` Development: ${parsed.data.project}.` : ""} ${letter.downloadUrl}`,
+      message: `Brochure download.${parsed.data.project ? ` Development: ${parsed.data.project}.` : ""} ${letter.downloadUrl}`,
       inquiryType: "SALES",
     },
   });
@@ -209,7 +209,7 @@ export async function submitBrochure(_prev: State, formData: FormData): Promise<
     to: siteConfig.salesEmail,
     replyTo: parsed.data.email,
     subject: `Brochure: ${parsed.data.name}`,
-    text: `${parsed.data.name} (${parsed.data.email}) downloaded the pre-launch brochure.${parsed.data.project ? ` Development: ${parsed.data.project}.` : ""}`,
+    text: `${parsed.data.name} (${parsed.data.email}) downloaded the brochure.${parsed.data.project ? ` Development: ${parsed.data.project}.` : ""}`,
   });
 
   return { ok: true, error: "" };

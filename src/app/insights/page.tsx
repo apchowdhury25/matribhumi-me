@@ -36,7 +36,7 @@ export async function generateMetadata({
   return createMetadata({
     title: label ? `${label} insights` : "Insights",
     description:
-      "Notes on coming home to Bangladesh: architecture, family visits, and looking after a house from overseas. Demonstration articles.",
+      "Notes on coming home to Bangladesh: choosing a developer project, family visits, and looking after a house from overseas.",
     path: label ? `/insights?category=${category}` : "/insights",
     image: "/media/about-studio.jpg",
   });
@@ -70,7 +70,7 @@ export default async function InsightsPage({
         <SectionHeader
           eyebrow="The journal"
           title="Read by subject."
-          description="Filter the archive. Notes from the studio on coming home, climate, and the craft of a residence."
+          description="Filter the archive. Notes from the advisory team on coming home, climate, and choosing a residence."
         />
         <div className="mt-10 flex flex-wrap gap-2">
           <FilterLink href="/insights" active={!category}>
@@ -89,7 +89,7 @@ export default async function InsightsPage({
 
         {articles.length === 0 ? (
           <p className="mt-16 max-w-xl text-muted">
-            No articles in this category yet. Demonstration archives grow as the studio writes.
+            No articles in this category yet. The archive grows as the team writes.
           </p>
         ) : (
           <div className="mt-14 grid gap-10 md:grid-cols-2 xl:grid-cols-3">

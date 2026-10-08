@@ -71,7 +71,7 @@ describe("brochureSchema", () => {
 describe("brochureEmail", () => {
   it("addresses the reader by first name and includes the download link", () => {
     const letter = brochureEmail("Asha Rahman");
-    expect(letter.subject).toBe("Your MatriBhumi Pre-Launch Portfolio & Brochure");
+    expect(letter.subject).toBe("Your MatriBhumi curated portfolio & brochure");
     expect(letter.text.startsWith("Dear Asha,")).toBe(true);
     expect(letter.text).toContain("https://matribhumi.me/media/brochures/matribhumi-preview.pdf");
     expect(letter.text).toContain("House 12, Road 7, Gulshan, Dhaka, Bangladesh");

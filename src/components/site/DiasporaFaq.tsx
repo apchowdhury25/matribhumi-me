@@ -6,8 +6,8 @@ export function DiasporaFaq() {
     <section className="px-4 py-16 sm:px-6 md:px-12 md:py-24">
       <SectionHeader
         eyebrow="For the diaspora"
-        title="Designed for the Diaspora: Frequently Asked Questions"
-        description="Ownership, wires, and the months the house is quiet — answered before you fly."
+        title="For buyers living in two places: frequently asked questions"
+        description="Fees, who the seller is, ownership, payments, and the months the house is quiet — answered before you fly."
       />
       <div className="mt-12 border-t border-charcoal/10">
         {diasporaFaq.map((item) => (

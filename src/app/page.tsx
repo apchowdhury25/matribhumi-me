@@ -32,7 +32,7 @@ export default async function HomePage() {
       <section className="relative min-h-[100dvh] overflow-hidden">
         <img
           src="/media/hero-plaza.jpg"
-          alt="A landscaped plaza at the base of a contemporary MatriBhumi development"
+          alt="A landscaped plaza at a contemporary residential development"
           className="absolute inset-0 h-full w-full object-cover ken-burns"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-charcoal/25" />
@@ -71,9 +71,9 @@ export default async function HomePage() {
 
       <section className="px-4 py-16 sm:px-6 md:px-12 md:py-24">
         <SectionHeader
-          eyebrow="Featured developments"
+          eyebrow="Selected developments"
           title="Addresses in Bangladesh you can come back to — or live in every day."
-          description="Exclusive pre-launch developments in Dhaka and Chattogram — architectural concepts you can reserve before the public launch."
+          description="Curated projects from participating developers in Dhaka, Chattogram, and other markets we cover. Join the waitlist to compare and request an introduction."
         />
         <div className="mt-12 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           {featured.map((project) => (
@@ -102,8 +102,8 @@ export default async function HomePage() {
 
       <section className="bg-charcoal px-4 py-16 text-ivory sm:px-6 md:px-12 md:py-24">
         <SectionHeader
-          eyebrow="Signature developments"
-          title="Buildings as stories, told at the scale of a neighborhood."
+          eyebrow="Signature partner projects"
+          title="Places worth a second look, at the scale of a neighbourhood."
           light
         />
         <div className="mt-16 space-y-24">
@@ -159,9 +159,9 @@ export default async function HomePage() {
 
       <section className="bg-mist px-4 py-16 sm:px-6 md:px-12 md:py-24">
         <SectionHeader
-          eyebrow="Bangladesh, and a few studies abroad"
-          title="Most of our work is at home — especially Dhaka’s new districts."
-          description="Select a development and the map moves to it. Dhaka, Bashundhara, and Chattogram hold the pre-launch portfolio. Cities farther away are where our clients already live."
+          eyebrow="Bangladesh, UAE, and Malaysia"
+          title="Most of the shortlist is at home — especially Dhaka’s new districts."
+          description="Select a development and the map moves to it. Dhaka, Bashundhara, and Chattogram hold the current curated list. Cities farther away are where many buyers already live."
         />
         <div className="mt-12">
           <PresenceMap
@@ -185,7 +185,7 @@ export default async function HomePage() {
       <section className="px-4 py-16 sm:px-6 md:px-12 md:py-24">
         <SectionHeader
           eyebrow="Why MatriBhumi"
-          title="Homes for people whose life is here, or in two places."
+          title="Independent advice, then a coordinated introduction."
           description={siteConfig.audience}
         />
         <div className="mt-12 grid gap-px bg-charcoal/10 md:grid-cols-2 lg:grid-cols-3">
@@ -204,7 +204,7 @@ export default async function HomePage() {
           <p className="text-[11px] uppercase tracking-[0.24em] text-sand">How you will use it</p>
           <h2 className="font-display mt-4 text-[1.85rem] leading-tight sm:text-4xl md:text-5xl">Look at the life, not at a yield.</h2>
           <p className="mt-5 max-w-lg text-ivory/70">
-            These homes are meant for vacation and part-year stays, for retirement in Bangladesh, and for everyday living in Bashundhara’s new districts. We do not guarantee returns, appreciation, or rental income.
+            These listings are meant for vacation and part-year stays, for retirement in Bangladesh, and for everyday living in Bashundhara’s new districts. The developer is the seller. We do not guarantee returns, appreciation, or rental income.
           </p>
           <ul className="mt-8 space-y-4">
             {comingHomePrinciples.slice(0, 3).map((item) => (
@@ -222,7 +222,7 @@ export default async function HomePage() {
         <SectionHeader
           eyebrow="Bashundhara district life"
           title="Malls, golf, parks — and a home on the same map."
-          description={`${siteConfig.districtRelation} MatriBhumi is an independent studio. The district is the setting; the architecture is ours.`}
+          description={`${siteConfig.districtRelation} MatriBhumi is an independent advisor. The district is the setting; the developer is the seller.`}
         />
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {districtLife.map((item) => (
@@ -242,7 +242,7 @@ export default async function HomePage() {
 
       <section className="px-4 py-16 sm:px-6 md:px-12 md:py-24">
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
-          <SectionHeader eyebrow="Insights" title="Notes from the studio and the street." />
+          <SectionHeader eyebrow="Insights" title="Notes from the market and the street." />
           <Button href="/insights" variant="outline" className="w-full sm:w-auto">
             All insights
           </Button>

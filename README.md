@@ -4,9 +4,11 @@ Official website for **MatriBhumi**.
 
 Canonical site: **[https://matribhumi.me](https://matribhumi.me)**
 
-MatriBhumi designs homes in **Bangladesh** for three households: families living overseas who return for vacations or part of the year; **retirees coming home**; and people already in Bangladesh who want **modern living in Bashundhara’s new districts** (malls, golf, amusement parks, daily amenities). This repository is a production-ready developer platform: public marketing site, property discovery, inquiries, viewings, and a staff console.
+MatriBhumi is an **independent property advisor and transaction partner**. It curates selected projects from participating developers, helps buyers compare them, and coordinates introductions, viewings, and follow-up. The buyer is not charged a brokerage, consultation, or property-search fee. The participating developer is the seller.
 
-Projects, people, prices, and locations shipped in the seed are **fictional demonstration content**. MatriBhumi does not guarantee returns, appreciation, rental income, or any investment outcome.
+This repository is the public marketing site, property discovery, inquiries, viewings, and a staff console.
+
+Projects, people, prices, and locations shipped in the seed are **placeholder listing content**. Named partner developers are unpublished until a real partnership is stored. MatriBhumi does not guarantee returns, appreciation, rental income, or any investment outcome. See `docs/BUSINESS-MODEL-TRANSITION.md`.
 
 ## Architecture
 
@@ -92,7 +94,7 @@ docker compose up -d db
 
 Then set `DATABASE_URL` to `postgresql://matribhumi:matribhumi@localhost:5432/matribhumi?schema=public` and change the Prisma provider to `postgresql`.
 
-Seed includes 10+ properties, 6 developments, 6 locations, 30+ units, 15 amenities, 10 articles, and 8 jobs — all marked as demonstration content.
+Seed includes 10+ properties, 6 developments, 6 locations, 30+ units, 15 amenities, 10 articles, and 8 jobs. The seed developer row is an unpublished placeholder; public pages hide the developer name until a published partner exists. Reseeding clears existing leads.
 
 ## Testing
 

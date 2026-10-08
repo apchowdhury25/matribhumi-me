@@ -116,7 +116,7 @@ function CaptureForm({ kind, projectName }: { kind: Kind; projectName?: string }
           You are on the list.
         </h2>
         <p className="mt-4 text-sm leading-7 text-muted">
-          Priority access to floor plans, early-bird pricing, and the first choice of premium units will come to this email — before the public launch.
+          Floor plans, viewing slots, and developer updates for the projects you asked about will come to this email.
         </p>
       </div>
     );
@@ -130,7 +130,7 @@ function CaptureForm({ kind, projectName }: { kind: Kind; projectName?: string }
           Your portfolio is on its way.
         </h2>
         <p className="mt-4 text-sm leading-7 text-muted">
-          A note titled “Your MatriBhumi Pre-Launch Portfolio &amp; Brochure” is on its way to your inbox, with provisional priority for floor plans and early-bird tiers.
+          A note titled “Your MatriBhumi curated portfolio &amp; brochure” is on its way to your inbox, with the selected-project list and next steps.
         </p>
         <a
           href={siteConfig.brochurePath}
@@ -148,15 +148,15 @@ function CaptureForm({ kind, projectName }: { kind: Kind; projectName?: string }
     <form action={formAction} className="grid gap-4">
       <div>
         <p className="text-[11px] uppercase tracking-[0.24em] text-earth">
-          {kind === "waitlist" ? "Pre-launch" : "Portfolio"}
+          {kind === "waitlist" ? "Waitlist" : "Portfolio"}
         </p>
         <h2 id="lead-capture-title" className="font-display mt-3 text-4xl leading-tight">
-          {kind === "waitlist" ? "Join the waitlist." : "Download the pre-launch brochure."}
+          {kind === "waitlist" ? "Join the waitlist." : "Download the brochure."}
         </h2>
         <p className="mt-3 text-sm leading-7 text-muted">
           {kind === "waitlist"
-            ? "Priority access to architectural floor plans, early-bird pricing, and the first choice of premium units."
-            : "Upcoming architectural visions in Dhaka and Chattogram, sent to your inbox the moment you ask."}
+            ? "Hear first when curated floor plans, viewing slots, or developer updates are released."
+            : "A shortlist of selected developer projects in Dhaka, Chattogram, and other markets we cover."}
         </p>
         {projectName ? <p className="mt-3 text-sm text-charcoal">{projectName}</p> : null}
       </div>
@@ -205,7 +205,7 @@ function CaptureForm({ kind, projectName }: { kind: Kind; projectName?: string }
       </label>
       {state.error ? <p className="text-sm text-red-800">{state.error}</p> : null}
       <Button type="submit" disabled={pending} className="w-full sm:w-auto">
-        {pending ? "Sending…" : kind === "waitlist" ? "Join Waitlist" : "Download Pre-Launch Brochure"}
+        {pending ? "Sending…" : kind === "waitlist" ? "Join Waitlist" : "Download Brochure"}
       </Button>
     </form>
   );
@@ -277,7 +277,7 @@ export function DualCta({
 }
 
 export function BrochureButton({
-  label = "Download Pre-Launch Brochure",
+  label = "Download Brochure",
   variant = "invert",
   size = "md",
   className,
