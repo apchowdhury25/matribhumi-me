@@ -9,17 +9,26 @@ test("country landings and how it works", async ({ page }) => {
   await page.goto("/locations/bangladesh");
   await expect(page.getByRole("heading", { level: 1, name: /Bangladesh property advisory/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Dhaka" })).toBeVisible();
-  await page.goto("/locations/uae");
-  await expect(page.getByRole("heading", { level: 1, name: /United Arab Emirates property advisory/i })).toBeVisible();
-  await expect(page.getByText(/As data becomes available/i).first()).toBeVisible();
-  await page.goto("/locations/malaysia");
-  await expect(page.getByRole("heading", { level: 1, name: /Malaysia property advisory/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Chattogram" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Bashundhara", exact: true })).toBeVisible();
   await page.goto("/how-it-works");
-  await expect(page.getByText("Tell us what you are looking for.")).toBeVisible();
-  await expect(page.getByText("You complete the purchase with the developer.")).toBeVisible();
+  await expect(page.getByText("Tell us what you are looking for.").first()).toBeVisible();
+  await expect(page.getByText("You complete the purchase with the developer.").first()).toBeVisible();
   await page.goto("/for-developers");
   await expect(page.getByRole("heading", { level: 1, name: /Reach qualified buyers/i })).toBeVisible();
   await expect(page.getByText(/guaranteed sales/i)).toBeVisible();
+});
+
+test("foreign market landings are gone", async ({ page }) => {
+  await page.goto("/locations/uae");
+  await expect(page).not.toHaveURL(/\/locations\/uae\/?$/);
+  await expect(page.getByRole("heading", { name: /UAE|United Arab Emirates/i })).toHaveCount(0);
+  await page.goto("/locations/malaysia");
+  await expect(page).not.toHaveURL(/\/locations\/malaysia\/?$/);
+  await expect(page.getByRole("heading", { name: /Malaysia/i })).toHaveCount(0);
+  await page.goto("/");
+  await expect(page.getByRole("link", { name: "UAE", exact: true })).toHaveCount(0);
+  await expect(page.getByRole("link", { name: "Malaysia", exact: true })).toHaveCount(0);
 });
 
 test("properties search and filter", async ({ page }) => {

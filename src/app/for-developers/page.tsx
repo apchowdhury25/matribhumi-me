@@ -8,7 +8,7 @@ import { createMetadata } from "@/lib/seo";
 export const metadata = createMetadata({
   title: "For developers",
   description:
-    "Reach qualified buyers across Bangladesh, the UAE and Malaysia. MatriBhumi offers property marketing, buyer referrals, viewing coordination and transaction coordination. Sales are not guaranteed.",
+    "Reach qualified buyers in Bangladesh. MatriBhumi offers property marketing, buyer referrals, viewing coordination and transaction coordination. Sales are not guaranteed.",
   path: "/for-developers",
   image: "/media/about-construction.jpg",
 });
@@ -19,14 +19,14 @@ export default function ForDevelopersPage() {
       <PageHero
         image="/media/about-construction.jpg"
         eyebrow="For developers"
-        title="Reach qualified buyers across Bangladesh, the UAE and Malaysia."
+        title="Reach qualified buyers in Bangladesh."
         description="MatriBhumi is an independent property advisory and transaction-coordination platform. We present selected projects to buyers we already advise — local buyers, NRBs, and relocators — and coordinate introductions and viewings. We do not promise guaranteed sales."
       />
       <section className="px-4 py-16 sm:px-6 md:px-12 md:py-20">
         <SectionHeader
           eyebrow="How we work with developers"
           title="Marketing, matching, and coordination."
-          description="Developer arrangements vary by project and jurisdiction. The buyer’s purchase agreement remains with you as the developer or seller."
+          description="Developer arrangements vary by project. The buyer’s purchase agreement remains with you as the developer or seller."
         />
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {developerServices.map((item) => (

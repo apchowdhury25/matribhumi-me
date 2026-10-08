@@ -8,8 +8,6 @@ const pages = [
   "/projects/the-grove-residences",
   "/locations",
   "/locations/bangladesh",
-  "/locations/uae",
-  "/locations/malaysia",
   "/locations/chattogram",
   "/locations/bashundhara",
   "/developers",

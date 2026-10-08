@@ -1,8 +1,10 @@
 import { prisma } from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
 import { publicDeveloperName } from "@/lib/developer";
-import { countryFilterValues } from "@/lib/markets";
+import { isOperatingCountry, OPERATING_COUNTRY } from "@/lib/markets";
 import type { PropertyFilters } from "@/lib/validations";
+
+const inBangladesh = { country: OPERATING_COUNTRY };
 
 const propertyCardInclude = {
   location: true,
@@ -25,7 +27,7 @@ export async function getFeaturedDevelopments() {
   return safe(
     () =>
       prisma.development.findMany({
-        where: { featured: true, published: true },
+        where: { featured: true, published: true, location: inBangladesh },
         include: { location: true },
         orderBy: { name: "asc" },
       }),
@@ -37,7 +39,7 @@ export async function getSignatureDevelopments() {
   return safe(
     () =>
       prisma.development.findMany({
-        where: { signature: true, published: true },
+        where: { signature: true, published: true, location: inBangladesh },
         include: { location: true },
         orderBy: { name: "asc" },
       }),
@@ -51,6 +53,7 @@ export async function getDevelopments(category?: string) {
       prisma.development.findMany({
         where: {
           published: true,
+          location: inBangladesh,
           ...(category ? { category: category as never } : {}),
         },
         include: { location: true, _count: { select: { properties: true } } },
@@ -61,24 +64,25 @@ export async function getDevelopments(category?: string) {
 }
 
 export async function getDevelopment(slug: string) {
-  return safe(
-    () =>
-      prisma.development.findUnique({
-    where: { slug },
-    include: {
-      location: true,
-      developer: true,
-      properties: { where: { published: true }, include: propertyCardInclude },
-    },
-      }),
-    null,
-  );
+  return safe(async () => {
+    const development = await prisma.development.findUnique({
+      where: { slug },
+      include: {
+        location: true,
+        developer: true,
+        properties: { where: { published: true }, include: propertyCardInclude },
+      },
+    });
+    if (!development || !isOperatingCountry(development.location.country)) return null;
+    return development;
+  }, null);
 }
 
 export async function getLocations() {
   return safe(
     () =>
       prisma.location.findMany({
+        where: inBangladesh,
         include: { _count: { select: { developments: true, properties: true } } },
         orderBy: { name: "asc" },
       }),
@@ -87,52 +91,47 @@ export async function getLocations() {
 }
 
 export async function getLocation(slug: string) {
-  return safe(
-    () =>
-      prisma.location.findUnique({
-        where: { slug },
-        include: {
-          developments: { where: { published: true } },
-          properties: { where: { published: true, featured: true }, include: propertyCardInclude },
-        },
-      }),
-    null,
-  );
+  return safe(async () => {
+    const location = await prisma.location.findUnique({
+      where: { slug },
+      include: {
+        developments: { where: { published: true } },
+        properties: { where: { published: true, featured: true }, include: propertyCardInclude },
+      },
+    });
+    if (!location || !isOperatingCountry(location.country)) return null;
+    return location;
+  }, null);
 }
 
 export async function getProperty(slug: string) {
-  return safe(
-    () =>
-      prisma.property.findUnique({
-    where: { slug },
-    include: {
-      location: true,
-      development: true,
-      developer: true,
-      images: { orderBy: { sortOrder: "asc" } },
-      amenities: { include: { amenity: true } },
-      units: { orderBy: { name: "asc" } },
-      floorPlans: true,
-      nearbyPlaces: true,
-    },
-      }),
-    null,
-  );
+  return safe(async () => {
+    const property = await prisma.property.findUnique({
+      where: { slug },
+      include: {
+        location: true,
+        development: true,
+        developer: true,
+        images: { orderBy: { sortOrder: "asc" } },
+        amenities: { include: { amenity: true } },
+        units: { orderBy: { name: "asc" } },
+        floorPlans: true,
+        nearbyPlaces: true,
+      },
+    });
+    if (!property || !isOperatingCountry(property.location.country)) return null;
+    return property;
+  }, null);
 }
 
-function locationWhere(filters: PropertyFilters): Prisma.LocationWhereInput | undefined {
-  const countryValues = filters.country ? countryFilterValues(filters.country) : [];
-  const clauses: Prisma.LocationWhereInput[] = [];
-  if (countryValues.length) {
-    clauses.push({ OR: countryValues.map((country) => ({ country })) });
-  }
+function locationWhere(filters: PropertyFilters): Prisma.LocationWhereInput {
+  const clauses: Prisma.LocationWhereInput[] = [inBangladesh];
   if (filters.city) {
     clauses.push({ OR: [{ slug: filters.city }, { city: filters.city }, { name: filters.city }] });
   }
   if (filters.location) {
     clauses.push({ slug: filters.location });
   }
-  if (!clauses.length) return undefined;
   return clauses.length === 1 ? clauses[0] : { AND: clauses };
 }
 
@@ -204,7 +203,7 @@ export async function getProperties(filters: PropertyFilters = {}) {
           take: PAGE_SIZE,
         }),
         prisma.property.count({ where }),
-        prisma.location.findMany({ orderBy: { name: "asc" } }),
+        prisma.location.findMany({ where: inBangladesh, orderBy: { name: "asc" } }),
         prisma.amenity.findMany({ orderBy: { name: "asc" } }),
         prisma.developer.findMany({
           where: { published: true },
@@ -239,7 +238,7 @@ export async function getFeaturedProperties(take = 6) {
   return safe(
     () =>
       prisma.property.findMany({
-        where: { published: true, featured: true },
+        where: { published: true, featured: true, location: inBangladesh },
         include: propertyCardInclude,
         orderBy: { name: "asc" },
         take,
@@ -280,7 +279,7 @@ export async function getPublishedDeveloper(slug: string) {
       where: { slug },
       include: {
         properties: {
-          where: { published: true },
+          where: { published: true, location: inBangladesh },
           include: propertyCardInclude,
           orderBy: { name: "asc" },
         },
@@ -302,7 +301,7 @@ export async function getPropertiesByIds(ids: string[]) {
 
   return safe(async () => {
     const items = await prisma.property.findMany({
-      where: { id: { in: unique }, published: true },
+      where: { id: { in: unique }, published: true, location: inBangladesh },
       include: propertyCardInclude,
     });
     const order = new Map(unique.map((id, index) => [id, index]));
@@ -353,17 +352,28 @@ export async function searchAll(q: string) {
     async () => {
       const [properties, developments, locations, articles] = await Promise.all([
         prisma.property.findMany({
-          where: { published: true, OR: [{ name: contains }, { description: contains }] },
+          where: {
+            published: true,
+            location: inBangladesh,
+            OR: [{ name: contains }, { description: contains }],
+          },
           include: { location: true },
           take: 5,
         }),
         prisma.development.findMany({
-          where: { published: true, OR: [{ name: contains }, { tagline: contains }] },
+          where: {
+            published: true,
+            location: inBangladesh,
+            OR: [{ name: contains }, { tagline: contains }],
+          },
           include: { location: true },
           take: 5,
         }),
         prisma.location.findMany({
-          where: { OR: [{ name: contains }, { city: contains }, { country: contains }] },
+          where: {
+            ...inBangladesh,
+            OR: [{ name: contains }, { city: contains }],
+          },
           take: 5,
         }),
         prisma.newsArticle.findMany({
@@ -400,7 +410,7 @@ export async function getMapDevelopments() {
   return safe(
     () =>
       prisma.development.findMany({
-        where: { published: true },
+        where: { published: true, location: inBangladesh },
         include: { location: true },
       }),
     [],

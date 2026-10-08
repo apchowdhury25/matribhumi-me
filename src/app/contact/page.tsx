@@ -7,7 +7,7 @@ import { siteConfig } from "@/config/site";
 export const metadata = createMetadata({
   title: "Contact",
   description:
-    "Speak with a MatriBhumi advisor about selected developer properties in Bangladesh, the UAE and Malaysia. There is no buyer fee for this conversation.",
+    "Speak with a MatriBhumi advisor about selected developer properties in Bangladesh. There is no buyer fee for this conversation.",
   path: "/contact",
   image: "/media/about-lobby.jpg",
 });
@@ -19,7 +19,7 @@ export default function ContactPage() {
         image="/media/about-lobby.jpg"
         eyebrow="Contact"
         title="Speak with an advisor."
-        description="Tell us the country, the kind of home, and how you will use it. MatriBhumi helps you compare selected developer properties and coordinate the journey — with no buyer fee."
+        description="Tell us the city in Bangladesh, the kind of home, and how you will use it. MatriBhumi helps you compare selected developer properties and coordinate the journey — with no buyer fee."
       />
       <section className="grid gap-16 px-4 py-14 sm:px-6 md:px-12 md:py-20 lg:grid-cols-[0.8fr_1.2fr]">
         <div>

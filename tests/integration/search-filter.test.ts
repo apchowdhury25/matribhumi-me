@@ -17,16 +17,16 @@ describe("property filtering", () => {
 
   it("accepts market discovery filters", () => {
     const filters = propertyFilterSchema.parse({
-      country: "uae",
-      city: "Dubai",
-      location: "dubai",
+      country: "bangladesh",
+      city: "Dhaka",
+      location: "dhaka",
       type: "APARTMENT",
       status: "UNDER_CONSTRUCTION",
       completionStatus: "off-plan",
       featured: "true",
     });
-    expect(filters.country).toBe("uae");
-    expect(filters.location).toBe("dubai");
+    expect(filters.country).toBe("bangladesh");
+    expect(filters.location).toBe("dhaka");
     expect(filters.completionStatus).toBe("off-plan");
   });
 });

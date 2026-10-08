@@ -5,20 +5,20 @@ export const siteConfig = {
   url: "https://matribhumi.me",
   domain: "matribhumi.me",
   description:
-    "Independent property advisory and transaction coordination across Bangladesh, the UAE and Malaysia. Compare selected developer properties — with no buyer fee.",
+    "Independent property advisory and transaction coordination in Bangladesh. Compare selected developer properties — with no buyer fee.",
   tagline: "Find the right property. We coordinate the rest.",
   supporting:
-    "Explore selected properties from selected developers across Bangladesh, the UAE and Malaysia. Our advisors help you compare options, connect with the right developer and coordinate the transaction — with no buyer fee.",
+    "Explore selected properties from selected developers in Bangladesh. Our advisors help you compare options, connect with the right developer and coordinate the transaction — with no buyer fee.",
   positioning:
     "Independent property advisory and transaction coordination.",
   districtRelation:
-    "Selected developer projects in and around Dhaka’s master-planned Bashundhara district, and other markets we cover with participating developers.",
+    "Selected developer projects in Bangladesh, including Dhaka, Chattogram, and Dhaka’s master-planned Bashundhara district.",
   audience:
     "For Bangladeshi expats, returning retirees, and households already in Bangladesh who want help choosing a home and coordinating the process.",
   buyerFee:
     "You pay MatriBhumi nothing for our property advisory and transaction-coordination service. Where applicable, participating developers compensate MatriBhumi under separate commercial agreements.",
   buyerFeeNote:
-    "Developer arrangements vary by project and jurisdiction. The buyer's purchase agreement is with the property developer/seller.",
+    "Developer arrangements vary by project. The buyer's purchase agreement is with the property developer/seller.",
   email: "hello@matribhumi.me",
   salesEmail: "sales@matribhumi.me",
   pressEmail: "press@matribhumi.me",
@@ -54,8 +54,9 @@ export const navItems = [
 
 export const countryNav = [
   { href: "/locations/bangladesh", label: "Bangladesh" },
-  { href: "/locations/uae", label: "UAE" },
-  { href: "/locations/malaysia", label: "Malaysia" },
+  { href: "/locations/dhaka", label: "Dhaka" },
+  { href: "/locations/chattogram", label: "Chattogram" },
+  { href: "/locations/bashundhara", label: "Bashundhara" },
 ] as const;
 
 export const footerNav = {
@@ -86,7 +87,7 @@ export const footerNav = {
 export const whatWeDo = [
   {
     title: "Find a suitable property",
-    body: "Tell us how you will live in the home. We shortlist selected developer properties across Bangladesh, the UAE and Malaysia.",
+    body: "Tell us how you will live in the home. We shortlist selected developer properties in Bangladesh.",
   },
   {
     title: "Work with developers",
@@ -101,7 +102,7 @@ export const whatWeDo = [
 export const whoItsFor = [
   {
     title: "Local property buyers",
-    body: "Households already in Bangladesh, the UAE or Malaysia who want help comparing developer projects before they buy.",
+    body: "Households already in Bangladesh who want help comparing developer projects before they buy.",
   },
   {
     title: "Bangladeshis living abroad",
@@ -109,7 +110,7 @@ export const whoItsFor = [
   },
   {
     title: "Relocating families",
-    body: "Buyers moving to Bangladesh, the UAE or Malaysia who need a residential shortlist, viewings, and a clear path to the developer.",
+    body: "Buyers relocating to Bangladesh who need a residential shortlist, viewings, and a clear path to the developer.",
   },
 ] as const;
 
@@ -117,7 +118,7 @@ export const howItWorksSteps = [
   {
     step: "01",
     title: "Tell us what you are looking for.",
-    body: "Share your markets, budget, property type, and how you will use the home.",
+    body: "Share the city in Bangladesh, your budget, property type, and how you will use the home.",
   },
   {
     step: "02",
@@ -152,11 +153,11 @@ export const buyerServices = [
   { title: "Viewing coordination", body: "Arrange viewings with the developer and keep the diary across time zones." },
   { title: "Developer introductions", body: "A qualified introduction to the developer of record for the project you choose." },
   { title: "Transaction coordination", body: "Follow-up on the developer’s process so the purchase does not stall." },
-  { title: "Cross-border support", body: "Help for buyers living abroad or relocating, within what each jurisdiction allows." },
+  { title: "Cross-border support", body: "Help for buyers living abroad or relocating to Bangladesh, within what Bangladesh law allows." },
 ] as const;
 
 export const developerServices = [
-  { title: "Property marketing", body: "Present selected projects to buyers already looking across our three markets." },
+  { title: "Property marketing", body: "Present selected Bangladesh projects to buyers already looking with MatriBhumi." },
   { title: "Qualified buyer referrals", body: "Introductions after we understand budget, timing, and intent." },
   { title: "Buyer requirement matching", body: "Route enquiries to the project that actually fits." },
   { title: "Viewing coordination", body: "Schedule and follow up viewings with the buyer and your sales team." },
@@ -255,7 +256,7 @@ export const whyMatriBhumi = [
   },
   {
     title: "Reachable from abroad — and from across town",
-    body: "Clear information and people you can actually call, whether you are in Dubai, Kuala Lumpur, London, or another neighbourhood of Dhaka.",
+    body: "Clear information and people you can actually call, whether you are living abroad or in another neighbourhood of Dhaka.",
   },
   {
     title: "A long view of home",
@@ -304,7 +305,7 @@ export const diasporaFaq = [
   {
     question: "Can I buy if I hold foreign citizenship?",
     answer:
-      "Ownership rules depend on the country of the property and on your citizenship and residency. MatriBhumi coordinates introductions and helps you follow the developer’s process. Independent legal advice in that jurisdiction is yours to obtain. We do not claim a licence in Bangladesh, UAE, or Malaysia on this site.",
+      "Ownership rules in Bangladesh depend on your citizenship and residency. MatriBhumi coordinates introductions and helps you follow the developer’s process. Independent legal advice is yours to obtain. We do not claim a real-estate licence in Bangladesh on this site.",
   },
   {
     question: "How do payments and registration work from overseas?",
@@ -351,11 +352,11 @@ export const legalCompliance = [
   },
   {
     title: "Buyer fees",
-    body: "You pay MatriBhumi nothing for our property advisory and transaction-coordination service. Where applicable, participating developers compensate MatriBhumi under separate commercial agreements. Developer arrangements vary by project and jurisdiction. The buyer's purchase agreement is with the property developer/seller.",
+    body: "You pay MatriBhumi nothing for our property advisory and transaction-coordination service. Where applicable, participating developers compensate MatriBhumi under separate commercial agreements. Developer arrangements vary by project. The buyer's purchase agreement is with the property developer/seller.",
   },
   {
     title: "Office",
-    body: "MatriBhumi. House 12, Road 7, Gulshan, Dhaka 1212, Bangladesh. This site does not claim a real-estate licence in Bangladesh, UAE, or Malaysia.",
+    body: "MatriBhumi. House 12, Road 7, Gulshan, Dhaka 1212, Bangladesh. This site does not claim a real-estate licence in Bangladesh.",
   },
 ] as const;
 

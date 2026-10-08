@@ -94,7 +94,7 @@ export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
               </Link>
             ))}
           </nav>
-          <p className="text-[11px] uppercase tracking-[0.22em] text-earth">Markets</p>
+          <p className="text-[11px] uppercase tracking-[0.22em] text-earth">Bangladesh</p>
           <nav className="mt-3 grid gap-1 pb-24">
             {countryNav.map((item) => (
               <Link

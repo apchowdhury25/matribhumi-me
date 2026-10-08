@@ -24,7 +24,7 @@ export default async function CareersPage() {
         image="/media/about-studio.jpg"
         eyebrow="Careers"
         title="Help people find a home they can return to."
-        description="We advise buyers across Bangladesh, UAE, and Malaysia, and coordinate with participating developers. Open roles in the Dhaka office are listed below."
+        description="We advise buyers on Bangladesh property and coordinate with participating developers. Open roles in the Dhaka office are listed below."
       />
       <section className="grid gap-10 px-4 py-14 sm:px-6 md:px-12 md:py-20 lg:grid-cols-3">
         <article>

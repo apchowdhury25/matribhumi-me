@@ -156,7 +156,7 @@ function CaptureForm({ kind, projectName }: { kind: Kind; projectName?: string }
         <p className="mt-3 text-sm leading-7 text-muted">
           {kind === "waitlist"
             ? "Hear first when curated floor plans, viewing slots, or developer updates are released."
-            : "A shortlist of selected developer projects in Dhaka, Chattogram, and other markets we cover."}
+            : "A shortlist of selected developer projects in Bangladesh — including Dhaka, Chattogram, and Bashundhara."}
         </p>
         {projectName ? <p className="mt-3 text-sm text-charcoal">{projectName}</p> : null}
       </div>

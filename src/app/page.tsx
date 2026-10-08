@@ -16,11 +16,11 @@ import {
   developerServices,
   countryNav,
 } from "@/config/site";
-import { markets } from "@/lib/markets";
 import {
   getArticles,
   getFeaturedDevelopers,
   getFeaturedProperties,
+  getLocations,
   getMapDevelopments,
 } from "@/lib/data";
 import { publicDeveloperName } from "@/lib/developer";
@@ -36,12 +36,13 @@ export const metadata = createMetadata({
 });
 
 export default async function HomePage() {
-  const [featuredProperties, featuredDevelopers, articles, mapPins] = await Promise.all([
+  const [featuredProperties, featuredDevelopers, articles, mapPins, locations] = await Promise.all([
     getFeaturedProperties(6),
     getFeaturedDevelopers(),
     getArticles(),
     getMapDevelopments(),
-  ]).catch(() => [[], [], [], []] as const);
+    getLocations(),
+  ]).catch(() => [[], [], [], [], []] as const);
 
   return (
     <PublicShell transparentHeader>
@@ -100,23 +101,23 @@ export default async function HomePage() {
 
       <section className="bg-mist px-4 py-16 sm:px-6 md:px-12 md:py-20">
         <SectionHeader
-          eyebrow="Primary markets"
-          title="Choose a country."
-          description="Bangladesh, the UAE and Malaysia. City pages open as location data is published."
+          eyebrow="Bangladesh"
+          title="Explore Bangladesh by city."
+          description="Selected developer properties in Dhaka, Chattogram, and other Bangladesh cities as data is published."
         />
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {markets.map((market) => (
-            <Link key={market.slug} href={`/locations/${market.slug}`} className="group relative min-h-[280px] overflow-hidden">
+          {locations.map((location) => (
+            <Link key={location.id} href={`/locations/${location.slug}`} className="group relative min-h-[280px] overflow-hidden">
               <img
-                src={market.heroImage}
+                src={location.heroImage}
                 alt=""
                 className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-charcoal/45" />
               <div className="relative flex h-full flex-col justify-end p-6 text-ivory">
-                <p className="text-[11px] uppercase tracking-[0.2em] text-sand">{market.seoTitle}</p>
-                <h3 className="font-display mt-2 text-4xl">{market.shortName}</h3>
-                <p className="mt-2 text-sm text-ivory/80">{market.region}</p>
+                <p className="text-[11px] uppercase tracking-[0.2em] text-sand">{location.country}</p>
+                <h3 className="font-display mt-2 text-4xl">{location.city}</h3>
+                <p className="mt-2 text-sm text-ivory/80">{location.name}</p>
               </div>
             </Link>
           ))}
@@ -232,7 +233,7 @@ export default async function HomePage() {
       <section className="px-4 py-16 sm:px-6 md:px-12 md:py-24">
         <SectionHeader
           eyebrow="For developers"
-          title="Reach qualified buyers across Bangladesh, the UAE and Malaysia."
+          title="Reach qualified buyers in Bangladesh."
           description="Marketing, referrals, and transaction coordination. MatriBhumi does not promise guaranteed sales."
         />
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-5">
@@ -250,9 +251,9 @@ export default async function HomePage() {
 
       <section className="bg-mist px-4 py-16 sm:px-6 md:px-12 md:py-24">
         <SectionHeader
-          eyebrow="Markets and locations"
-          title="Discover properties by country and city."
-          description="Select a development and the map moves to it. Country pages cover Bangladesh, the UAE and Malaysia; city pages open as data is published."
+          eyebrow="Locations"
+          title="Discover properties by city."
+          description="Select a development and the map moves to it. Listings are in Bangladesh: Dhaka, Chattogram, and other cities as data is published."
         />
         <div className="mt-8 flex flex-wrap gap-3">
           {countryNav.map((item) => (
@@ -308,7 +309,7 @@ export default async function HomePage() {
         <SectionHeader
           eyebrow="Start a conversation"
           title="Speak with an advisor."
-          description="Tell us the country, the kind of home, and how you will use it. There is no buyer fee for this conversation."
+          description="Tell us the city in Bangladesh, the kind of home, and how you will use it. There is no buyer fee for this conversation."
           light
         />
         <DualCta tone="dark" className="mt-10" />

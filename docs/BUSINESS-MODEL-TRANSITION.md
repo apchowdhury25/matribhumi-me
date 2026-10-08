@@ -1,11 +1,21 @@
 # Business-model transition
 
+## Step 3 — Bangladesh-only coordination
+
+Public pages, filters, sitemap, and seed listings coordinate with developers in Bangladesh only.
+
+- Country bar: Bangladesh, Dhaka, Chattogram, Bashundhara.
+- `/locations/uae` and `/locations/malaysia` are removed.
+- Public queries require `location.country = Bangladesh`.
+- Seed locations, developments, properties, jobs, and articles are Bangladesh-only.
+- Waitlist phone country codes stay international so NRBs can enter their numbers.
+
 ## Step 2 — public information architecture
 
 Public navigation, homepage, and discovery now match the advisory / brokerage / transaction-coordination model.
 
 - Primary nav: Home, Properties, Developers, Locations, How It Works, For Developers, About, Insights, Contact.
-- Secondary nav: Bangladesh, UAE, Malaysia → `/locations/bangladesh`, `/locations/uae`, `/locations/malaysia`.
+- Secondary nav: Bangladesh cities — Bangladesh, Dhaka, Chattogram, Bashundhara. Public listings are Bangladesh-only.
 - Properties is the central discovery surface (country, city, location, developer, type, price, bedrooms, completion status, development status, featured).
 - Property cards say “Listed through MatriBhumi”, show a public developer name only when published, and use Request details / Arrange a viewing / Speak with an advisor.
 - Homepage follows the 13-section advisory structure, including “How MatriBhumi is paid”.
@@ -55,8 +65,8 @@ Owner language (“we build”, “our developments”, “development firm”) 
 
 ## Legal / compliance claims reviewed
 
-- No licence is claimed in Bangladesh, UAE, or Malaysia.
-- Developer compensation is not described as legally identical across those markets.
+- No licence is claimed in Bangladesh.
+- Developer compensation is not described as legally identical across projects.
 - RAJUK / structural / developer-registration numbers are not invented; they belong to the developer of record when published.
 - Invented 2014–2026 developer-firm timeline is removed.
 
@@ -67,7 +77,7 @@ Owner language (“we build”, “our developments”, “development firm”) 
 ## Unresolved assumptions
 
 - Real partner legal names, logos, and contracts are not in the repository.
-- Malaysia is named in positioning only; there is no Malaysian inventory in seed.
+- Public coordination is Bangladesh-only. UAE and Malaysia market pages were removed.
 - Leadership bios remain “to follow.”
 - The brochure PDF binary is unchanged; on-page and email framing is advisory.
 - Licence numbers and approval references remain unpublished.

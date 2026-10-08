@@ -59,7 +59,7 @@ async function main() {
     },
   });
 
-  const [dhaka, chattogram, dubai, singapore] = await Promise.all([
+  const [dhaka, chattogram] = await Promise.all([
     prisma.location.create({
       data: {
         name: "Dhaka",
@@ -105,82 +105,6 @@ async function main() {
         connectivity: "Port, airport, and hill roads — illustrative only.",
         opportunities: "Villa communities and nature-edge housing studies.",
         attractions: [{ name: "Hill forests", category: "Nature" }],
-      },
-    }),
-    prisma.location.create({
-      data: {
-        name: "Dubai",
-        slug: "dubai",
-        city: "Dubai",
-        country: "United Arab Emirates",
-        region: "Middle East",
-        featured: true,
-        heroImage: "/media/location-coastal.jpg",
-        latitude: 25.2048,
-        longitude: 55.2708,
-        description: "An international setting for climate-aware urban housing, where many buyers already live.",
-        overview: "The context for Horizon, a curated upcoming listing in the UAE advisory market.",
-        lifestyle: "Urban apartments with shaded podiums and evening public rooms.",
-        connectivity: "Metro-adjacent, with the city’s main roads close at hand.",
-        opportunities: "Mid-rise and tower living studies.",
-        attractions: [{ name: "Waterfront walks", category: "Leisure" }],
-      },
-    }),
-    prisma.location.create({
-      data: {
-        name: "Singapore",
-        slug: "singapore",
-        city: "Singapore",
-        country: "Singapore",
-        region: "Southeast Asia",
-        featured: true,
-        heroImage: "/media/location-singapore.jpg",
-        latitude: 1.3521,
-        longitude: 103.8198,
-        description: "A garden city, and a reference for mixed-use districts we help buyers compare.",
-        overview: "Central is an upcoming curated concept for living above a civic street.",
-        lifestyle: "Cafés, trees, and apartments sharing the same block.",
-        connectivity: "Transit-oriented, with daily life on the same block.",
-        opportunities: "Mixed-use destinations.",
-        attractions: [{ name: "Parks", category: "Nature" }],
-      },
-    }),
-    prisma.location.create({
-      data: {
-        name: "London",
-        slug: "london",
-        city: "London",
-        country: "United Kingdom",
-        region: "Europe",
-        featured: false,
-        heroImage: "/media/location-london.jpg",
-        latitude: 51.5074,
-        longitude: -0.1278,
-        description: "A riverside city where many buyers already live.",
-        overview: "Shown so a family abroad can place home on the same map.",
-        lifestyle: "River walks and compact urban homes.",
-        connectivity: "Rail and river.",
-        opportunities: "Future partnership studies only.",
-        attractions: [{ name: "River terraces", category: "Leisure" }],
-      },
-    }),
-    prisma.location.create({
-      data: {
-        name: "Toronto",
-        slug: "toronto",
-        city: "Toronto",
-        country: "Canada",
-        region: "North America",
-        featured: false,
-        heroImage: "/media/location-toronto.jpg",
-        latitude: 43.6532,
-        longitude: -79.3832,
-        description: "A lakeside city where many buyers already live.",
-        overview: "A presence on the map for families writing home from Canada.",
-        lifestyle: "Park-oriented mid-rise living.",
-        connectivity: "Transit and waterfront trails.",
-        opportunities: "Future studies only.",
-        attractions: [{ name: "Lake parks", category: "Nature" }],
       },
     }),
   ]);
@@ -323,31 +247,6 @@ async function main() {
     }),
     prisma.development.create({
       data: {
-        name: "MatriBhumi Horizon",
-        slug: "matribhumi-horizon",
-        tagline: "Apartments oriented to sky and shade.",
-        description:
-          "An upcoming tower in Dubai exploring climate, podium life, and long views — for clients who already live in the Gulf.",
-        architecture: "Sandstone, deep fins, and a shaded civic base.",
-        lifestyle: "Urban living with communal kitchens, a library, and evening terraces.",
-        locationNote: "Dubai — upcoming architectural concept",
-        heroImage: "/media/project-horizon.jpg",
-        category: "RESIDENTIAL",
-        propertyType: "APARTMENT",
-        status: "UNDER_CONSTRUCTION",
-        completion: "2028",
-        startingPrice: "450000",
-        featured: true,
-        signature: false,
-        latitude: 25.1972,
-        longitude: 55.2744,
-        locationId: dubai.id,
-        developerId: developer.id,
-        stats: { units: 310, floors: 44, greenCover: "28%" },
-      },
-    }),
-    prisma.development.create({
-      data: {
         name: "Bhumi Gardens",
         slug: "bhumi-gardens",
         tagline: "A family neighborhood around a central park.",
@@ -369,31 +268,6 @@ async function main() {
         locationId: dhaka.id,
         developerId: developer.id,
         stats: { homes: 128, park: "2.1 ha", schoolsWalk: "6 min" },
-      },
-    }),
-    prisma.development.create({
-      data: {
-        name: "MatriBhumi Central",
-        slug: "matribhumi-central",
-        tagline: "Live above a street that stays awake.",
-        description:
-          "An upcoming mixed-use block: residences over civic rooms, food, and workplaces.",
-        architecture: "A porous ground floor, gardens at mid-level, apartments above.",
-        lifestyle: "Mixed-use destinations where the commute is a staircase.",
-        locationNote: "Singapore — upcoming architectural concept",
-        heroImage: "/media/project-central.jpg",
-        category: "MIXED_USE",
-        propertyType: "MIXED_USE",
-        status: "UPCOMING",
-        completion: "2029",
-        startingPrice: "620000",
-        featured: true,
-        signature: true,
-        latitude: 1.304,
-        longitude: 103.832,
-        locationId: singapore.id,
-        developerId: developer.id,
-        stats: { units: 160, retail: "18", workplaces: "4 floors" },
       },
     }),
     prisma.development.create({
@@ -424,7 +298,7 @@ async function main() {
     }),
   ]);
 
-  const [heights, riverside, grove, horizon, gardens, central, bashundharaDev] = developments;
+  const [heights, riverside, grove, gardens, bashundharaDev] = developments;
 
   const gallery = (hero: string, extras: string[]) =>
     [hero, ...extras].map((url, i) => ({
@@ -608,45 +482,6 @@ async function main() {
   });
 
   await addProperty({
-    name: "Horizon Sky Residences",
-    slug: "horizon-sky-residences",
-    description:
-      "High apartments with long views and a shaded podium. An upcoming concept for clients in the Gulf.",
-    type: "APARTMENT",
-    status: "UNDER_CONSTRUCTION",
-    completionDate: new Date("2028-06-01"),
-    startingPrice: "450000",
-    bedroomsMin: 1,
-    bedroomsMax: 3,
-    bathroomsMin: 1,
-    bathroomsMax: 3,
-    areaMin: 690,
-    areaMax: 1900,
-    floors: 44,
-    totalUnits: 310,
-    heroImage: "/media/project-horizon.jpg",
-    brochureUrl: "/media/brochures/matribhumi-preview.pdf",
-    latitude: 25.1972,
-    longitude: 55.2744,
-    featured: true,
-    lifestyle: "urban-living",
-    developmentId: horizon.id,
-    locationId: dubai.id,
-    developerId: developer.id,
-    amenitySlugs: ["pool", "gym", "spa", "concierge", "security", "parking", "library"],
-    nearby: commonNearby,
-    images: gallery("/media/project-horizon.jpg", [
-      "/media/hero-urban.jpg",
-      "/media/amenity-spa.jpg",
-      "/media/interior-bedroom.jpg",
-    ]),
-    units: [
-      { name: "H-2105", type: "2 Bed", bedrooms: 2, bathrooms: 2, area: 1080, price: "610000", floor: 21 },
-    ],
-    plans: [{ name: "Sky 2", type: "2 Bed", imageUrl: "/media/plans/type-b.svg", area: 1080, bedrooms: 2, bathrooms: 2 }],
-  });
-
-  await addProperty({
     name: "Bhumi Park Townhomes",
     slug: "bhumi-park-townhomes",
     description:
@@ -682,45 +517,6 @@ async function main() {
       { name: "Park 22", type: "Townhome", bedrooms: 3, bathrooms: 3, area: 1320, price: "210000" },
     ],
     plans: [{ name: "Park 3", type: "Townhome", imageUrl: "/media/plans/type-b.svg", area: 1320, bedrooms: 3, bathrooms: 3 }],
-  });
-
-  await addProperty({
-    name: "Central Living",
-    slug: "central-living",
-    description:
-      "Apartments above a civic street in an upcoming mixed-use block.",
-    type: "MIXED_USE",
-    status: "UPCOMING",
-    completionDate: new Date("2029-09-01"),
-    startingPrice: "620000",
-    bedroomsMin: 1,
-    bedroomsMax: 3,
-    bathroomsMin: 1,
-    bathroomsMax: 2,
-    areaMin: 540,
-    areaMax: 1500,
-    floors: 22,
-    totalUnits: 160,
-    heroImage: "/media/project-central.jpg",
-    brochureUrl: "/media/brochures/matribhumi-preview.pdf",
-    latitude: 1.304,
-    longitude: 103.832,
-    featured: true,
-    lifestyle: "mixed-use-destinations",
-    developmentId: central.id,
-    locationId: singapore.id,
-    developerId: developer.id,
-    amenitySlugs: ["gym", "coworking", "library", "concierge", "security", "parking", "gardens"],
-    nearby: commonNearby,
-    images: gallery("/media/project-central.jpg", [
-      "/media/lifestyle-mixed.jpg",
-      "/media/amenity-library.jpg",
-      "/media/interior-kitchen.jpg",
-    ]),
-    units: [
-      { name: "CL-0903", type: "1 Bed", bedrooms: 1, bathrooms: 1, area: 580, price: "620000", floor: 9 },
-    ],
-    plans: [{ name: "Loft 1", type: "1 Bed", imageUrl: "/media/plans/type-a.svg", area: 580, bedrooms: 1, bathrooms: 1 }],
   });
 
   await addProperty({
@@ -1013,7 +809,7 @@ A clubhouse should work on a Tuesday afternoon: shade, a table, a kitchen someon
     {
       title: "Drawing the mixed-use block",
       slug: "drawing-the-mixed-use-block",
-      excerpt: "How MatriBhumi Central stacks living, work, and a civic street.",
+      excerpt: "How a Bashundhara mixed-use block stacks living, work, and a civic street.",
       category: "ARCHITECTURE" as const,
       coverImage: "/media/project-central.jpg",
       body: `## One plot, several days
@@ -1077,7 +873,7 @@ If a number cannot be stood beside in a quiet room, it does not belong on a Matr
         title: "Development Analyst",
         slug: "development-analyst",
         department: "Development",
-        location: "Singapore",
+        location: "Dhaka",
         type: "Full-time",
         description: "Study sites, infrastructure, and program mix. Not a sales role.",
         requirements: "Numeracy and a respect for uncertainty.",
@@ -1104,7 +900,7 @@ If a number cannot be stood beside in a quiet room, it does not belong on a Matr
         title: "Sales Consultant",
         slug: "sales-consultant",
         department: "Sales",
-        location: "Dubai",
+        location: "Dhaka",
         type: "Full-time",
         description: "Help people understand a home without promising a market.",
         requirements: "Clarity, patience, and comfort saying 'we do not forecast returns'.",

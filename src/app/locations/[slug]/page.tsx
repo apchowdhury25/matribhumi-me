@@ -13,7 +13,7 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const location = await getLocation(slug);
-  if (!location) return createMetadata({ title: "Location", description: "MatriBhumi location", path: `/locations/${slug}` });
+  if (!location) notFound();
   return createMetadata({
     title: `${location.city}, ${location.country}`,
     description: location.description,

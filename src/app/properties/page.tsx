@@ -6,13 +6,12 @@ import { propertyFilterSchema } from "@/lib/validations";
 import { createMetadata } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
 import { statusLabel } from "@/lib/format";
-import { markets } from "@/lib/markets";
 
 export const dynamic = "force-dynamic";
 export const metadata = createMetadata({
   title: "Properties",
   description:
-    "Browse new-development and selected developer properties across Bangladesh, the UAE and Malaysia. Filter by country, city, developer, type and price. Listed through MatriBhumi — with no buyer fee.",
+    "Browse new-development and selected developer properties in Bangladesh. Filter by city, developer, type and price. Listed through MatriBhumi — with no buyer fee.",
   path: "/properties",
   image: "/media/hero-urban.jpg",
 });
@@ -42,17 +41,11 @@ export default async function PropertiesPage({
         image="/media/hero-urban.jpg"
         eyebrow="Properties"
         title="Find the right property."
-        description="Browse selected developer properties across Bangladesh, the UAE and Malaysia. Prices are indicative until an agreement is signed with the developer or seller."
+        description="Browse selected developer properties in Bangladesh. Prices are indicative until an agreement is signed with the developer or seller."
       />
       <section className="px-4 py-10 sm:px-6 md:px-12 md:py-12">
         <form className="grid gap-3 border border-charcoal/10 bg-paper p-4 md:grid-cols-4 lg:grid-cols-6">
           <input name="q" defaultValue={filters.q} placeholder="Search" className="h-12 border border-charcoal/15 bg-ivory px-3 text-base md:col-span-2" />
-          <select name="country" defaultValue={filters.country ?? ""} className="h-11 border border-charcoal/15 bg-ivory px-3 text-sm">
-            <option value="">All countries</option>
-            {markets.map((market) => (
-              <option key={market.slug} value={market.slug}>{market.shortName}</option>
-            ))}
-          </select>
           <select name="city" defaultValue={filters.city ?? ""} className="h-11 border border-charcoal/15 bg-ivory px-3 text-sm">
             <option value="">All cities</option>
             {[...new Map(data.locations.map((loc) => [loc.city, loc])).values()].map((loc) => (

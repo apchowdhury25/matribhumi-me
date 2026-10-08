@@ -24,7 +24,7 @@ export function brochureEmail(fullName: string) {
   const subject = "Your MatriBhumi curated portfolio & brochure";
   const text = `Dear ${firstName},
 
-Thank you for your interest in MatriBhumi. Enclosed is a brochure of selected projects from participating developers in Dhaka, Chattogram, and other markets we cover.
+Thank you for your interest in MatriBhumi. Enclosed is a brochure of selected projects from participating developers in Bangladesh — including Dhaka, Chattogram, and Bashundhara.
 
 ${downloadUrl}
 
@@ -58,7 +58,7 @@ www.matribhumi.me`;
             </tr>
             <tr>
               <td style="padding-top:20px;font-family:Georgia,serif;font-size:16px;line-height:1.7;color:#2c2a26;">
-                Thank you for your interest in MatriBhumi. Enclosed is a brochure of selected projects from participating developers in Dhaka, Chattogram, and other markets we cover.
+                Thank you for your interest in MatriBhumi. Enclosed is a brochure of selected projects from participating developers in Bangladesh — including Dhaka, Chattogram, and Bashundhara.
               </td>
             </tr>
             <tr>

@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 export const metadata = createMetadata({
   title: "Developments",
   description:
-    "Selected developer projects listed through MatriBhumi across Bangladesh, the UAE and Malaysia.",
+    "Selected developer projects listed through MatriBhumi in Bangladesh.",
   path: "/projects",
   image: "/media/hero-plaza.jpg",
 });

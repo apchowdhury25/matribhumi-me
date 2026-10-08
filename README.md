@@ -4,9 +4,9 @@ Official website for **MatriBhumi**.
 
 Canonical site: **[https://matribhumi.me](https://matribhumi.me)**
 
-MatriBhumi is **independent property advisory and transaction coordination** across Bangladesh, the UAE and Malaysia. It helps buyers find suitable properties from selected developers, introduces them to the developer of record, and coordinates viewings and follow-up. Buyers pay MatriBhumi nothing for this service. The purchase agreement is with the developer or seller.
+MatriBhumi is **independent property advisory and transaction coordination** in Bangladesh. It helps buyers find suitable properties from selected developers, introduces them to the developer of record, and coordinates viewings and follow-up. Buyers pay MatriBhumi nothing for this service. The purchase agreement is with the developer or seller.
 
-Public navigation: Home, Properties, Developers, Locations, How It Works, For Developers, About, Insights, Contact, with a country bar for Bangladesh, UAE and Malaysia.
+Public navigation: Home, Properties, Developers, Locations, How It Works, For Developers, About, Insights, Contact, with a Bangladesh city bar for Dhaka, Chattogram and Bashundhara.
 
 This repository is the public marketing site, property discovery, inquiries, viewings, and a staff console.
 

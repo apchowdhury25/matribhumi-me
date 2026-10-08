@@ -32,14 +32,16 @@ describe("publicDeveloperName", () => {
 });
 
 describe("markets", () => {
-  it("resolves primary market slugs and country aliases", () => {
+  it("resolves the Bangladesh market only", () => {
     expect(getMarket("bangladesh")?.country).toBe("Bangladesh");
-    expect(getMarketByCountry("United Arab Emirates")?.slug).toBe("uae");
-    expect(countryFilterValues("uae")).toContain("United Arab Emirates");
-    expect(getMarket("malaysia")?.cities.map((city) => city.name)).toEqual([
-      "Kuala Lumpur",
-      "Johor Bahru",
-      "Penang",
+    expect(getMarketByCountry("Bangladesh")?.slug).toBe("bangladesh");
+    expect(countryFilterValues("bangladesh")).toEqual(["Bangladesh"]);
+    expect(getMarket("uae")).toBeNull();
+    expect(getMarket("malaysia")).toBeNull();
+    expect(getMarket("bangladesh")?.cities.map((city) => city.name)).toEqual([
+      "Dhaka",
+      "Chattogram",
+      "Bashundhara",
     ]);
   });
 });

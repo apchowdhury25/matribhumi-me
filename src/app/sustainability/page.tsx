@@ -16,7 +16,7 @@ const sections = [
   { title: "Water management", image: "/media/sustain-water.jpg", body: "Hold rain, slow it, and use it. Bioswales, cisterns, and permeable courts — described here as questions we put to partners, not certified outcomes." },
   { title: "Responsible materials", image: "/media/hero-nature.jpg", body: "Stone, timber, lime, and metals that can be repaired. We prefer a surface that ages in public to one that cannot be maintained." },
   { title: "Community development", image: "/media/lifestyle-family.jpg", body: "A sustainable place is one people can share: schools within a walk, shops that keep a street awake, rooms for gathering." },
-  { title: "Future-focused cities", image: "/media/location-singapore.jpg", body: "We advise as if the neighbourhood will still matter in twenty years. That is a working attitude, not a forecast, and not a claim that MatriBhumi is the builder." },
+  { title: "Future-focused cities", image: "/media/location-dhaka.jpg", body: "We advise as if the neighbourhood will still matter in twenty years. That is a working attitude, not a forecast, and not a claim that MatriBhumi is the builder." },
 ];
 
 export default function SustainabilityPage() {

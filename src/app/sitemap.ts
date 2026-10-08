@@ -12,9 +12,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let jobs: { slug: string; updatedAt: Date }[] = [];
   try {
     [properties, developments, locations, articles, jobs] = await Promise.all([
-      prisma.property.findMany({ where: { published: true }, select: { slug: true, updatedAt: true } }),
-      prisma.development.findMany({ where: { published: true }, select: { slug: true, updatedAt: true } }),
-      prisma.location.findMany({ select: { slug: true, updatedAt: true } }),
+      prisma.property.findMany({ where: { published: true, location: { country: "Bangladesh" } }, select: { slug: true, updatedAt: true } }),
+      prisma.development.findMany({ where: { published: true, location: { country: "Bangladesh" } }, select: { slug: true, updatedAt: true } }),
+      prisma.location.findMany({ where: { country: "Bangladesh" }, select: { slug: true, updatedAt: true } }),
       prisma.newsArticle.findMany({ where: { published: true }, select: { slug: true, updatedAt: true } }),
       prisma.job.findMany({ where: { published: true }, select: { slug: true, updatedAt: true } }),
     ]);
@@ -39,8 +39,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/projects",
     "/locations",
     "/locations/bangladesh",
-    "/locations/uae",
-    "/locations/malaysia",
     "/how-it-works",
     "/for-developers",
     "/about",
