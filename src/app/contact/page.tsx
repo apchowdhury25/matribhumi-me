@@ -40,10 +40,14 @@ export default function ContactPage() {
             <a href={siteConfig.social.whatsapp} className="hover:text-charcoal" target="_blank" rel="noreferrer">WhatsApp</a>
           </p>
           <ul className="mt-8 space-y-2 text-sm text-muted">
-            <li>General — {siteConfig.email}</li>
-            <li>Sales — {siteConfig.salesEmail}</li>
-            <li>Press — {siteConfig.pressEmail}</li>
-            <li>Careers — {siteConfig.careersEmail}</li>
+            {siteConfig.departments.map((department) => (
+              <li key={department.email}>
+                {department.label} —{" "}
+                <a href={`mailto:${department.email}`} className="hover:text-charcoal">
+                  {department.email}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
         <div>
