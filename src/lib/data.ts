@@ -404,6 +404,22 @@ export async function getJob(slug: string) {
   }, null);
 }
 
+function matchRank(value: string | null | undefined, query: string) {
+  const text = (value ?? "").toLowerCase();
+  const q = query.toLowerCase();
+  if (!text || !q) return 3;
+  if (text.startsWith(q)) return 0;
+  if (text.split(/[^a-z0-9]+/).some((part) => part.startsWith(q))) return 1;
+  if (text.includes(q)) return 2;
+  return 3;
+}
+
+function preferNamed<T>(rows: T[], query: string, label: (row: T) => string, limit: number) {
+  const ranked = [...rows].sort((a, b) => matchRank(label(a), query) - matchRank(label(b), query) || label(a).localeCompare(label(b)));
+  const named = ranked.filter((row) => matchRank(label(row), query) < 3);
+  return (named.length ? named : ranked).slice(0, limit);
+}
+
 export async function searchAll(q: string) {
   const query = q.trim();
   if (query.length < 2) {
@@ -420,16 +436,16 @@ export async function searchAll(q: string) {
             OR: [{ name: contains }, { description: contains }],
           },
           include: { location: true },
-          take: 5,
+          take: 24,
         }),
         prisma.development.findMany({
           where: {
             ...publicVisibilityWhere(),
             location: inBangladesh,
-            OR: [{ name: contains }, { tagline: contains }],
+            OR: [{ name: contains }, { tagline: contains }, { description: contains }],
           },
           include: { location: true },
-          take: 5,
+          take: 24,
         }),
         prisma.location.findMany({
           where: {
@@ -437,14 +453,19 @@ export async function searchAll(q: string) {
             OR: [{ name: contains }, { city: contains }, { slug: contains }],
           },
           include: { parent: { select: { slug: true, name: true } } },
-          take: 8,
+          take: 24,
         }),
         prisma.newsArticle.findMany({
           where: { ...publicVisibilityWhere(), OR: [{ title: contains }, { excerpt: contains }] },
-          take: 5,
+          take: 24,
         }),
       ]);
-      return { properties, developments, locations, articles };
+      return {
+        properties: preferNamed(properties, query, (item) => item.name, 6),
+        developments: preferNamed(developments, query, (item) => item.name, 6),
+        locations: preferNamed(locations, query, (item) => item.name, 6),
+        articles: preferNamed(articles, query, (item) => item.title, 6),
+      };
     },
     { properties: [], developments: [], locations: [], articles: [] },
   );
